@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import   com.example.infinityjobportal.model.*;
 public class ClientSignUp extends AppCompatActivity {
     EditText firstName,lastName,email,password,mobile;
     Button login,signup;
+    ProgressBar progressBar;
 
     public FirebaseAuth mAuth;
     FirebaseFirestore db;
@@ -46,6 +48,7 @@ public class ClientSignUp extends AppCompatActivity {
         login=(Button) findViewById(R.id.login);
         signup=(Button)findViewById(R.id.signup);
         emailString= email.getText().toString();
+        progressBar = findViewById(R.id.progressBar);
 
         errorView = findViewById(R.id.errorView);
         mAuth = FirebaseAuth.getInstance();
@@ -81,6 +84,8 @@ public class ClientSignUp extends AppCompatActivity {
                 } else {
 
 
+                    progressBar.setVisibility(View.VISIBLE);
+
                     mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                             .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                 @Override
@@ -94,7 +99,8 @@ public class ClientSignUp extends AppCompatActivity {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
                                                             if (task.isSuccessful()) {
-
+                                                                   // loadOtherDetails();
+                                                                progressBar.setVisibility(View.GONE);
                                                                 //Toast.makeText(getApplicationContext(),"Verfy Email",Toast.LENGTH_LONG).show();
                                                                 //  loadOtherDetails();
                                                                 AlertDialog.Builder builder = new AlertDialog.Builder(ClientSignUp.this);
