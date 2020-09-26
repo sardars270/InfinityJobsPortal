@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/homeFragment"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Home" />
+
+        <item android:title="My Jobs"
+            android:id="@+id/myJobsFragment"
+            android:icon="@drawable/logo">
+        </item>
+
+        <item android:title="Employers">
+            <menu>
+
+                <item
+                    android:id="@+id/postJobFragment"
+                    android:icon="@drawable/logo"
+                    android:title="Post a Job" />
+                <item
+                    android:id="@+id/postedJobsFragment"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="Posted Jobs" />
+
+            </menu>
+        </item>
+        <item android:title="Others">
+            <menu>
+                <item
+                    android:id="@+id/aboutUsFragment"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="About Us" />
+                <item
+                    android:id="@+id/logout"
+                    android:icon="@drawable/ic_menu_slideshow"
+                    android:title="Logout" />
+            </menu>
+
+        </item>
+
+    </group>
+</menu>
