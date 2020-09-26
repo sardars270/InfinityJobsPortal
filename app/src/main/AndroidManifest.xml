@@ -11,7 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".interests"></activity>
+        <activity android:name=".interests"> <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
         <activity android:name=".Search_jobs" />
         <activity android:name=".Jobs_search" />
         <activity android:name=".Applied_jobs" />
@@ -24,11 +28,7 @@
         <activity android:name=".Splash" />
         <activity android:name=".ClientSignUp" />
         <activity android:name=".ListOfExperienceActiviy">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"

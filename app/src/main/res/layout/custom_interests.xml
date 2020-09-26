@@ -5,7 +5,7 @@
 <View
     android:layout_width="wrap_content"
     android:layout_marginTop="10dp"
-    android:background="@color/black"
+    android:background="@color/grey"
     android:layout_height="1dp">
 
 </View>
@@ -13,13 +13,9 @@
         android:id="@+id/tv"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:padding="10dp"
         android:layout_height="wrap_content"
         android:text="TextView" />
-    <View
-        android:layout_width="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@color/black"
-        android:layout_height="1dp">
 
-    </View>
 </LinearLayout>
