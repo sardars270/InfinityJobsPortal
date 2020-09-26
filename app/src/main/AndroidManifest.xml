@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.infinityjobportal">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,24 +11,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ClientSignUp"></activity>
-        <activity android:name=".ClientLogin" />
+        <activity android:name=".interests"></activity>
+        <activity android:name=".Search_jobs" />
+        <activity android:name=".Jobs_search" />
+        <activity android:name=".Applied_jobs" />
+        <activity android:name=".SavedJobsActivity"></activity>
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-        <activity
-            android:name=".admin.AdminMainActivity"
-            android:label="@string/title_activity_admin_main" />
-        <activity android:name=".Splash" >
+            android:name=".ClientLogin"
+            android:label="@string/title_activity_my_jobs"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".add_exp" />
+        <activity android:name=".Splash" />
+        <activity android:name=".ClientSignUp" />
+        <activity android:name=".ListOfExperienceActiviy">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".admin.AdminMainActivity"
+            android:label="@string/title_activity_admin_main" />
     </application>
 
 </manifest>

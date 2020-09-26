@@ -2,10 +2,11 @@
 <resources>
     <color name="colorPrimary">@color/mainAppColor</color>
     <color name="colorPrimaryDark">@color/mainAppColor</color>
-
+    <color name="grey">#C0C0C0</color>
     <color name="mainAppColor">#607d8b</color>
 
 <color name="red" >#FF0000</color>
+    <color name="black" >#000000</color>
 
 
     <color name="colorAccent">#789FB6</color>
