@@ -1,12 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
-    <color name="colorPrimary">@color/mainAppColor</color>
-    <color name="colorPrimaryDark">@color/mainAppColor</color>
-
-    <color name="mainAppColor">#607d8b</color>
-
-<color name="red" >#FF0000</color>
-
-
-    <color name="colorAccent">#789FB6</color>
+  <color name="primaryColor">#0cb1ff</color>
+  <color name="primaryLightColor">#6be3ff</color>
+  <color name="primaryDarkColor">#0082cb</color>
+  <color name="primaryTextColor">#000000</color>
+  <color name="errorText">#f54e42</color>
+  <color name="editTextBG">#F8FCFF</color>
 </resources>

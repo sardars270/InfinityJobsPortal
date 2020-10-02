@@ -1,14 +1,14 @@
-package com.example.infinityjobportal.ui.gallery;
+package com.example.infinityjobportal.ui.myJobs;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class MyJobsModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public MyJobsModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is gallery fragment");
     }

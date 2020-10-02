@@ -1,19 +1,20 @@
 package com.example.infinityjobportal;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.infinityjobportal.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -22,11 +23,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import   com.example.infinityjobportal.model.*;
 
 public class ClientSignUp extends AppCompatActivity {
-    EditText firstName,lastName,email,password,mobile;
-    Button login,signup;
+    private static final String TAG = "ClientSignUp";
+    EditText firstName, lastName, email, password, mobile;
+    Button login, signUp;
     ProgressBar progressBar;
 
     public FirebaseAuth mAuth;
@@ -34,20 +35,22 @@ public class ClientSignUp extends AppCompatActivity {
 
     TextView errorView;
     String emailString;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: has started.");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_sign_up);
 
 
-        firstName=findViewById(R.id.firstName);
-        lastName=(EditText)findViewById(R.id.lastName);
-        email=(EditText)findViewById(R.id.email);
-        password=(EditText)findViewById(R.id.password);
-        mobile=(EditText)findViewById(R.id.mobile);
-        login=(Button) findViewById(R.id.login);
-        signup=(Button)findViewById(R.id.signup);
-        emailString= email.getText().toString();
+        firstName = findViewById(R.id.firstName);
+        lastName = (EditText) findViewById(R.id.lastName);
+        email = (EditText) findViewById(R.id.email);
+        password = (EditText) findViewById(R.id.password);
+        mobile = (EditText) findViewById(R.id.mobile);
+        login = (Button) findViewById(R.id.login);
+        signUp = (Button) findViewById(R.id.signup);
+        emailString = email.getText().toString();
         progressBar = findViewById(R.id.progressBar);
 
         errorView = findViewById(R.id.errorView);
@@ -57,17 +60,17 @@ public class ClientSignUp extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),ClientLogin.class);
+                Log.d(TAG, "onClick: login");
+                Intent i = new Intent(getApplicationContext(), ClientLogin.class);
                 startActivity(i);
             }
         });
 
 
-
-
-        signup.setOnClickListener(new View.OnClickListener() {
+        signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d(TAG, "onClick: signUp");
 
                 if (email.getText().toString().contentEquals("")) {
 
@@ -99,7 +102,7 @@ public class ClientSignUp extends AppCompatActivity {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
                                                             if (task.isSuccessful()) {
-                                                                   // loadOtherDetails();
+                                                                // loadOtherDetails();
                                                                 progressBar.setVisibility(View.GONE);
                                                                 //Toast.makeText(getApplicationContext(),"Verfy Email",Toast.LENGTH_LONG).show();
                                                                 //  loadOtherDetails();
@@ -108,7 +111,7 @@ public class ClientSignUp extends AppCompatActivity {
                                                                         .setCancelable(false)
                                                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                                             public void onClick(DialogInterface dialog, int id) {
-                                                                                Intent i = new Intent(getApplicationContext(),ClientLogin.class);
+                                                                                Intent i = new Intent(getApplicationContext(), ClientLogin.class);
                                                                                 startActivity(i);
                                                                             }
                                                                         });
@@ -158,25 +161,11 @@ public class ClientSignUp extends AppCompatActivity {
                             });
 
 
-
-
-
-
-
-
-
-
-
-
-
                 }
 
             }
         });
 
-
-
-
-
+        Log.d(TAG, "onCreate: has ended.");
     }
 }

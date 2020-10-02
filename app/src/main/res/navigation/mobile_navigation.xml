@@ -3,23 +3,65 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
-
+    app:startDestination="@id/homeFragment">
     <fragment
-        android:id="@+id/nav_home"
+        android:id="@+id/myJobsFragment"
+        android:name="com.example.infinityjobportal.ui.myJobs.MyJobsFragment"
+        android:label="My Jobs"
+        tools:layout="@layout/fragment_my_jobs" />
+    <fragment
+        android:id="@+id/postedJobsFragment"
+        android:name="com.example.infinityjobportal.ui.postedJobs.PostedJobsFragment"
+        android:label="Posted Jobs" />
+    <fragment
+        android:id="@+id/myProfileFragment"
+        android:name="com.example.infinityjobportal.ui.myProfile.MyProfile"
+        android:label="My Profile" />
+    <fragment
+        android:id="@+id/postJobFragment"
+        android:name="com.example.infinityjobportal.ui.postJob.PostJobFragment"
+        android:label="Post a Job"
+        tools:layout="@layout/fragment_post_job" />
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.example.infinityjobportal.ui.AboutUsFragment"
+        android:label="About us"
+        tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/queriesFragment"
+        android:name="com.example.infinityjobportal.ui.Queries.QueriesFragment"
+        android:label="Queries"
+        tools:layout="@layout/fragment_queries" />
+    <fragment
+        android:id="@+id/homeFragment"
         android:name="com.example.infinityjobportal.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
-
-    <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.infinityjobportal.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.infinityjobportal.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_myJobsFragment"
+            app:destination="@id/myJobsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_postJobFragment"
+            app:destination="@id/postJobFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_postedJobsFragment"
+            app:destination="@id/postedJobsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_clientLogin"
+            app:destination="@id/clientLogin" />
+        <action
+            android:id="@+id/action_homeFragment_to_queriesFragment"
+            app:destination="@id/queriesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_myProfileFragment"
+            app:destination="@id/myProfileFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/clientLogin"
+        android:name="com.example.infinityjobportal.ClientLogin"
+        android:label="activity_client_login"
+        tools:layout="@layout/activity_client_login" />
 </navigation>

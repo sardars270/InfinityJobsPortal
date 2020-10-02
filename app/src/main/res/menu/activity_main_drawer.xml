@@ -5,16 +5,59 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:id="@+id/homeFragment"
+            android:icon="@drawable/home_black"
+            android:title="Home" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:id="@+id/myProfileFragment"
+            android:icon="@drawable/work_black"
+            android:title="My Profile"></item>
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/myJobsFragment"
+            android:icon="@drawable/work_black"
+            android:title="My Jobs"></item>
+
+
+
+
+
+        <item android:title="Employers">
+            <menu>
+
+                <item
+                    android:id="@+id/postJobFragment"
+                    android:icon="@drawable/post_add_black"
+                    android:title="Post a Job" />
+                <item
+                    android:id="@+id/postedJobsFragment"
+                    android:icon="@drawable/list_alt_black"
+                    android:title="Posted Jobs" />
+
+            </menu>
+        </item>
+
+
+
+
+
+
+        <item android:title="Others">
+            <menu>
+                <item
+                    android:id="@+id/queriesFragment"
+                    android:icon="@drawable/arrow_circle_down_black"
+                    android:title="Queries" />
+                <item
+                    android:id="@+id/aboutUsFragment"
+                    android:icon="@drawable/info_black"
+                    android:title="About Us" />
+                <item
+                    android:id="@+id/logout"
+                    android:icon="@drawable/arrow_circle_down_black"
+                    android:title="Logout" />
+            </menu>
+
+        </item>
+
     </group>
 </menu>

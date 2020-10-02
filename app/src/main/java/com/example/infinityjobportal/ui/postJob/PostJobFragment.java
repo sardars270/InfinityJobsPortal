@@ -1,4 +1,4 @@
-package com.example.infinityjobportal.ui.home;
+package com.example.infinityjobportal.ui.postJob;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.infinityjobportal.R;
 
-public class HomeFragment extends Fragment {
+public class PostJobFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private PostJobViewModel postJobViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        postJobViewModel =
+                ViewModelProviders.of(this).get(PostJobViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_post_job, container, false);
+        final TextView textView = root.findViewById(R.id.letsGetStartedTextView);
+        postJobViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
@@ -32,6 +32,4 @@ public class HomeFragment extends Fragment {
         });
         return root;
     }
-
-    
 }

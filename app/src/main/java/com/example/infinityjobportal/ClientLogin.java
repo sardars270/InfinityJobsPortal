@@ -1,16 +1,17 @@
 package com.example.infinityjobportal;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,24 +20,29 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class ClientLogin extends AppCompatActivity {
-    public EditText email, pass;
-    public Button login, signup, forgotpassword;
+
+    private static final String TAG = "ClientLogin";
+
+    public EditText email, password;
+    public Button login, signUp, forgotPassword;
     ProgressBar progressBar;
 
     TextView errorView;
     public FirebaseAuth mAuth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: has started.");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_login);
 
 
         login = findViewById(R.id.login);
-        signup = findViewById(R.id.signup);
-        forgotpassword = findViewById(R.id.bt_forgotpassword);
+        signUp = findViewById(R.id.signup);
+        forgotPassword = findViewById(R.id.bt_forgotpassword);
         email = findViewById(R.id.email);
-        pass = findViewById(R.id.password);
+        password = findViewById(R.id.password);
         errorView = findViewById(R.id.errorView);
         progressBar = findViewById(R.id.progressBar);
 
@@ -44,25 +50,26 @@ public class ClientLogin extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-        signup.setOnClickListener(new View.OnClickListener() {
+        signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d(TAG, "onClick: signUp started");
                 startActivity(new Intent(getApplicationContext(), ClientSignUp.class));
             }
         });
 
 
-
     }
 
     public void logInFunction(View view) {
+        Log.d(TAG, "logInFunction: has started");
         if (email.getText().toString().contentEquals("")) {
 
 
             errorView.setText("Email cant be empty");
 
 
-        } else if (pass.getText().toString().contentEquals("")) {
+        } else if (password.getText().toString().contentEquals("")) {
 
             errorView.setText("Password cant be empty");
 
@@ -70,7 +77,7 @@ public class ClientLogin extends AppCompatActivity {
 
             progressBar.setVisibility(View.VISIBLE);
 
-            mAuth.signInWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
+            mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                     .addOnCompleteListener(ClientLogin.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -88,7 +95,6 @@ public class ClientLogin extends AppCompatActivity {
                                         Intent HomeActivity = new Intent(getApplicationContext(), MainActivity.class);
                                         //   setResult(RESULT_OK, null);
                                         startActivity(HomeActivity);
-
 
 
                                     } else {
@@ -117,6 +123,7 @@ public class ClientLogin extends AppCompatActivity {
 
 
         }
+        Log.d(TAG, "logInFunction: has ended.");
 
     }
 
