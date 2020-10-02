@@ -1,16 +1,16 @@
-package com.example.infinityjobportal.ui.slideshow;
+package com.example.infinityjobportal.ui.postedJobs;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SlideshowViewModel extends ViewModel {
+public class PostedJobsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public SlideshowViewModel() {
+    public PostedJobsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
+        mText.setValue("Let's get started!");
     }
 
     public LiveData<String> getText() {
