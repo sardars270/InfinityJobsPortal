@@ -166,6 +166,7 @@ public class PostJobFragment extends Fragment {
                         });
 
 
+                
                 Navigation.findNavController(view).navigate(R.id.myJobsFragment);
 
                 Log.d(TAG, "onClick: for job post has ended");
