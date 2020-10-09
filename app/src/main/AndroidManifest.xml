@@ -27,25 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".MainEducation">
-
-        </activity>
-        <activity android:name=".AboutUs" >
-        </activity>
-        <activity android:name=".EditAvailability"></activity>
-        <activity android:name=".Query" >
-
-        </activity>
-        <activity android:name=".EditEducation" />
-        <activity android:name=".AddNewEducation" >
-
-        </activity>
-
-
-
-
-
     </application>
 
 </manifest>
