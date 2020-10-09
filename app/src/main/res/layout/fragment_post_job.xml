@@ -249,12 +249,12 @@
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/salaryStartRangeEditText"
-                app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName11"
+                app:layout_constraintEnd_toStartOf="@+id/salaryEndRangeEditText"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/salaryStartRangeEditText" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName11"
+                android:id="@+id/salaryEndRangeEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_baseline_attach_money_24"
@@ -278,10 +278,10 @@
                 android:text="per hour"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/editTextTextPersonName11"
+                app:layout_constraintBaseline_toBaselineOf="@+id/salaryEndRangeEditText"
                 app:layout_constraintEnd_toEndOf="@+id/salaryRangeTextView"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName11" />
+                app:layout_constraintStart_toEndOf="@+id/salaryEndRangeEditText" />
 
 
             <EditText
@@ -402,7 +402,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/qualificationRequiredTextView" />
 
             <Button
-                android:id="@+id/postJobSubmit"
+                android:id="@+id/postJobSubmitButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"

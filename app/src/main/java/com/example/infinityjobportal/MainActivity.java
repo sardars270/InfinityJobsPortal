@@ -52,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment); // Each NavHost Fragment has a NavController that defines valid navigation within the navigation host.
 
-
+//Configuration options for NavigationUI methods that interact with implementations of the app bar pattern such as Toolbar, CollapsingToolbarLayout, and ActionBar.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.homeFragment, R.id.myJobsFragment, R.id.postJobFragment, R.id.postedJobsFragment, R.id.aboutUsFragment, R.id.myProfileFragment, R.id.queriesFragment)
                 .setDrawerLayout(drawer)
@@ -67,43 +67,43 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
         Log.d(TAG, "onCreate: setupWithNavController is executed");
 
-        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-            @Override
-            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                int id = destination.getId();
-
-                switch (id){
-                    case R.id.homeFragment:
-                        Toast.makeText(MainActivity.this, "Home fragment is selected", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case R.id.myJobsFragment:
-                        Toast.makeText(MainActivity.this, "My Jobs fragment is selected", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case R.id.postJobFragment:
-                        Toast.makeText(MainActivity.this, "Post Job is selected", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case R.id.postedJobsFragment:
-                        Toast.makeText(MainActivity.this, "Posted Jobs fragment is selected", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case R.id.aboutUsFragment:
-                        Toast.makeText(MainActivity.this, "About us fragment is selected", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case R.id.logout:
-                        mAuth.signOut();
-                        startActivity(new Intent(getApplicationContext(), ClientLogin.class));
-                        break;
-
-                    default:
-                        Toast.makeText(MainActivity.this, "Home fragment is selected", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            }
-        });
+//        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+//            @Override
+//            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+//                int id = destination.getId();
+//
+//                switch (id){
+//                    case R.id.homeFragment:
+//                        Toast.makeText(MainActivity.this, "Home fragment is selected", Toast.LENGTH_SHORT).show();
+//                        break;
+//
+//                    case R.id.myJobsFragment:
+//                        Toast.makeText(MainActivity.this, "My Jobs fragment is selected", Toast.LENGTH_SHORT).show();
+//                        break;
+//
+//                    case R.id.postJobFragment:
+//                        Toast.makeText(MainActivity.this, "Post Job is selected", Toast.LENGTH_SHORT).show();
+//                        break;
+//
+//                    case R.id.postedJobsFragment:
+//                        Toast.makeText(MainActivity.this, "Posted Jobs fragment is selected", Toast.LENGTH_SHORT).show();
+//                        break;
+//
+//                    case R.id.aboutUsFragment:
+//                        Toast.makeText(MainActivity.this, "About us fragment is selected", Toast.LENGTH_SHORT).show();
+//                        break;
+//
+//                    case R.id.logout:
+//                        mAuth.signOut();
+//                        startActivity(new Intent(getApplicationContext(), ClientLogin.class));
+//                        break;
+//
+//                    default:
+//                        Toast.makeText(MainActivity.this, "Home fragment is selected", Toast.LENGTH_SHORT).show();
+//                        break;
+//                }
+//            }
+//        });
 
 
         Log.d(TAG, "onCreate: has ended.");
