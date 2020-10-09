@@ -25,14 +25,8 @@ LinearLayout loadQueryDetails;
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.admin_fragment_queries, container, false);
-            loadQueryDetails = root.findViewById(R.id.loadQueryDetails);
 
-            loadQueryDetails.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(getContext(), ViewQuery.class));
-                }
-            });
+
 
         return root;
     }

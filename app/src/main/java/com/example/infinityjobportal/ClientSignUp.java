@@ -156,6 +156,17 @@ public class ClientSignUp extends AppCompatActivity {
         user.setLastName(lastName.getText().toString());
         user.setNumber(mobile.getText().toString());
         user.setEmail(email.getText().toString());
+        user.setTagLine("");
+        user.setAbout("");
+        user.setWebsite("");
+        user.setUserProfilePic("user.png");
+        user.setCity("");
+        user.setProvince("");
+        user.setCountry("");
+        user.setStreet("");
+        user.setBuilding("");
+        user.setApartment("");
+        user.setZipCode("");
 
 
       //  db.collection("users").document(user.getEmail()).set(user)

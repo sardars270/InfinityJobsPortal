@@ -21,6 +21,8 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import io.opencensus.stats.View;
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     FirebaseAuth mAuth;
@@ -52,11 +54,15 @@ public class MainActivity extends AppCompatActivity {
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+
+
+
+
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.homeFragment, R.id.myJobsFragment, R.id.postJobFragment, R.id.postedJobsFragment, R.id.aboutUsFragment, R.id.myProfileFragment, R.id.queriesFragment)
+                R.id.homeFragment, R.id.myJobsFragment, R.id.postJobFragment, R.id.postedJobsFragment, R.id.aboutUsFragment, R.id.myProfileFragment, R.id.queriesFragment, R.id.myCompaniesFragment, R.id.logout)
                 .setDrawerLayout(drawer)
                 .build();
 
@@ -94,8 +100,11 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.logout:
+                        Toast.makeText(getApplicationContext(),"loagout called",Toast.LENGTH_SHORT).show();
+                        /*
                         mAuth.signOut();
                         startActivity(new Intent(getApplicationContext(), ClientLogin.class));
+                        */
                         break;
 
                     default:
@@ -110,6 +119,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+
+
     @Override
     public boolean onSupportNavigateUp() {
         Log.d(TAG, "onSupportNavigateUp: has started");
@@ -119,4 +138,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void logout(MenuItem item) {
+        mAuth.signOut();
+        startActivity(new Intent(getApplicationContext(), ClientLogin.class));
+        finish();
+    }
 }

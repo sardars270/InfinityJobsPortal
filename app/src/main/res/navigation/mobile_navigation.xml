@@ -28,6 +28,12 @@
         android:label="About us"
         tools:layout="@layout/fragment_about_us" />
     <fragment
+        android:id="@+id/myCompaniesFragment"
+        android:name="com.example.infinityjobportal.ui.myCompanies.myCompanies"
+        android:label="About us"
+        tools:layout="@layout/fragment_my_companies" />
+
+    <fragment
         android:id="@+id/queriesFragment"
         android:name="com.example.infinityjobportal.ui.Queries.QueriesFragment"
         android:label="Queries"

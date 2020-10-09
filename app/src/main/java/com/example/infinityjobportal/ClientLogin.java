@@ -45,6 +45,8 @@ public class ClientLogin extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
+       // autoLogin(); // for testing only
+
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,6 +75,58 @@ public class ClientLogin extends AppCompatActivity {
 
     }
 
+    private void autoLogin() {
+
+
+
+        mAuth.signInWithEmailAndPassword("", "")
+
+                .addOnCompleteListener(ClientLogin.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+
+                            FirebaseUser user = mAuth.getCurrentUser();
+
+                            if (user != null) {
+                                if (user.isEmailVerified()) {
+
+                                    progressBar.setVisibility(View.GONE);
+                                    //errorView.setText("");
+                                    // errorView.setVisibility(View.GONE);
+                                    Intent HomeActivity = new Intent(getApplicationContext(), MainActivity.class);
+                                    //   setResult(RESULT_OK, null);
+                                    startActivity(HomeActivity);
+
+
+
+                                } else {
+
+                                    progressBar.setVisibility(View.GONE);
+                                    errorView.setText("Please Verify your EmailID and SignIn");
+
+                                }
+                            }
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(getApplicationContext(), "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            if (task.getException() != null) {
+                                errorView.setText(task.getException().getMessage());
+
+                            }
+
+                        }
+
+                    }
+                });
+
+    }
+
     public void logInFunction(View view) {
         if (email.getText().toString().contentEquals("")) {
 
@@ -89,6 +143,8 @@ public class ClientLogin extends AppCompatActivity {
             progressBar.setVisibility(View.VISIBLE);
 
             mAuth.signInWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
+           // mAuth.signInWithEmailAndPassword("sardars270@gmail.com", "barry123")
+
                     .addOnCompleteListener(ClientLogin.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {

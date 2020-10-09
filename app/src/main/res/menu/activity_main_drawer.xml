@@ -32,6 +32,10 @@
                     android:id="@+id/postedJobsFragment"
                     android:icon="@drawable/list_alt_black"
                     android:title="Posted Jobs" />
+                <item
+                    android:id="@+id/myCompaniesFragment"
+                    android:icon="@drawable/list_alt_black"
+                    android:title="My Companies" />
 
             </menu>
         </item>
