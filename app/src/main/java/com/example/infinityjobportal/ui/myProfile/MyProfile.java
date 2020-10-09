@@ -12,10 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.infinityjobportal.ClientChangePassword;
 import com.example.infinityjobportal.EditNameSection;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.UpdateAbout;
@@ -37,6 +39,7 @@ public class MyProfile extends Fragment {
 ImageView userPic, editNameSection, editAboutSection, editExperienceSection, editEducationSection, editInterestSection, editSkillsSection, editContcatSection;
 TextView name, tagLine, location, about,email, number,website, address;
 String websiteUrl="";
+LinearLayout changePassword;
 
 FirebaseAuth mAuth;
 FirebaseFirestore db;
@@ -66,6 +69,7 @@ FirebaseFirestore db;
         editSkillsSection = root.findViewById(R.id.editSkillsSection);
         editInterestSection = root.findViewById(R.id.editInterestsection);
         editContcatSection = root.findViewById(R.id.editContactInfo);
+        changePassword = root.findViewById(R.id.changePassword);
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -217,6 +221,12 @@ FirebaseFirestore db;
             }
         });
 
+        changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), ClientChangePassword.class));
+            }
+        });
 
 
 

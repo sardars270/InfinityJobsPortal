@@ -45,7 +45,7 @@ public class ClientLogin extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-       // autoLogin(); // for testing only
+        autoLogin(); // for testing only
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +79,7 @@ public class ClientLogin extends AppCompatActivity {
 
 
 
-        mAuth.signInWithEmailAndPassword("", "")
+        mAuth.signInWithEmailAndPassword("sardars270@gmail.com", "barry123")
 
                 .addOnCompleteListener(ClientLogin.this, new OnCompleteListener<AuthResult>() {
                     @Override
