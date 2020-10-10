@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
     app:startDestination="@id/homeFragment">
+
     <fragment
         android:id="@+id/myJobsFragment"
         android:name="com.example.infinityjobportal.ui.myJobs.MyJobsFragment"
@@ -30,7 +31,7 @@
     <fragment
         android:id="@+id/myCompaniesFragment"
         android:name="com.example.infinityjobportal.ui.myCompanies.myCompanies"
-        android:label="About us"
+        android:label="My Companies"
         tools:layout="@layout/fragment_my_companies" />
 
     <fragment

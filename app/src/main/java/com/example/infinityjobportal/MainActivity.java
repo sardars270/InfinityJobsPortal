@@ -76,27 +76,27 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (id){
                     case R.id.homeFragment:
-                        Toast.makeText(MainActivity.this, "Home fragment is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(MainActivity.this, "Home fragment is selected", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.myJobsFragment:
-                        Toast.makeText(MainActivity.this, "My Jobs fragment is selected", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "My Jobs fragment is selected", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.postJobFragment:
-                        Toast.makeText(MainActivity.this, "Post Job is selected", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "Post Job is selected", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.postedJobsFragment:
-                        Toast.makeText(MainActivity.this, "Posted Jobs fragment is selected", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "Posted Jobs fragment is selected", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.aboutUsFragment:
-                        Toast.makeText(MainActivity.this, "About us fragment is selected", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "About us fragment is selected", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.logout:
-                        Toast.makeText(getApplicationContext(),"loagout called",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),"loagout called",Toast.LENGTH_SHORT).show();
                         /*
                         mAuth.signOut();
                         startActivity(new Intent(getApplicationContext(), ClientLogin.class));
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     default:
-                        Toast.makeText(MainActivity.this, "Home fragment is selected", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "Home fragment is selected", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
