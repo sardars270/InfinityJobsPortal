@@ -14,11 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MySkillsActivity extends AppCompatActivity {
 
@@ -30,11 +32,15 @@ public class MySkillsActivity extends AppCompatActivity {
     String TAG = "SkillActivity";
 
     AppCompatButton btnAdd;
+    FirebaseAuth mAuth;
+    String email;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_skills);
+        mAuth = FirebaseAuth.getInstance();
+        email = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         skillList = new ArrayList<>();
@@ -55,9 +61,7 @@ public class MySkillsActivity extends AppCompatActivity {
         });
 
 
-
     }
-
 
 
     private void getSkills() {
@@ -76,15 +80,14 @@ public class MySkillsActivity extends AppCompatActivity {
                             List<MySkill> skills = documentSnapshots.toObjects(MySkill.class);
 
                             for (int i = 0; i < skills.size(); i++) {
-                                if(TextUtils.equals(skills.get(i).getUserId(),userId)){
-                                    MySkill mySkill= new MySkill(skills.get(i).getId(),skills.get(i).getName(),
-                                            skills.get(i).getSkillId(),skills.get(i).getUserId());
+                                if (TextUtils.equals(skills.get(i).getUserId(), userId)) {
+                                    MySkill mySkill = new MySkill(skills.get(i).getId(), skills.get(i).getName(),
+                                            skills.get(i).getSkillId(), skills.get(i).getUserId());
                                     skillList.add(mySkill);
                                 }
 
 
                             }
-
 
 
                             adapter.notifyDataSetChanged();
@@ -99,7 +102,7 @@ public class MySkillsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(adapter!=null)
-        getSkills();
+        if (adapter != null)
+            getSkills();
     }
 }
