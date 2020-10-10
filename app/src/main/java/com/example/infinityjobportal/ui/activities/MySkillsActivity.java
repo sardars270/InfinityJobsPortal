@@ -1,4 +1,4 @@
-package com.example.infinityjobportal;
+package com.example.infinityjobportal.ui.activities;
 
 
 import android.content.Intent;
@@ -13,6 +13,9 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infinityjobportal.MySkill;
+import com.example.infinityjobportal.MySkillAdapter;
+import com.example.infinityjobportal.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -20,7 +23,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class MySkillsActivity extends AppCompatActivity {
 
@@ -40,7 +42,7 @@ public class MySkillsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_skills);
         mAuth = FirebaseAuth.getInstance();
-        email = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
+//        email = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         skillList = new ArrayList<>();

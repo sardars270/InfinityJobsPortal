@@ -1,4 +1,4 @@
-package com.example.infinityjobportal;
+package com.example.infinityjobportal.ui.activities;
 
 
 import android.os.Bundle;
@@ -11,6 +11,9 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infinityjobportal.AddSkillAdapter;
+import com.example.infinityjobportal.R;
+import com.example.infinityjobportal.Skill;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;

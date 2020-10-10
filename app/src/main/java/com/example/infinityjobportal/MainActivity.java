@@ -11,14 +11,14 @@ import androidx.appcompat.widget.AppCompatButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    AppCompatButton btnMySkills, btnSkills;
+    //  AppCompatButton btnMySkills, btnSkills;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_my_company);
 
-        btnMySkills = findViewById(R.id.btnMySkills);
+     /*   btnMySkills = findViewById(R.id.btnMySkills);
         btnSkills = findViewById(R.id.btnSkills);
 
         btnMySkills.setOnClickListener(new View.OnClickListener() {
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
 
             }
-        });
+        });*/
 
     }
 }
