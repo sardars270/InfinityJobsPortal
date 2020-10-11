@@ -1,7 +1,9 @@
 package com.example.infinityjobportal.model;
 
 public class InterestsModel {
-    String id;
+     String id;
+    String faltu;
+    String type_int;
 
     public String getId() {
         return id;
@@ -9,14 +11,6 @@ public class InterestsModel {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getInterests() {
-        return interests;
-    }
-
-    public void setInterests(String interests) {
-        this.interests = interests;
     }
 
     public String getFaltu() {
@@ -27,13 +21,28 @@ public class InterestsModel {
         this.faltu = faltu;
     }
 
-    String interests;
-    String faltu;
+    public String getType_int() {
+        return type_int;
+    }
 
+    public void setType_int(String type_int) {
+        this.type_int = type_int;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    String userid;
 
     public InterestsModel() {
         this.id = id;
-        this.interests = interests;
         this.faltu = faltu;
+        this.type_int = type_int;
+        this.userid = userid;
     }
 }

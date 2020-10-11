@@ -91,6 +91,8 @@ public class ClientSignUp extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
                                     FirebaseUser user = mAuth.getCurrentUser();
+                                    loadOtherDetails();
+
 
                                     try {
                                         if (user != null)
@@ -118,33 +120,11 @@ public class ClientSignUp extends AppCompatActivity {
                                                             }
                                                         }
 
-                                                        private void loadOtherDetails() {
 
-                                                            User user = new User();
-                                                            user.setFirstName(firstName.getText().toString());
-                                                            user.setLastName(lastName.getText().toString());
-                                                            user.setNumber(mobile.getText().toString());
-                                                            user.setEmail(email.getText().toString());
-
-                                                            db.collection("users").document(user.getEmail()).set(user)
-                                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                        @Override
-                                                                        public void onSuccess(Void aVoid) {
-
-                                                                        }
-                                                                    })
-                                                                    .addOnFailureListener(new OnFailureListener() {
-                                                                        @Override
-                                                                        public void onFailure(@NonNull Exception e) {
-
-                                                                        }
-                                                                    });
-
-
-                                                        }
                                                     });
 
                                     } catch (Exception e) {
+                                        progressBar.setVisibility(View.GONE);
                                         errorView.setText(e.getMessage());
                                     }
 
@@ -153,20 +133,10 @@ public class ClientSignUp extends AppCompatActivity {
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
+                                    progressBar.setVisibility(View.GONE);
                                     errorView.setText(e.getMessage());
                                 }
                             });
-
-
-
-
-
-
-
-
-
-
-
 
 
                 }
@@ -178,5 +148,40 @@ public class ClientSignUp extends AppCompatActivity {
 
 
 
+    }
+
+    private void loadOtherDetails() {
+        User user = new User();
+        user.setFirstName(firstName.getText().toString());
+        user.setLastName(lastName.getText().toString());
+        user.setNumber(mobile.getText().toString());
+        user.setEmail(email.getText().toString());
+        user.setTagLine("");
+        user.setAbout("");
+        user.setWebsite("");
+        user.setUserProfilePic("user.png");
+        user.setCity("");
+        user.setProvince("");
+        user.setCountry("");
+        user.setStreet("");
+        user.setBuilding("");
+        user.setApartment("");
+        user.setZipCode("");
+
+
+      //  db.collection("users").document(user.getEmail()).set(user)
+        db.collection("users").document(mAuth.getCurrentUser().getEmail()).set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
     }
 }

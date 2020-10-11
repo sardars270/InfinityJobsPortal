@@ -8,6 +8,43 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:313501571213:android:f4c20b09754b54ac1eaac4",
+        "android_client_info": {
+          "package_name": "com.example.firestore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313501571213-93i81qpi5iru7nas1sdr3p6eihhtpo1m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.firestore",
+            "certificate_hash": "6fcec61dc55c184f63da4893179155a8f37ed596"
+          }
+        },
+        {
+          "client_id": "313501571213-tdss09vqeq0f48i10a52gtjkp1642h7e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApLotu2fSNcvtQ3zM-w5rkggUOkI_A2kw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313501571213-tdss09vqeq0f48i10a52gtjkp1642h7e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:313501571213:android:820be44349f44b071eaac4",
         "android_client_info": {
           "package_name": "com.example.infinityjobportal"
@@ -88,6 +125,43 @@
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.infinityjobs",
+            "certificate_hash": "a050e9420bfb7827481c46cf4b2617d848909e38"
+          }
+        },
+        {
+          "client_id": "313501571213-tdss09vqeq0f48i10a52gtjkp1642h7e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApLotu2fSNcvtQ3zM-w5rkggUOkI_A2kw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313501571213-tdss09vqeq0f48i10a52gtjkp1642h7e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313501571213:android:5c42f7e7ac4cdade1eaac4",
+        "android_client_info": {
+          "package_name": "com.example.ruf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313501571213-95p464jocg94cl8i8i968j5bi82sdbee.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ruf",
             "certificate_hash": "a050e9420bfb7827481c46cf4b2617d848909e38"
           }
         },

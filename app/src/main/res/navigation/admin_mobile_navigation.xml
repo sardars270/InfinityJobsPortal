@@ -7,19 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.infinityjobportal.admin.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/admin_fragment_home" />
+        android:name="com.example.infinityjobportal.admin.ui.user.UserFragment"
+        android:label="Users"
+        tools:layout="@layout/admin_fragment_user" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.infinityjobportal.admin.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/admin_fragment_dashboard" />
+        android:id="@+id/navigation_queries"
+        android:name="com.example.infinityjobportal.admin.ui.queries.QueriesFragment"
+        android:label="Queries"
+        tools:layout="@layout/admin_fragment_queries" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.infinityjobportal.admin.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/admin_fragment_notifications" />
+        android:id="@+id/navigation_settings"
+        android:name="com.example.infinityjobportal.admin.ui.settings.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/admin_fragment_settings" />
+
+    <fragment
+        android:id="@+id/navigation_jobs"
+        android:name="com.example.infinityjobportal.admin.ui.jobs.JobsFragment"
+        android:label="Jobs"
+        tools:layout="@layout/admin_fragment_jobs" />
 </navigation>

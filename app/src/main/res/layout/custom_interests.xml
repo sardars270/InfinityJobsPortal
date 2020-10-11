@@ -5,7 +5,7 @@
     <View
         android:layout_width="wrap_content"
         android:layout_marginTop="10dp"
-
+        android:background="@color/grayFontsColor"
         android:layout_height="1dp">
 
     </View>
@@ -20,26 +20,31 @@
             android:layout_width="0dp"
             android:textColor="@color/black"
             android:padding="10dp"
+            android:textSize="20dp"
+
             android:layout_height="wrap_content"
             android:text="TextView" />
+
         <TextView
-            android:id="@+id/delvalid"
+            android:id="@+id/del"
             android:layout_width="0dp"
             android:layout_marginTop="10dp"
             android:layout_weight="4"
-
             android:textColor="@color/black"
+            android:visibility="gone"
             android:padding="10dp"
             android:layout_height="wrap_content"
             android:text="jjcv" />
+
         <TextView
             android:id="@+id/minus"
             android:layout_width="0dp"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
-
+            android:drawableLeft="@drawable/ic_baseline_remove_circle_outline_24"
             android:textColor="@color/black"
             android:padding="10dp"
+            android:textSize="20dp"
             android:layout_height="wrap_content"
             android:text="" />
     </LinearLayout>
