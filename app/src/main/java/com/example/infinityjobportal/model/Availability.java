@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Availability implements Serializable {
     @Exclude
     private String id;
-    private String Monday, Tuesday, Wednessday, Thursday, Friday, Saturday, Sunday;
+    private String Monday, Tuesday, Wednessday, Thursday, Friday, Saturday, Sunday,UserId;
 
     public Availability(String monday, String tuesday, String wednessday, String thursday, String friday, String saturday, String sunday) {
         Monday = monday;
@@ -19,7 +19,16 @@ public class Availability implements Serializable {
         Saturday = saturday;
         Sunday = sunday;
     }
-
+    public Availability(String monday, String tuesday, String wednessday, String thursday, String friday, String saturday, String sunday,String userId) {
+        Monday = monday;
+        Tuesday = tuesday;
+        Wednessday = wednessday;
+        Thursday = thursday;
+        Friday = friday;
+        Saturday = saturday;
+        Sunday = sunday;
+        UserId=userId;
+    }
     public Availability() {
     }
 
@@ -33,6 +42,14 @@ public class Availability implements Serializable {
 
     public String getTuesday() {
         return Tuesday;
+    }
+
+    public String getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(String userId) {
+        UserId = userId;
     }
 
     public void setTuesday(String tuesday) {

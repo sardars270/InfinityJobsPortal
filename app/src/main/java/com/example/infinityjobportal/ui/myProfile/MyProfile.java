@@ -5,20 +5,26 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.infinityjobportal.AddNewEducation;
 import com.example.infinityjobportal.ClientChangePassword;
+import com.example.infinityjobportal.EditAvailability;
+import com.example.infinityjobportal.EditEducation;
 import com.example.infinityjobportal.EditNameSection;
+import com.example.infinityjobportal.MainEducation;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.UpdateAbout;
 import com.example.infinityjobportal.UpdateContactSection;
@@ -31,18 +37,24 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 public class MyProfile extends Fragment {
 ImageView userPic, editNameSection, editAboutSection, editExperienceSection, editEducationSection, editInterestSection, editSkillsSection, editContcatSection;
 TextView name, tagLine, location, about,email, number,website, address;
+TextView mon,tue,wed,thurs,fri,sat,sun;
+ImageView editAvailabilitySection;
 String websiteUrl="";
 LinearLayout changePassword;
+    FirebaseAuth mAuth;
+    FirebaseFirestore db;
 
-FirebaseAuth mAuth;
-FirebaseFirestore db;
+
+
 
     public MyProfile() {
         // Required empty public constructor
@@ -53,6 +65,15 @@ FirebaseFirestore db;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
        View root  = inflater.inflate(R.layout.fragment_my_profile, container, false);
+
+       editAvailabilitySection=root.findViewById(R.id.editAvailabilitySection);
+        mon=root.findViewById(R.id.mon);
+        tue=root.findViewById(R.id.tue);
+        wed=root.findViewById(R.id.wed);
+        thurs=root.findViewById(R.id.thurs);
+        fri=root.findViewById(R.id.fri);
+        sat=root.findViewById(R.id.sat);
+        sun=root.findViewById(R.id.sun);
         userPic = root.findViewById(R.id.userPic);
         name  = root.findViewById(R.id.name);
         tagLine  = root.findViewById(R.id.tagLine);
@@ -70,10 +91,74 @@ FirebaseFirestore db;
         editInterestSection = root.findViewById(R.id.editInterestsection);
         editContcatSection = root.findViewById(R.id.editContactInfo);
         changePassword = root.findViewById(R.id.changePassword);
-
-
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
+
+        editAvailabilitySection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), EditAvailability.class);
+                startActivity(i);
+            }
+        });
+
+
+        DocumentReference dref=db.collection("Availability").document("Weeksdays");
+       dref.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+                        if (error != null) {
+                            return;
+
+                        }
+                        if (documentSnapshot.exists()) {
+                            String Mon = documentSnapshot.getString("monday");
+                            String Tue = documentSnapshot.getString("tuesday");
+                            String Wed = documentSnapshot.getString("wednessday");
+                            String Thurs = documentSnapshot.getString("thursday");
+                            String Fri = documentSnapshot.getString("friday");
+                            String Sat = documentSnapshot.getString("saturday");
+                            String Sun = documentSnapshot.getString("sunday");
+
+                            mon.setText(Mon);
+                            tue.setText(Tue);
+                            wed.setText(Wed);
+                            thurs.setText(Thurs);
+                            fri.setText(Fri);
+                            sat.setText(Sat);
+                            sun.setText(Sun);
+                        }
+                    }
+                });
+
+
+        /*DocumentReference dref=db.collection("Availability").document("Weeksdays");
+      dref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                             @Override
+                                             public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                 if (documentSnapshot.exists()) {
+                                                     String Mon = documentSnapshot.getString("monday");
+                                                     String Tue = documentSnapshot.getString("tuesday");
+                                                     String Wed = documentSnapshot.getString("wednessday");
+                                                     String Thurs = documentSnapshot.getString("thursday");
+                                                     String Fri = documentSnapshot.getString("friday");
+                                                     String Sat = documentSnapshot.getString("saturday");
+                                                     String Sun = documentSnapshot.getString("sunday");
+
+                                                     mon.setText(Mon);
+                                                     tue.setText(Tue);
+                                                     wed.setText(Wed);
+                                                     thurs.setText(Thurs);
+                                                     fri.setText(Fri);
+                                                     sat.setText(Sat);
+                                                     sun.setText(Sun);
+
+
+                                                 }
+                                             }
+                                         });
+*/
 
 
         DocumentReference docRef = db.collection("users").document(mAuth.getCurrentUser().getEmail());
@@ -232,5 +317,12 @@ FirebaseFirestore db;
 
         return root;
     }
-}
+
+
+
+
+
+
+    }
+
 

@@ -33,6 +33,7 @@ public class QueriesFragment extends Fragment {
     private EditText feedbackQuery1;
     private EditText editsubject1;
     CollectionReference reference =db.collection("Query");
+    private static final String TAG = "QueriesFragment";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -1,24 +1,24 @@
 package com.example.infinityjobportal;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.infinityjobportal.model.Availability;
-import com.google.android.gms.tasks.OnFailureListener;
+import com.example.infinityjobportal.ui.myProfile.MyProfile;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class EditAvailability extends AppCompatActivity
-        //  implements View.OnClickListener
+      //  implements View.OnClickListener
 {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     CheckBox checkBoxMon, checkBoxTue, checkBoxWed, checkBoxThurs, checkBoxFri, checkBoxSat, checkBoxSun, ckbxMonMor, ckbxMonEve, ckbxMonN9t, ckbxTueMor, ckbxTueEve, ckbxTueN9t, ckbxWedMor, ckbxWedEve, ckbxWedN9t, ckbxThursMor, ckbxThursEve, ckbxThursN9t,
@@ -26,11 +26,255 @@ public class EditAvailability extends AppCompatActivity
     Button btnback, btnsave;
     String Mondayvalue, Tuesdayvalue, Wednessdayvalue, Thursdayvalue, Fridayvalue, Saturdayvalue, Sundayvalue;
     String day;
+    FirebaseAuth mAuth;
+
+
+    private DocumentReference dref=db.collection("Availability").document("Weeksdays");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_availability);
+
+
+        mAuth= FirebaseAuth.getInstance();
+        final String userId=  mAuth.getCurrentUser().getEmail();
+
+        dref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    String Mon = documentSnapshot.getString("monday");
+                    String Tue = documentSnapshot.getString("tuesday");
+                    String Wed = documentSnapshot.getString("wednessday");
+                    String Thurs = documentSnapshot.getString("thursday");
+                    String Fri = documentSnapshot.getString("friday");
+                    String Sat = documentSnapshot.getString("saturday");
+                    String Sun = documentSnapshot.getString("sunday");
+
+                        if (Mon.equals("Morning/Evening/Night")) {
+                            checkBoxMon.setChecked(true);
+                            ckbxMonMor.setChecked(true);
+                            ckbxMonEve.setChecked(true);
+                            ckbxMonN9t.setChecked(true);
+
+                        } else if (Mon.equals("Morning") ){
+
+                            ckbxMonMor.setChecked(true);
+
+                        } else if (Mon.equals("Evening")) {
+
+                            ckbxMonEve.setChecked(true);
+                        } else if (Mon.equals("Night")) {
+                            ckbxMonN9t.setChecked(true);
+                        } else if (Mon.equals("Morning/Evening")) {
+                            ckbxMonMor.setChecked(true);
+                            ckbxMonEve.setChecked(true);
+                        } else if (Mon.equals("Evening/Night")) {
+                            ckbxMonEve.setChecked(true);
+                            ckbxMonN9t.setChecked(true);
+                        } else if (Mon.equals("Morning/Night")) {
+                            ckbxMonMor.setChecked(true);
+                            ckbxMonN9t.setChecked(true);
+                        } else {
+                            ckbxTueMor.setChecked(false);
+                            ckbxTueEve.setChecked(false);
+                            ckbxTueN9t.setChecked(false);
+
+                        }
+                        if(Tue.equals("Morning/Evening/Night")) {
+                            checkBoxTue.setChecked(true);
+                            ckbxTueMor.setChecked(true);
+                            ckbxTueEve.setChecked(true);
+                            ckbxTueN9t.setChecked(true);
+
+                        } else if (Tue.equals("Morning") ){
+                              ckbxTueMor.setChecked(true);
+
+                        } else if (Tue.equals("Evening")) {
+
+                            ckbxTueEve.setChecked(true);
+                        } else if (Tue.equals("Night")) {
+                            ckbxTueN9t.setChecked(true);
+                        } else if (Tue.equals("Morning/Evening")) {
+                            ckbxTueMor.setChecked(true);
+                            ckbxTueEve.setChecked(true);
+                        } else if (Tue.equals("Evening/Night")) {
+                            ckbxTueEve.setChecked(true);
+                            ckbxTueN9t.setChecked(true);
+                        } else if (Tue.equals("Morning/Night")) {
+                            ckbxTueMor.setChecked(true);
+                            ckbxTueN9t.setChecked(true);
+                        } else {
+                            ckbxTueMor.setChecked(false);
+                            ckbxTueEve.setChecked(false);
+                            ckbxTueN9t.setChecked(false);
+
+                        }
+                    if(Wed.equals("Morning/Evening/Night")) {
+                        checkBoxWed.setChecked(true);
+                        ckbxWedMor.setChecked(true);
+                        ckbxWedEve.setChecked(true);
+                        ckbxWedN9t.setChecked(true);
+
+                    } else if (Wed.equals("Morning") ){
+                        ckbxWedMor.setChecked(true);
+
+                    } else if (Tue.equals("Evening")) {
+
+                        ckbxWedEve.setChecked(true);
+                    } else if (Wed.equals("Night")) {
+                        ckbxWedN9t.setChecked(true);
+                    } else if (Wed.equals("Morning/Evening")) {
+                        ckbxWedMor.setChecked(true);
+                        ckbxWedEve.setChecked(true);
+                    } else if (Wed.equals("Evening/Night")) {
+                        ckbxWedEve.setChecked(true);
+                        ckbxWedN9t.setChecked(true);
+                    } else if (Wed.equals("Morning/Night")) {
+                        ckbxWedMor.setChecked(true);
+                        ckbxWedN9t.setChecked(true);
+                    } else {
+                        ckbxWedMor.setChecked(false);
+                        ckbxWedEve.setChecked(false);
+                        ckbxWedN9t.setChecked(false);
+
+                    }
+                    if(Thurs.equals("Morning/Evening/Night")) {
+                        checkBoxThurs.setChecked(true);
+                        ckbxThursMor.setChecked(true);
+                        ckbxThursEve.setChecked(true);
+                        ckbxThursN9t.setChecked(true);
+
+                    } else if (Thurs.equals("Morning") ){
+                        ckbxThursMor.setChecked(true);
+
+                    } else if (Thurs.equals("Evening")) {
+
+                        ckbxThursEve.setChecked(true);
+                    } else if (Thurs.equals("Night")) {
+                        ckbxThursN9t.setChecked(true);
+                    } else if (Thurs.equals("Morning/Evening")) {
+                        ckbxThursMor.setChecked(true);
+                        ckbxThursEve.setChecked(true);
+                    } else if (Thurs.equals("Evening/Night")) {
+                        ckbxThursEve.setChecked(true);
+                        ckbxThursN9t.setChecked(true);
+                    } else if (Thurs.equals("Morning/Night")) {
+                        ckbxThursMor.setChecked(true);
+                        ckbxThursN9t.setChecked(true);
+                    } else {
+                        ckbxThursMor.setChecked(false);
+                        ckbxThursEve.setChecked(false);
+                        ckbxThursN9t.setChecked(false);
+
+                    }
+
+                    if(Fri.equals("Morning/Evening/Night")) {
+                        checkBoxFri.setChecked(true);
+                        ckbxFriMor.setChecked(true);
+                        ckbxFriEve.setChecked(true);
+                        ckbxFriN9t.setChecked(true);
+
+                    } else if (Fri.equals("Morning") ){
+                        ckbxFriMor.setChecked(true);
+
+                    } else if (Fri.equals("Evening")) {
+
+                        ckbxFriEve.setChecked(true);
+                    } else if (Fri.equals("Night")) {
+                        ckbxFriN9t.setChecked(true);
+                    } else if (Fri.equals("Morning/Evening")) {
+                        ckbxFriMor.setChecked(true);
+                        ckbxFriEve.setChecked(true);
+                    } else if (Fri.equals("Evening/Night")) {
+                        ckbxFriEve.setChecked(true);
+                        ckbxFriN9t.setChecked(true);
+                    } else if (Fri.equals("Morning/Night")) {
+                        ckbxFriMor.setChecked(true);
+                        ckbxFriN9t.setChecked(true);
+                    } else {
+                        ckbxFriMor.setChecked(false);
+                        ckbxFriEve.setChecked(false);
+                        ckbxFriN9t.setChecked(false);
+
+                    }
+
+                    if(Sat.equals("Morning/Evening/Night")) {
+                        checkBoxSat.setChecked(true);
+                        ckbxSatMor.setChecked(true);
+                        ckbxSatEve.setChecked(true);
+                        ckbxSatN9t.setChecked(true);
+
+                    } else if (Sat.equals("Morning") ){
+                        ckbxSatMor.setChecked(true);
+
+                    } else if (Sat.equals("Evening")) {
+
+                        ckbxSatEve.setChecked(true);
+                    } else if (Sat.equals("Night")) {
+                        ckbxSatN9t.setChecked(true);
+                    } else if (Sat.equals("Morning/Evening")) {
+                        ckbxSatMor.setChecked(true);
+                        ckbxSatEve.setChecked(true);
+                    } else if (Sat.equals("Evening/Night")) {
+                        ckbxSatEve.setChecked(true);
+                        ckbxSatN9t.setChecked(true);
+                    } else if (Sat.equals("Morning/Night")) {
+                        ckbxSatMor.setChecked(true);
+                        ckbxSatN9t.setChecked(true);
+                    } else {
+                        ckbxSatMor.setChecked(false);
+                        ckbxSatEve.setChecked(false);
+                        ckbxSatN9t.setChecked(false);
+
+                    }
+
+                    if(Sun.equals("Morning/Evening/Night")) {
+                        checkBoxSun.setChecked(true);
+                        ckbxSunMor.setChecked(true);
+                        ckbxSunEve.setChecked(true);
+                        ckbxSunN9t.setChecked(true);
+
+                    } else if (Sun.equals("Morning") ){
+                        ckbxSunMor.setChecked(true);
+
+                    } else if (Sun.equals("Evening")) {
+
+                        ckbxSunEve.setChecked(true);
+                    } else if (Sun.equals("Night")) {
+                        ckbxSunN9t.setChecked(true);
+                    } else if (Sun.equals("Morning/Evening")) {
+                        ckbxSunMor.setChecked(true);
+                        ckbxSunEve.setChecked(true);
+                    } else if (Sun.equals("Evening/Night")) {
+                        ckbxSunEve.setChecked(true);
+                        ckbxSunN9t.setChecked(true);
+                    } else if (Sun.equals("Morning/Night")) {
+                        ckbxSunMor.setChecked(true);
+                        ckbxSunN9t.setChecked(true);
+                    } else {
+                        ckbxSunMor.setChecked(false);
+                        ckbxSunEve.setChecked(false);
+                        ckbxSunN9t.setChecked(false);
+
+                    }
+
+
+
+
+
+
+
+
+
+                }
+            }
+
+
+        });
+
         checkBoxMon = findViewById(R.id.checkBoxMon);
         checkBoxTue = findViewById(R.id.checkboxTue);
         checkBoxWed = findViewById(R.id.checkboxWed);
@@ -59,7 +303,17 @@ public class EditAvailability extends AppCompatActivity
         ckbxSunMor = findViewById(R.id.chbxSunMor);
         ckbxSunEve = findViewById(R.id.chbxSunEve);
         ckbxSunN9t = findViewById(R.id.chbxSunN9t);
-        btnsave = findViewById(R.id.btnsave);
+        btnsave = findViewById(R.id.btn_save);
+
+
+
+
+
+
+
+
+
+
 
 
         checkBoxMon.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +327,7 @@ public class EditAvailability extends AppCompatActivity
                     ckbxMonMor.setChecked(false);
                     ckbxMonEve.setChecked(false);
                     ckbxMonN9t.setChecked(false);
-                    Mondayvalue = "Not Available";
+
                 }
             }
         });
@@ -88,7 +342,7 @@ public class EditAvailability extends AppCompatActivity
                     ckbxTueMor.setChecked(false);
                     ckbxTueEve.setChecked(false);
                     ckbxTueN9t.setChecked(false);
-                    Tuesdayvalue = "Not Available";
+
                 }
             }
         });
@@ -104,7 +358,7 @@ public class EditAvailability extends AppCompatActivity
                     ckbxWedMor.setChecked(false);
                     ckbxWedEve.setChecked(false);
                     ckbxWedN9t.setChecked(false);
-                    Wednessdayvalue = "Not Available";
+
                 }
             }
         });
@@ -119,7 +373,7 @@ public class EditAvailability extends AppCompatActivity
                     ckbxThursMor.setChecked(false);
                     ckbxThursEve.setChecked(false);
                     ckbxThursN9t.setChecked(false);
-                    Thursdayvalue = "Not Available";
+
                 }
             }
         });
@@ -135,7 +389,7 @@ public class EditAvailability extends AppCompatActivity
                     ckbxFriMor.setChecked(false);
                     ckbxFriEve.setChecked(false);
                     ckbxFriN9t.setChecked(false);
-                    Fridayvalue = "Not Available";
+
                 }
             }
         });
@@ -151,7 +405,7 @@ public class EditAvailability extends AppCompatActivity
                     ckbxSatMor.setChecked(false);
                     ckbxSatEve.setChecked(false);
                     ckbxSatN9t.setChecked(false);
-                    Saturdayvalue = "Not Available";
+
                 }
             }
         });
@@ -168,253 +422,329 @@ public class EditAvailability extends AppCompatActivity
                     ckbxSunMor.setChecked(false);
                     ckbxSunEve.setChecked(false);
                     ckbxSunN9t.setChecked(false);
-                    Sundayvalue = "Not Available";
+
                 }
             }
         });
+
 
 
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (checkBoxMon.isChecked()) {
-                    Toast.makeText(EditAvailability.this, "Monday", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(EditAvailability.this, "Monday", Toast.LENGTH_SHORT).show();
                     day = "Monday";
 
-                    if (ckbxMonMor.isChecked() && !ckbxMonEve.isChecked() && !ckbxMonN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "Morning is selected", Toast.LENGTH_SHORT).show();
+
+                     if (ckbxMonMor.isChecked() && !ckbxMonEve.isChecked() && !ckbxMonN9t.isChecked()) {
+
                         Mondayvalue = "Morning";
                     } else if (ckbxMonEve.isChecked() && !ckbxMonMor.isChecked() && !ckbxMonN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Evening is selected", Toast.LENGTH_SHORT).show();
                         Mondayvalue = "Evening";
                     } else if (ckbxMonN9t.isChecked() && !ckbxMonMor.isChecked() && !ckbxMonEve.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Night is selected", Toast.LENGTH_SHORT).show();
                         Mondayvalue = "Night";
                     } else if (ckbxMonMor.isChecked() && ckbxMonEve.isChecked() && !ckbxMonN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning and Evening is selected", Toast.LENGTH_SHORT).show();
                         Mondayvalue = "Morning/Evening";
                     } else if (ckbxMonMor.isChecked() && ckbxMonN9t.isChecked() && !ckbxMonEve.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning and night is selected", Toast.LENGTH_SHORT).show();
+
                         Mondayvalue = "Morning/Night";
                     } else if (ckbxMonEve.isChecked() && ckbxMonN9t.isChecked() && !ckbxMonMor.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday evening and night is selected", Toast.LENGTH_SHORT).show();
+
                         Mondayvalue = "Evening/Night";
                     } else if (ckbxMonMor.isChecked() && ckbxMonEve.isChecked() && ckbxMonN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
+
                         Mondayvalue = "Morning/Evening/Night";
 
-                    } else {
+                    }
+
+                    else {
 
                         return;
 
 
+                    }
+                }
+
+
+                else {
+                   // if(!checkBoxMon.isChecked())
+                    {
+                        ckbxMonMor.setChecked(false);
+                        ckbxMonEve.setChecked(false);
+                        ckbxMonN9t.setChecked(false);
+                        Mondayvalue = "Not Available";
                     }
                 }
 
 
                 if (checkBoxTue.isChecked()) {
 
-                    Toast.makeText(EditAvailability.this, "Tuesday", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(EditAvailability.this, "Tuesday", Toast.LENGTH_SHORT).show();
                     day = "Tueday";
                     if (ckbxTueMor.isChecked() && !ckbxTueEve.isChecked() && !ckbxTueN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "Morning is selected", Toast.LENGTH_SHORT).show();
+                    //    Toast.makeText(EditAvailability.this, "Morning is selected", Toast.LENGTH_SHORT).show();
                         Tuesdayvalue = "Morning";
                     } else if (ckbxTueEve.isChecked() && !ckbxTueMor.isChecked() && !ckbxTueN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Evening is selected", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(EditAvailability.this, "monday Evening is selected", Toast.LENGTH_SHORT).show();
                         Tuesdayvalue = "Evening";
                     } else if (ckbxTueN9t.isChecked() && !ckbxTueMor.isChecked() && !ckbxTueEve.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Night is selected", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(EditAvailability.this, "monday Night is selected", Toast.LENGTH_SHORT).show();
                         Tuesdayvalue = "Night";
                     } else if (ckbxTueMor.isChecked() && ckbxTueEve.isChecked() && !ckbxTueN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning and Evening is selected", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(EditAvailability.this, "monday Morning and Evening is selected", Toast.LENGTH_SHORT).show();
                         Tuesdayvalue = "Morning/Evening";
                     } else if (ckbxTueMor.isChecked() && ckbxTueN9t.isChecked() && !ckbxTueEve.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning and night is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "monday Morning and night is selected", Toast.LENGTH_SHORT).show();
                         Tuesdayvalue = "Morning/Night";
                     } else if (ckbxTueEve.isChecked() && ckbxTueN9t.isChecked() && !ckbxTueMor.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday evening and night is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "monday evening and night is selected", Toast.LENGTH_SHORT).show();
                         Tuesdayvalue = "Evening/Night";
                     } else if (ckbxTueMor.isChecked() && ckbxTueEve.isChecked() && ckbxTueN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
                         Tuesdayvalue = "Morning/Evening/Night";
 
-                    } else {
+                    }
+
+
+                    else {
                         return;
 
                     }
+                }
+                else {
+                        ckbxTueMor.setChecked(false);
+                        ckbxTueEve.setChecked(false);
+                        ckbxTueN9t.setChecked(false);
+                        Tuesdayvalue = "Not Available";
+
                 }
 
 
                 if (checkBoxWed.isChecked()) {
 
-                    Toast.makeText(EditAvailability.this, "Tuesday", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(EditAvailability.this, "Tuesday", Toast.LENGTH_SHORT).show();
                     day = "Wednessday";
                     if (ckbxWedMor.isChecked() && !ckbxWedEve.isChecked() && !ckbxWedN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "Morning is selected", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(EditAvailability.this, "Morning is selected", Toast.LENGTH_SHORT).show();
                         Wednessdayvalue = "Morning";
                     } else if (ckbxWedEve.isChecked() && !ckbxWedMor.isChecked() && !ckbxWedN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Evening is selected", Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(EditAvailability.this, "monday Evening is selected", Toast.LENGTH_SHORT).show();
                         Wednessdayvalue = "Evening";
                     } else if (ckbxWedN9t.isChecked() && !ckbxWedMor.isChecked() && !ckbxWedEve.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Night is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "monday Night is selected", Toast.LENGTH_SHORT).show();
                         Wednessdayvalue = "Night";
                     } else if (ckbxWedMor.isChecked() && ckbxWedEve.isChecked() && !ckbxWedN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning and Evening is selected", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(EditAvailability.this, "monday Morning and Evening is selected", Toast.LENGTH_SHORT).show();
                         Wednessdayvalue = "Morning/Evening";
                     } else if (ckbxWedMor.isChecked() && ckbxWedN9t.isChecked() && !ckbxWedEve.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning and night is selected", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(EditAvailability.this, "monday Morning and night is selected", Toast.LENGTH_SHORT).show();
                         Wednessdayvalue = "Morning/Night";
                     } else if (ckbxWedEve.isChecked() && ckbxWedN9t.isChecked() && !ckbxWedMor.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday evening and night is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "monday evening and night is selected", Toast.LENGTH_SHORT).show();
                         Wednessdayvalue = "Evening/Night";
                     } else if (ckbxWedMor.isChecked() && ckbxWedEve.isChecked() && ckbxWedN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(EditAvailability.this, "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
                         Wednessdayvalue = "Morning/Evening/Night";
+                    }
 
-                    } else {
+
+                        else {
                         return;
 
                     }
+                }
+                else  {
+                    ckbxWedMor.setChecked(false);
+                    ckbxWedEve.setChecked(false);
+                    ckbxWedN9t.setChecked(false);
+                    Wednessdayvalue = "Not Available";
+
+
                 }
                 if (checkBoxThurs.isChecked()) {
 
                     Toast.makeText(EditAvailability.this, "Tuesday", Toast.LENGTH_SHORT).show();
                     day = "Thursday";
                     if (ckbxThursMor.isChecked() && !ckbxThursEve.isChecked() && !ckbxThursN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "Morning is selected", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(EditAvailability.this, "Morning is selected", Toast.LENGTH_SHORT).show();
                         Thursdayvalue = "Morning";
                     } else if (ckbxThursEve.isChecked() && !ckbxThursMor.isChecked() && !ckbxThursN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Evening is selected", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(EditAvailability.this, "monday Evening is selected", Toast.LENGTH_SHORT).show();
                         Thursdayvalue = "Evening";
                     } else if (ckbxThursN9t.isChecked() && !ckbxThursMor.isChecked() && !ckbxThursEve.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Night is selected", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(EditAvailability.this, "monday Night is selected", Toast.LENGTH_SHORT).show();
                         Thursdayvalue = "Night";
                     } else if (ckbxThursMor.isChecked() && ckbxThursEve.isChecked() && !ckbxThursN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning and Evening is selected", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(EditAvailability.this, "monday Morning and Evening is selected", Toast.LENGTH_SHORT).show();
                         Thursdayvalue = "Morning/Evening";
                     } else if (ckbxThursMor.isChecked() && ckbxThursN9t.isChecked() && !ckbxThursEve.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning and night is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "monday Morning and night is selected", Toast.LENGTH_SHORT).show();
                         Thursdayvalue = "Morning/Night";
                     } else if (ckbxThursEve.isChecked() && ckbxThursN9t.isChecked() && !ckbxThursMor.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday evening and night is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "monday evening and night is selected", Toast.LENGTH_SHORT).show();
                         Thursdayvalue = "Evening/Night";
                     } else if (ckbxThursMor.isChecked() && ckbxThursEve.isChecked() && ckbxThursN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(EditAvailability.this, "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
                         Thursdayvalue = "Morning/Evening/Night";
+                    }
 
-                    } else {
+                    else {
                         return;
 
                     }
                 }
+                else  {
+                    ckbxThursMor.setChecked(false);
+                    ckbxThursEve.setChecked(false);
+                    ckbxThursN9t.setChecked(false);
+                    Thursdayvalue = "Not Available";
+                }
+
                 if (checkBoxFri.isChecked()) {
 
                     Toast.makeText(EditAvailability.this, "Tuesday", Toast.LENGTH_SHORT).show();
                     day = "Friday";
                     if (ckbxFriMor.isChecked() && !ckbxMonEve.isChecked() && !ckbxFriN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "Morning is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "Morning is selected", Toast.LENGTH_SHORT).show();
                         Fridayvalue = "Morning";
                     } else if (ckbxFriEve.isChecked() && !ckbxFriMor.isChecked() && !ckbxFriN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Evening is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "monday Evening is selected", Toast.LENGTH_SHORT).show();
                         Fridayvalue = "Evening";
                     } else if (ckbxFriN9t.isChecked() && !ckbxFriMor.isChecked() && !ckbxFriEve.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Night is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "monday Night is selected", Toast.LENGTH_SHORT).show();
                         Fridayvalue = "Night";
                     } else if (ckbxFriMor.isChecked() && ckbxFriEve.isChecked() && !ckbxFriN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning and Evening is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "monday Morning and Evening is selected", Toast.LENGTH_SHORT).show();
                         Fridayvalue = "Morning/Evening";
                     } else if (ckbxFriMor.isChecked() && ckbxFriN9t.isChecked() && !ckbxFriEve.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning and night is selected", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(EditAvailability.this, "monday Morning and night is selected", Toast.LENGTH_SHORT).show();
                         Fridayvalue = "Morning/Night";
                     } else if (ckbxFriEve.isChecked() && ckbxFriN9t.isChecked() && !ckbxFriMor.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday evening and night is selected", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(EditAvailability.this, "monday evening and night is selected", Toast.LENGTH_SHORT).show();
                         Fridayvalue = "Evening/Night";
                     } else if (ckbxFriMor.isChecked() && ckbxFriEve.isChecked() && ckbxFriN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
                         Fridayvalue = "Morning/Evening/Night";
 
-                    } else {
+                    }
+
+                    else {
                         return;
 
                     }
                 }
+                else  {
+                    ckbxFriMor.setChecked(false);
+                    ckbxFriEve.setChecked(false);
+                    ckbxFriN9t.setChecked(false);
+                    Fridayvalue = "Not Available";
+                }
+
                 if (checkBoxSat.isChecked()) {
 
                     Toast.makeText(EditAvailability.this, "Tuesday", Toast.LENGTH_SHORT).show();
                     day = "Saturday";
                     if (ckbxSatMor.isChecked() && !ckbxSatEve.isChecked() && !ckbxSatN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "Morning is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "Morning is selected", Toast.LENGTH_SHORT).show();
                         Saturdayvalue = "Morning";
                     } else if (ckbxSatEve.isChecked() && !ckbxSatMor.isChecked() && !ckbxSatN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Evening is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "monday Evening is selected", Toast.LENGTH_SHORT).show();
                         Saturdayvalue = "Evening";
                     } else if (ckbxSatN9t.isChecked() && !ckbxSatMor.isChecked() && !ckbxSatEve.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Night is selected", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(EditAvailability.this, "monday Night is selected", Toast.LENGTH_SHORT).show();
                         Saturdayvalue = "Night";
                     } else if (ckbxSatMor.isChecked() && ckbxSatEve.isChecked() && !ckbxSatN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning and Evening is selected", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(EditAvailability.this, "monday Morning and Evening is selected", Toast.LENGTH_SHORT).show();
                         Saturdayvalue = "Morning/Evening";
                     } else if (ckbxSatMor.isChecked() && ckbxSatN9t.isChecked() && !ckbxSatEve.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning and night is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "monday Morning and night is selected", Toast.LENGTH_SHORT).show();
                         Saturdayvalue = "Morning/Night";
                     } else if (ckbxSatEve.isChecked() && ckbxSatN9t.isChecked() && !ckbxSatMor.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday evening and night is selected", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(EditAvailability.this, "monday evening and night is selected", Toast.LENGTH_SHORT).show();
                         Saturdayvalue = "Evening/Night";
                     } else if (ckbxSatMor.isChecked() && ckbxSatEve.isChecked() && ckbxSatN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(EditAvailability.this, "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
                         Saturdayvalue = "Morning/Evening/Night";
 
-                    } else {
+                    }
+                    else {
                         return;
 
                     }
+                }
+                else   {
+                    ckbxSatMor.setChecked(false);
+                    ckbxSatEve.setChecked(false);
+                    ckbxSatN9t.setChecked(false);
+                    Saturdayvalue = "Not Available";
                 }
                 if (checkBoxSun.isChecked()) {
 
-                    Toast.makeText(EditAvailability.this, "Tuesday", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(EditAvailability.this, "Tuesday", Toast.LENGTH_SHORT).show();
                     day = "Sunday";
                     if (ckbxSunMor.isChecked() && !ckbxSunEve.isChecked() && !ckbxSunN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "Morning is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "Morning is selected", Toast.LENGTH_SHORT).show();
                         Sundayvalue = "Morning";
                     } else if (ckbxSunEve.isChecked() && !ckbxSunMor.isChecked() && !ckbxSunN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Evening is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "monday Evening is selected", Toast.LENGTH_SHORT).show();
                         Sundayvalue = "Evening";
                     } else if (ckbxSunN9t.isChecked() && !ckbxSunMor.isChecked() && !ckbxSunEve.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Night is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "monday Night is selected", Toast.LENGTH_SHORT).show();
                         Sundayvalue = "Night";
                     } else if (ckbxSunMor.isChecked() && ckbxSunEve.isChecked() && !ckbxSunN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning and Evening is selected", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(EditAvailability.this, "monday Morning and Evening is selected", Toast.LENGTH_SHORT).show();
                         Sundayvalue = "Morning/Evening";
                     } else if (ckbxSunMor.isChecked() && ckbxSunN9t.isChecked() && !ckbxSunEve.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning and night is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "monday Morning and night is selected", Toast.LENGTH_SHORT).show();
                         Sundayvalue = "Morning/Night";
                     } else if (ckbxSunEve.isChecked() && ckbxSunN9t.isChecked() && !ckbxSunMor.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday evening and night is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "monday evening and night is selected", Toast.LENGTH_SHORT).show();
                         Sundayvalue = "Evening/Night";
                     } else if (ckbxSunMor.isChecked() && ckbxSunEve.isChecked() && ckbxSunN9t.isChecked()) {
-                        Toast.makeText(EditAvailability.this, "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EditAvailability.this, "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
                         Sundayvalue = "Morning/Evening/Night";
+                    }
 
-                    } else {
+                        else {
                         return;
 
                     }
                 }
+                else {
+                    ckbxSunMor.setChecked(false);
+                    ckbxSunEve.setChecked(false);
+                    ckbxSunN9t.setChecked(false);
+                    Sundayvalue = "Not Available";
+                }
+                Availability Availability = new Availability(Mondayvalue, Tuesdayvalue, Wednessdayvalue, Thursdayvalue, Fridayvalue, Saturdayvalue, Sundayvalue,userId);
+                DocumentReference documentReference=db.collection("Availability").document("Weeksdays");
+                documentReference.set(Availability).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                 @Override
+                                                                                 public void onSuccess(Void aVoid) {
+                                                                                     Toast.makeText(EditAvailability.this, " Availability Added Successfully", Toast.LENGTH_SHORT).show();
+                                                                                     finish();
 
-
-                Availability pojoAvailability = new Availability(Mondayvalue, Tuesdayvalue, Wednessdayvalue, Thursdayvalue, Fridayvalue, Saturdayvalue, Sundayvalue);
-                CollectionReference reference = db.collection("Availability");
+                                                                                 }
+                                                                             }
+                );
+               /* CollectionReference reference = db.collection("Availability");
                 reference.add(pojoAvailability).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Toast.makeText(EditAvailability.this, "Data Added Successfully", Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(new Intent(EditAvailability.this, MainAvailability.class));
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(EditAvailability.this, "e.toString()", Toast.LENGTH_SHORT).show();
+
                     }
                 });
+
+                */
 
             }
         });
@@ -423,56 +753,5 @@ public class EditAvailability extends AppCompatActivity
     }
 
 
-
-   /* private void DeleteAvailability() {
-        db.collection("Availability").document(pojoAvailability.getId()).delete()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(EditAvailability.this, "Availability deleted", Toast.LENGTH_LONG).show();
-                            finish();
-                            startActivity(new Intent(EditAvailability.this, MainEducation.class));
-                        }
-                    }
-                });
-
-
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.button_update:
-                UpdateAvailablity();
-                break;
-            case R.id.delete:
-
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(EditAvailability.this);
-                builder.setTitle("Are you sure about this?");
-                builder.setMessage("Deletion is permanent...");
-
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        DeleteAvailability();
-                    }
-                });
-
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-
-                AlertDialog ad = builder.create();
-                ad.show();
-                break;
-
-        }
-    }
-
-    */
-}
