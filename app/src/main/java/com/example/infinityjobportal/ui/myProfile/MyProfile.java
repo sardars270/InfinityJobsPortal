@@ -95,16 +95,7 @@ LinearLayout changePassword;
         db = FirebaseFirestore.getInstance();
 
 
-        editAvailabilitySection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getContext(), EditAvailability.class);
-                startActivity(i);
-            }
-        });
-
-
-        DocumentReference dref=db.collection("Availability").document("Weeksdays");
+        DocumentReference dref=db.collection("Availability").document(mAuth.getCurrentUser().getEmail());
        dref.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
@@ -133,32 +124,6 @@ LinearLayout changePassword;
                 });
 
 
-        /*DocumentReference dref=db.collection("Availability").document("Weeksdays");
-      dref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                             @Override
-                                             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                 if (documentSnapshot.exists()) {
-                                                     String Mon = documentSnapshot.getString("monday");
-                                                     String Tue = documentSnapshot.getString("tuesday");
-                                                     String Wed = documentSnapshot.getString("wednessday");
-                                                     String Thurs = documentSnapshot.getString("thursday");
-                                                     String Fri = documentSnapshot.getString("friday");
-                                                     String Sat = documentSnapshot.getString("saturday");
-                                                     String Sun = documentSnapshot.getString("sunday");
-
-                                                     mon.setText(Mon);
-                                                     tue.setText(Tue);
-                                                     wed.setText(Wed);
-                                                     thurs.setText(Thurs);
-                                                     fri.setText(Fri);
-                                                     sat.setText(Sat);
-                                                     sun.setText(Sun);
-
-
-                                                 }
-                                             }
-                                         });
-*/
 
 
         DocumentReference docRef = db.collection("users").document(mAuth.getCurrentUser().getEmail());
@@ -305,6 +270,16 @@ LinearLayout changePassword;
 
             }
         });
+
+
+        editAvailabilitySection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), EditAvailability.class);
+                startActivity(i);
+            }
+        });
+
 
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override

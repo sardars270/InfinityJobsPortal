@@ -1,8 +1,10 @@
 package com.example.infinityjobportal.ui.Queries;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -13,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.infinityjobportal.EditAvailability;
+import com.example.infinityjobportal.MainActivity;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.Query;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -57,8 +61,16 @@ public class QueriesFragment extends Fragment {
                 reference.add(Query).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setMessage("Your Message Sent Successfully.")
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
 
-
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

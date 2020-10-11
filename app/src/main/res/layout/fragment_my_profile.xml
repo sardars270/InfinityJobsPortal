@@ -26,13 +26,24 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:textColor="@color/black"
+                <ImageView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:paddingRight="20dp"
+                    android:visibility="invisible"
+                    android:paddingTop="20dp"
+                    android:src="@drawable/edit_symbol" />
+
+
+                <ImageView
+                    android:id="@+id/userPic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:text="" />
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/user"></ImageView>
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -59,18 +70,12 @@
 
 
 
-                <ImageView
-                    android:id="@+id/userPic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="220dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/user"></ImageView>
-
                 <TextView
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:layout_marginTop="10dp"
                     android:text=""
                     android:textColor="@color/black"
                     android:textSize="25sp" />
@@ -358,6 +363,7 @@
                         android:id="@+id/editExperienceSection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:visibility="invisible"
                         android:layout_gravity="right"
                         android:src="@drawable/edit_symbol" />
 
@@ -410,6 +416,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
+                        android:visibility="invisible"
                         android:src="@drawable/edit_symbol" />
 
                 </LinearLayout>
@@ -459,6 +466,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
+                        android:visibility="invisible"
                         android:src="@drawable/edit_symbol" />
 
                 </LinearLayout>
@@ -509,6 +517,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
+                        android:visibility="invisible"
                         android:src="@drawable/edit_symbol" />
 
                 </LinearLayout>

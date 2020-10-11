@@ -12,7 +12,7 @@
         <activity android:name=".CompanyProfileActivity" />
         <activity android:name=".AddCompanyActivity" />
         <activity android:name=".EditCompanyActivity" />
-        <activity android:name=".ClientChangePassword" ></activity>
+        <activity android:name=".ClientChangePassword"  android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
         <activity
             android:name=".UpdateContactSection"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -58,6 +58,7 @@
 <activity android:name=".EditEducation"/>
             <activity
                 android:name=".EditAvailability"
+                android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
                 >
         </activity>
 <activity android:name=".AddNewEducation">
