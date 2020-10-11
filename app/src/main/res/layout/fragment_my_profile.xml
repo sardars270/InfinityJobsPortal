@@ -193,12 +193,12 @@
                         android:textColor="@color/black"
                         android:text="Monday - "
                         />
+
                     <TextView
+                        android:id="@+id/mon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Morning / Evening / Night"
-                        />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -213,12 +213,12 @@
                         android:textColor="@color/black"
                         android:text="Tuesday - "
                         />
+
                     <TextView
+                        android:id="@+id/tue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Morning / Evening / Night"
-                        />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -233,12 +233,12 @@
                         android:textColor="@color/black"
                         android:text="Wednesday - "
                         />
+
                     <TextView
+                        android:id="@+id/wed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Morning / Evening / Night"
-                        />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -253,12 +253,12 @@
                         android:textColor="@color/black"
                         android:text="Thrusday - "
                         />
+
                     <TextView
+                        android:id="@+id/thurs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Morning / Evening / Night"
-                        />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -273,12 +273,12 @@
                         android:textColor="@color/black"
                         android:text="Friday - "
                         />
+
                     <TextView
+                        android:id="@+id/fri"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Morning / Evening / Night"
-                        />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -293,12 +293,12 @@
                         android:textColor="@color/black"
                         android:text="Saturday - "
                         />
+
                     <TextView
+                        android:id="@+id/sat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Morning / Evening / Night"
-                        />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -313,12 +313,12 @@
                         android:textColor="@color/black"
                         android:text="Sunday - "
                         />
+
                     <TextView
+                        android:id="@+id/sun"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Morning / Evening / Night"
-                        />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
             </LinearLayout>

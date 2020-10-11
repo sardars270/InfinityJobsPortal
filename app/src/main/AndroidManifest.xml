@@ -54,6 +54,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+<activity android:name=".EditEducation"/>
+            <activity
+                android:name=".EditAvailability"
+                >
+        </activity>
+<activity android:name=".AddNewEducation">
+
+</activity>
+        <activity android:name=".MainEducation">
+
+        </activity>
     </application>
 
 </manifest>
