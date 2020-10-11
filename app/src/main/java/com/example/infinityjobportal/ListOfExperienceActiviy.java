@@ -6,13 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.infinityjobportal.Adapters.LOEAdapter;
-import com.example.infinityjobportal.model.InterestsModel;
+import com.example.infinityjobportal.adapter.LOEAdapter;
 import com.example.infinityjobportal.model.LOEModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,8 +19,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.security.AccessController.getContext;
 
 public class ListOfExperienceActiviy extends AppCompatActivity {
  TextView plus;

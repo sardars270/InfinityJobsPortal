@@ -8,17 +8,17 @@
             android:id="@+id/homeFragment"
             android:icon="@drawable/home_black"
             android:title="Home" />
-        <item
-            android:id="@+id/myProfileFragment"
-            android:icon="@drawable/work_black"
-            android:title="My Profile"></item>
+
         <item
             android:id="@+id/myJobsFragment"
             android:icon="@drawable/work_black"
             android:title="My Jobs"></item>
 
 
-
+        <item
+            android:id="@+id/myProfileFragment"
+            android:icon="@drawable/work_black"
+            android:title="My Profile"></item>
 
 
         <item android:title="Employers">
@@ -55,10 +55,7 @@
                     android:id="@+id/aboutUsFragment"
                     android:icon="@drawable/info_black"
                     android:title="About Us" />
-                <item
-                    android:id="@+id/logout"
-                    android:icon="@drawable/arrow_circle_down_black"
-                    android:title="Logout" />
+
             </menu>
 
         </item>

@@ -2,9 +2,11 @@ package com.example.infinityjobportal;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -110,8 +112,16 @@ public class UpdateUserPic extends AppCompatActivity {
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(getApplicationContext(),"Data Updated...",Toast.LENGTH_SHORT).show();
-                                progressBar.setVisibility(View.GONE);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateUserPic.this);
+                                builder.setMessage("A verification Email Is Sent To Your Registered EmailID, please click on the link and Sign in again!")
+                                        .setCancelable(false)
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+
+                                            }
+                                        });
+                                AlertDialog alert = builder.create();
+                                alert.show();  progressBar.setVisibility(View.GONE);
                                 Resources res = getResources(); /** from an Activity */
                                 userPic.setImageDrawable(res.getDrawable(R.drawable.images));
                             }
@@ -246,14 +256,14 @@ public class UpdateUserPic extends AppCompatActivity {
                         if(user.getUserProfilePic().equals(""))
                         {
                            // userPic.setHint("Write here about your self.");
-                            Toast.makeText(getApplicationContext(),user.getUserProfilePic(),Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(),user.getUserProfilePic(),Toast.LENGTH_SHORT).show();
                         }else if(user.getUserProfilePic().equals("user.png"))
                         {
                         }
                         else
                         {
                            // userPic.setText(user.getAbout());
-                            Toast.makeText(getApplicationContext(),user.getUserProfilePic(),Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(getApplicationContext(),user.getUserProfilePic(),Toast.LENGTH_SHORT).show();
 
                             FirebaseStorage firebaseStorage;
                             StorageReference storageReference;

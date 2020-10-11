@@ -8,28 +8,39 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.infinityjobportal.AddNewEducation;
+import com.example.infinityjobportal.adapter.InterestsAdapter;
 import com.example.infinityjobportal.ClientChangePassword;
 import com.example.infinityjobportal.EditAvailability;
-import com.example.infinityjobportal.EditEducation;
 import com.example.infinityjobportal.EditNameSection;
+import com.example.infinityjobportal.ListOfExperienceActiviy;
 import com.example.infinityjobportal.MainEducation;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.UpdateAbout;
 import com.example.infinityjobportal.UpdateContactSection;
 import com.example.infinityjobportal.UpdateUserPic;
+import com.example.infinityjobportal.adapter.InterestsAdapterProfile;
+import com.example.infinityjobportal.adapter.LOEAdapter;
+import com.example.infinityjobportal.adapter.LOEAdapterProfile;
+import com.example.infinityjobportal.adapter.NewEducationAdapter;
+import com.example.infinityjobportal.adapter.NewEducationAdapterProfile;
+import com.example.infinityjobportal.faltu_context;
+import com.example.infinityjobportal.interests;
+import com.example.infinityjobportal.model.InterestsModel;
+import com.example.infinityjobportal.model.LOEModel;
 import com.example.infinityjobportal.model.User;
+import com.example.infinityjobportal.pojoAddNewEducation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,11 +51,16 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyProfile extends Fragment {
-ImageView userPic, editNameSection, editAboutSection, editExperienceSection, editEducationSection, editInterestSection, editSkillsSection, editContcatSection;
+ImageView userPic, editNameSection, editAboutSection,  editContcatSection;
+        TextView editExperienceSection, editEducationSection, editInterestSection, editSkillsSection;
 TextView name, tagLine, location, about,email, number,website, address;
 TextView mon,tue,wed,thurs,fri,sat,sun;
 ImageView editAvailabilitySection;
@@ -53,6 +69,23 @@ LinearLayout changePassword;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
 
+    RecyclerView rec;
+    InterestsAdapterProfile InteAdapter;
+
+    ArrayList<InterestsModel> list=new ArrayList<>();
+
+
+    private RecyclerView recyclerViewEducation;
+    private NewEducationAdapterProfile adapter;
+    private List<pojoAddNewEducation> educationList;
+
+
+
+    RecyclerView recexp;
+    LOEAdapterProfile loeAdapter;
+    faltu_context context;
+
+    ArrayList<LOEModel> listexp=new ArrayList<>();
 
 
 
@@ -85,26 +118,21 @@ LinearLayout changePassword;
         address = root.findViewById(R.id.address);
         editNameSection = root.findViewById(R.id.editNameSection);
         editAboutSection = root.findViewById(R.id.editAboutSection);
-        editEducationSection = root.findViewById(R.id.editEducationSection);
-        editExperienceSection = root.findViewById(R.id.editExperienceSection);
-        editSkillsSection = root.findViewById(R.id.editSkillsSection);
-        editInterestSection = root.findViewById(R.id.editInterestsection);
+        editEducationSection = root.findViewById(R.id.openEducation);
+        editExperienceSection = root.findViewById(R.id.openExperience);
+        editSkillsSection = root.findViewById(R.id.openSkills);
+        editInterestSection = root.findViewById(R.id.openInterest);
         editContcatSection = root.findViewById(R.id.editContactInfo);
         changePassword = root.findViewById(R.id.changePassword);
+        rec=root.findViewById(R.id.rec);
+        recyclerViewEducation = root.findViewById(R.id.recyclerEducation);
+        recexp=root.findViewById(R.id.recexp);
+
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
 
-        editAvailabilitySection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getContext(), EditAvailability.class);
-                startActivity(i);
-            }
-        });
-
-
-        DocumentReference dref=db.collection("Availability").document("Weeksdays");
+        DocumentReference dref=db.collection("Availability").document(mAuth.getCurrentUser().getEmail());
        dref.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
@@ -133,32 +161,6 @@ LinearLayout changePassword;
                 });
 
 
-        /*DocumentReference dref=db.collection("Availability").document("Weeksdays");
-      dref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                             @Override
-                                             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                 if (documentSnapshot.exists()) {
-                                                     String Mon = documentSnapshot.getString("monday");
-                                                     String Tue = documentSnapshot.getString("tuesday");
-                                                     String Wed = documentSnapshot.getString("wednessday");
-                                                     String Thurs = documentSnapshot.getString("thursday");
-                                                     String Fri = documentSnapshot.getString("friday");
-                                                     String Sat = documentSnapshot.getString("saturday");
-                                                     String Sun = documentSnapshot.getString("sunday");
-
-                                                     mon.setText(Mon);
-                                                     tue.setText(Tue);
-                                                     wed.setText(Wed);
-                                                     thurs.setText(Thurs);
-                                                     fri.setText(Fri);
-                                                     sat.setText(Sat);
-                                                     sun.setText(Sun);
-
-
-                                                 }
-                                             }
-                                         });
-*/
 
 
         DocumentReference docRef = db.collection("users").document(mAuth.getCurrentUser().getEmail());
@@ -263,6 +265,109 @@ LinearLayout changePassword;
         });
 
 
+
+        db.collection("LOE").whereEqualTo("a","extra").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        if (!queryDocumentSnapshots.isEmpty()) {
+
+
+                            List<DocumentSnapshot> list1 = queryDocumentSnapshots.getDocuments();
+
+                            for (DocumentSnapshot d : list1) {
+
+                                LOEModel p = d.toObject(LOEModel.class);
+                                p.setDesignation(d.getString("designation"));
+                                p.setInstitute(d.getString("institute"));
+                                p.setStartdate(d.getString("startdate"));
+                                p.setEnddate(d.getString("enddate"));
+                                p.setId(d.getString("id"));
+                                p.setUserId(d.getString("userId"));
+                                listexp.add(p);
+                            }
+                            loeAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+
+
+        loeAdapter =new LOEAdapterProfile(listexp, getContext(), "af");
+
+        recexp.setHasFixedSize(true);
+        recexp.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
+        recexp.setAdapter(loeAdapter);
+
+
+
+        // loading interest
+        db.collection("interest").whereEqualTo("faltu","extra").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        if (!queryDocumentSnapshots.isEmpty()) {
+
+
+                            List<DocumentSnapshot> list1 = queryDocumentSnapshots.getDocuments();
+
+                            for (DocumentSnapshot d : list1) {
+
+                                InterestsModel p = d.toObject(InterestsModel.class);
+                                assert p != null;
+                                p.setType_int(d.getString("type_int"));
+                                p.setId(d.getString("id"));
+
+                                list.add(p);
+                            }
+                            InteAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+        InteAdapter =new InterestsAdapterProfile(list, getContext(), "af");
+
+        rec.setHasFixedSize(true);
+        rec.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
+        rec.setAdapter(InteAdapter);
+
+
+
+
+
+
+
+
+
+        recyclerViewEducation.setHasFixedSize(true);
+        recyclerViewEducation.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        educationList=new ArrayList<>();
+        adapter=new NewEducationAdapterProfile(getContext(), educationList);
+        recyclerViewEducation.setAdapter(adapter);
+        db.collection("Education").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if(!queryDocumentSnapshots.isEmpty())
+                {
+                    List<DocumentSnapshot> list=queryDocumentSnapshots.getDocuments();
+                    for(DocumentSnapshot d: list){
+
+                        pojoAddNewEducation ed= d.toObject(pojoAddNewEducation.class);
+                        ed.setId(d.getId());
+                        educationList.add(ed);
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+
+
+
+
+
+
         userPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -306,12 +411,48 @@ LinearLayout changePassword;
             }
         });
 
+
+        editAvailabilitySection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), EditAvailability.class);
+                startActivity(i);
+            }
+        });
+
+
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), ClientChangePassword.class));
             }
         });
+
+
+        editEducationSection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), MainEducation.class));
+            }
+        });
+
+        editInterestSection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), interests.class));
+            }
+        });
+
+        editExperienceSection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), ListOfExperienceActiviy.class));
+            }
+        });
+
+
+
+
 
 
 

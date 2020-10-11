@@ -76,7 +76,12 @@
         <item>Hamilton</item>
         <item>Others</item>
     </string-array>
-
+    <string-array name="industries">
+        <item>Information Technology</item>
+        <item>Computer Hardware</item>
+        <item>Software Development</item>
+        <item>Digital Marketing</item>
+    </string-array>
     <string-array name="province">
         <item>Province</item>
         <item>ON</item>
