@@ -1,5 +1,7 @@
 package com.example.infinityjobportal.ui.postJob;
 
+import android.app.DatePickerDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,12 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -23,15 +27,15 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class PostJobFragment extends Fragment {
     private static final String TAG = "PostJobFragment";
+
+    DatePickerDialog datePickerDialog;
 
     //Firestore Keys
     private static final String JOB_TITLE = "Job title";
@@ -53,10 +57,10 @@ public class PostJobFragment extends Fragment {
 
 
     private PostJobViewModel postJobViewModel;
-    private EditText mCompanyNameEditText,mJobTitleEditText, mStreetAddressEditText, mStartSalaryRangeEditText, mSalaryEndRangeEditText,
-                        mJoiningEditTextDate, mApplicationDeadlineEditTextDate, mJobDescriptionEditText, mSkillsRequiredEditText,
-                        mQualificationRequiredEditText;
-    private Spinner mJobCategorySpinner, mCityAddressSpinner, mProvinceAddressSpinner, mTypeOfEmployerSpinner;
+    private EditText mCompanyNameEditText, mJobTitleEditText, mStreetAddressEditText, mStartSalaryRangeEditText, mSalaryEndRangeEditText,
+            mJoiningEditTextDate, mApplicationDeadlineEditTextDate, mJobDescriptionEditText, mSkillsRequiredEditText,
+            mQualificationRequiredEditText, mCityAddressEditText, mProvinceAddressEditText;
+    private Spinner mJobCategorySpinner, mTypeOfEmployerSpinner;
     private CheckBox mEnglishCheckBox, mFrenchCheckBox;
     private Button mPostJobSubmitButton;
 
@@ -78,8 +82,6 @@ public class PostJobFragment extends Fragment {
         });
 
 
-
-
         //EditText of Post a Job fragment.
         mCompanyNameEditText = root.findViewById(R.id.companyNameEditText);
         mJobTitleEditText = root.findViewById(R.id.jobTitleEditText);
@@ -94,8 +96,8 @@ public class PostJobFragment extends Fragment {
 
         //Spinners of Post a Job Fragment.
         mJobCategorySpinner = root.findViewById(R.id.jobCategorySpinner);
-        mCityAddressSpinner = root.findViewById(R.id.cityAddressSpinner);
-        mProvinceAddressSpinner = root.findViewById(R.id.provinceSpinner);
+        mCityAddressEditText = root.findViewById(R.id.cityAddressSpinner);
+        mProvinceAddressEditText = root.findViewById(R.id.provinceSpinner);
         mTypeOfEmployerSpinner = root.findViewById(R.id.typeOfEmploymentSpinner);
 
         //CheckBox of Post a Job Spinner.
@@ -104,6 +106,56 @@ public class PostJobFragment extends Fragment {
 
         //Submit Button.
         mPostJobSubmitButton = root.findViewById(R.id.postJobSubmitButton);
+
+
+        mApplicationDeadlineEditTextDate.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+
+
+
+                datePickerDialog = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                mApplicationDeadlineEditTextDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                            }
+                        }, year, month, day);
+                datePickerDialog.show();
+            }
+        });
+
+
+        mJoiningEditTextDate.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+
+
+
+                datePickerDialog = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                mJoiningEditTextDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                            }
+                        }, year, month, day);
+                datePickerDialog.show();
+            }
+        });
+
+
 
 
         // OnClick Listener for post a job submit button.
@@ -116,8 +168,8 @@ public class PostJobFragment extends Fragment {
                 String jobCategory = mJobCategorySpinner.getSelectedItem().toString();
                 String jobTitle = mJobTitleEditText.getText().toString();
                 String streetAddress = mStreetAddressEditText.getText().toString();
-                String city = mCityAddressSpinner.getSelectedItem().toString();
-                String province = mProvinceAddressSpinner.getSelectedItem().toString();
+                String city = mCityAddressEditText.getText().toString();
+                String province = mProvinceAddressEditText.getText().toString();
 
                 double minSalary = Double.parseDouble(mStartSalaryRangeEditText.getText().toString());
                 double maxSalary = Double.parseDouble(mSalaryEndRangeEditText.getText().toString());
@@ -128,7 +180,6 @@ public class PostJobFragment extends Fragment {
                 String jobDescription = mJobDescriptionEditText.getText().toString();
                 String skillsRequired = mSkillsRequiredEditText.getText().toString();
                 String qualificationRequired = mQualificationRequiredEditText.getText().toString();
-
 
 
                 Map<String, Object> jobs = new HashMap<>();
@@ -169,15 +220,14 @@ public class PostJobFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.myJobsFragment);
 
                 Log.d(TAG, "onClick: for job post has ended");
-                
+
             }
         });
-
-
 
 
         return root;
 
 
     }
+
 }
