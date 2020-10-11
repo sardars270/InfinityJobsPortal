@@ -32,6 +32,15 @@
         <activity
             android:name=".admin.ViewQuery"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity android:name=".AddNewEducation" />
+        <activity android:name=".EditEducation" />
+        <activity android:name=".MainEducation" />
+        <activity android:name=".Update_Exp" />
+        <activity android:name=".interests" />
+        <activity android:name=".Search_jobs" />
+        <activity android:name=".Jobs_search" />
+        <activity android:name=".Applied_jobs" />
+        <activity android:name=".SavedJobsActivity" />
         <activity
             android:name=".AdminLogin"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -55,18 +64,15 @@
             </intent-filter>
         </activity>
 
-<activity android:name=".EditEducation"/>
+<activity android:name=".ListOfExperienceActiviy" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
             <activity
                 android:name=".EditAvailability"
                 android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
                 >
         </activity>
-<activity android:name=".AddNewEducation">
 
-</activity>
-        <activity android:name=".MainEducation">
+<activity android:name=".add_exp" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
 
-        </activity>
     </application>
 
 </manifest>

@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_marginTop="10dp"
-        android:background="@color/mainAppçColor"
+        android:background="@color/mainSecondaryColor"
         android:orientation="horizontal">
 
         <Button
@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/mainAppçColor"
+            android:background="@color/mainSecondaryColor"
             android:text="X"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/mainAppçColor"
+            android:background="@color/mainSecondaryColor"
             android:text="Save" />
 
     </LinearLayout>
@@ -75,11 +75,13 @@
                 android:id="@+id/school"
                 style="@android:style/Widget.DeviceDefault.AutoCompleteTextView"
                 android:layout_width="match_parent"
+
                 android:layout_height="wrap_content"
                 android:backgroundTint="@drawable/backgroundtintcolor"
                 android:textCursorDrawable="@drawable/customized_cursor"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:hint="enter school name"
+
                 android:textColor="@color/grayFontsColor" />
 
             <TextView
@@ -100,7 +102,7 @@
                 android:backgroundTint="@drawable/backgroundtintcolor"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text=""
+               android:hint="enter degree"
                 android:textColor="@color/grayFontsColor" />
 
             <TextView
@@ -117,7 +119,7 @@
                 android:id="@+id/studyField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:hint="enter field of study"
                 android:textCursorDrawable="@drawable/customized_cursor"
                 android:backgroundTint="@drawable/backgroundtintcolor"
                 android:ems="10"
@@ -158,6 +160,7 @@
                         android:textCursorDrawable="@drawable/customized_cursor"
                         android:backgroundTint="@drawable/backgroundtintcolor"
                         android:ems="10"
+                        android:hint="09/12/2020"
                         android:inputType="date"
                         android:textColor="@color/grayFontsColor" />
                 </LinearLayout>
@@ -197,6 +200,7 @@
                             android:layout_marginEnd="5dp"
                             android:layout_marginRight="5dp"
                             android:layout_marginBottom="5dp"
+                            android:hint="09/12/2020"
                             android:textCursorDrawable="@drawable/customized_cursor"
                             android:backgroundTint="@drawable/backgroundtintcolor"
                             android:ems="10"
@@ -233,6 +237,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:hint="enter grade here"
                 android:textCursorDrawable="@drawable/customized_cursor"
                 android:backgroundTint="@drawable/backgroundtintcolor"
                 android:ems="10"
@@ -261,6 +266,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
+                    android:hint="enter your achievements here"
                     android:ems="10"
                     android:textCursorDrawable="@drawable/customized_cursor"
                     android:gravity="start|top"
@@ -299,6 +305,7 @@
                     android:ems="10"
                     android:textCursorDrawable="@drawable/customized_cursor"
                     android:gravity="start|top"
+                    android:hint="Enter description here"
                     android:inputType="textMultiLine"
                     android:minLines="5"
                     android:padding="5dp"

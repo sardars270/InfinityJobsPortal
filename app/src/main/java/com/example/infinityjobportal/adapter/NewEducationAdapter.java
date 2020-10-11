@@ -1,4 +1,4 @@
-package com.example.infinityjobportal;
+package com.example.infinityjobportal.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.infinityjobportal.EditEducation;
+import com.example.infinityjobportal.R;
+import com.example.infinityjobportal.pojoAddNewEducation;
 
 import java.util.List;
 

@@ -159,7 +159,7 @@ public class ClientLogin extends AppCompatActivity {
                                         progressBar.setVisibility(View.GONE);
                                         //errorView.setText("");
                                         // errorView.setVisibility(View.GONE);
-                                        Intent HomeActivity = new Intent(getApplicationContext(), MainActivity.class);
+                                        Intent HomeActivity = new Intent(getApplicationContext(), interests.class);
                                         //   setResult(RESULT_OK, null);
                                         startActivity(HomeActivity);
 
