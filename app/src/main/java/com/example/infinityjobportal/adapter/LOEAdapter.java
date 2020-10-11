@@ -1,42 +1,24 @@
-package com.example.infinityjobportal.Adapters;
+package com.example.infinityjobportal.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaTimestamp;
-import android.net.Uri;
-import android.os.Parcelable;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.Update_Exp;
-import com.example.infinityjobportal.add_exp;
 import com.example.infinityjobportal.model.LOEModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.security.AccessControlContext;
 import java.util.ArrayList;
 
 public class LOEAdapter extends RecyclerView.Adapter<LOEAdapter.ViewHolder> {

@@ -64,13 +64,14 @@
             </intent-filter>
         </activity>
 
-
+<activity android:name=".ListOfExperienceActiviy" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
             <activity
                 android:name=".EditAvailability"
                 android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
                 >
         </activity>
 
+<activity android:name=".add_exp" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
 
     </application>
 

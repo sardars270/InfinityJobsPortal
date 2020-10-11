@@ -16,9 +16,7 @@ public class User {
     String country;
     String zipCode;
     String street;
-
     String userProfilePic;
-
     boolean admin;
 
     public User() {

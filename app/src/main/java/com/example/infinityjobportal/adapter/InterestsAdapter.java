@@ -1,4 +1,4 @@
-package com.example.infinityjobportal.Adapters;
+package com.example.infinityjobportal.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -84,7 +84,7 @@ public class InterestsAdapter extends RecyclerView.Adapter<InterestsAdapter.View
                     // city.put("faltu", "deleted");
 
 
-                    DocumentReference washingtonRef = db.collection("aInt").document(del.getText().toString());
+                    DocumentReference washingtonRef = db.collection("interest").document(del.getText().toString());
 
 // Set the "isCapital" field of the city 'DC'
                     washingtonRef

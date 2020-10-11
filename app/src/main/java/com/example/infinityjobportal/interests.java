@@ -1,6 +1,5 @@
 package com.example.infinityjobportal;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,18 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.infinityjobportal.Adapters.InterestsAdapter;
-import com.example.infinityjobportal.Adapters.LOEAdapter;
+import com.example.infinityjobportal.adapter.InterestsAdapter;
 import com.example.infinityjobportal.model.InterestsModel;
-import com.example.infinityjobportal.model.LOEModel;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
@@ -67,86 +62,20 @@ public class interests extends AppCompatActivity {
                 data.put("faltu", "extra");
                 data.put("type_int", ed_interests.getText().toString());
                 data.put("userid", String.valueOf(fbauth.getCurrentUser().getEmail()));
-                DocumentReference washingtonRef = db.collection("aInt").document();
+                DocumentReference washingtonRef = db.collection("interest").document();
                 data.put("id", String.valueOf(washingtonRef.getId()));
                 washingtonRef.set(data);
                 Toast.makeText(getApplicationContext(),"Interests added successfull",Toast.LENGTH_SHORT).show();
                 Intent ii = new Intent(getApplicationContext(),interests.class);
                 startActivity(ii);
-                /**db.collection("aInt")
-                 .add(data)
-                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                @Override
-                public void onSuccess(DocumentReference documentReference) {
-                //Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
-                Toast.makeText(getApplicationContext(), documentReference.getId(),Toast.LENGTH_LONG).show();
-                a= documentReference.getId();
-                }
-                })
-                 .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                //Log.w(TAG, "Error adding document", e);
-                }
-                });
 
-                 DocumentReference washingtonRef = db.collection("aInt").document(String.valueOf(a));
-
-                 washingtonRef
-                 .update("faltu", "extra","type_int",ed_interests.getText().toString(),"id",a, "userid", "lll")
-                 .addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                Toast.makeText(getApplicationContext(), "data added",Toast.LENGTH_LONG).show();
-                }
-                })
-                 .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                // Log.w(TAG, "Error updating document", e);
-
-
-                }
-                });
-
-
-
-                 //  FirebaseFirestore   firebaseFirestore = FirebaseFirestore.getInstance();
-                 String kj = db.collection("aInt").document().getId();
-                 InterestsModel i =new InterestsModel();
-
-                 i.setType_int(ed_interests.getText().toString());
-                 i.setFaltu("extra");
-                 i.setUserid("3333");
-                 i.setId(kj);
-                 db.collection("aInt").add(i)
-                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                @Override
-                public void onSuccess(DocumentReference documentReference) {
-                Toast.makeText(getApplicationContext(),"Interests added successfull",Toast.LENGTH_SHORT).show();
-                Intent ii = new Intent(getApplicationContext(),interests.class);
-                startActivity(ii);
-                }
-
-
-                }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-
-                Toast.makeText(getApplicationContext(),"fail",Toast.LENGTH_SHORT).show();
-
-                }
-                })
-                 ;
-                 //View krvana
-                 */
 
 
 
             }
 
         });
-        db.collection("aInt").whereEqualTo("faltu","extra").get()
+        db.collection("interest").whereEqualTo("faltu","extra").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
