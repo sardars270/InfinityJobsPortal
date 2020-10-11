@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".add_exp">
+    android:layout_height="match_parent"
+    tools:context=".Update_Exp">
     <ImageView
         android:id="@+id/img"
         android:layout_width="120dp"
@@ -81,19 +81,19 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/et_start_date"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_below = "@+id/errorView"
-        android:layout_centerHorizontal = "true"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="Start Date"
-        android:padding="8dp"
-        android:cursorVisible="true" />
+        <EditText
+            android:id="@+id/et_start_date"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below = "@+id/errorView"
+            android:layout_centerHorizontal = "true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="Start Date"
+            android:padding="8dp"
+            android:cursorVisible="true" />
         <Button
             android:id="@+id/spickdate"
             android:text="PickDate"
@@ -115,19 +115,19 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/et_end_date"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_below = "@+id/errorView"
-        android:layout_centerHorizontal = "true"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="End Date"
-        android:padding="8dp"
-        android:cursorVisible="true" />
+        <EditText
+            android:id="@+id/et_end_date"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below = "@+id/errorView"
+            android:layout_centerHorizontal = "true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="End Date"
+            android:padding="8dp"
+            android:cursorVisible="true" />
         <Button
             android:id="@+id/pickdate"
             android:text="PickDate"
@@ -135,11 +135,11 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
     <Button
-        android:id="@+id/submit"
+        android:id="@+id/update"
         android:layout_width="match_parent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:text="submit"
+        android:text="Update"
         android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/faltu"
@@ -153,5 +153,6 @@
         android:text="faltu"
         android:padding="2dp"
         android:cursorVisible="true" />
+
 
 </LinearLayout>

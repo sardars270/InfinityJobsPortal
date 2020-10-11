@@ -17,10 +17,10 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
-class InterestsAdapter extends RecyclerView.Adapter<InterestsAdapter.ViewHolder> {
+public class InterestsAdapter extends RecyclerView.Adapter<InterestsAdapter.ViewHolder> {
 
     private ArrayList<InterestsModel> l = new ArrayList<>();
-    private Context context;
+    public Context context;
     FirebaseFirestore db;
     public InterestsAdapter(ArrayList<InterestsModel> o, Context context,String af) {
         this.l = o;
@@ -28,6 +28,7 @@ class InterestsAdapter extends RecyclerView.Adapter<InterestsAdapter.ViewHolder>
         this.context = context;
 
     }
+
 
     @NonNull
     @Override

@@ -1,15 +1,38 @@
 package com.example.infinityjobportal.model;
 
-public class LOEModel {
+import java.io.Serializable;
+
+public class LOEModel implements Serializable {
     String id;
-    String img;
-    String companyName;
-    String title;
-    String chooseCountry;
-    String employmentType;
-    String a;
+    String designation;
+    String institute;
+    String startdate;
+    String enddate;
+    String userId;
     String b;
-    String c;
+    public LOEModel() {
+        this.id = id;
+        this.designation = designation;
+        this.institute = institute;
+        this.startdate = startdate;
+        this.enddate = enddate;
+      this.userId=userId;
+        this.b = b;
+
+    }
+
+
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+
+
 
     public String getId() {
         return id;
@@ -19,53 +42,39 @@ public class LOEModel {
         this.id = id;
     }
 
-    public  String getImg() {
-        return img;
+    public String getDesignation() {
+        return designation;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setDesignation(String designation) {
+        this.designation = designation;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public String getInstitute() {
+        return institute;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setInstitute(String institute) {
+        this.institute = institute;
     }
 
-    public String getTitle() {
-        return title;
+    public String getStartdate() {
+        return startdate;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setStartdate(String startdate) {
+        this.startdate = startdate;
     }
 
-    public String getChooseCountry() {
-        return chooseCountry;
+    public String getEnddate() {
+        return enddate;
     }
 
-    public void setChooseCountry(String chooseCountry) {
-        this.chooseCountry = chooseCountry;
+    public void setEnddate(String enddate) {
+        this.enddate = enddate;
     }
 
-    public String getEmploymentType(String s) {
-        return employmentType;
-    }
 
-    public void setEmploymentType(String employmentType) {
-        this.employmentType = employmentType;
-    }
-
-    public String getA() {
-        return a;
-    }
-
-    public void setA(String a) {
-        this.a = a;
-    }
 
     public String getB() {
         return b;
@@ -75,26 +84,10 @@ public class LOEModel {
         this.b = b;
     }
 
-    public String getC() {
-        return c;
-    }
-
-    public void setC(String c) {
-        this.c = c;
-    }
 
 
-    public LOEModel() {
-        this.id = this.id;
-        this.img = this.img;
-        this.companyName = this.companyName;
-        this.title = this.title;
-        this.chooseCountry = chooseCountry;
-        this.employmentType = employmentType;
-        this.a = a;
-        this.b = b;
-        this.c = c;
-    }
+
+
 
 
 }

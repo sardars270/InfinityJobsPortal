@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/mainAppColor</color>
-    <color name="colorPrimaryDark">@color/mainAppColor</color>
-    <color name="grey">#C0C0C0</color>
-    <color name="mainAppColor">#607d8b</color>
+    <color name="colorPrimary">@color/mainAppçColor</color>
+    <color name="colorPrimaryDark">@color/mainAppçColor</color>
 
-<color name="red" >#FF0000</color>
-    <color name="black" >#000000</color>
+
+    <color name="mainAppçColor">#0082CB</color>
+    <color name="mainSecondaryColor">#0CB1FF</color>
+
+    <color name="grayFontsColor">#969D9F</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="headingBack">#E3E3E3</color>
+    <color name="subBack">#F4F5F5</color>
+    <color name="appBackground">#EFF1F9</color>
+    <color name="black">#000</color>
+    <color name="red">#FB0000</color>
+
 
 
     <color name="colorAccent">#789FB6</color>

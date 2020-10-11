@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Update_Exp"></activity>
         <activity android:name=".interests"></activity>
         <activity android:name=".Search_jobs" />
         <activity android:name=".Jobs_search" />
@@ -19,16 +20,20 @@
         <activity
             android:name=".ClientLogin"
             android:label="@string/title_activity_my_jobs"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".add_exp" />
-        <activity android:name=".Splash" />
-        <activity android:name=".ClientSignUp" />
-        <activity android:name=".ListOfExperienceActiviy">
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".add_exp" />
+        <activity android:name=".Splash" />
+        <activity android:name=".ClientSignUp" >
+        </activity>
+        <activity android:name=".ListOfExperienceActiviy">
+
         </activity>
         <activity
             android:name=".MainActivity"
