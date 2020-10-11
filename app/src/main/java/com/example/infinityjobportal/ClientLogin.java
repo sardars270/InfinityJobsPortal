@@ -45,7 +45,7 @@ public class ClientLogin extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-        autoLogin(); // for testing only
+        //autoLogin(); // for testing only
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,7 +159,7 @@ public class ClientLogin extends AppCompatActivity {
                                         progressBar.setVisibility(View.GONE);
                                         //errorView.setText("");
                                         // errorView.setVisibility(View.GONE);
-                                        Intent HomeActivity = new Intent(getApplicationContext(), interests.class);
+                                        Intent HomeActivity = new Intent(getApplicationContext(), MainActivity.class);
                                         //   setResult(RESULT_OK, null);
                                         startActivity(HomeActivity);
 
