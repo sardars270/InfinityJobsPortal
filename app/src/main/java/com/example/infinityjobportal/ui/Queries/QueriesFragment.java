@@ -40,7 +40,6 @@ public class QueriesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root= inflater.inflate(R.layout.fragment_queries, container, false);
-
         send=root.findViewById(R.id.btnsend);
         editsubject1=root.findViewById(R.id.editsubject);
         feedbackQuery1= root.findViewById(R.id.editcustomerfeedback);

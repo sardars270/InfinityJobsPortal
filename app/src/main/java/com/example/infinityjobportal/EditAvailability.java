@@ -564,7 +564,7 @@ public class EditAvailability extends AppCompatActivity
                 }
                 if (checkBoxThurs.isChecked()) {
 
-                    Toast.makeText(EditAvailability.this, "Tuesday", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(EditAvailability.this, "Tuesday", Toast.LENGTH_SHORT).show();
                     day = "Thursday";
                     if (ckbxThursMor.isChecked() && !ckbxThursEve.isChecked() && !ckbxThursN9t.isChecked()) {
                       //  Toast.makeText(EditAvailability.this, "Morning is selected", Toast.LENGTH_SHORT).show();
@@ -603,7 +603,7 @@ public class EditAvailability extends AppCompatActivity
 
                 if (checkBoxFri.isChecked()) {
 
-                    Toast.makeText(EditAvailability.this, "Tuesday", Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(EditAvailability.this, "Tuesday", Toast.LENGTH_SHORT).show();
                     day = "Friday";
                     if (ckbxFriMor.isChecked() && !ckbxMonEve.isChecked() && !ckbxFriN9t.isChecked()) {
                        // Toast.makeText(EditAvailability.this, "Morning is selected", Toast.LENGTH_SHORT).show();
@@ -643,7 +643,7 @@ public class EditAvailability extends AppCompatActivity
 
                 if (checkBoxSat.isChecked()) {
 
-                    Toast.makeText(EditAvailability.this, "Tuesday", Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(EditAvailability.this, "Tuesday", Toast.LENGTH_SHORT).show();
                     day = "Saturday";
                     if (ckbxSatMor.isChecked() && !ckbxSatEve.isChecked() && !ckbxSatN9t.isChecked()) {
                        // Toast.makeText(EditAvailability.this, "Morning is selected", Toast.LENGTH_SHORT).show();
