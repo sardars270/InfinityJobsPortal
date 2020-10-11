@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".interests"></activity>
         <activity android:name=".CompanyProfileActivity" />
         <activity android:name=".AddCompanyActivity" />
         <activity android:name=".EditCompanyActivity" />
-        <activity android:name=".ClientChangePassword" ></activity>
+        <activity android:name=".ClientChangePassword" />
         <activity
             android:name=".UpdateContactSection"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
