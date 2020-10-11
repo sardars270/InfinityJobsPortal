@@ -169,7 +169,7 @@ LinearLayout changePassword;
                         {
                             website.setText(user.getWebsite());
                             websiteUrl=user.getWebsite();
-                            website.setTextColor(ContextCompat.getColor(getContext(), R.color.mainSecondaryColor));
+                            website.setTextColor(ContextCompat.getColor(getContext(), R.color.mainAppçColor));
                         }
 
                         if(user.getCity().equals("") ||  user.getProvince().equals("")|| user.getCountry().equals(""))
