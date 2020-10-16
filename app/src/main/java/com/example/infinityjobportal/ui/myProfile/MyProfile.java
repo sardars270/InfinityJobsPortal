@@ -3,14 +3,6 @@ package com.example.infinityjobportal.ui.myProfile;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,28 +11,32 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
-import com.example.infinityjobportal.adapter.InterestsAdapter;
 import com.example.infinityjobportal.ClientChangePassword;
 import com.example.infinityjobportal.EditAvailability;
 import com.example.infinityjobportal.EditNameSection;
 import com.example.infinityjobportal.ListOfExperienceActiviy;
 import com.example.infinityjobportal.MainEducation;
+import com.example.infinityjobportal.PojoAddNewEducation;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.UpdateAbout;
 import com.example.infinityjobportal.UpdateContactSection;
 import com.example.infinityjobportal.UpdateUserPic;
 import com.example.infinityjobportal.adapter.InterestsAdapterProfile;
-import com.example.infinityjobportal.adapter.LOEAdapter;
 import com.example.infinityjobportal.adapter.LOEAdapterProfile;
-import com.example.infinityjobportal.adapter.NewEducationAdapter;
 import com.example.infinityjobportal.adapter.NewEducationAdapterProfile;
 import com.example.infinityjobportal.faltu_context;
 import com.example.infinityjobportal.interests;
 import com.example.infinityjobportal.model.InterestsModel;
 import com.example.infinityjobportal.model.LOEModel;
 import com.example.infinityjobportal.model.User;
-import com.example.infinityjobportal.pojoAddNewEducation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -59,34 +55,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyProfile extends Fragment {
-ImageView userPic, editNameSection, editAboutSection,  editContcatSection;
-        TextView editExperienceSection, editEducationSection, editInterestSection, editSkillsSection;
-TextView name, tagLine, location, about,email, number,website, address;
-TextView mon,tue,wed,thurs,fri,sat,sun;
-ImageView editAvailabilitySection;
-String websiteUrl="";
-LinearLayout changePassword;
+
+    ImageView userPic, editNameSection, editAboutSection, editContcatSection;
+    TextView editExperienceSection, editEducationSection, editInterestSection, editSkillsSection;
+    TextView name, tagLine, location, about, email, number, website, address;
+    TextView mon, tue, wed, thurs, fri, sat, sun;
+    ImageView editAvailabilitySection;
+    String websiteUrl = "";
+    LinearLayout changePassword;
+
     FirebaseAuth mAuth;
     FirebaseFirestore db;
 
     RecyclerView rec;
     InterestsAdapterProfile InteAdapter;
 
-    ArrayList<InterestsModel> list=new ArrayList<>();
+    ArrayList<InterestsModel> list = new ArrayList<>();
 
 
     private RecyclerView recyclerViewEducation;
     private NewEducationAdapterProfile adapter;
-    private List<pojoAddNewEducation> educationList;
-
+    private List<PojoAddNewEducation> educationList;
 
 
     RecyclerView recexp;
     LOEAdapterProfile loeAdapter;
     faltu_context context;
 
-    ArrayList<LOEModel> listexp=new ArrayList<>();
-
+    ArrayList<LOEModel> listexp = new ArrayList<>();
 
 
     public MyProfile() {
@@ -97,19 +93,19 @@ LinearLayout changePassword;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       View root  = inflater.inflate(R.layout.fragment_my_profile, container, false);
+        View root = inflater.inflate(R.layout.fragment_my_profile, container, false);
 
-       editAvailabilitySection=root.findViewById(R.id.editAvailabilitySection);
-        mon=root.findViewById(R.id.mon);
-        tue=root.findViewById(R.id.tue);
-        wed=root.findViewById(R.id.wed);
-        thurs=root.findViewById(R.id.thurs);
-        fri=root.findViewById(R.id.fri);
-        sat=root.findViewById(R.id.sat);
-        sun=root.findViewById(R.id.sun);
+        editAvailabilitySection = root.findViewById(R.id.editAvailabilitySection);
+        mon = root.findViewById(R.id.mon);
+        tue = root.findViewById(R.id.tue);
+        wed = root.findViewById(R.id.wed);
+        thurs = root.findViewById(R.id.thurs);
+        fri = root.findViewById(R.id.fri);
+        sat = root.findViewById(R.id.sat);
+        sun = root.findViewById(R.id.sun);
         userPic = root.findViewById(R.id.userPic);
-        name  = root.findViewById(R.id.name);
-        tagLine  = root.findViewById(R.id.tagLine);
+        name = root.findViewById(R.id.name);
+        tagLine = root.findViewById(R.id.tagLine);
         location = root.findViewById(R.id.location);
         about = root.findViewById(R.id.about);
         email = root.findViewById(R.id.email);
@@ -124,43 +120,41 @@ LinearLayout changePassword;
         editInterestSection = root.findViewById(R.id.openInterest);
         editContcatSection = root.findViewById(R.id.editContactInfo);
         changePassword = root.findViewById(R.id.changePassword);
-        rec=root.findViewById(R.id.rec);
+        rec = root.findViewById(R.id.rec);
         recyclerViewEducation = root.findViewById(R.id.recyclerEducation);
-        recexp=root.findViewById(R.id.recexp);
+        recexp = root.findViewById(R.id.recexp);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
 
-        DocumentReference dref=db.collection("Availability").document(mAuth.getCurrentUser().getEmail());
-       dref.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-                        if (error != null) {
-                            return;
+        DocumentReference dref = db.collection("Availability").document(mAuth.getCurrentUser().getEmail());
+        dref.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+                if (error != null) {
+                    return;
 
-                        }
-                        if (documentSnapshot.exists()) {
-                            String Mon = documentSnapshot.getString("monday");
-                            String Tue = documentSnapshot.getString("tuesday");
-                            String Wed = documentSnapshot.getString("wednessday");
-                            String Thurs = documentSnapshot.getString("thursday");
-                            String Fri = documentSnapshot.getString("friday");
-                            String Sat = documentSnapshot.getString("saturday");
-                            String Sun = documentSnapshot.getString("sunday");
+                }
+                if (documentSnapshot.exists()) {
+                    String Mon = documentSnapshot.getString("monday");
+                    String Tue = documentSnapshot.getString("tuesday");
+                    String Wed = documentSnapshot.getString("wednessday");
+                    String Thurs = documentSnapshot.getString("thursday");
+                    String Fri = documentSnapshot.getString("friday");
+                    String Sat = documentSnapshot.getString("saturday");
+                    String Sun = documentSnapshot.getString("sunday");
 
-                            mon.setText(Mon);
-                            tue.setText(Tue);
-                            wed.setText(Wed);
-                            thurs.setText(Thurs);
-                            fri.setText(Fri);
-                            sat.setText(Sat);
-                            sun.setText(Sun);
-                        }
-                    }
-                });
-
-
+                    mon.setText(Mon);
+                    tue.setText(Tue);
+                    wed.setText(Wed);
+                    thurs.setText(Thurs);
+                    fri.setText(Fri);
+                    sat.setText(Sat);
+                    sun.setText(Sun);
+                }
+            }
+        });
 
 
         DocumentReference docRef = db.collection("users").document(mAuth.getCurrentUser().getEmail());
@@ -174,51 +168,39 @@ LinearLayout changePassword;
                         User user = document.toObject(User.class);
                         email.setText(user.getEmail());
 
-                        name.setText(user.getFirstName().substring(0, 1).toUpperCase()+user.getFirstName().substring(1)+ " "+ user.getLastName().substring(0, 1).toUpperCase()+user.getLastName().substring(1));
+                        name.setText(user.getFirstName().substring(0, 1).toUpperCase() + user.getFirstName().substring(1) + " " + user.getLastName().substring(0, 1).toUpperCase() + user.getLastName().substring(1));
                         number.setText(user.getNumber());
 
-                        if(user.getTagLine().equals(""))
-                        {
+                        if (user.getTagLine().equals("")) {
                             tagLine.setText("Add your tag line.");
-                        }
-                        else
-                        {
+                        } else {
                             tagLine.setText(user.getTagLine());
                         }
 
 
-                        if(user.getAbout().equals(""))
-                        {
+                        if (user.getAbout().equals("")) {
                             about.setText("Add your about information.");
-                        }
-                        else
-                        {
+                        } else {
                             about.setText(user.getAbout());
                         }
 
-                        if(user.getWebsite().equals(""))
-                        {
+                        if (user.getWebsite().equals("")) {
                             website.setText("Add your website.");
-                            websiteUrl="";
+                            websiteUrl = "";
                             website.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
-                        }
-                        else
-                        {
+                        } else {
                             website.setText(user.getWebsite());
-                            websiteUrl=user.getWebsite();
+                            websiteUrl = user.getWebsite();
                             website.setTextColor(ContextCompat.getColor(getContext(), R.color.mainAppçColor));
                         }
 
-                        if(user.getCity().equals("") ||  user.getProvince().equals("")|| user.getCountry().equals(""))
-                        {
+                        if (user.getCity().equals("") || user.getProvince().equals("") || user.getCountry().equals("")) {
                             location.setText("Add your location for better experience.");
                             address.setText("Add your Address");
 
-                        }
-                        else
-                        {
-                            location.setText(user.getCity().substring(0, 1).toUpperCase()+user.getCity().substring(1)+ ", " +  user.getProvince().substring(0, 1).toUpperCase()+user.getProvince().substring(1)+", "+ user.getCountry().substring(0, 1).toUpperCase()+user.getCountry().substring(1));
-                            address.setText(user.getApartment()+"-"+user.getBuilding()+", "+user.getStreet().substring(0, 1).toUpperCase()+user.getStreet().substring(1)+", "+user.getCity().substring(0, 1).toUpperCase()+user.getCity().substring(1)+", "+user.getProvince().substring(0, 1).toUpperCase()+user.getProvince().substring(1)+", "+user.getCountry().substring(0, 1).toUpperCase()+user.getCountry().substring(1)+", "+user.getZipCode());
+                        } else {
+                            location.setText(user.getCity().substring(0, 1).toUpperCase() + user.getCity().substring(1) + ", " + user.getProvince().substring(0, 1).toUpperCase() + user.getProvince().substring(1) + ", " + user.getCountry().substring(0, 1).toUpperCase() + user.getCountry().substring(1));
+                            address.setText(user.getApartment() + "-" + user.getBuilding() + ", " + user.getStreet().substring(0, 1).toUpperCase() + user.getStreet().substring(1) + ", " + user.getCity().substring(0, 1).toUpperCase() + user.getCity().substring(1) + ", " + user.getProvince().substring(0, 1).toUpperCase() + user.getProvince().substring(1) + ", " + user.getCountry().substring(0, 1).toUpperCase() + user.getCountry().substring(1) + ", " + user.getZipCode());
                         }
 
                         FirebaseStorage firebaseStorage;
@@ -228,7 +210,7 @@ LinearLayout changePassword;
                         storageReference = firebaseStorage.getReference();
 
 //        StorageReference imageRef = storageReference.child("Images/my.png");
-                        StorageReference imageRef = storageReference.child("user/"+user.getUserProfilePic());
+                        StorageReference imageRef = storageReference.child("user/" + user.getUserProfilePic());
 
                         imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
@@ -247,12 +229,9 @@ LinearLayout changePassword;
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getContext(),"Profile Pic is not available",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Profile Pic is not available", Toast.LENGTH_SHORT).show();
                             }
                         });
-
-
-
 
 
                     } else {
@@ -265,8 +244,7 @@ LinearLayout changePassword;
         });
 
 
-
-        db.collection("LOE").whereEqualTo("a","extra").get()
+        db.collection("LOE").whereEqualTo("a", "extra").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -293,16 +271,15 @@ LinearLayout changePassword;
                 });
 
 
-        loeAdapter =new LOEAdapterProfile(listexp, getContext(), "af");
+        loeAdapter = new LOEAdapterProfile(listexp, getContext(), "af");
 
         recexp.setHasFixedSize(true);
-        recexp.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
+        recexp.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         recexp.setAdapter(loeAdapter);
 
 
-
         // loading interest
-        db.collection("interest").whereEqualTo("faltu","extra").get()
+        db.collection("interest").whereEqualTo("faltu", "extra").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -325,35 +302,27 @@ LinearLayout changePassword;
                         }
                     }
                 });
-        InteAdapter =new InterestsAdapterProfile(list, getContext(), "af");
+        InteAdapter = new InterestsAdapterProfile(list, getContext(), "af");
 
         rec.setHasFixedSize(true);
-        rec.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
+        rec.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         rec.setAdapter(InteAdapter);
-
-
-
-
-
-
-
 
 
         recyclerViewEducation.setHasFixedSize(true);
         recyclerViewEducation.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        educationList=new ArrayList<>();
-        adapter=new NewEducationAdapterProfile(getContext(), educationList);
+        educationList = new ArrayList<>();
+        adapter = new NewEducationAdapterProfile(getContext(), educationList);
         recyclerViewEducation.setAdapter(adapter);
         db.collection("Education").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if(!queryDocumentSnapshots.isEmpty())
-                {
-                    List<DocumentSnapshot> list=queryDocumentSnapshots.getDocuments();
-                    for(DocumentSnapshot d: list){
+                if (!queryDocumentSnapshots.isEmpty()) {
+                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                    for (DocumentSnapshot d : list) {
 
-                        pojoAddNewEducation ed= d.toObject(pojoAddNewEducation.class);
+                        PojoAddNewEducation ed = d.toObject(PojoAddNewEducation.class);
                         ed.setId(d.getId());
                         educationList.add(ed);
                     }
@@ -363,19 +332,13 @@ LinearLayout changePassword;
         });
 
 
-
-
-
-
-
         userPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getContext(), UpdateUserPic.class);
-              startActivity(i);
+                startActivity(i);
             }
         });
-
 
 
         editNameSection.setOnClickListener(new View.OnClickListener() {
@@ -402,7 +365,7 @@ LinearLayout changePassword;
         website.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!websiteUrl.equals("")){
+                if (!websiteUrl.equals("")) {
                     Intent i = new Intent(Intent.ACTION_VIEW);
                     i.setData(Uri.parse(websiteUrl));
                     startActivity(i);
@@ -451,19 +414,10 @@ LinearLayout changePassword;
         });
 
 
-
-
-
-
-
         return root;
     }
 
 
-
-
-
-
-    }
+}
 
 

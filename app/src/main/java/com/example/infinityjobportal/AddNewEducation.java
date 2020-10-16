@@ -26,32 +26,33 @@ import java.util.Calendar;
 import static java.util.Calendar.getInstance;
 
 public class AddNewEducation extends AppCompatActivity {
-    private FirebaseFirestore db= FirebaseFirestore.getInstance();
-    private Button save,back;
-    TextView textstart,textend;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private Button save, back;
+    TextView textStart, textEnd;
     FirebaseAuth mAuth;
-    private EditText school1,degree1,fieldOfStudy1,startdate,enddate,grades,extraAct,discription1;
-     CollectionReference reference =db.collection("Education");
+    private EditText school1, degree1, fieldOfStudy1, startdate, enddate, grades, extraAct, description1;
+    CollectionReference reference = db.collection("Education");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_education);
-        save =findViewById(R.id.button_save);
-        back=findViewById(R.id.button_back);
-        school1=findViewById(R.id.school);
-        degree1=findViewById(R.id.Degree);
-        fieldOfStudy1=findViewById(R.id.studyField);
-        startdate=findViewById(R.id.start_date);
-        textstart=findViewById(R.id.textstart);
-        textend=findViewById(R.id.textend);
-        enddate=findViewById(R.id.end_date);
-        grades=findViewById(R.id.grade);
-        extraAct= findViewById(R.id.activities_societies);
-        discription1=findViewById(R.id.description);
+        save = findViewById(R.id.button_save);
+        back = findViewById(R.id.button_back);
+        school1 = findViewById(R.id.school);
+        degree1 = findViewById(R.id.Degree);
+        fieldOfStudy1 = findViewById(R.id.studyField);
+        startdate = findViewById(R.id.start_date);
+        textStart = findViewById(R.id.textstart);
+        textEnd = findViewById(R.id.textend);
+        enddate = findViewById(R.id.end_date);
+        grades = findViewById(R.id.grade);
+        extraAct = findViewById(R.id.activities_societies);
+        description1 = findViewById(R.id.description);
 
-        mAuth= FirebaseAuth.getInstance();
-       final String userId=  mAuth.getCurrentUser().getEmail();
-        textstart.setOnClickListener(new View.OnClickListener() {
+        mAuth = FirebaseAuth.getInstance();
+        final String userId = mAuth.getCurrentUser().getEmail();
+        textStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -79,8 +80,7 @@ public class AddNewEducation extends AppCompatActivity {
         });
 
 
-
-        textend.setOnClickListener(new View.OnClickListener() {
+        textEnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -108,7 +108,6 @@ public class AddNewEducation extends AppCompatActivity {
         });
 
 
-
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,13 +118,13 @@ public class AddNewEducation extends AppCompatActivity {
                 String endDate = enddate.getText().toString();
                 String grade = grades.getText().toString();
                 String extraActs = extraAct.getText().toString();
-                String discription = discription1.getText().toString();
+                String discription = description1.getText().toString();
 
                 if (!hasValidationErrors(school, degree, fieldOfStudy, startDate, endDate, grade, extraActs, discription)) {
 
                     CollectionReference reference = db.collection("Education");
 
-                    pojoAddNewEducation pojoaddNewEducation = new pojoAddNewEducation(school, degree, fieldOfStudy, startDate, endDate, grade, extraActs, discription,userId);
+                    PojoAddNewEducation pojoaddNewEducation = new PojoAddNewEducation(school, degree, fieldOfStudy, startDate, endDate, grade, extraActs, discription, userId);
                     reference.add(pojoaddNewEducation).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
@@ -186,8 +185,8 @@ public class AddNewEducation extends AppCompatActivity {
                     return true;
                 }
                 if (discription.isEmpty()) {
-                    discription1.setError("Description of Study is required");
-                    discription1.requestFocus();
+                    description1.setError("Description of Study is required");
+                    description1.requestFocus();
                     return true;
                 }
                 return false;
@@ -195,14 +194,14 @@ public class AddNewEducation extends AppCompatActivity {
         });
 
 
-      back.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              Intent intent = new Intent(AddNewEducation.this, MainEducation.class);
-              startActivity(intent);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddNewEducation.this, MainEducation.class);
+                startActivity(intent);
 
-          }
-      });
+            }
+        });
 
 
     }
