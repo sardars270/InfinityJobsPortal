@@ -1,6 +1,8 @@
 package com.example.infinityjobportal.ui.postJob;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,11 +19,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
+import com.example.infinityjobportal.ClientLogin;
+import com.example.infinityjobportal.ClientSignUp;
+import com.example.infinityjobportal.MainActivity;
 import com.example.infinityjobportal.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -207,6 +213,19 @@ public class PostJobFragment extends Fragment {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                builder.setMessage("Job Added To Database.")
+                                        .setCancelable(false)
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+
+                                            }
+                                        });
+                                AlertDialog alert = builder.create();
+                                alert.show();
+                                Intent i = new Intent(getContext(),MainActivity.class);
+                                startActivity(i);
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -215,20 +234,10 @@ public class PostJobFragment extends Fragment {
                                 Log.w(TAG, "Error adding document", e);
                             }
                         });
-
-
-
-                Navigation.findNavController(view).navigate(R.id.myJobsFragment);
-
+              //  Navigation.findNavController(view).navigate(R.id.myJobsFragment);
                 Log.d(TAG, "onClick: for job post has ended");
-
             }
         });
-
-
         return root;
-
-
     }
-
 }
