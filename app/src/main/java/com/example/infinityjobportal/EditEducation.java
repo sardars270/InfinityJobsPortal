@@ -20,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -35,12 +34,12 @@ public class EditEducation extends AppCompatActivity implements OnClickListener 
 
     private EditText school1, degree1, fieldOfStudy1, startdate, enddate, grades, extraAct, discription1;
     CollectionReference reference = db.collection("Education");
-    private pojoAddNewEducation pojoAddNewEducation;
+    private PojoAddNewEducation pojoAddNewEducation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_education);
-        pojoAddNewEducation = (pojoAddNewEducation) getIntent().getSerializableExtra("Education");
+        pojoAddNewEducation = (PojoAddNewEducation) getIntent().getSerializableExtra("Education");
         back = findViewById(R.id.button_back);
         school1=findViewById(R.id.school);
         degree1 = findViewById(R.id.Degree);
@@ -200,7 +199,7 @@ back.setOnClickListener(new OnClickListener() {
 
            // CollectionReference reference = db.collection("Education");
 
-            pojoAddNewEducation pojoaddNewEducation = new pojoAddNewEducation(school, degree, fieldOfStudy, startDate, endDate, grade, extraActs, discription);
+            PojoAddNewEducation pojoaddNewEducation = new PojoAddNewEducation(school, degree, fieldOfStudy, startDate, endDate, grade, extraActs, discription);
             db.collection("Education").document(pojoAddNewEducation.getId()).update("school",pojoaddNewEducation.getSchool(), "degree",pojoaddNewEducation.getDegree(),
                     "fieldOfStudy", pojoaddNewEducation.getFieldOfStudy(), "startDate", pojoaddNewEducation.getStartDate(), "endDate",pojoaddNewEducation.getEndDate(), "grade",
                     pojoaddNewEducation.getGrade(), "extraActs", pojoaddNewEducation.getExtraActs(), "description", pojoaddNewEducation.getdescription())
