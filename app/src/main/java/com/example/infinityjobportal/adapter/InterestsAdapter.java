@@ -84,7 +84,7 @@ minus.setOnClickListener(new View.OnClickListener() {
        // city.put("faltu", "deleted");
 
 
-        DocumentReference washingtonRef = db.collection("aInt").document(del.getText().toString());
+        DocumentReference washingtonRef = db.collection("allInterests").document(del.getText().toString());
 
 // Set the "isCapital" field of the city 'DC'
         washingtonRef

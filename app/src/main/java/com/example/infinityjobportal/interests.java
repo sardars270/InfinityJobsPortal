@@ -63,7 +63,7 @@ public class interests extends AppCompatActivity {
                 data.put("faltu", "extra");
                 data.put("type_int", ed_interests.getText().toString());
                 data.put("userid", String.valueOf(fbauth.getCurrentUser().getEmail()));
-                DocumentReference washingtonRef = db.collection("aInt").document();
+                DocumentReference washingtonRef = db.collection("allInterests").document();
                 data.put("id", String.valueOf(washingtonRef.getId()));
                 washingtonRef.set(data);
                 Toast.makeText(getApplicationContext(),"Interests added successfull",Toast.LENGTH_SHORT).show();
@@ -142,7 +142,7 @@ public class interests extends AppCompatActivity {
             }
 
         });
-        db.collection("aInt").whereEqualTo("faltu","extra").get()
+        db.collection("allInterests").whereEqualTo("faltu","extra").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
