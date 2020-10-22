@@ -2,7 +2,7 @@ package com.example.infinityjobportal.model;
 
 import java.util.Date;
 
-public class PostJobPOJO {
+public class PostJobPojo {
     private String companyName;
     private String jobCategory;
     private String jobTitle;
@@ -18,11 +18,16 @@ public class PostJobPOJO {
     private String jobDescription;
     private String skillsRequired;
     private String qualificationRequired;
+    String id;
 
-    public PostJobPOJO() {
+    public PostJobPojo() {
     }
 
-    public PostJobPOJO(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Double minSalary, Double maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired) {
+    public PostJobPojo(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Double minSalary, Double maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired) {
         this.companyName = companyName;
         this.jobCategory = jobCategory;
         this.jobTitle = jobTitle;
@@ -39,6 +44,7 @@ public class PostJobPOJO {
         this.skillsRequired = skillsRequired;
         this.qualificationRequired = qualificationRequired;
     }
+
 
     public String getCompanyName() {
         return companyName;
@@ -98,5 +104,73 @@ public class PostJobPOJO {
 
     public String getQualificationRequired() {
         return qualificationRequired;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public void setJobCategory(String jobCategory) {
+        this.jobCategory = jobCategory;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
+    public void setCityAddress(String cityAddress) {
+        this.cityAddress = cityAddress;
+    }
+
+    public void setProvinceAddress(String provinceAddress) {
+        this.provinceAddress = provinceAddress;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public void setMinSalary(Double minSalary) {
+        this.minSalary = minSalary;
+    }
+
+    public void setMaxSalary(Double maxSalary) {
+        this.maxSalary = maxSalary;
+    }
+
+    public void setAvailability(String availability) {
+        this.availability = availability;
+    }
+
+    public void setJoiningDate(String joiningDate) {
+        this.joiningDate = joiningDate;
+    }
+
+    public void setApplicationDeadline(String applicationDeadline) {
+        this.applicationDeadline = applicationDeadline;
+    }
+
+    public void setJobDescription(String jobDescription) {
+        this.jobDescription = jobDescription;
+    }
+
+    public void setSkillsRequired(String skillsRequired) {
+        this.skillsRequired = skillsRequired;
+    }
+
+    public void setQualificationRequired(String qualificationRequired) {
+        this.qualificationRequired = qualificationRequired;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -82,7 +82,7 @@ public class add_exp extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         mAuth=FirebaseAuth.getInstance();
 
-        final global_vars globalVariable = (global_vars) faltu_context.context;
+
        spickdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

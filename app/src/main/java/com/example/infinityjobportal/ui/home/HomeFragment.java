@@ -1,5 +1,6 @@
 package com.example.infinityjobportal.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,16 +8,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infinityjobportal.ClientLogin;
+import com.example.infinityjobportal.Jobs_search;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.adapter.Adapterjoblist;
-import com.example.infinityjobportal.model.Jobs;
+import com.example.infinityjobportal.model.PostJobPojo;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -27,8 +28,9 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     private RecyclerView recjoblist;
+    TextView search;
 
-    private ArrayList<Jobs> list=new ArrayList<>();
+    private ArrayList<PostJobPojo> list=new ArrayList<PostJobPojo>();
     Adapterjoblist adapter;
     FirebaseFirestore db;
 
@@ -41,6 +43,7 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         recjoblist=root.findViewById(R.id.recJobList);
+        search = root.findViewById(R.id.serach);
 
 
         db = FirebaseFirestore.getInstance();
@@ -56,11 +59,11 @@ public class HomeFragment extends Fragment {
 
                             for (DocumentSnapshot d : list1) {
 
-
-                                Jobs p = d.toObject(Jobs.class);
-                                p.setTitle(d.getString("Job title"));
-                                p.setAt(d.getString("Company Name"));
-                                p.setLocation(d.getString("City"));
+                                PostJobPojo p = d.toObject(PostJobPojo.class);
+                                p.setJobTitle(d.getString("jobTitle"));
+                                p.setCompanyName(d.getString("companyName"));
+                                p.setCityAddress(d.getString("cityAddress"));
+                                p.setId(d.getId());
 
                                 list.add(p);
                             }
@@ -75,6 +78,14 @@ public class HomeFragment extends Fragment {
         recjoblist.setLayoutManager(new LinearLayoutManager(getContext()));
         recjoblist.setAdapter(adapter);
 
+
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), Jobs_search.class));
+            }
+        });
 
 
 

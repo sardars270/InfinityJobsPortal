@@ -1,27 +1,27 @@
 package com.example.infinityjobportal.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infinityjobportal.JobDetails;
 import com.example.infinityjobportal.R;
-import com.example.infinityjobportal.model.Jobs;
-import com.example.infinityjobportal.model.User;
+import com.example.infinityjobportal.model.PostJobPojo;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHolder>{
     Context context;
-    List<Jobs> ar1;
-    public Adapterjoblist(Context context, List<Jobs> ar1) {
+    ArrayList<PostJobPojo> ar1;
+    public Adapterjoblist(Context context, ArrayList<PostJobPojo> ar1) {
 
         this.context=context;
         this.ar1=ar1;
@@ -43,11 +43,22 @@ public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHold
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
-        Jobs pj=ar1.get(position);
+        PostJobPojo pj=ar1.get(position);
 
-        holder.title.setText(pj.getTitle());
-        holder.at.setText(pj.getAt());
-        holder.location.setText(pj.getLocation());
+        holder.title.setText(pj.getJobTitle());
+        holder.at.setText(pj.getCompanyName());
+        holder.location.setText(pj.getCityAddress());
+        holder.id.setText(pj.getId());
+
+
+        holder.lout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, JobDetails.class);
+                i.putExtra("id", holder.id.getText().toString());
+                context.startActivity(i);
+            }
+        });
 
 
 
@@ -62,7 +73,7 @@ public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHold
     {
         CardView lout;
 
-        TextView title, at, location;
+        TextView title, at, location,id;
         ImageView saveJob;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -71,8 +82,10 @@ public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHold
             at=itemView.findViewById(R.id.at);
             location=itemView.findViewById(R.id.location);
 
-            lout=itemView.findViewById(R.id.ulist);
+            lout=itemView.findViewById(R.id.lout);
             saveJob  = itemView.findViewById(R.id.saveJob);
+            id  = itemView.findViewById(R.id.id);
+
         }
     }
 }

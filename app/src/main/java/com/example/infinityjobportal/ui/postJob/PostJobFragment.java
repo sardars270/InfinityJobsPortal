@@ -23,7 +23,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import com.example.infinityjobportal.R;
-import com.example.infinityjobportal.model.PostJobPOJO;
+import com.example.infinityjobportal.model.PostJobPojo;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -187,7 +187,7 @@ public class PostJobFragment extends Fragment {
                         maxSalary, availability, joiningDate, applicationDeadline, jobDescription,
                         skillsRequired, qualificationRequired)) {
 
-                    PostJobPOJO postJobPOJO = new PostJobPOJO(companyName,jobCategory, jobTitle, streetAddress, city, province, language,
+                    PostJobPojo postJobPOJO = new PostJobPojo(companyName,jobCategory, jobTitle, streetAddress, city, province, language,
                             minSalary, maxSalary, availability, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired);
 
                     db.collection("Jobs")

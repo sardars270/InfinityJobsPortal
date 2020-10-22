@@ -7,6 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+    <TextView
+        android:id="@+id/serach"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="search"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recJobList"
         android:layout_width="match_parent"

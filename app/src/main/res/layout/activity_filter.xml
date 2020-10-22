@@ -1,41 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Jobs_search">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
-    <TextView
-        android:id="@+id/filter"
-        android:text="Filters"
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
+    tools:context=".Filter">
 <LinearLayout
-    android:id="@+id/filtersContainer"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:visibility="gone"
-    >
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-
-        <TextView
-            android:id="@+id/apply"
-            android:text="Apply"
-            android:textColor="@color/white"
-            android:layout_marginLeft="250dp"
-            android:gravity="right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/apply"
+        android:text="Apply"
+        android:textColor="@color/white"
+        android:layout_marginLeft="250dp"
+        android:gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -125,7 +107,7 @@
         android:fontFamily="@font/robotoregular"
         android:padding="10dp"
         android:spinnerMode="dropdown"
-   />
+        />
 
     <View
         android:background="@color/grayFontsColor"
@@ -154,6 +136,7 @@
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
+
     <TextView
         android:id="@+id/Language"
         android:text="Language"
@@ -163,28 +146,51 @@
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/et_language"
-        android:text="French"
-        android:layout_marginLeft="20dp"
-        android:textSize="20dp"
-        android:layout_marginTop="5dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        >
+    <CheckBox
+        android:id="@+id/radioEnglish"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="10dp"
+        android:text="English"
+        />
+
+    <CheckBox
+        android:id="@+id/radioFrench"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_weight="1"
+        android:text="French"
+        />
+    </LinearLayout>
+
     <View
         android:background="@color/grayFontsColor"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
 
-
-</LinearLayout>
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recJobList"
-        android:layout_width="match_parent"
+    <TextView
+        android:onClick="applyFilter"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:text="Apply"
+        android:background="@color/mainSecondaryColor"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:paddingLeft="20dp"
+        android:paddingTop="5dp"
+        android:layout_margin="20dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="20dp"
+        android:layout_gravity="center"
         />
-    </LinearLayout>
+</LinearLayout>
 </ScrollView>
