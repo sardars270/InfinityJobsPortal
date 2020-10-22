@@ -28,7 +28,7 @@ public class ClientSignUp extends AppCompatActivity {
     EditText firstName,lastName,email,password,mobile;
     Button login,signup;
     ProgressBar progressBar;
-
+    String  patterntomatch ="[0-9]{10}";
     public FirebaseAuth mAuth;
     FirebaseFirestore db;
 
@@ -81,7 +81,22 @@ public class ClientSignUp extends AppCompatActivity {
                     errorView.setText("Password cannot be empty");
 
 
-                } else {
+                }
+               else if (firstName.getText().toString().contentEquals("")) {
+
+
+                    errorView.setText("Firstname cannot be empty");
+                }
+                else if (lastName.getText().toString().contentEquals("")) {
+
+
+                    errorView.setText("Lastname cannot be empty");
+                }
+                else if (!mobile.getText().toString().matches(patterntomatch)) {
+
+
+                    errorView.setText("Please enter valid number");
+                }else {
 
 
                     progressBar.setVisibility(View.VISIBLE);

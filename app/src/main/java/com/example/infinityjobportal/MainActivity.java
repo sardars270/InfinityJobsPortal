@@ -20,7 +20,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import io.opencensus.stats.View;
+
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";

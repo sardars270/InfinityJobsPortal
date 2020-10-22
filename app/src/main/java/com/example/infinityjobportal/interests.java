@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -65,11 +66,16 @@ public class interests extends AppCompatActivity {
                 DocumentReference washingtonRef = db.collection("interest").document();
                 data.put("id", String.valueOf(washingtonRef.getId()));
                 washingtonRef.set(data);
-                Toast.makeText(getApplicationContext(),"Interests added successfull",Toast.LENGTH_SHORT).show();
-                Intent ii = new Intent(getApplicationContext(),interests.class);
-                startActivity(ii);
+                String interest =ed_interests.getText().toString();
+                if (TextUtils.isEmpty(interest)) {
+                    ed_interests.setError("Invalid");
 
+                }else {
+                    Toast.makeText(getApplicationContext(), "Interests added successfull", Toast.LENGTH_SHORT).show();
+                    Intent ii = new Intent(getApplicationContext(), interests.class);
+                    startActivity(ii);
 
+                }
 
 
             }
