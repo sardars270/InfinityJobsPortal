@@ -6,13 +6,11 @@
     android:id="@+id/constraintLayout"
     android:padding="10dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivCompanyLogo"
         android:layout_width="96dp"
         android:layout_height="96dp"
         android:src="@drawable/company_thumb"
-        app:civ_border_color="#FF000000"
-        app:civ_border_width="2dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,7 +47,8 @@
         android:fontFamily="@font/robotomedium"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/ivCompanyLogo"
-        app:layout_constraintTop_toBottomOf="@+id/tvIndustry" />
+        app:layout_constraintTop_toBottomOf="@+id/tvIndustry"
+        android:layout_marginLeft="10dp" />
 
     <View
         android:layout_width="match_parent"

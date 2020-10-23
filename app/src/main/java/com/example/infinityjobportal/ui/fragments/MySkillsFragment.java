@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.infinityjobportal.ui.activities.MySkillsActivity;
+
 import com.example.infinityjobportal.R;
 
 public class MySkillsFragment extends Fragment {
@@ -20,8 +20,6 @@ public class MySkillsFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_my_skills, container, false);
 
-        Intent i = new Intent(getContext(), MySkillsActivity.class);
-        startActivity(i);
 
         return root;
     }

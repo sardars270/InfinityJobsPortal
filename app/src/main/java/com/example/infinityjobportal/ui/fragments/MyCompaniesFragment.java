@@ -12,12 +12,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infinityjobportal.AddCompanyActivity;
 import com.example.infinityjobportal.Company;
 import com.example.infinityjobportal.CompanyAdapter;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.Skill;
 import com.example.infinityjobportal.SkillAdapter;
-import com.example.infinityjobportal.ui.activities.AddCompanyActivity;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;

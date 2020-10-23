@@ -18,7 +18,7 @@
         android:textStyle="bold"
         android:background="@android:color/darker_gray"
         android:padding="8dp"
-        android:text="@string/add_skill"
+        android:text="Add Skill"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
