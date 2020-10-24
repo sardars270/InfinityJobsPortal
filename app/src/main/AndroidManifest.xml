@@ -9,10 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".JobDetails" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+        <activity android:name=".Filter" />
+        <activity android:name=".Search" />
         <activity android:name=".CompanyProfileActivity" />
         <activity android:name=".AddCompanyActivity" />
         <activity android:name=".EditCompanyActivity" />
-        <activity android:name=".ClientChangePassword"  android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+        <activity
+            android:name=".ClientChangePassword"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".UpdateContactSection"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -63,16 +68,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-<activity android:name=".ListOfExperienceActiviy" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
-            <activity
-                android:name=".EditAvailability"
-                android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-                >
-        </activity>
-
-<activity android:name=".add_exp" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
-
+        <activity
+            android:name=".ListOfExperienceActiviy"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".EditAvailability"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".add_exp"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
     </application>
 
 </manifest>

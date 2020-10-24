@@ -22,7 +22,7 @@ public class UserFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.admin_fragment_user, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
+       // final TextView textView = root.findViewById(R.id.text_home);
 
         return root;
     }
