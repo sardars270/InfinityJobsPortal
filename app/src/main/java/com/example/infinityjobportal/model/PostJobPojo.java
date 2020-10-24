@@ -1,5 +1,7 @@
 package com.example.infinityjobportal.model;
 
+import com.google.firebase.firestore.ServerTimestamp;
+
 import java.util.Date;
 
 public class PostJobPojo {
@@ -19,11 +21,12 @@ public class PostJobPojo {
     private String skillsRequired;
     private String qualificationRequired;
     private String status;
+    private String date;
 
     public PostJobPojo() {
     }
 
-    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Double minSalary, Double maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired, String status) {
+    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Double minSalary, Double maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired, String status, String date) {
         this.companyName = companyName;
         this.jobCategory = jobCategory;
         this.jobTitle = jobTitle;
@@ -40,14 +43,15 @@ public class PostJobPojo {
         this.skillsRequired = skillsRequired;
         this.qualificationRequired = qualificationRequired;
         this.status = status;
+        this.date = date;
     }
 
-    public String getStatus() {
-        return status;
+    public String getDate() {
+        return date;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getCompanyName() {

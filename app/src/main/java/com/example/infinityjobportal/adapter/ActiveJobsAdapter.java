@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infinityjobportal.R;
@@ -41,16 +42,23 @@ public class ActiveJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, Act
         Log.d(TAG, "onBindViewHolder: called");
         activeJobsViewHolder.jobTitle.setText(postJobPOJO.getJobTitle());
         activeJobsViewHolder.companyName.setText(postJobPOJO.getCompanyName());
+        activeJobsViewHolder.viewDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: View Jobs");
+                Navigation.findNavController(view).navigate(R.id.myJobsFragment);
+            }
+        });
+        activeJobsViewHolder.viewApplication.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: View Applications");
+                Navigation.findNavController(view).navigate(R.id.homeFragment);
+            }
+        });
 
 
     }
-
-//    @Override
-//    public int getItemCount() {
-//        Log.d(TAG, "getItemCount: called");
-//        return ;
-//    }
-
 
     public class ActiveJobsViewHolder extends RecyclerView.ViewHolder {
 

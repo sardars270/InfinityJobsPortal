@@ -23,10 +23,15 @@ import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.PostJobPojo;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ServerTimestamp;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class PostJobFragment extends Fragment {
     private static final String TAG = "PostJobFragment";
@@ -145,7 +150,9 @@ public class PostJobFragment extends Fragment {
                 String jobDescription = mJobDescriptionEditText.getText().toString();
                 String skillsRequired = mSkillsRequiredEditText.getText().toString();
                 String qualificationRequired = mQualificationRequiredEditText.getText().toString();
-
+                SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+                Date todayDate = new Date();
+                String date = currentDate.format(todayDate);
 
 
                 if (!hasValidationErrors(companyName, jobCategory, jobTitle, streetAddress, city, province, language, minSalary,
@@ -153,7 +160,7 @@ public class PostJobFragment extends Fragment {
                         skillsRequired, qualificationRequired)) {
 
                     PostJobPojo postJobPOJO = new PostJobPojo(companyName, jobCategory, jobTitle, streetAddress, city, province, language,
-                            minSalary, maxSalary, availability, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired, "active");
+                            minSalary, maxSalary, availability, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired,"Active", date);
 
                     db.collection("Jobs")
                             .add(postJobPOJO)
@@ -172,7 +179,7 @@ public class PostJobFragment extends Fragment {
                             });
 
 
-                    Navigation.findNavController(view).navigate(R.id.myJobsFragment);
+                    Navigation.findNavController(view).navigate(R.id.postedJobsFragment);
 
                     Log.d(TAG, "onClick: for job post has ended");
 
