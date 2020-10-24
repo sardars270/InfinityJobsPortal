@@ -170,6 +170,8 @@ public class PostJobFragment extends Fragment {
                     language = "French";
                 } else if (mFrenchCheckBox.isChecked() && mEnglishCheckBox.isChecked()) {
                     language = "English & French";
+                } else{
+                    language = "English & French";
                 }
 
                 Double minSalary = Double.parseDouble(mStartSalaryRangeEditText.getText().toString());

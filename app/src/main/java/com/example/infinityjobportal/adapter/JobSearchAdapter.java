@@ -2,6 +2,7 @@ package com.example.infinityjobportal.adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infinityjobportal.JobDetails;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.PostJobPojo;
 
@@ -23,17 +26,28 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.Exam
     private List<PostJobPojo> exampleList;
     private List<PostJobPojo> exampleListFull;
 
-
+Context context;
 
     class ExampleViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
+
         TextView textView1;
-        TextView textView2;
+        CardView lout;
+
+        TextView title, at, location,id;
+        ImageView saveJob;
+
+
 
         ExampleViewHolder(View itemView) {
             super(itemView);
           //  imageView = itemView.findViewById(R.id.image_view);
             textView1 = itemView.findViewById(R.id.title);
+            at=itemView.findViewById(R.id.at);
+            location=itemView.findViewById(R.id.location);
+
+            lout=itemView.findViewById(R.id.lout);
+            saveJob  = itemView.findViewById(R.id.saveJob);
+            id  = itemView.findViewById(R.id.id);
            // textView2 = itemView.findViewById(R.id.text_view2);
         }
     }
@@ -41,6 +55,7 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.Exam
     public JobSearchAdapter(Context applicationContext, List<PostJobPojo> exampleList) {
         this.exampleList = exampleList;
         exampleListFull = new ArrayList<>(exampleList);
+        this.context=applicationContext;
     }
 
     @NonNull
@@ -57,7 +72,23 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.Exam
 
       //  holder.imageView.setImageResource(currentItem.gett());
         holder.textView1.setText(currentItem.getJobTitle());
-       // holder.textView2.setText(currentItem.getText2());
+        holder.at.setText(currentItem.getCompanyName());
+        holder.location.setText(currentItem.getCityAddress());
+        holder.id.setText(currentItem.getId());
+
+/*
+        holder.lout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, JobDetails.class);
+                i.putExtra("id", holder.id.getText().toString());
+                context.startActivity(i);
+            }
+        });
+
+
+ */
+        // holder.textView2.setText(currentItem.getText2());
     }
 
     @Override

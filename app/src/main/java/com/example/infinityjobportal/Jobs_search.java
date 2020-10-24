@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -40,8 +41,12 @@ public class Jobs_search extends AppCompatActivity {
     LinearLayout filtersContainer;
     TextView filter;
     private Spinner jobCategorySpinner;
-
+    Query q;
     String category;
+    int count=0;
+
+    CollectionReference collectionReference ;
+    Query query;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,9 +56,11 @@ public class Jobs_search extends AppCompatActivity {
         filtersContainer = findViewById(R.id.filtersContainer);
         filter = findViewById(R.id.filter);
         jobCategorySpinner = findViewById(R.id.jobCategorySpinner);
+        db= FirebaseFirestore.getInstance();
+        collectionReference=db.collection("Jobs");
 
         fillExampleList();
-        setUpRecyclerView();
+       // setUpRecyclerView();
 
 
 
@@ -98,65 +105,70 @@ public class Jobs_search extends AppCompatActivity {
 
 
     private void fillExampleList() {
+        db = FirebaseFirestore.getInstance();
         exampleList = new ArrayList<>();
 
 
-        db = FirebaseFirestore.getInstance();
 
-       // String catogory = 'db.collection("Jobs").whereEqualTo("jobCategory",jobCategorySpinner.getSelectedItem().toString())';
 
-        CollectionReference collectionReference = db.collection("Jobs");
 
-        Toast.makeText(getApplicationContext(),GlobalStorage.jobCatogory,Toast.LENGTH_SHORT).show();
+/*
+        if(GlobalStorage.language.equals("English") || GlobalStorage.language.equals("French") || GlobalStorage.language.equals("English & French"))
+        {
+            count++;
 
-        if(GlobalStorage.jobCatogory.equals("Any")) {
-            category = "";
+        }//language id end
+
+*/
+      //  collectionReference.orderBy("language").startAt(GlobalStorage.language).endAt(GlobalStorage.language+'\uf8ff')
+
+
+        if (!GlobalStorage.language.equals("") && !GlobalStorage.jobCatogory.equals("Any")) {// botth active
+            query=collectionReference.whereEqualTo("language", GlobalStorage.language).whereEqualTo("jobCategory",GlobalStorage.jobCatogory);
+
+        } else if (!GlobalStorage.language.equals("") && GlobalStorage.jobCatogory.equals("Any")) {// only language active && category disabled {
+            query=collectionReference.whereEqualTo("language", GlobalStorage.language);
+        }
+        else if (GlobalStorage.language.equals("") && !GlobalStorage.jobCatogory.equals("Any")) {// only language disabled && category active {
+            query=collectionReference.whereEqualTo("jobCategory",GlobalStorage.jobCatogory);
         }else {
-            Toast.makeText(getApplicationContext(),"else",Toast.LENGTH_SHORT).show();
-
-            //collectionReference.whereEqualTo("jobCategory", "Technology");
-            category = GlobalStorage.jobCatogory;
+          query=collectionReference;
         }
 
-        //collectionReference.;
+          // .orderBy("jobCategory").startAt(category).endAt(category + '\uf8ff')
+                  query .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
+                    if (!queryDocumentSnapshots.isEmpty()) {
 
-      //  collectionReference.orderBy("jobCategory").startAt(category).endAt(category+'\uf8ff')
-                //collectionReference.whereEqualTo("language","Frenche")
-                collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        List<DocumentSnapshot> list1 = queryDocumentSnapshots.getDocuments();
 
-                        if (!queryDocumentSnapshots.isEmpty()) {
+                        for (DocumentSnapshot d : list1) {
 
-                            List<DocumentSnapshot> list1 = queryDocumentSnapshots.getDocuments();
+                            PostJobPojo p = d.toObject(PostJobPojo.class);
+                            p.setJobTitle(d.getString("jobTitle"));
+                            p.setCompanyName(d.getString("companyName"));
+                            p.setCityAddress(d.getString("cityAddress"));
+                            p.setId(d.getId());
 
-                            for (DocumentSnapshot d : list1) {
-
-                                PostJobPojo p = d.toObject(PostJobPojo.class);
-                                p.setJobTitle(d.getString("jobTitle"));
-                               // p.setCompanyName(d.getString("companyName"));
-                                //p.setCityAddress(d.getString("cityAddress"));
-
-                                exampleList.add(p);
-                            }
-                            RecyclerView recyclerView = findViewById(R.id.recJobList);
-                            recyclerView.setHasFixedSize(true);
-                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(Jobs_search.this);
-                            adapter = new JobSearchAdapter(getApplicationContext(),exampleList);
-
-                            recyclerView.setLayoutManager(layoutManager);
-                            recyclerView.setAdapter(adapter);
-                            adapter.notifyDataSetChanged();
+                            exampleList.add(p);
                         }
+                        RecyclerView recyclerView = findViewById(R.id.recJobList);
+                        recyclerView.setHasFixedSize(true);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(Jobs_search.this);
+                        adapter = new JobSearchAdapter(getApplicationContext(), exampleList);
+
+                        recyclerView.setLayoutManager(layoutManager);
+                        recyclerView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
                     }
-                });
+                }
+            });
+        } ;
 
-    }
+    //fillExamplelist     end here
 
-    private void setUpRecyclerView() {
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
