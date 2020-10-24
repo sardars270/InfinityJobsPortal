@@ -49,7 +49,7 @@ public class AdminLogin extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-
+        autoLogin();
 
         user.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +72,76 @@ public class AdminLogin extends AppCompatActivity {
 
 
     }
+    private void autoLogin() {
+
+
+
+
+
+
+            mAuth.signInWithEmailAndPassword("varunmahajan292@gmail.com", "varun123")
+                    .addOnCompleteListener(AdminLogin.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+
+                                FirebaseUser user = mAuth.getCurrentUser();
+
+                                if (user != null) {
+                                    if (user.isEmailVerified()) {
+
+                                        DocumentReference docRef = db.collection("users").document("varunmahajan292@gmail.com");
+                                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                User user = documentSnapshot.toObject(User.class);
+
+                                                if(user.isAdmin())
+                                                {
+                                                    progressBar.setVisibility(View.GONE);
+                                                    //errorView.setText("");
+                                                    // errorView.setVisibility(View.GONE);
+                                                    Intent HomeActivity = new Intent(getApplicationContext(), AdminMainActivity.class);
+                                                    //   setResult(RESULT_OK, null);
+                                                    startActivity(HomeActivity);
+                                                }
+                                                else {
+                                                    progressBar.setVisibility(View.GONE);
+                                                    errorView.setText("This Email Is Not SetUp For Admin Account.");
+                                                }
+                                            }
+                                        });
+
+                                    } else {
+
+                                        progressBar.setVisibility(View.GONE);
+                                        errorView.setText("Please Verify your EmailID and SignIn");
+
+                                    }
+                                }
+
+                            } else {
+                                // If sign in fails, display a message to the user.
+
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(getApplicationContext(), "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                                if (task.getException() != null) {
+                                    errorView.setText(task.getException().getMessage());
+
+                                }
+
+                            }
+
+                        }
+                    });
+
+
+        }
+
+
+
 
     public void logInFunction(View view) {
         if (email.getText().toString().contentEquals("")) {

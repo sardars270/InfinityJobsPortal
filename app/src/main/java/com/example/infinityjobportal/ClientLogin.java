@@ -45,7 +45,7 @@ public class ClientLogin extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-       // autoLogin(); // for testing only
+       //autoLogin(); // for testing only
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
