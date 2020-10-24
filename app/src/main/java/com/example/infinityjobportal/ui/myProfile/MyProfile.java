@@ -47,6 +47,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -244,7 +245,7 @@ public class MyProfile extends Fragment {
         });
 
 
-        db.collection("LOE").whereEqualTo("a", "extra").get()
+        db.collection("LOE").whereEqualTo("a", "extra").limit(2).get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -279,7 +280,7 @@ public class MyProfile extends Fragment {
 
 
         // loading interest
-        db.collection("interest").whereEqualTo("faltu", "extra").get()
+        db.collection("interest").whereEqualTo("faltu", "extra").limit(2).get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -315,7 +316,8 @@ public class MyProfile extends Fragment {
         educationList = new ArrayList<>();
         adapter = new NewEducationAdapterProfile(getContext(), educationList);
         recyclerViewEducation.setAdapter(adapter);
-        db.collection("Education").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        db.collection("Education").limit(2).get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 if (!queryDocumentSnapshots.isEmpty()) {

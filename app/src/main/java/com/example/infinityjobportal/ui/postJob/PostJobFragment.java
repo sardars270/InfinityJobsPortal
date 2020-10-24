@@ -12,11 +12,14 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import com.example.infinityjobportal.R;
@@ -33,6 +36,25 @@ public class PostJobFragment extends Fragment {
 
     DatePickerDialog datePickerDialog;
 
+    //Firestore Keys
+    private static final String COMPANY_NAME = "Company Name";
+    private static final String JOB_TITLE = "Job title";
+    private static final String JOB_CATEGORY = "Job Category";
+    private static final String STREET_ADDRESS = "Street Address";
+    private static final String CITY = "City";
+    private static final String PROVINCE = "Province";
+    private static final String LANGUAGE = "Language";
+    private static final String AVAILABILITY = "Availability";
+    private static final String MIN_SALARY = "Minimum Salary";
+    private static final String MAX_SALARY = "Maximum Salary";
+    private static final String APPLICATION_DEADLINE = "Application Deadline";
+    private static final String JOINING_DATE = "Joining Date";
+    private static final String JOB_DESCRIPTION = "Job Description";
+    private static final String SKILLS_REQUIRED = "Skills Required";
+    private static final String QUALIFICATION_REQUIRED = "Qualification Required";
+
+
+    private PostJobViewModel postJobViewModel;
     private EditText mCompanyNameEditText, mJobTitleEditText, mStreetAddressEditText, mCityAddressEditText, mProvinceAddressEditText, mStartSalaryRangeEditText, mSalaryEndRangeEditText,
             mJoiningEditTextDate, mApplicationDeadlineEditTextDate, mJobDescriptionEditText, mSkillsRequiredEditText,
             mQualificationRequiredEditText;
@@ -45,7 +67,18 @@ public class PostJobFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: has Started");
+
+        postJobViewModel = ViewModelProviders.of(this).get(PostJobViewModel.class);
         View root = inflater.inflate(R.layout.fragment_post_job, container, false);
+        final TextView textView = root.findViewById(R.id.letsGetStartedTextView);
+        postJobViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                textView.setText(s);
+            }
+        });
+
+
 
         mCompanyNameEditText = root.findViewById(R.id.companyNameEditText);
         mJobCategorySpinner = root.findViewById(R.id.jobCategorySpinner);
@@ -63,6 +96,9 @@ public class PostJobFragment extends Fragment {
         mJobDescriptionEditText = root.findViewById(R.id.jobDescriptionEditText);
         mSkillsRequiredEditText = root.findViewById(R.id.skillsRequiredEditText);
         mQualificationRequiredEditText = root.findViewById(R.id.qualificationRequiredEditText);
+
+
+
 
 
         //Submit Button.
@@ -90,7 +126,7 @@ public class PostJobFragment extends Fragment {
             }
         });
 
-        //joining date calender
+
         mJoiningEditTextDate.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -134,6 +170,8 @@ public class PostJobFragment extends Fragment {
                     language = "French";
                 } else if (mFrenchCheckBox.isChecked() && mEnglishCheckBox.isChecked()) {
                     language = "English & French";
+                } else{
+                    language = "English & French";
                 }
 
                 Double minSalary = Double.parseDouble(mStartSalaryRangeEditText.getText().toString());
@@ -147,13 +185,12 @@ public class PostJobFragment extends Fragment {
                 String qualificationRequired = mQualificationRequiredEditText.getText().toString();
 
 
-
-                if (!hasValidationErrors(companyName, jobCategory, jobTitle, streetAddress, city, province, language, minSalary,
+                if (!hasValidationErrors(companyName, jobCategory, jobTitle, streetAddress, city, province, language,  minSalary,
                         maxSalary, availability, joiningDate, applicationDeadline, jobDescription,
                         skillsRequired, qualificationRequired)) {
 
-                    PostJobPojo postJobPOJO = new PostJobPojo(companyName, jobCategory, jobTitle, streetAddress, city, province, language,
-                            minSalary, maxSalary, availability, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired, "active");
+                    PostJobPojo postJobPOJO = new PostJobPojo(companyName,jobCategory, jobTitle, streetAddress, city, province, language,
+                            minSalary, maxSalary, availability, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired);
 
                     db.collection("Jobs")
                             .add(postJobPOJO)
@@ -161,7 +198,6 @@ public class PostJobFragment extends Fragment {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
                                     Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
-                                    Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -190,7 +226,7 @@ public class PostJobFragment extends Fragment {
                     mCompanyNameEditText.requestFocus();
                     return true;
                 }
-                if (jobCategory.equals("Select the job category")) {
+                if(jobCategory.equalsIgnoreCase("Select the job category")){
                     mCompanyNameEditText.setError("Job category is required");
                     mCompanyNameEditText.requestFocus();
                 }
@@ -229,9 +265,9 @@ public class PostJobFragment extends Fragment {
                     mSalaryEndRangeEditText.requestFocus();
                     return true;
                 }
-                if (availability.equals("Select the availability requirement")) {
+                if(availability.equalsIgnoreCase("Select the availability requirement")){
                     mJoiningEditTextDate.setError("Availability is required");
-                    mJoiningEditTextDate.requestFocus();
+                            mJoiningEditTextDate.requestFocus();
                 }
                 if (joiningDate.isEmpty()) {
                     mJoiningEditTextDate.setError("joining date is required");
