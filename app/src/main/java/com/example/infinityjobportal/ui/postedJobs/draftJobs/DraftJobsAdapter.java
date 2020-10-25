@@ -31,7 +31,7 @@ public class DraftJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, Draf
     @Override
     public DraftJobsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d(TAG, "onCreateViewHolder: called");
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.active_jobs_row_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.draft_jobs_row_layout, parent, false);
         DraftJobsViewHolder viewHolder = new DraftJobsViewHolder(view);
         return viewHolder;
     }
@@ -42,6 +42,7 @@ public class DraftJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, Draf
         Log.d(TAG, "onBindViewHolder: called");
         draftJobsViewHolder.jobTitle.setText(postJobPOJO.getJobTitle());
         draftJobsViewHolder.companyName.setText(postJobPOJO.getCompanyName());
+        draftJobsViewHolder.companyAddress.setText(postJobPOJO.getCityAddress() + "," + postJobPOJO.getProvinceAddress());
         draftJobsViewHolder.viewDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,10 +50,10 @@ public class DraftJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, Draf
                 Navigation.findNavController(view).navigate(R.id.myJobsFragment);
             }
         });
-        draftJobsViewHolder.viewApplication.setOnClickListener(new View.OnClickListener() {
+        draftJobsViewHolder.completePost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: View Applications");
+                Log.d(TAG, "onClick: complete post");
                 Navigation.findNavController(view).navigate(R.id.homeFragment);
             }
         });
@@ -63,19 +64,18 @@ public class DraftJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, Draf
     public class DraftJobsViewHolder extends RecyclerView.ViewHolder {
 
         public TextView jobTitle, companyName, companyAddress, numberOfApplications;
-        public Button viewDetails, viewApplication;
+        public Button viewDetails, completePost;
         public ConstraintLayout constraintLayout; //used to attach onClickListener
 
         public DraftJobsViewHolder(@NonNull View itemView) {
             super(itemView);
-            Log.d(TAG, "ActiveJobsViewHolder: called");
+            Log.d(TAG, "DraftJobsViewHolder: called");
             jobTitle = itemView.findViewById(R.id.jobTitleDraftJobsTextView);
             companyName = itemView.findViewById(R.id.companyNameDraftJobsTextView);
             companyAddress = itemView.findViewById(R.id.companyAddressDraftJobsTextView);
 //          numberOfApplications = itemView.findViewById(R.id.numberOfApplcationsActiveJobsTextView);
             viewDetails = itemView.findViewById(R.id.jobDetailsDraftJobsButton);
-            viewApplication = itemView.findViewById(R.id.makeActiveJobsButton);
-            constraintLayout = itemView.findViewById(R.id.active_jobs_constraint_layout);
+            completePost = itemView.findViewById(R.id.completeDraftJobButton);
 
 
         }

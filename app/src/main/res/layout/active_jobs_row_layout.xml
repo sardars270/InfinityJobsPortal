@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@+id/companyAddressDraftJobsTextView" />
 
     <Button
-        android:id="@+id/makeActiveJobsButton"
+        android:id="@+id/viewApplicationsActiveJobButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -85,6 +85,6 @@
         android:fontFamily="@font/robotoregular"
         android:text="Number of application"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/makeActiveJobsButton"
-        app:layout_constraintEnd_toEndOf="@+id/makeActiveJobsButton" />
+        app:layout_constraintBottom_toTopOf="@+id/viewApplicationsActiveJobButton"
+        app:layout_constraintEnd_toEndOf="@+id/viewApplicationsActiveJobButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

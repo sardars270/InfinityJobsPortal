@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/edit_text_background"
-    android:id="@+id/active_jobs_constraint_layout">
+    android:id="@+id/closed_jobs_constraint_layout">
 
 
     <TextView
@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/companyNameDraftJobsTextView" />
 
     <Button
-        android:id="@+id/jobDetailsDraftJobsButton"
+        android:id="@+id/jobDetailsClosedJobsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -64,7 +64,7 @@
         app:layout_constraintTop_toBottomOf="@+id/companyAddressDraftJobsTextView" />
 
     <Button
-        android:id="@+id/makeActiveJobsButton"
+        android:id="@+id/makeActiveClosedJobsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -77,5 +77,5 @@
         android:textColor="#ffffff"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/jobDetailsDraftJobsButton" />
+        app:layout_constraintTop_toTopOf="@+id/jobDetailsClosedJobsButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

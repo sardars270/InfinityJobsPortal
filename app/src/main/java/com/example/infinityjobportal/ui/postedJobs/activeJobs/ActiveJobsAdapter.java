@@ -42,7 +42,7 @@ public class ActiveJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, Act
         Log.d(TAG, "onBindViewHolder: called");
         activeJobsViewHolder.jobTitle.setText(postJobPOJO.getJobTitle());
         activeJobsViewHolder.companyName.setText(postJobPOJO.getCompanyName());
-        activeJobsViewHolder.companyAddress.setText(postJobPOJO.getStreetAddress() + " " + postJobPOJO.getCityAddress() + " " + postJobPOJO.getProvinceAddress());
+        activeJobsViewHolder.companyAddress.setText(postJobPOJO.getCityAddress() + " " + postJobPOJO.getProvinceAddress());
 
         activeJobsViewHolder.viewDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,12 +56,6 @@ public class ActiveJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, Act
             public void onClick(View view) {
                 Log.d(TAG, "onClick: View Applications");
                 Navigation.findNavController(view).navigate(R.id.homeFragment);
-            }
-        });
-        activeJobsViewHolder.viewApplication.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
             }
         });
 
@@ -81,7 +75,7 @@ public class ActiveJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, Act
             companyAddress = itemView.findViewById(R.id.companyAddressDraftJobsTextView);
             numberOfApplications = itemView.findViewById(R.id.numberOfApplicationTextView);
             viewDetails = itemView.findViewById(R.id.jobDetailsDraftJobsButton);
-            viewApplication = itemView.findViewById(R.id.makeActiveJobsButton);
+            viewApplication = itemView.findViewById(R.id.viewApplicationsActiveJobButton);
             constraintLayout = itemView.findViewById(R.id.active_jobs_constraint_layout);
 
 

@@ -19,7 +19,6 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 public class ClosedJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, ClosedJobsAdapter.ClosedJobsViewHolder> {
     private static final String TAG = "ClosedJobsAdapter";
-    PostJobPojo postJobPOJO;
 
 
     public ClosedJobsAdapter(@NonNull FirestoreRecyclerOptions<PostJobPojo> options) {
@@ -42,6 +41,8 @@ public class ClosedJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, Clo
         Log.d(TAG, "onBindViewHolder: called");
         closedJobsViewHolder.jobTitle.setText(postJobPOJO.getJobTitle());
         closedJobsViewHolder.companyName.setText(postJobPOJO.getCompanyName());
+        closedJobsViewHolder.companyAddress.setText(postJobPOJO.getCityAddress() + "," + postJobPOJO.getProvinceAddress());
+
         closedJobsViewHolder.viewDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,7 +50,7 @@ public class ClosedJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, Clo
                 Navigation.findNavController(view).navigate(R.id.myJobsFragment);
             }
         });
-        closedJobsViewHolder.viewApplication.setOnClickListener(new View.OnClickListener() {
+        closedJobsViewHolder.makeActiveClosedJobs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: View Applications");
@@ -63,7 +64,7 @@ public class ClosedJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, Clo
     public class ClosedJobsViewHolder extends RecyclerView.ViewHolder {
 
         public TextView jobTitle, companyName, companyAddress, numberOfApplications;
-        public Button viewDetails, viewApplication;
+        public Button viewDetails, makeActiveClosedJobs;
         public ConstraintLayout constraintLayout; //used to attach onClickListener
 
         public ClosedJobsViewHolder(@NonNull View itemView) {
@@ -73,9 +74,9 @@ public class ClosedJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, Clo
             companyName = itemView.findViewById(R.id.companyNameDraftJobsTextView);
             companyAddress = itemView.findViewById(R.id.companyAddressDraftJobsTextView);
 //          numberOfApplications = itemView.findViewById(R.id.numberOfApplcationsActiveJobsTextView);
-            viewDetails = itemView.findViewById(R.id.jobDetailsDraftJobsButton);
-            viewApplication = itemView.findViewById(R.id.makeActiveJobsButton);
-            constraintLayout = itemView.findViewById(R.id.active_jobs_constraint_layout);
+            viewDetails = itemView.findViewById(R.id.jobDetailsClosedJobsButton);
+            makeActiveClosedJobs = itemView.findViewById(R.id.makeActiveClosedJobsButton);
+            constraintLayout = itemView.findViewById(R.id.closed_jobs_constraint_layout);
 
 
         }

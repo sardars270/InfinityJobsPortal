@@ -23,7 +23,7 @@ import com.google.firebase.firestore.Query;
 public class DraftJobsFragment extends Fragment {
 
 
-    private static final String TAG = "ActiveJobsFragment";
+    private static final String TAG = "DraftJobsFragment";
 
     RecyclerView recyclerView;
     View view;
