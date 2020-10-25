@@ -28,6 +28,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Jobs_search extends AppCompatActivity {
@@ -39,7 +40,7 @@ public class Jobs_search extends AppCompatActivity {
     FirebaseFirestore db;
     private List<PostJobPojo> exampleList;
     LinearLayout filtersContainer;
-    TextView filter;
+    TextView filter,msg;
     private Spinner jobCategorySpinner;
     Query q;
     String category;
@@ -53,49 +54,27 @@ public class Jobs_search extends AppCompatActivity {
         setContentView(R.layout.activity_jobs_search);
         back = findViewById(R.id.back);
         recjoblist=findViewById(R.id.recJobList);
-        filtersContainer = findViewById(R.id.filtersContainer);
+
         filter = findViewById(R.id.filter);
+        msg = findViewById(R.id.msg);
         jobCategorySpinner = findViewById(R.id.jobCategorySpinner);
         db= FirebaseFirestore.getInstance();
         collectionReference=db.collection("Jobs");
 
+        //msg.setVisibility(View.GONE);
         fillExampleList();
        // setUpRecyclerView();
 
 
+        //Toast.makeText(getApplicationContext(), (int) GlobalStorage.minSalary +" "+ (int) GlobalStorage.maxSalary,Toast.LENGTH_SHORT).show();
 
-/*
-        jobCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                fillExampleList();
-                setUpRecyclerView();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-*/
 
 
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-               // String t = String.valueOf(filtersContainer.getVisibility());
-
-
-                if(filtersContainer.getVisibility()== View.GONE)
-                {
-                    filtersContainer.setVisibility(View.VISIBLE);
-                }
-                else{
-                    filtersContainer.setVisibility(View.GONE);
-                }
-
-              //  filtersContainer.setVisibility(View.VISIBLE);
+              finish();
             }
         });
 
@@ -110,32 +89,19 @@ public class Jobs_search extends AppCompatActivity {
 
 
 
-
-
-/*
-        if(GlobalStorage.language.equals("English") || GlobalStorage.language.equals("French") || GlobalStorage.language.equals("English & French"))
-        {
-            count++;
-
-        }//language id end
-
-*/
-      //  collectionReference.orderBy("language").startAt(GlobalStorage.language).endAt(GlobalStorage.language+'\uf8ff')
-
-
         if (!GlobalStorage.language.equals("") && !GlobalStorage.jobCatogory.equals("Any")) {// botth active
-            query=collectionReference.whereEqualTo("language", GlobalStorage.language).whereEqualTo("jobCategory",GlobalStorage.jobCatogory);
+            query=collectionReference.whereEqualTo("language", GlobalStorage.language).whereEqualTo("jobCategory",GlobalStorage.jobCatogory);//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
 
         } else if (!GlobalStorage.language.equals("") && GlobalStorage.jobCatogory.equals("Any")) {// only language active && category disabled {
-            query=collectionReference.whereEqualTo("language", GlobalStorage.language);
+            query=collectionReference.whereEqualTo("language", GlobalStorage.language);//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
         }
         else if (GlobalStorage.language.equals("") && !GlobalStorage.jobCatogory.equals("Any")) {// only language disabled && category active {
-            query=collectionReference.whereEqualTo("jobCategory",GlobalStorage.jobCatogory);
+            query=collectionReference.whereEqualTo("jobCategory",GlobalStorage.jobCatogory);//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
         }else {
-          query=collectionReference;
-        }
+         query=collectionReference;
+           //query=collectionReference.whereEqualTo("language", "English");//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
 
-          // .orderBy("jobCategory").startAt(category).endAt(category + '\uf8ff')
+        }
                   query .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                 @Override
                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -154,6 +120,7 @@ public class Jobs_search extends AppCompatActivity {
 
                             exampleList.add(p);
                         }
+
                         RecyclerView recyclerView = findViewById(R.id.recJobList);
                         recyclerView.setHasFixedSize(true);
                         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(Jobs_search.this);

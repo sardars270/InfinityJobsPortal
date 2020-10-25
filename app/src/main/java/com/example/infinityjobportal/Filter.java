@@ -33,16 +33,20 @@ public class Filter extends AppCompatActivity {
 
 
         dollarPicker.setMinValue(13);
-        dollarPicker.setMaxValue(50);
+        dollarPicker.setMaxValue(99);
 
-        centsPicker.setMinValue(0);
-        centsPicker.setMaxValue(99);
+        centsPicker.setMinValue(14);
+        centsPicker.setMaxValue(100);
+        centsPicker.setValue(100);
 
 
 
     }
 
     public void applyFilter(View view) {
+        GlobalStorage.minSalary=13;
+        GlobalStorage.maxSalary=100;
+
         GlobalStorage.language="";
         GlobalStorage.jobCatogory = jobCategorySpinner.getSelectedItem().toString();
 
@@ -55,6 +59,15 @@ public class Filter extends AppCompatActivity {
         }else{
             GlobalStorage.language = "";
         }
+
+       GlobalStorage.minSalary = Integer.valueOf(dollarPicker.getValue());
+        GlobalStorage.maxSalary = Integer.valueOf(centsPicker.getValue());
+
+
+
+
+
+
 
         startActivity(new Intent(getApplicationContext(),Jobs_search.class));
     }
