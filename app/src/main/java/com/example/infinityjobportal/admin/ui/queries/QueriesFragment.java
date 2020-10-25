@@ -71,14 +71,53 @@ db2=FirebaseFirestore.getInstance();
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
                         if (!queryDocumentSnapshots.isEmpty()) {
+
+
                             List<DocumentSnapshot> list1 = queryDocumentSnapshots.getDocuments();
+
                             for (DocumentSnapshot d : list1) {
+
+
                                 Query p = d.toObject(Query.class);
                                 assert p != null;
+                                //Toast.makeText(getContext(),d.getString(s),Toast.LENGTH_SHORT).show();
+                               // p.setFirstName(d.getString("firstName"));
+                              //  Log.d("log_userid",p.getUserid());
                                 p.setEditSubject(d.getString("editSubject"));
                                 p.setUserid(d.getString("userid"));
-                                 list.add(p);
+                                s= p.getUserid();
+                                Log.d("log_s",s);
+
+
+
+
+                                // p.setCity(d.getString("city"));
+        //                        Toast.makeText(getContext(),d.getString(s),Toast.LENGTH_SHORT).show();
+                               // p.setUserProfilePic(d.getString("userProfilePic"));
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222
+                                DocumentReference docRef = db.collection("users").document(s);
+                                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            DocumentSnapshot document = task.getResult();
+                                            if (document.exists()) {
+
+                                                User user = document.toObject(User.class);
+
+                                                name = user.getFirstName().substring(0, 1).toUpperCase() + user.getFirstName().substring(1) + " " + user.getLastName().substring(0, 1).toUpperCase() + user.getLastName().substring(1);
+                                                //  number.setText(user.getNumber());
+
+                                           //  Toast.makeText(getContext(),name,Toast.LENGTH_LONG).show();
+                                            }}
+                                    }
+                                });
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222
+                                p.setFirstName(name);
+                                list.add(p);
                             }
                             InteAdapter.notifyDataSetChanged();
                         }
