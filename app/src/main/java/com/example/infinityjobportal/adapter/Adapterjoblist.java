@@ -48,7 +48,7 @@ public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHold
         holder.title.setText(pj.getJobTitle());
         holder.at.setText(pj.getCompanyName());
         holder.location.setText(pj.getCityAddress());
-//        holder.id.setText(pj.getId());
+        holder.id.setText(pj.getId());
 
 
         holder.lout.setOnClickListener(new View.OnClickListener() {
