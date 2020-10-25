@@ -1,6 +1,8 @@
 package com.example.infinityjobportal.ui.postJob;
 
 import android.app.DatePickerDialog;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +23,7 @@ import androidx.navigation.Navigation;
 
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.PostJobPojo;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
@@ -28,15 +31,19 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ServerTimestamp;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class PostJobFragment extends Fragment {
     private static final String TAG = "PostJobFragment";
 
     DatePickerDialog datePickerDialog;
+    double latitude;
+    double longitude;
 
     private EditText mCompanyNameEditText, mJobTitleEditText, mStreetAddressEditText, mCityAddressEditText, mProvinceAddressEditText, mStartSalaryRangeEditText, mSalaryEndRangeEditText,
             mJoiningEditTextDate, mApplicationDeadlineEditTextDate, mJobDescriptionEditText, mSkillsRequiredEditText,
@@ -154,13 +161,34 @@ public class PostJobFragment extends Fragment {
                 Date todayDate = new Date();
                 String date = currentDate.format(todayDate);
 
+                String Add= mStreetAddressEditText.getText().toString()+","+ mCityAddressEditText.getText().toString();
+                Toast.makeText(getContext(),"location"+Add,Toast.LENGTH_LONG).show();
+                List<Address> addressList = null;
+                if (Add != null || !Add.equals("")) {
+                    Geocoder geocoder = new Geocoder(getContext());
+                    try {
+                        addressList = geocoder.getFromLocationName(Add, 1);
+                        final Address address = addressList.get(0);
+                        final LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                        latitude=latLng.latitude;
+                        longitude=latLng.longitude;
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                final Address address = addressList.get(0);
+                final LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                latitude=address.getLatitude();
+                longitude=address.getLongitude();
+
 
                 if (!hasValidationErrors(companyName, jobCategory, jobTitle, streetAddress, city, province, language, minSalary,
                         maxSalary, availability, joiningDate, applicationDeadline, jobDescription,
                         skillsRequired, qualificationRequired)) {
 
                     PostJobPojo postJobPOJO = new PostJobPojo(companyName, jobCategory, jobTitle, streetAddress, city, province, language,
-                            minSalary, maxSalary, availability, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired,"active", date);
+                            minSalary, maxSalary, availability, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired,"active", date, latitude, longitude);
 
                     db.collection("Jobs")
                             .add(postJobPOJO)
@@ -303,7 +331,7 @@ public class PostJobFragment extends Fragment {
 
 
                 PostJobPojo postJobPOJO = new PostJobPojo(companyName, jobCategory, jobTitle, streetAddress, city, province, language,
-                        minSalary, maxSalary, availability, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired,"draft", date);
+                        minSalary, maxSalary, availability, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired,"draft", date, latitude, longitude);
 
                 db.collection("Jobs")
                         .add(postJobPOJO)
