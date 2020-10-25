@@ -24,9 +24,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.infinityjobportal.R;
+import com.example.infinityjobportal.adapter.adapterAppliedJobs;
 import com.example.infinityjobportal.adapter.adapterquerylist;
 import com.example.infinityjobportal.adapter.adapteruserlist;
 import com.example.infinityjobportal.admin.ViewQuery;
+import com.example.infinityjobportal.model.PostJobPojo;
 import com.example.infinityjobportal.model.Query;
 import com.example.infinityjobportal.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -47,6 +49,7 @@ import java.util.List;
 public class QueriesFragment extends Fragment {
     public String a="";
     public String s="", name;
+    public String b="";
     Button bt_add;
     // FirebaseFirestore db;
     StorageReference mstorageRef;
@@ -56,7 +59,9 @@ public class QueriesFragment extends Fragment {
     Context c;
     public FirebaseFirestore db = FirebaseFirestore.getInstance();
     public FirebaseFirestore db2 = FirebaseFirestore.getInstance();
-    ArrayList<Query> list=new ArrayList<>();
+    ArrayList<String > l = new ArrayList<String>();
+    ArrayList<Query> lq=new ArrayList<>();
+    ArrayList<Query> lq2=new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -65,8 +70,11 @@ public class QueriesFragment extends Fragment {
         recy = root.findViewById(R.id.recy);
         fbauth=FirebaseAuth.getInstance();
         ///////////////////////////fetch data for query
-db2=FirebaseFirestore.getInstance();
         db = FirebaseFirestore.getInstance();
+        ///////////get applied jobs by username
+        //String k = String.valueOf(fbauth.getCurrentUser().getEmail());
+
+
         db.collection("Query").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -79,55 +87,109 @@ db2=FirebaseFirestore.getInstance();
 
                             for (DocumentSnapshot d : list1) {
 
-
                                 Query p = d.toObject(Query.class);
                                 assert p != null;
                                 //Toast.makeText(getContext(),d.getString(s),Toast.LENGTH_SHORT).show();
-                               // p.setFirstName(d.getString("firstName"));
-                              //  Log.d("log_userid",p.getUserid());
+                                // p.setFirstName(d.getString("firstName"));
+                                //  Log.d("log_userid",p.getUserid());
                                 p.setEditSubject(d.getString("editSubject"));
                                 p.setUserid(d.getString("userid"));
-                                s= p.getUserid();
-                                Log.d("log_s",s);
-
-
-
-
-                                // p.setCity(d.getString("city"));
-        //                        Toast.makeText(getContext(),d.getString(s),Toast.LENGTH_SHORT).show();
-                               // p.setUserProfilePic(d.getString("userProfilePic"));
-
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222
-                                DocumentReference docRef = db.collection("users").document(s);
-                                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            DocumentSnapshot document = task.getResult();
-                                            if (document.exists()) {
-
-                                                User user = document.toObject(User.class);
-
-                                                name = user.getFirstName().substring(0, 1).toUpperCase() + user.getFirstName().substring(1) + " " + user.getLastName().substring(0, 1).toUpperCase() + user.getLastName().substring(1);
-                                                //  number.setText(user.getNumber());
-
-                                           //  Toast.makeText(getContext(),name,Toast.LENGTH_LONG).show();
-                                            }}
-                                    }
-                                });
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@222
-                                p.setFirstName(name);
-                                list.add(p);
+                               lq.add(p);
+                                //Toast.makeText(getApplicationContext(),d.getString("uid"),Toast.LENGTH_SHORT).show();
                             }
-                            InteAdapter.notifyDataSetChanged();
+
+                            sdata();
+
+
                         }
                     }
                 });
-        InteAdapter =new adapterquerylist(list, getContext(), "af");
 
-        recy.setHasFixedSize(true);
-        recy.setLayoutManager(new LinearLayoutManager(c,RecyclerView.VERTICAL,false));
-        recy.setAdapter(InteAdapter);
         return root;
     }
-}
+
+    public void sdata(){
+        for (int i = 0; i < lq.size(); i++) {
+            Query  bq =lq.get(i);
+            b= bq.getEditSubject();
+            db.collection("users").whereEqualTo("email", bq.getUserid().toString()).get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                            if (!queryDocumentSnapshots.isEmpty()) {
+
+
+                                List<DocumentSnapshot> list1 = queryDocumentSnapshots.getDocuments();
+
+                                for (DocumentSnapshot d : list1) {
+
+                                    Query  user  = d.toObject(Query.class);
+
+                                    assert user != null;
+                                    user.setFirstName(String.valueOf(d.getString("firstName")+" "+ d.getString("lastName")));
+                                    user.setEditSubject(b);
+                                    lq2.add(user);
+                                    //Toast.makeText(getApplicationContext(),d.getString("uid"),Toast.LENGTH_SHORT).show();
+                                }
+                               // InteAdapter.notifyDataSetChanged();
+                                InteAdapter = new adapterquerylist( getContext(),lq2);
+
+                                recy.setHasFixedSize(true);
+                                recy.setLayoutManager(new LinearLayoutManager(c, RecyclerView.VERTICAL, false));
+                                recy.setAdapter(InteAdapter);
+
+
+
+
+                            }
+                        }
+                    });
+
+
+        }
+
+    }
+    ///////////////////
+    public void showdata() {
+        for (int i = 0; i < lq.size(); i++) {
+
+         Query  bq =lq.get(i);
+           b= bq.getEditSubject();
+            DocumentReference docRef = db.collection("users").document(bq.getUserid().toString());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                         if (document.exists()) {
+
+                            Query  user  = document.toObject(Query.class);
+                            user.setFirstName(String.valueOf(document.getString("firstName")+" "+ document.getString("lastName")));
+                           user.setEditSubject(b);
+
+
+                            lq2.add(user);
+                            //  Toast.makeText(getContext(),user.getJobTitle(),Toast.LENGTH_SHORT).show();
+                            InteAdapter.notifyDataSetChanged();
+                            InteAdapter = new adapterquerylist( getContext(),lq2);
+
+                            recy.setHasFixedSize(true);
+                            recy.setLayoutManager(new LinearLayoutManager(c, RecyclerView.VERTICAL, false));
+                            recy.setAdapter(InteAdapter);
+
+                        } else {
+
+                        }
+                    } else {
+
+                    }
+                }
+            });
+
+
+
+            // Toast.makeText(getApplicationContext(),l.get(i),Toast.LENGTH_SHORT).show();
+
+
+        }}}

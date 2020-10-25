@@ -1,6 +1,7 @@
 package com.example.infinityjobportal.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infinityjobportal.JobDetails;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.PostJobPojo;
 import com.example.infinityjobportal.model.User;
@@ -48,14 +50,17 @@ public class adapterAppliedJobs extends RecyclerView.Adapter<adapterAppliedJobs.
         holder.at.setText(pj.getCompanyName());
         holder.location.setText(pj.getCityAddress());
         holder.id.setText(pj.getId());
+        holder.faltu_st.setText(pj.getProvinceAddress());
 
 
         holder.lout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Intent i = new Intent(context, JobDetails.class);
-                // i.putExtra("id", holder.id.getText().toString());
-                //  context.startActivity(i);
+                 Intent i = new Intent(context, JobDetails.class);
+              String s =  holder.faltu_st.getText().toString();
+                 i.putExtra("id", holder.id.getText().toString());
+                 i.putExtra("status",s );
+                 context.startActivity(i);
             }
         });
 
@@ -72,7 +77,7 @@ public class adapterAppliedJobs extends RecyclerView.Adapter<adapterAppliedJobs.
     {
         CardView lout;
 
-        TextView title, at, location,id;
+        TextView title, at, location,id, faltu_st;
         ImageView saveJob;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -84,6 +89,8 @@ public class adapterAppliedJobs extends RecyclerView.Adapter<adapterAppliedJobs.
             lout=itemView.findViewById(R.id.lout);
             saveJob  = itemView.findViewById(R.id.saveJob);
             id  = itemView.findViewById(R.id.id);
+            faltu_st  = itemView.findViewById(R.id.faltu_st);
+
 
         }
     }

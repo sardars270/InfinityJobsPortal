@@ -108,8 +108,10 @@ public class SaveJobs extends Fragment {
                             PostJobPojo user = document.toObject(PostJobPojo.class);
                             user.setJobTitle(document.getString("jobTitle"));
                             user.setJobCategory(document.getString("jobCategory"));
-                            user.setCityAddress(document.getString("cityAddress"));
+                            user.setCityAddress(String.valueOf(document.getString("cityAddress")+", "+document.getString("provinceAddress")));
                             user.setId(String.valueOf(b));
+                            user.setProvinceAddress("save");
+
                             list2.add(user);
                             //  Toast.makeText(getContext(),user.getJobTitle(),Toast.LENGTH_SHORT).show();
                             //InteAdapter.notifyDataSetChanged();
