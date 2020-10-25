@@ -29,7 +29,7 @@ public class ClosedJobsFragment extends Fragment {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference jobsReference = db.collection("Jobs");
 
-    private ActiveJobsAdapter activeJobsAdapter;
+    private ClosedJobsAdapter closedJobsAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,31 +45,31 @@ public class ClosedJobsFragment extends Fragment {
         Log.d(TAG, "setUpRecyclerView: called");
 
         //Query
-        Query query = jobsReference.whereEqualTo("status","active");
+        Query query = jobsReference.whereEqualTo("status","closed");
 
         //Recycler Options
         FirestoreRecyclerOptions<PostJobPojo> options = new FirestoreRecyclerOptions.Builder<PostJobPojo>()
                 .setQuery(query, PostJobPojo.class)
                 .build();
-        activeJobsAdapter = new ActiveJobsAdapter(options);
+        closedJobsAdapter = new ClosedJobsAdapter(options);
 
         recyclerView = view.findViewById(R.id.closed_jobs_recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(activeJobsAdapter);
+        recyclerView.setAdapter(closedJobsAdapter);
 
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        activeJobsAdapter.startListening();
+        closedJobsAdapter.startListening();
 
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        activeJobsAdapter.stopListening();
+        closedJobsAdapter.stopListening();
     }
 }

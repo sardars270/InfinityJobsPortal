@@ -42,6 +42,8 @@ public class ActiveJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, Act
         Log.d(TAG, "onBindViewHolder: called");
         activeJobsViewHolder.jobTitle.setText(postJobPOJO.getJobTitle());
         activeJobsViewHolder.companyName.setText(postJobPOJO.getCompanyName());
+        activeJobsViewHolder.companyAddress.setText(postJobPOJO.getStreetAddress() + " " + postJobPOJO.getCityAddress() + " " + postJobPOJO.getProvinceAddress());
+
         activeJobsViewHolder.viewDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,7 +81,7 @@ public class ActiveJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, Act
             companyAddress = itemView.findViewById(R.id.companyAddressDraftJobsTextView);
             numberOfApplications = itemView.findViewById(R.id.numberOfApplicationTextView);
             viewDetails = itemView.findViewById(R.id.jobDetailsDraftJobsButton);
-            viewApplication = itemView.findViewById(R.id.completeJobsButton);
+            viewApplication = itemView.findViewById(R.id.makeActiveJobsButton);
             constraintLayout = itemView.findViewById(R.id.active_jobs_constraint_layout);
 
 

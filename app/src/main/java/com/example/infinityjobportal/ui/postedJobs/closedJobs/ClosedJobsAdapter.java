@@ -17,7 +17,7 @@ import com.example.infinityjobportal.model.PostJobPojo;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-public class ClosedJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, ClosedJobsAdapter.ActiveJobsViewHolder> {
+public class ClosedJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, ClosedJobsAdapter.ClosedJobsViewHolder> {
     private static final String TAG = "ClosedJobsAdapter";
     PostJobPojo postJobPOJO;
 
@@ -29,27 +29,27 @@ public class ClosedJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, Clo
 
     @NonNull
     @Override
-    public ActiveJobsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ClosedJobsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d(TAG, "onCreateViewHolder: called");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.closed_jobs_row_layout, parent, false);
-        ActiveJobsViewHolder viewHolder = new ActiveJobsViewHolder(view);
+        ClosedJobsViewHolder viewHolder = new ClosedJobsViewHolder(view);
         return viewHolder;
     }
 
 
     @Override
-    protected void onBindViewHolder(@NonNull ActiveJobsViewHolder activeJobsViewHolder, int i, @NonNull PostJobPojo postJobPOJO) {
+    protected void onBindViewHolder(@NonNull ClosedJobsViewHolder closedJobsViewHolder, int i, @NonNull PostJobPojo postJobPOJO) {
         Log.d(TAG, "onBindViewHolder: called");
-        activeJobsViewHolder.jobTitle.setText(postJobPOJO.getJobTitle());
-        activeJobsViewHolder.companyName.setText(postJobPOJO.getCompanyName());
-        activeJobsViewHolder.viewDetails.setOnClickListener(new View.OnClickListener() {
+        closedJobsViewHolder.jobTitle.setText(postJobPOJO.getJobTitle());
+        closedJobsViewHolder.companyName.setText(postJobPOJO.getCompanyName());
+        closedJobsViewHolder.viewDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: View Jobs");
                 Navigation.findNavController(view).navigate(R.id.myJobsFragment);
             }
         });
-        activeJobsViewHolder.viewApplication.setOnClickListener(new View.OnClickListener() {
+        closedJobsViewHolder.viewApplication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: View Applications");
@@ -60,13 +60,13 @@ public class ClosedJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, Clo
 
     }
 
-    public class ActiveJobsViewHolder extends RecyclerView.ViewHolder {
+    public class ClosedJobsViewHolder extends RecyclerView.ViewHolder {
 
         public TextView jobTitle, companyName, companyAddress, numberOfApplications;
         public Button viewDetails, viewApplication;
         public ConstraintLayout constraintLayout; //used to attach onClickListener
 
-        public ActiveJobsViewHolder(@NonNull View itemView) {
+        public ClosedJobsViewHolder(@NonNull View itemView) {
             super(itemView);
             Log.d(TAG, "ActiveJobsViewHolder: called");
             jobTitle = itemView.findViewById(R.id.jobTitleDraftJobsTextView);
@@ -74,7 +74,7 @@ public class ClosedJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, Clo
             companyAddress = itemView.findViewById(R.id.companyAddressDraftJobsTextView);
 //          numberOfApplications = itemView.findViewById(R.id.numberOfApplcationsActiveJobsTextView);
             viewDetails = itemView.findViewById(R.id.jobDetailsDraftJobsButton);
-            viewApplication = itemView.findViewById(R.id.completeJobsButton);
+            viewApplication = itemView.findViewById(R.id.makeActiveJobsButton);
             constraintLayout = itemView.findViewById(R.id.active_jobs_constraint_layout);
 
 

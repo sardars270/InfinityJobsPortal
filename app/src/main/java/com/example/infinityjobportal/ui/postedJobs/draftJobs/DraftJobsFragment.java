@@ -31,7 +31,7 @@ public class DraftJobsFragment extends Fragment {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference jobsReference = db.collection("Jobs");
 
-    private ActiveJobsAdapter activeJobsAdapter;
+    private DraftJobsAdapter draftJobsAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,25 +53,25 @@ public class DraftJobsFragment extends Fragment {
         FirestoreRecyclerOptions<PostJobPojo> options = new FirestoreRecyclerOptions.Builder<PostJobPojo>()
                 .setQuery(query, PostJobPojo.class)
                 .build();
-        activeJobsAdapter = new ActiveJobsAdapter(options);
+        draftJobsAdapter = new DraftJobsAdapter(options);
 
         recyclerView = view.findViewById(R.id.draft_jobs_recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(activeJobsAdapter);
+        recyclerView.setAdapter(draftJobsAdapter);
 
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        activeJobsAdapter.startListening();
+        draftJobsAdapter.startListening();
 
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        activeJobsAdapter.stopListening();
+        draftJobsAdapter.stopListening();
     }
 }
