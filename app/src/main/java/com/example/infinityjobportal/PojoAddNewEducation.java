@@ -6,10 +6,10 @@ import com.google.firebase.firestore.Exclude;
 
 import java.io.Serializable;
 
-public class pojoAddNewEducation implements Serializable {
+public class PojoAddNewEducation implements Serializable {
 
-        @Exclude
-        private String id;
+    @Exclude
+    private String id;
 
     private String school;
     private String degree;
@@ -19,8 +19,9 @@ public class pojoAddNewEducation implements Serializable {
     private String grade;
     private String extraActs;
     private String description;
-private  String userid;
-    public pojoAddNewEducation(String school, String degree, String fieldOfStudy, String startDate, String endDate, String grade, String extraActs, String description,String userid) {
+    private String userid;
+
+    public PojoAddNewEducation(String school, String degree, String fieldOfStudy, String startDate, String endDate, String grade, String extraActs, String description, String userid) {
         this.school = school;
         this.degree = degree;
         this.fieldOfStudy = fieldOfStudy;
@@ -29,11 +30,11 @@ private  String userid;
         this.grade = grade;
         this.extraActs = extraActs;
         this.description = description;
-        this.userid=userid;
+        this.userid = userid;
     }
 
 
-    public pojoAddNewEducation(String school, String degree, String fieldOfStudy, String startDate, String endDate, String grade, String extraActs, String description) {
+    public PojoAddNewEducation(String school, String degree, String fieldOfStudy, String startDate, String endDate, String grade, String extraActs, String description) {
         this.school = school;
         this.degree = degree;
         this.fieldOfStudy = fieldOfStudy;
@@ -43,8 +44,8 @@ private  String userid;
         this.extraActs = extraActs;
         this.description = description;
     }
-    public pojoAddNewEducation()
-    {
+
+    public PojoAddNewEducation() {
 
     }
 
@@ -119,6 +120,7 @@ private  String userid;
     public void setdescription(String description) {
         this.description = description;
     }
+
     public String getUserid() {
         return userid;
     }
