@@ -102,7 +102,7 @@ public class Jobs_search extends AppCompatActivity {
            //query=collectionReference.whereEqualTo("language", "English");//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
 
         }
-                  query .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                  query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                 @Override
                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 

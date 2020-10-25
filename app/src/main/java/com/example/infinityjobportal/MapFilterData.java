@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
-import com.example.infinityjobportal.model.PostJobPOJO;
+import com.example.infinityjobportal.model.*;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -20,7 +20,7 @@ public class MapFilterData extends AppCompatActivity {
     int i;
     private MapFilterDataAdapter adapter;
     RecyclerView recyclerViewMapFilteredJobs;
-    private ArrayList<PostJobPOJO> MapJobsList;
+    private ArrayList<PostJobPojo> MapJobsList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +38,7 @@ public class MapFilterData extends AppCompatActivity {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
 
-                            PostJobPOJO postJobPOJO= document.toObject(PostJobPOJO.class);
+                      PostJobPojo postJobPOJO= document.toObject(PostJobPojo.class);
 
 
                             MapJobsList.add(postJobPOJO);

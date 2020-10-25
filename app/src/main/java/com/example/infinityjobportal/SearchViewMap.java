@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.solver.widgets.Rectangle;
+import androidx.navigation.Navigation;
+
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,13 +19,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.infinityjobportal.R;
-import com.example.infinityjobportal.model.PostJobPOJO;
+import com.example.infinityjobportal.model.*;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -53,6 +56,7 @@ import java.util.List;
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class SearchViewMap extends AppCompatActivity implements OnMapReadyCallback {
     GoogleMap map;
+    ImageView  back;
     SupportMapFragment mapFragment;
     SearchView searchView;
 
@@ -77,14 +81,23 @@ public class SearchViewMap extends AppCompatActivity implements OnMapReadyCallba
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_view_map);
+
         searchView = findViewById(R.id.searchViewMap);
         seekRadius = (SeekBar) findViewById(R.id.seekRadius);
         textSeek = findViewById(R.id.textSeek);
-
+        back = findViewById(R.id.back);
        FloatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
+
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               finish();
+            }
+        });
 
         seekRadius.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -142,7 +155,7 @@ public class SearchViewMap extends AppCompatActivity implements OnMapReadyCallba
                                     CircleOptions circleOptions1 = new CircleOptions().center(latLng).radius(200).fillColor(Color.RED);
                                     map.addCircle(circleOptions1);
 
-                                    PostJobPOJO p = d.toObject(PostJobPOJO.class);
+                                    PostJobPojo p = d.toObject(PostJobPojo.class);
                                     street = p.getStreetAddress();
                                    streetList.add(street);
 

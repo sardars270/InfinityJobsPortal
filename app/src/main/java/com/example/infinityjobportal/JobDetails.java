@@ -67,7 +67,7 @@ public class JobDetails extends AppCompatActivity {
          id = getIntent().getStringExtra("id");
         Toast.makeText(getApplicationContext(),id,Toast.LENGTH_SHORT).show();
 
-        loadInfo();
+      //  loadInfo();
 
 
 

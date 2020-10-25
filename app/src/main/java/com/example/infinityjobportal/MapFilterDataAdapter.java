@@ -1,6 +1,7 @@
 package com.example.infinityjobportal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.infinityjobportal.model.PostJobPOJO;
+
+import com.example.infinityjobportal.model.PostJobPojo;
+
 import java.util.ArrayList;
 public class MapFilterDataAdapter extends RecyclerView.Adapter<MapFilterDataAdapter.MapFilterViewHolder> {
     private Context context;
-    private ArrayList<PostJobPOJO>  MapJobsList;
-    public MapFilterDataAdapter(Context context, ArrayList<PostJobPOJO>  MapJobsList) {
+    private ArrayList<PostJobPojo>  MapJobsList;
+    public MapFilterDataAdapter(Context context, ArrayList<PostJobPojo> MapJobsList) {
         this.context = context;
         this.MapJobsList = MapJobsList;
     }
@@ -25,14 +28,24 @@ public class MapFilterDataAdapter extends RecyclerView.Adapter<MapFilterDataAdap
 }
 
     @Override
-    public void onBindViewHolder(@NonNull MapFilterViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MapFilterViewHolder holder, int position) {
 
 
-        final PostJobPOJO postJobPOJO = MapJobsList.get(position);
+        final PostJobPojo postJobPOJO = MapJobsList.get(position);
 
                     holder.title.setText(postJobPOJO.getJobTitle());
                     holder.company.setText(postJobPOJO.getCompanyName());
                     holder.location.setText(postJobPOJO.getCityAddress());
+                    holder.id.setText(postJobPOJO.getId());
+
+        holder.lout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, JobDetails.class);
+                i.putExtra("id", holder.id.getText().toString());
+                context.startActivity(i);
+            }
+        });
                 }
 
 

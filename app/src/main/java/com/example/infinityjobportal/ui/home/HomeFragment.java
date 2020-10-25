@@ -21,7 +21,7 @@ import com.example.infinityjobportal.ClientLogin;
 import com.example.infinityjobportal.Jobs_search;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.adapter.Adapterjoblist;
-import com.example.infinityjobportal.model.PostJobPojo;
+import com.example.infinityjobportal.model.*;
 import com.example.infinityjobportal.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

@@ -9,6 +9,9 @@ public class Query {
     String firstName;
     String lastName;
 
+    public Query(String editSubject, String feedbackQuery, String userId) {
+    }
+
     public String getUserProfilePic() {
         return userProfilePic;
     }

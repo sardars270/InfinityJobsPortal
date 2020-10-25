@@ -1,6 +1,8 @@
 package com.example.infinityjobportal.ui.postJob;
 
 import android.app.DatePickerDialog;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +15,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,17 +27,22 @@ import androidx.navigation.Navigation;
 
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.PostJobPojo;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
 
 public class PostJobFragment extends Fragment {
     private static final String TAG = "PostJobFragment";
 
     DatePickerDialog datePickerDialog;
+    double latitude;
+    double longitude;
 
     //Firestore Keys
     private static final String COMPANY_NAME = "Company Name";
@@ -162,6 +170,28 @@ public class PostJobFragment extends Fragment {
                 String streetAddress = mStreetAddressEditText.getText().toString();
                 String city = mCityAddressEditText.getText().toString();
                 String province = mProvinceAddressEditText.getText().toString();
+                String Add= mStreetAddressEditText.getText().toString()+","+ mCityAddressEditText.getText().toString();
+                Toast.makeText(getContext(),"location"+Add,Toast.LENGTH_LONG).show();
+                List<Address> addressList = null;
+                if (Add != null || !Add.equals("")) {
+                    Geocoder geocoder = new Geocoder(getContext());
+                    try {
+                        addressList = geocoder.getFromLocationName(Add, 1);
+                        final Address address = addressList.get(0);
+                        final LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                        latitude=latLng.latitude;
+                        longitude=latLng.longitude;
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                final Address address = addressList.get(0);
+                final LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                latitude=address.getLatitude();
+                longitude=address.getLongitude();
+
+
 
                 String language = "";
                 if (mEnglishCheckBox.isChecked()) {
@@ -190,7 +220,7 @@ public class PostJobFragment extends Fragment {
                         skillsRequired, qualificationRequired)) {
 
                     PostJobPojo postJobPOJO = new PostJobPojo(companyName,jobCategory, jobTitle, streetAddress, city, province, language,
-                            minSalary, maxSalary, availability, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired);
+                            minSalary, maxSalary, availability, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired,latitude,longitude);
 
                     db.collection("Jobs")
                             .add(postJobPOJO)

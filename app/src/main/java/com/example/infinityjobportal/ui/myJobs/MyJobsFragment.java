@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.infinityjobportal.R;
-import com.example.infinityjobportal.adapter.myJobsPagerAdapter;
+
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -26,7 +26,7 @@ public class MyJobsFragment extends  Fragment {
     TabLayout tabLayout;
     TabItem activeTab, closedTab, draftTab;
     ViewPager2 viewPager2;
-    myJobsPagerAdapter myJobsPagerAdapter;
+   // myJobsPagerAdapter myJobsPagerAdapter;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -36,9 +36,9 @@ public class MyJobsFragment extends  Fragment {
 
         tabLayout = root.findViewById(R.id.myJobsTabBar);
 
-        myJobsPagerAdapter = new myJobsPagerAdapter(this);
+      //  myJobsPagerAdapter = new myJobsPagerAdapter(this);
         viewPager2 = root.findViewById(R.id.viewPager_myjobs);
-         viewPager2.setAdapter(myJobsPagerAdapter);
+       //  viewPager2.setAdapter(myJobsPagerAdapter);
 
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
