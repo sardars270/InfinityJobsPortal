@@ -1,38 +1,21 @@
 package com.example.infinityjobportal.admin.ui.queries;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.infinityjobportal.R;
-import com.example.infinityjobportal.adapter.adapterAppliedJobs;
 import com.example.infinityjobportal.adapter.adapterquerylist;
-import com.example.infinityjobportal.adapter.adapteruserlist;
-import com.example.infinityjobportal.admin.ViewQuery;
-import com.example.infinityjobportal.model.PostJobPojo;
 import com.example.infinityjobportal.model.Query;
-import com.example.infinityjobportal.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,7 +23,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
@@ -98,7 +80,7 @@ public class QueriesFragment extends Fragment {
                                 //Toast.makeText(getApplicationContext(),d.getString("uid"),Toast.LENGTH_SHORT).show();
                             }
 
-                            sdata();
+                            gdata();
 
 
                         }
@@ -108,7 +90,8 @@ public class QueriesFragment extends Fragment {
         return root;
     }
 
-    public void sdata(){
+    public void gdata(){
+        //hash
         for (int i = 0; i < lq.size(); i++) {
             Query  bq =lq.get(i);
             b= bq.getEditSubject();
