@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,49 +17,82 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.infinityjobportal.R;
+import com.example.infinityjobportal.model.InterestsModel;
 import com.example.infinityjobportal.model.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class adapteruserlist extends RecyclerView.Adapter<adapteruserlist.ViewHolder>{
-    Context context;
-    List<User> ar1;
-    public adapteruserlist(Context context, List<User> ar1) {
-
+    public Context context;
+    private ArrayList<User> l = new ArrayList<>();
+    public FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public adapteruserlist(ArrayList<User> o, Context context, String af) {
+        this.l=o;
         this.context=context;
-        this.ar1=ar1;
+
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public adapteruserlist.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem= layoutInflater.inflate(R.layout.itemsuserlist, parent, false);
-
-        ViewHolder holder=new ViewHolder(listItem);
-
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.itemsuserlist, parent,false);
+        adapteruserlist.ViewHolder holder=new adapteruserlist.ViewHolder(view);
         return holder;
+        //////////
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final adapteruserlist.ViewHolder holder, int position) {
 
-        User pj=ar1.get(position);
+        final User o =l.get(position);
+        FirebaseStorage firebaseStorage;
+        StorageReference storageReference;
+        firebaseStorage=FirebaseStorage.getInstance();
+        storageReference= firebaseStorage.getReference();
+
+        Toast.makeText(context,o.getUserProfilePic(),Toast.LENGTH_SHORT).show();
+        StorageReference imageRef=storageReference.child("user/"+o.getUserProfilePic());
+        imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(context).load(uri).into(holder.imageView1);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                //
+            }
+        });
 
 
+
+
+
+
+
+
+
+
+        ////////////////////////''''''''''''''''''''''///////////////////
+        holder.nm.setText(o.getFirstName().toString() +" "+o.getLastName().toString());
+        holder.eml.setText(o.getEmail().toString());
+        holder.loc.setText(o.getCity().toString());
+        //holder.imageView.
 
 
     }
 
     @Override
     public int getItemCount() {
-        return ar1.size();
+        return l.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder
@@ -66,7 +100,7 @@ public class adapteruserlist extends RecyclerView.Adapter<adapteruserlist.ViewHo
         LinearLayout lout;
         TextView uid;
         TextView nm,eml,loc;
-        ImageView imageView;
+        ImageView imageView1;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -75,7 +109,7 @@ public class adapteruserlist extends RecyclerView.Adapter<adapteruserlist.ViewHo
             loc=itemView.findViewById(R.id.location);
             uid=itemView.findViewById(R.id.usid);
             lout=itemView.findViewById(R.id.ulist);
-            imageView  = itemView.findViewById(R.id.imageView1);
+            imageView1  = itemView.findViewById(R.id.imageView1);
         }
     }
 }
