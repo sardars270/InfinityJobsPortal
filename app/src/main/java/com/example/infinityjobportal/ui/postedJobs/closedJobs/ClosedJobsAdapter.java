@@ -1,4 +1,4 @@
-package com.example.infinityjobportal.adapter;
+package com.example.infinityjobportal.ui.postedJobs.closedJobs;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,12 +17,12 @@ import com.example.infinityjobportal.model.PostJobPojo;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-public class ActiveJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, ActiveJobsAdapter.ActiveJobsViewHolder> {
-    private static final String TAG = "ActiveJobsAdapter";
+public class ClosedJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, ClosedJobsAdapter.ActiveJobsViewHolder> {
+    private static final String TAG = "ClosedJobsAdapter";
     PostJobPojo postJobPOJO;
 
 
-    public ActiveJobsAdapter(@NonNull FirestoreRecyclerOptions<PostJobPojo> options) {
+    public ClosedJobsAdapter(@NonNull FirestoreRecyclerOptions<PostJobPojo> options) {
         super(options);
     }
 
@@ -31,7 +31,7 @@ public class ActiveJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, Act
     @Override
     public ActiveJobsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d(TAG, "onCreateViewHolder: called");
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.active_jobs_row_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.closed_jobs_row_layout, parent, false);
         ActiveJobsViewHolder viewHolder = new ActiveJobsViewHolder(view);
         return viewHolder;
     }
@@ -69,12 +69,12 @@ public class ActiveJobsAdapter extends FirestoreRecyclerAdapter<PostJobPojo, Act
         public ActiveJobsViewHolder(@NonNull View itemView) {
             super(itemView);
             Log.d(TAG, "ActiveJobsViewHolder: called");
-            jobTitle = itemView.findViewById(R.id.jobTitleActiveJobsTextView);
-            companyName = itemView.findViewById(R.id.companyNameActiveJobsTextView);
-            companyAddress = itemView.findViewById(R.id.companyAddressActiveJobsTextView);
+            jobTitle = itemView.findViewById(R.id.jobTitleDraftJobsTextView);
+            companyName = itemView.findViewById(R.id.companyNameDraftJobsTextView);
+            companyAddress = itemView.findViewById(R.id.companyAddressDraftJobsTextView);
 //          numberOfApplications = itemView.findViewById(R.id.numberOfApplcationsActiveJobsTextView);
-            viewDetails = itemView.findViewById(R.id.jobDetailsActiveJobsButton);
-            viewApplication = itemView.findViewById(R.id.viewApplicationActiveJobsButton);
+            viewDetails = itemView.findViewById(R.id.jobDetailsDraftJobsButton);
+            viewApplication = itemView.findViewById(R.id.completeJobsButton);
             constraintLayout = itemView.findViewById(R.id.active_jobs_constraint_layout);
 
 

@@ -409,8 +409,7 @@
                 android:id="@+id/postJobSubmitButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/button_pressed"
                 android:elevation="5dp"
                 android:fontFamily="@font/robotoregular"
@@ -419,6 +418,19 @@
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/qualificationRequiredEditText"
+                app:layout_constraintTop_toTopOf="@+id/postJobDraftButton" />
+
+            <Button
+                android:id="@+id/postJobDraftButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/button_pressed"
+                android:elevation="5dp"
+                android:fontFamily="@font/robotoregular"
+                android:text="Draft"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/qualificationRequiredEditText"
                 app:layout_constraintTop_toBottomOf="@+id/qualificationRequiredEditText" />
 

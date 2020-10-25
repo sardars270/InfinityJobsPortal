@@ -43,7 +43,7 @@ public class PostJobFragment extends Fragment {
             mQualificationRequiredEditText;
     private Spinner mJobCategorySpinner, mTypeOfEmployerSpinner;
     private CheckBox mEnglishCheckBox, mFrenchCheckBox;
-    private Button mPostJobSubmitButton;
+    private Button mPostJobSubmitButton, mPostJobDraftButton;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance(); //Initialize an instance of Cloud Firestore.
 
@@ -72,6 +72,7 @@ public class PostJobFragment extends Fragment {
 
         //Submit Button.
         mPostJobSubmitButton = root.findViewById(R.id.postJobSubmitButton);
+        mPostJobDraftButton = root.findViewById(R.id.postJobDraftButton);
 
         //Application Deadline calendar
         mApplicationDeadlineEditTextDate.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +117,6 @@ public class PostJobFragment extends Fragment {
                 datePickerDialog.show();
             }
         });
-
 
         // OnClick Listener for post a job submit button.
         mPostJobSubmitButton.setOnClickListener(new View.OnClickListener() {
@@ -266,6 +266,65 @@ public class PostJobFragment extends Fragment {
                     return true;
                 }
                 return false;
+            }
+        });
+
+        mPostJobDraftButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String companyName = mCompanyNameEditText.getText().toString();
+                String jobCategory = mJobCategorySpinner.getSelectedItem().toString();
+                String jobTitle = mJobTitleEditText.getText().toString();
+                String streetAddress = mStreetAddressEditText.getText().toString();
+                String city = mCityAddressEditText.getText().toString();
+                String province = mProvinceAddressEditText.getText().toString();
+
+                String language = "";
+                if (mEnglishCheckBox.isChecked()) {
+                    language = "English";
+                } else if (mFrenchCheckBox.isChecked()) {
+                    language = "French";
+                } else if (mFrenchCheckBox.isChecked() && mEnglishCheckBox.isChecked()) {
+                    language = "English & French";
+                }
+
+                Double minSalary = Double.parseDouble(mStartSalaryRangeEditText.getText().toString());
+                Double maxSalary = Double.parseDouble(mSalaryEndRangeEditText.getText().toString());
+
+                String availability = mTypeOfEmployerSpinner.getSelectedItem().toString();
+                String joiningDate = mJoiningEditTextDate.getText().toString();
+                String applicationDeadline = mApplicationDeadlineEditTextDate.getText().toString();
+                String jobDescription = mJobDescriptionEditText.getText().toString();
+                String skillsRequired = mSkillsRequiredEditText.getText().toString();
+                String qualificationRequired = mQualificationRequiredEditText.getText().toString();
+                SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+                Date todayDate = new Date();
+                String date = currentDate.format(todayDate);
+
+
+                PostJobPojo postJobPOJO = new PostJobPojo(companyName, jobCategory, jobTitle, streetAddress, city, province, language,
+                        minSalary, maxSalary, availability, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired,"Draft", date);
+
+                db.collection("Jobs")
+                        .add(postJobPOJO)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                                Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error adding document", e);
+                            }
+                        });
+
+
+                Navigation.findNavController(view).navigate(R.id.postedJobsFragment);
+
             }
         });
 

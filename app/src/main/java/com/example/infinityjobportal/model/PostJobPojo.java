@@ -5,6 +5,7 @@ import com.google.firebase.firestore.ServerTimestamp;
 import java.util.Date;
 
 public class PostJobPojo {
+
     private String companyName;
     private String jobCategory;
     private String jobTitle;
@@ -22,8 +23,13 @@ public class PostJobPojo {
     private String qualificationRequired;
     private String status;
     private String date;
+    String id;
 
     public PostJobPojo() {
+    }
+
+    public PostJobPojo(String jobTitle) {
+        this.jobTitle = jobTitle;
     }
 
     public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Double minSalary, Double maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired, String status, String date) {
@@ -44,133 +50,142 @@ public class PostJobPojo {
         this.qualificationRequired = qualificationRequired;
         this.status = status;
         this.date = date;
+
     }
 
-    public String getDate() {
-        return date;
+    public String getStatus() {
+        return status;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getCompanyName() {
         return companyName;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
     public String getJobCategory() {
         return jobCategory;
-    }
-
-    public void setJobCategory(String jobCategory) {
-        this.jobCategory = jobCategory;
     }
 
     public String getJobTitle() {
         return jobTitle;
     }
 
-    public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle;
-    }
-
     public String getStreetAddress() {
         return streetAddress;
-    }
-
-    public void setStreetAddress(String streetAddress) {
-        this.streetAddress = streetAddress;
     }
 
     public String getCityAddress() {
         return cityAddress;
     }
 
-    public void setCityAddress(String cityAddress) {
-        this.cityAddress = cityAddress;
-    }
-
     public String getProvinceAddress() {
         return provinceAddress;
-    }
-
-    public void setProvinceAddress(String provinceAddress) {
-        this.provinceAddress = provinceAddress;
     }
 
     public String getLanguage() {
         return language;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
     public Double getMinSalary() {
         return minSalary;
-    }
-
-    public void setMinSalary(Double minSalary) {
-        this.minSalary = minSalary;
     }
 
     public Double getMaxSalary() {
         return maxSalary;
     }
 
-    public void setMaxSalary(Double maxSalary) {
-        this.maxSalary = maxSalary;
-    }
-
     public String getAvailability() {
         return availability;
-    }
-
-    public void setAvailability(String availability) {
-        this.availability = availability;
     }
 
     public String getJoiningDate() {
         return joiningDate;
     }
 
-    public void setJoiningDate(String joiningDate) {
-        this.joiningDate = joiningDate;
-    }
-
     public String getApplicationDeadline() {
         return applicationDeadline;
-    }
-
-    public void setApplicationDeadline(String applicationDeadline) {
-        this.applicationDeadline = applicationDeadline;
     }
 
     public String getJobDescription() {
         return jobDescription;
     }
 
-    public void setJobDescription(String jobDescription) {
-        this.jobDescription = jobDescription;
-    }
-
     public String getSkillsRequired() {
         return skillsRequired;
-    }
-
-    public void setSkillsRequired(String skillsRequired) {
-        this.skillsRequired = skillsRequired;
     }
 
     public String getQualificationRequired() {
         return qualificationRequired;
     }
 
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public void setJobCategory(String jobCategory) {
+        this.jobCategory = jobCategory;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
+    public void setCityAddress(String cityAddress) {
+        this.cityAddress = cityAddress;
+    }
+
+    public void setProvinceAddress(String provinceAddress) {
+        this.provinceAddress = provinceAddress;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public void setMinSalary(Double minSalary) {
+        this.minSalary = minSalary;
+    }
+
+    public void setMaxSalary(Double maxSalary) {
+        this.maxSalary = maxSalary;
+    }
+
+    public void setAvailability(String availability) {
+        this.availability = availability;
+    }
+
+    public void setJoiningDate(String joiningDate) {
+        this.joiningDate = joiningDate;
+    }
+
+    public void setApplicationDeadline(String applicationDeadline) {
+        this.applicationDeadline = applicationDeadline;
+    }
+
+    public void setJobDescription(String jobDescription) {
+        this.jobDescription = jobDescription;
+    }
+
+    public void setSkillsRequired(String skillsRequired) {
+        this.skillsRequired = skillsRequired;
+    }
+
     public void setQualificationRequired(String qualificationRequired) {
         this.qualificationRequired = qualificationRequired;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
