@@ -3,6 +3,7 @@ package com.example.infinityjobportal.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infinityjobportal.GlobalStorage;
 import com.example.infinityjobportal.JobDetails;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.PostJobPojo;
@@ -68,6 +70,7 @@ Context context;
 
     @Override
     public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
+
         PostJobPojo currentItem = exampleList.get(position);
 
       //  holder.imageView.setImageResource(currentItem.gett());
@@ -93,6 +96,7 @@ Context context;
 
     @Override
     public int getItemCount() {
+
         return exampleList.size();
     }
 

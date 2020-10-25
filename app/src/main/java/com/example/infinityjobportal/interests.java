@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 public class interests extends AppCompatActivity {
+
     EditText ed_interests;
     public String a="";
     Button bt_add;
@@ -50,7 +51,7 @@ public class interests extends AppCompatActivity {
         fbauth=FirebaseAuth.getInstance();
 
         db = FirebaseFirestore.getInstance();
-      //  mstorageRef = FirebaseStorage.getInstance().getReference("Images");
+        //  mstorageRef = FirebaseStorage.getInstance().getReference("Images");
         bt_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,7 +69,73 @@ public class interests extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Interests added successfull",Toast.LENGTH_SHORT).show();
                 Intent ii = new Intent(getApplicationContext(),interests.class);
                 startActivity(ii);
+                /**db.collection("aInt")
+                 .add(data)
+                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
+                //Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                Toast.makeText(getApplicationContext(), documentReference.getId(),Toast.LENGTH_LONG).show();
+                a= documentReference.getId();
+                }
+                })
+                 .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                //Log.w(TAG, "Error adding document", e);
+                }
+                });
 
+                 DocumentReference washingtonRef = db.collection("aInt").document(String.valueOf(a));
+
+                 washingtonRef
+                 .update("faltu", "extra","type_int",ed_interests.getText().toString(),"id",a, "userid", "lll")
+                 .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                Toast.makeText(getApplicationContext(), "data added",Toast.LENGTH_LONG).show();
+                }
+                })
+                 .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                // Log.w(TAG, "Error updating document", e);
+
+
+                }
+                });
+
+
+
+                 //  FirebaseFirestore   firebaseFirestore = FirebaseFirestore.getInstance();
+                 String kj = db.collection("aInt").document().getId();
+                 InterestsModel i =new InterestsModel();
+
+                 i.setType_int(ed_interests.getText().toString());
+                 i.setFaltu("extra");
+                 i.setUserid("3333");
+                 i.setId(kj);
+                 db.collection("aInt").add(i)
+                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
+                Toast.makeText(getApplicationContext(),"Interests added successfull",Toast.LENGTH_SHORT).show();
+                Intent ii = new Intent(getApplicationContext(),interests.class);
+                startActivity(ii);
+                }
+
+
+                }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                Toast.makeText(getApplicationContext(),"fail",Toast.LENGTH_SHORT).show();
+
+                }
+                })
+                 ;
+                 //View krvana
+                 */
 
 
 

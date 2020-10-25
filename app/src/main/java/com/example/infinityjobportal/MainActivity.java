@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.homeFragment, R.id.myJobsFragment, R.id.postJobFragment, R.id.postedJobsFragment, R.id.aboutUsFragment, R.id.myProfileFragment, R.id.queriesFragment)
+                R.id.homeFragment, R.id.myJobsFragment, R.id.postJobFragment, R.id.postedJobsFragment, R.id.aboutUsFragment, R.id.myProfileFragment, R.id.queriesFragment, R.id.myMapFragment)
                 .setDrawerLayout(drawer)
                 .build();
 

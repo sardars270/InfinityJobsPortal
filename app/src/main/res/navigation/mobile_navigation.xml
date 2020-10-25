@@ -11,6 +11,11 @@
         android:label="My Jobs"
         tools:layout="@layout/fragment_my_jobs" />
     <fragment
+        android:id="@+id/myMapFragment"
+        android:name="com.example.infinityjobportal.ui.map.MapFragment"
+        android:label="Map"
+        tools:layout="@layout/fragment_map" />
+    <fragment
         android:id="@+id/postedJobsFragment"
         android:name="com.example.infinityjobportal.ui.postedJobs.PostedJobsFragment"
         android:label="Posted Jobs" />

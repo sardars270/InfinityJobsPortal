@@ -21,15 +21,17 @@ import com.example.infinityjobportal.ClientLogin;
 import com.example.infinityjobportal.Jobs_search;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.adapter.Adapterjoblist;
-import com.example.infinityjobportal.model.PostJobPojo;
+import com.example.infinityjobportal.model.*;
 import com.example.infinityjobportal.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -59,9 +61,12 @@ public class HomeFragment extends Fragment {
 
         db = FirebaseFirestore.getInstance();
 
+        CollectionReference collectionReference = db.collection("Jobs");
 
 
-            db.collection("Jobs").get()
+
+
+                           collectionReference.get()
                     .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
