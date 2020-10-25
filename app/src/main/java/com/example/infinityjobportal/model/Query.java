@@ -1,22 +1,52 @@
 package com.example.infinityjobportal.model;
 
-import com.google.firebase.firestore.Exclude;
-
-import java.io.Serializable;
-
-
-public class Query implements Serializable {
-    @Exclude
+public class Query {
     private String id;
     private String feedbackQuery;
     private String editSubject;
     private String userid;
+    String userProfilePic;
+    String firstName;
+    String lastName;
 
-    public Query(  String editSubject,String feedbackQuery,String userid) {
-        this.editSubject=editSubject;
-        this.feedbackQuery = feedbackQuery;
-        this.userid=userid;
+    public String getUserProfilePic() {
+        return userProfilePic;
     }
+
+    public void setUserProfilePic(String userProfilePic) {
+        this.userProfilePic = userProfilePic;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+
+
+    public Query(String id, String feedbackQuery, String editSubject, String userid, String userProfilePic, String firstName, String lastName) {
+        this.id = id;
+        this.feedbackQuery = feedbackQuery;
+        this.editSubject = editSubject;
+        this.userid = userid;
+        this.userProfilePic = userProfilePic;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+
+
 
 
     public Query() {

@@ -1,5 +1,8 @@
 package com.example.infinityjobportal;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -107,6 +110,7 @@ public class ClientLogin extends AppCompatActivity {
                                     startActivity(HomeActivity);
 
 
+
                                 } else {
 
                                     progressBar.setVisibility(View.GONE);
@@ -169,6 +173,7 @@ public class ClientLogin extends AppCompatActivity {
                                         Intent HomeActivity = new Intent(getApplicationContext(), interests.class);
                                         //   setResult(RESULT_OK, null);
                                         startActivity(HomeActivity);
+
 
 
                                     } else {
