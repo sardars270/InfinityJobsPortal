@@ -23,6 +23,8 @@ public class PostJobPojo {
     private String qualificationRequired;
     private String status;
     private String date;
+    private double latitude;
+    private double longitude;
     String id;
 
     public PostJobPojo() {
@@ -32,7 +34,7 @@ public class PostJobPojo {
         this.jobTitle = jobTitle;
     }
 
-    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Double minSalary, Double maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired, String status, String date) {
+    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Double minSalary, Double maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired, String status, String date, double latitude, double longitude) {
         this.companyName = companyName;
         this.jobCategory = jobCategory;
         this.jobTitle = jobTitle;
@@ -50,7 +52,46 @@ public class PostJobPojo {
         this.qualificationRequired = qualificationRequired;
         this.status = status;
         this.date = date;
+        this.latitude = latitude;
+        this.longitude = longitude;
 
+
+    }
+
+    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Double minSalary, Double maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired,double latitude,double longitude) {
+        this.companyName = companyName;
+        this.jobCategory = jobCategory;
+        this.jobTitle = jobTitle;
+        this.streetAddress = streetAddress;
+        this.cityAddress = cityAddress;
+        this.provinceAddress = provinceAddress;
+        this.language = language;
+        this.minSalary = minSalary;
+        this.maxSalary = maxSalary;
+        this.availability = availability;
+        this.joiningDate = joiningDate;
+        this.applicationDeadline = applicationDeadline;
+        this.jobDescription = jobDescription;
+        this.skillsRequired = skillsRequired;
+        this.qualificationRequired = qualificationRequired;
+        this.latitude=latitude;
+        this.longitude=longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public String getDate() {
