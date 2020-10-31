@@ -12,21 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.example.infinityjobportal.JobDetails;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.PostJobPojo;
 import com.example.infinityjobportal.model.User;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
-public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHolder>{
+public class adapterAppliedJobs extends RecyclerView.Adapter<adapterAppliedJobs.ViewHolder>{
     Context context;
-    //ArrayList<PostJobPojo> ar1;
-    private ArrayList<PostJobPojo> ar1 ;
-
-    public Adapterjoblist(Context context, ArrayList<PostJobPojo> ar1) {
+    ArrayList<PostJobPojo> ar1;
+    public adapterAppliedJobs(Context context, ArrayList<PostJobPojo> ar1) {
 
         this.context=context;
         this.ar1=ar1;
@@ -34,19 +30,19 @@ public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHold
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public adapterAppliedJobs.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem= layoutInflater.inflate(R.layout.item_job, parent, false);
 
-        ViewHolder holder=new ViewHolder(listItem);
+        adapterAppliedJobs.ViewHolder holder=new adapterAppliedJobs.ViewHolder(listItem);
 
         return holder;
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final adapterAppliedJobs.ViewHolder holder, int position) {
 
         PostJobPojo pj=ar1.get(position);
 
@@ -54,14 +50,18 @@ public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHold
         holder.at.setText(pj.getCompanyName());
         holder.location.setText(pj.getCityAddress());
         holder.id.setText(pj.getId());
+        holder.faltu_st.setText(pj.getProvinceAddress());
 
 
         holder.lout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, JobDetails.class);
-               i.putExtra("id", holder.id.getText().toString());
-               context.startActivity(i);          }
+                 Intent i = new Intent(context, JobDetails.class);
+              String s =  holder.faltu_st.getText().toString();
+                 i.putExtra("id", holder.id.getText().toString());
+                 i.putExtra("status",s );
+                 context.startActivity(i);
+            }
         });
 
 
@@ -77,7 +77,7 @@ public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHold
     {
         CardView lout;
 
-        TextView title, at, location,id;
+        TextView title, at, location,id, faltu_st;
         ImageView saveJob;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -85,9 +85,12 @@ public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHold
             title=itemView.findViewById(R.id.title);
             at=itemView.findViewById(R.id.at);
             location=itemView.findViewById(R.id.location);
+
             lout=itemView.findViewById(R.id.lout);
             saveJob  = itemView.findViewById(R.id.saveJob);
             id  = itemView.findViewById(R.id.id);
+            faltu_st  = itemView.findViewById(R.id.faltu_st);
+
 
         }
     }

@@ -32,8 +32,8 @@ public class adapterquerylist extends RecyclerView.Adapter<adapterquerylist.View
     private ArrayList<Query> list = new ArrayList<>();
 
     public FirebaseFirestore db = FirebaseFirestore.getInstance();
-    public adapterquerylist(ArrayList<Query> o,  Context context, String af) {
-        this.list=o;
+    public adapterquerylist(Context context,ArrayList<Query> list) {
+        this.list=list;
 
         this.context=context;
 
@@ -82,9 +82,9 @@ public class adapterquerylist extends RecyclerView.Adapter<adapterquerylist.View
 
 
         ////////////////////////''''''''''''''''''''''///////////////////
-      //  holder.nm.setText(o.getFirstName().toString() +" "+o.getLastName().toString());
+
         holder.message.setText(o.getEditSubject().toString());
-        holder.username.setText(o.getFirstName());
+        holder.username.setText(o.getFirstName().toString());
         //holder.loc.setText(o.getCity().toString());
         //holder.imageView.
 

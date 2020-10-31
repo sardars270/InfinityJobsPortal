@@ -89,7 +89,7 @@ public class ClientLogin extends AppCompatActivity {
     private void autoLogin() {
         Log.d(TAG, "autoLogin: has started");
 
-        mAuth.signInWithEmailAndPassword("sardars270@gmail.com", "barry123")
+        mAuth.signInWithEmailAndPassword("varunmahajan292@gmail.com", "varun123")
 
                 .addOnCompleteListener(ClientLogin.this, new OnCompleteListener<AuthResult>() {
                     @Override

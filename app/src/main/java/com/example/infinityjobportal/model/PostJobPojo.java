@@ -151,8 +151,7 @@ public class PostJobPojo {
     public Double getMaxSalary() {
         return maxSalary;
     }
-
-    public String getJoiningDate() {
+   public String getJoiningDate() {
         return joiningDate;
     }
 

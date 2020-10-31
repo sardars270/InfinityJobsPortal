@@ -55,7 +55,7 @@ public class JobDetails extends AppCompatActivity {
         joiningDate = findViewById(R.id.joining_date);
         description = findViewById(R.id.description);
         skiils = findViewById(R.id.skill_needed);
-        qualification = findViewById(R.id.qualification);
+     qualification = findViewById(R.id.qualification);
         experience = findViewById(R.id.industry);
         apply  = findViewById(R.id.apply);
         save  = findViewById(R.id.savejob);
@@ -64,10 +64,24 @@ public class JobDetails extends AppCompatActivity {
         db=FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
-         id = getIntent().getStringExtra("id");
+        id = getIntent().getStringExtra("id");
+        String s =getIntent().getStringExtra("status");
+        if (s.equals("save")){
+            apply.setVisibility(View.VISIBLE);
+            save.setVisibility(View.INVISIBLE);
+        }
+        else if(s.equals("application")){
+            apply.setVisibility(View.INVISIBLE);
+            save.setVisibility(View.INVISIBLE);
+
+        }
+        else {
+            apply.setVisibility(View.VISIBLE);
+            save.setVisibility(View.VISIBLE);
+        }
         Toast.makeText(getApplicationContext(),id,Toast.LENGTH_SHORT).show();
 
-      //  loadInfo();
+        loadInfo();
 
 
 
@@ -90,7 +104,7 @@ public class JobDetails extends AppCompatActivity {
                                         .setCancelable(false)
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
-                                               finish();
+                                                finish();
                                             }
                                         });
                                 AlertDialog alert = builder.create();
