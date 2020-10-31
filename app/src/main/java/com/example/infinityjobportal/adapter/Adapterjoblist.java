@@ -24,8 +24,8 @@ import java.util.ArrayList;
 public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHolder>{
     Context context;
     //ArrayList<PostJobPojo> ar1;
-    private ArrayList<PostJobPojo> ar1 = new ArrayList<>();
-    public FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private ArrayList<PostJobPojo> ar1 ;
+
     public Adapterjoblist(Context context, ArrayList<PostJobPojo> ar1) {
 
         this.context=context;
@@ -52,8 +52,8 @@ public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHold
 
         holder.title.setText(pj.getJobTitle());
         holder.at.setText(pj.getCompanyName());
-       holder.location.setText(pj.getCityAddress());
-      //  holder.id.setText(pj.getId());
+        holder.location.setText(pj.getCityAddress());
+        holder.id.setText(pj.getId());
 
 
         holder.lout.setOnClickListener(new View.OnClickListener() {
@@ -61,8 +61,7 @@ public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHold
             public void onClick(View view) {
                 Intent i = new Intent(context, JobDetails.class);
                i.putExtra("id", holder.id.getText().toString());
-               context.startActivity(i);
-            }
+               context.startActivity(i);          }
         });
 
 

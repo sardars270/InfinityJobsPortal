@@ -73,9 +73,7 @@
                 android:id="@+id/jobCategorySpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/edit_text_background"
-                android:entries="@array/category"
+                android:layout_marginTop="16dp" android:entries="@array/category"
                 android:fontFamily="@font/robotoregular"
                 android:padding="10dp"
                 android:spinnerMode="dropdown"
@@ -125,14 +123,14 @@
                 app:layout_constraintStart_toStartOf="@+id/EnterWorkLocationTextView"
                 app:layout_constraintTop_toBottomOf="@+id/EnterWorkLocationTextView" />
 
-            <Spinner
+            <EditText
                 android:id="@+id/cityAddressSpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/edit_text_background"
                 android:entries="@array/cities"
                 android:fontFamily="@font/robotoregular"
+                android:hint="City"
                 android:padding="10dp"
                 android:spinnerMode="dropdown"
                 app:layout_constraintEnd_toStartOf="@+id/provinceSpinner"
@@ -141,15 +139,15 @@
                 app:layout_constraintStart_toStartOf="@+id/streetAddressEditText"
                 app:layout_constraintTop_toBottomOf="@+id/streetAddressEditText" />
 
-            <Spinner
+            <EditText
                 android:id="@+id/provinceSpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="200dp"
-                android:layout_marginLeft="200dp"
-                android:background="@drawable/edit_text_background"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
                 android:entries="@array/province"
                 android:fontFamily="@font/robotoregular"
+                android:hint="Province"
                 android:padding="10dp"
                 android:spinnerMode="dropdown"
                 app:layout_constraintBaseline_toBaselineOf="@+id/cityAddressSpinner"
@@ -194,17 +192,392 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/radioEnglish" />
 
-            <Spinner
+            <TextView
                 android:id="@+id/typeOfEmploymentSpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/edit_text_background"
-                android:entries="@array/jobDaysRequirement"
+              android:text="Select the availability requirement"
                 android:padding="10dp"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:fontFamily="@font/robotoblack"
                 app:layout_constraintEnd_toEndOf="@+id/radioFrench"
                 app:layout_constraintStart_toStartOf="@+id/radioEnglish"
                 app:layout_constraintTop_toBottomOf="@+id/radioEnglish" />
+
+
+
+
+
+            <LinearLayout
+                android:id="@+id/availability_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/typeOfEmploymentSpinner"
+                app:layout_constraintStart_toStartOf="@+id/typeOfEmploymentSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/typeOfEmploymentSpinner"
+                android:orientation="vertical">
+
+
+                <CheckBox
+                    android:id="@+id/checkBoxMon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:buttonTint="@color/black"
+                    android:checked="false"
+                    android:text="Monday"
+                    android:textColor="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/ckbxMonMor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:checked="false"
+                        android:text="Morning"
+                        android:textColor="@color/black" />
+
+                    <CheckBox
+                        android:id="@+id/ckbxMonEve"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:text="Evening"
+                        android:textColor="@color/black" />
+
+                    <CheckBox
+                        android:id="@+id/chbxMonN9t"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:text="Night"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/headingBack"
+                    android:orientation="vertical"></View>
+
+
+                <CheckBox
+                    android:id="@+id/checkboxTue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:buttonTint="@color/black"
+                    android:text="Tuesday"
+                    android:textColor="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/chbxTueMor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:text="Morning"
+                        android:textColor="@color/black" />
+
+                    <CheckBox
+                        android:id="@+id/chbxTueEve"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:text="Evening"
+                        android:textColor="@color/black" />
+
+                    <CheckBox
+                        android:id="@+id/chbxTueN9t"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:text="Night"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/headingBack"
+                    android:orientation="vertical"></View>
+
+
+                <CheckBox
+                    android:id="@+id/checkboxWed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:buttonTint="@color/black"
+                    android:text="Wednessday"
+                    android:textColor="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/chbxWedMor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:text="Morning"
+                        android:textColor="@color/black" />
+
+                    <CheckBox
+                        android:id="@+id/chbxWedEve"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:text="Evening"
+                        android:textColor="@color/black" />
+
+                    <CheckBox
+                        android:id="@+id/chbxWedN9t"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:text="Night"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/headingBack"
+                    android:orientation="vertical"></View>
+
+
+                <CheckBox
+                    android:id="@+id/checkBoxThurs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:buttonTint="@color/black"
+                    android:text="Thursday"
+                    android:textColor="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/ckbxThursMOr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:text="Morning"
+                        android:textColor="@color/black" />
+
+                    <CheckBox
+                        android:id="@+id/ckbxThursEve"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:text="Evening"
+                        android:textColor="@color/black" />
+
+                    <CheckBox
+                        android:id="@+id/chbxThursN9t"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:text="Night"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/headingBack"
+                    android:orientation="vertical"></View>
+
+                <CheckBox
+                    android:id="@+id/checkboxFri"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:buttonTint="@color/black"
+                    android:text="Friday"
+                    android:textColor="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/chbxFriMor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:text="Morning"
+                        android:textColor="@color/black" />
+
+                    <CheckBox
+                        android:id="@+id/chbxFriEve"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:text="Evening"
+                        android:textColor="@color/black" />
+
+                    <CheckBox
+                        android:id="@+id/chbxFriN9t"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:text="Night"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/headingBack"
+                    android:orientation="vertical"></View>
+
+                <CheckBox
+                    android:id="@+id/checkboxSat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:buttonTint="@color/black"
+                    android:text="Saturday"
+                    android:textColor="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/chbxSatMor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:text="Morning"
+                        android:textColor="@color/black" />
+
+                    <CheckBox
+                        android:id="@+id/chbxSatEve"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:text="Evening"
+                        android:textColor="@color/black" />
+
+                    <CheckBox
+                        android:id="@+id/chbxSatN9t"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:text="Night"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/headingBack"
+                    android:orientation="vertical"></View>
+
+
+                <CheckBox
+                    android:id="@+id/checkboxSun"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:buttonTint="@color/black"
+                    android:text="Sunday"
+                    android:textColor="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/chbxSunMor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:text="Morning"
+                        android:textColor="@color/black" />
+
+                    <CheckBox
+                        android:id="@+id/chbxSunEve"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:text="Evening"
+                        android:textColor="@color/black" />
+
+                    <CheckBox
+                        android:id="@+id/chbxSunN9t"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/black"
+                        android:text="Night"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/headingBack"
+                    android:orientation="vertical"></View>
+
+
+
+
+            </LinearLayout>
+
+
+
 
             <TextView
                 android:id="@+id/salaryRangeTextView"
@@ -216,9 +589,9 @@
                 android:text="Salary Range"
                 android:textColor="#000000"
                 android:textSize="18dp"
-                app:layout_constraintEnd_toEndOf="@+id/typeOfEmploymentSpinner"
-                app:layout_constraintStart_toStartOf="@+id/typeOfEmploymentSpinner"
-                app:layout_constraintTop_toBottomOf="@+id/typeOfEmploymentSpinner" />
+                app:layout_constraintEnd_toEndOf="@+id/availability_section"
+                app:layout_constraintStart_toStartOf="@+id/availability_section"
+                app:layout_constraintTop_toBottomOf="@+id/availability_section" />
 
             <EditText
                 android:id="@+id/salaryStartRangeEditText"
@@ -290,8 +663,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:ems="10"
+                android:focusableInTouchMode="false"
                 android:hint="Application Deadline"
                 android:inputType="date"
+                android:clickable="true"
                 android:paddingLeft="10dp"
                 android:paddingBottom="15dp"
                 app:layout_constraintEnd_toEndOf="@+id/textView7"
@@ -306,6 +681,7 @@
                 android:layout_marginTop="8dp"
                 android:ems="10"
                 android:hint="Joining Date"
+                android:focusableInTouchMode="false"
                 android:inputType="date"
                 android:paddingLeft="10dp"
                 android:paddingBottom="15dp"
@@ -331,13 +707,16 @@
             <EditText
                 android:id="@+id/jobDescriptionEditText"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
                 android:hint="Write Job Description here."
-                android:inputType="textMultiLine|text"
+                android:inputType="textMultiLine"
                 android:maxLines="10"
+                android:overScrollMode="always"
                 android:padding="10dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
                 app:layout_constraintEnd_toEndOf="@+id/jobDescriptionTextView"
                 app:layout_constraintStart_toStartOf="@+id/jobDescriptionTextView"
                 app:layout_constraintTop_toBottomOf="@+id/jobDescriptionTextView" />
@@ -361,11 +740,11 @@
             <EditText
                 android:id="@+id/skillsRequiredEditText"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
                 android:hint="Enter Skills required"
-                android:inputType="textMultiLine|text"
+                android:inputType="textMultiLine"
                 android:maxLines="10"
                 android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="@+id/skillsRequiredTextView"
@@ -390,11 +769,11 @@
             <EditText
                 android:id="@+id/qualificationRequiredEditText"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:background="@drawable/edit_text_background"
                 android:ems="10"
-                android:hint="Enter Skills required"
-                android:inputType="textMultiLine|text"
+                android:hint="Enter qualification required"
+                android:inputType="textMultiLine"
                 android:maxLines="10"
                 android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="@+id/qualificationRequiredTextView"
@@ -405,8 +784,7 @@
                 android:id="@+id/postJobSubmitButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/button_pressed"
                 android:elevation="5dp"
                 android:fontFamily="@font/robotoregular"
@@ -415,6 +793,19 @@
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/qualificationRequiredEditText"
+                app:layout_constraintTop_toTopOf="@+id/postJobDraftButton" />
+
+            <Button
+                android:id="@+id/postJobDraftButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/button_pressed"
+                android:elevation="5dp"
+                android:fontFamily="@font/robotoregular"
+                android:text="Draft"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/qualificationRequiredEditText"
                 app:layout_constraintTop_toBottomOf="@+id/qualificationRequiredEditText" />
 

@@ -13,12 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".interests" />
         <activity android:name=".JobDetails" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
-
+        <activity android:name=".Filter" />
+        <activity android:name=".Search" />
+        <activity android:name=".interests"></activity>
         <activity android:name=".CompanyProfileActivity" />
         <activity android:name=".AddCompanyActivity" />
         <activity android:name=".EditCompanyActivity" />
+        <activity android:name=".MapFilterData"></activity>
+        <activity android:name=".SearchViewMap" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+
+        </activity>
+
+        <activity android:name=".test"></activity>
         <activity
             android:name=".ClientChangePassword"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -34,14 +41,23 @@
         <activity
             android:name=".UpdateUserPic"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity android:name=".test" />
+
         <activity
             android:name=".admin.ChangePassword"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".admin.ViewQuery"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity android:name=".AddNewEducation" />
+        <activity android:name=".EditEducation" />
+        <activity android:name=".MainEducation" />
+        <activity android:name=".Update_Exp" />
 
+        <activity android:name=".Search_jobs" />
+        <activity android:name=".Jobs_search" />
+        <activity android:name=".Applied_jobs" />
+        <activity android:name=".SavedJobsActivity" />
+        <activity android:name=".MyJobDetails" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".AdminLogin"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -65,6 +81,29 @@
             </intent-filter>
 
         </activity>
+        <activity
+            android:name=".ListOfExperienceActiviy"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".EditAvailability"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".add_exp"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+
+
+
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+
+
+
+
+
+
 
     </application>
 

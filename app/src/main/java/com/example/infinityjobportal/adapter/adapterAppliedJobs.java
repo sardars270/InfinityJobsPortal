@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infinityjobportal.JobDetails;
+import com.example.infinityjobportal.MyJobDetails;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.PostJobPojo;
 import com.example.infinityjobportal.model.User;
@@ -56,7 +57,7 @@ public class adapterAppliedJobs extends RecyclerView.Adapter<adapterAppliedJobs.
         holder.lout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 Intent i = new Intent(context, JobDetails.class);
+                 Intent i = new Intent(context, MyJobDetails.class);
               String s =  holder.faltu_st.getText().toString();
                  i.putExtra("id", holder.id.getText().toString());
                  i.putExtra("status",s );

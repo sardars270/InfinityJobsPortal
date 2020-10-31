@@ -1,6 +1,7 @@
 package com.example.infinityjobportal;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +24,7 @@ public class CompanyProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_company_profile);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Add Company");
+        getSupportActionBar().setTitle("Company Information");
         tvCompanyName = findViewById(R.id.tvCompanyName);
         tvIndustry = findViewById(R.id.tvIndustry);
         tvLocation = findViewById(R.id.tvLocation);
@@ -74,6 +75,7 @@ public class CompanyProfileActivity extends AppCompatActivity {
                 finish();
             }
         });
+
 
     }
 

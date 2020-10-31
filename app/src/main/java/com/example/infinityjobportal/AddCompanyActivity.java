@@ -191,7 +191,7 @@ public class AddCompanyActivity extends AppCompatActivity {
                 order.put("web", web);
                 order.put("email", email);
                 order.put("contact", contact);
-                order.put("userId", userId);
+                order.put("userId", mAuth.getCurrentUser().getEmail());
                 order.put("industry", spnIndustry.getSelectedItem().toString());
 
 

@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.infinityjobportal.admin.AdminMainActivity;
-import com.example.infinityjobportal.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -23,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.auth.User;
 
 public class AdminLogin extends AppCompatActivity {
     public EditText email, pass;
@@ -97,7 +97,7 @@ public class AdminLogin extends AppCompatActivity {
                                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                 User user = documentSnapshot.toObject(User.class);
 
-                                                if(user.isAdmin())
+                                              //  if(user.isAdmin())
                                                 {
                                                     progressBar.setVisibility(View.GONE);
                                                     //errorView.setText("");
@@ -106,10 +106,10 @@ public class AdminLogin extends AppCompatActivity {
                                                     //   setResult(RESULT_OK, null);
                                                     startActivity(HomeActivity);
                                                 }
-                                                else {
+                                               // else {
                                                     progressBar.setVisibility(View.GONE);
                                                     errorView.setText("This Email Is Not SetUp For Admin Account.");
-                                                }
+                                               // }
                                             }
                                         });
 
@@ -176,7 +176,7 @@ public class AdminLogin extends AppCompatActivity {
                                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                 User user = documentSnapshot.toObject(User.class);
 
-                                                if(user.isAdmin())
+                                              /* if(user.isAdmin())
                                                 {
                                                     progressBar.setVisibility(View.GONE);
                                                     //errorView.setText("");
@@ -189,6 +189,8 @@ public class AdminLogin extends AppCompatActivity {
                                                     progressBar.setVisibility(View.GONE);
                                                     errorView.setText("This Email Is Not SetUp For Admin Account.");
                                                 }
+
+                                               */
                                             }
                                         });
 

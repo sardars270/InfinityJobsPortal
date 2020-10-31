@@ -15,6 +15,28 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+
+    <string-array name="emp_spinnerItems">
+        <item>Choose employment type</item>
+        <item>Full Time</item>
+        <item>Part Time</item>
+        <item>Self-employed</item>
+        <item>Freelance</item>
+        <item>Internship</item>
+        <item>Trainee</item>
+    </string-array>
+    <string-array name="country_spinnerItems">
+        <item>Choose country</item>
+        <item>Canada</item>
+        <item>India</item>
+        <item>Australia</item>
+    </string-array>
+    <string name="title_activity_my_jobs">MyJobsActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string-array name="category">
@@ -32,6 +54,22 @@
         <item>Engineering</item>
         <item>Others</item>
     </string-array>
+    <string-array name="categoryforfilter">
+        <item>Any</item>
+        <item>Sales, Retail and Customer Support</item>
+        <item>Technology</item>
+        <item>Manufacturing</item>
+        <item>Supply Chain and logistics</item>
+        <item>Food and Beverages</item>
+        <item>Finance and accounting</item>
+        <item>Healthcare</item>
+        <item>Construction</item>
+        <item>Education</item>
+        <item>Media, Art and Design</item>
+        <item>Engineering</item>
+        <item>Others</item>
+    </string-array>
+
     <string-array name="jobDaysRequirement">
         <item>Select the availability requirement</item>
         <item>Monday</item>

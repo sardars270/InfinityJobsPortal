@@ -26,13 +26,24 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:textColor="@color/black"
+                <ImageView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:paddingRight="20dp"
+                    android:visibility="invisible"
+                    android:paddingTop="20dp"
+                    android:src="@drawable/edit_symbol" />
+
+
+                <ImageView
+                    android:id="@+id/userPic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:text="" />
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/user"></ImageView>
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -59,18 +70,12 @@
 
 
 
-                <ImageView
-                    android:id="@+id/userPic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="220dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/user"></ImageView>
-
                 <TextView
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:layout_marginTop="10dp"
                     android:text=""
                     android:textColor="@color/black"
                     android:textSize="25sp" />
@@ -193,12 +198,12 @@
                         android:textColor="@color/black"
                         android:text="Monday - "
                         />
+
                     <TextView
+                        android:id="@+id/mon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Morning / Evening / Night"
-                        />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -213,12 +218,12 @@
                         android:textColor="@color/black"
                         android:text="Tuesday - "
                         />
+
                     <TextView
+                        android:id="@+id/tue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Morning / Evening / Night"
-                        />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -233,12 +238,12 @@
                         android:textColor="@color/black"
                         android:text="Wednesday - "
                         />
+
                     <TextView
+                        android:id="@+id/wed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Morning / Evening / Night"
-                        />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -253,12 +258,12 @@
                         android:textColor="@color/black"
                         android:text="Thrusday - "
                         />
+
                     <TextView
+                        android:id="@+id/thurs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Morning / Evening / Night"
-                        />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -273,12 +278,12 @@
                         android:textColor="@color/black"
                         android:text="Friday - "
                         />
+
                     <TextView
+                        android:id="@+id/fri"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Morning / Evening / Night"
-                        />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -293,12 +298,12 @@
                         android:textColor="@color/black"
                         android:text="Saturday - "
                         />
+
                     <TextView
+                        android:id="@+id/sat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Morning / Evening / Night"
-                        />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -313,12 +318,12 @@
                         android:textColor="@color/black"
                         android:text="Sunday - "
                         />
+
                     <TextView
+                        android:id="@+id/sun"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Morning / Evening / Night"
-                        />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -358,11 +363,15 @@
                         android:id="@+id/editExperienceSection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:visibility="invisible"
                         android:layout_gravity="right"
                         android:src="@drawable/edit_symbol" />
 
                 </LinearLayout>
-
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recexp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/openExperience"
@@ -410,9 +419,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
+                        android:visibility="invisible"
                         android:src="@drawable/edit_symbol" />
 
                 </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_margin="10dp"
+                    android:id="@+id/recyclerEducation"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
                 <TextView
                     android:id="@+id/openEducation"
                     android:layout_width="wrap_content"
@@ -459,6 +476,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
+                        android:visibility="invisible"
                         android:src="@drawable/edit_symbol" />
 
                 </LinearLayout>
@@ -509,9 +527,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
+                        android:visibility="invisible"
                         android:src="@drawable/edit_symbol" />
 
                 </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+
+                    android:id="@+id/rec"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/openInterest"
                     android:layout_width="wrap_content"

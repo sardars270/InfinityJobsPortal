@@ -24,11 +24,11 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class ClientChangePassword extends AppCompatActivity {
     EditText confirmPassword, newPassword, currentPassword;
-ProgressBar progressBar;
+    ProgressBar progressBar;
 
-Button submit;
-ImageView back;
-TextView  errorView;
+    Button submit;
+    ImageView back;
+    TextView  errorView;
     FirebaseUser user;
     FirebaseAuth mAuth;
     @Override
@@ -46,65 +46,65 @@ TextView  errorView;
 
 
 
-       submit.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               progressBar.setVisibility(View.VISIBLE);
-               mAuth = FirebaseAuth.getInstance();
-               user= mAuth.getCurrentUser();
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
+                mAuth = FirebaseAuth.getInstance();
+                user= mAuth.getCurrentUser();
 
-               AuthCredential credential = EmailAuthProvider
-                       .getCredential(user.getEmail(), currentPassword.getText().toString());
+                AuthCredential credential = EmailAuthProvider
+                        .getCredential(user.getEmail(), currentPassword.getText().toString());
 
-               user.reauthenticate(credential)
-                       .addOnCompleteListener(new OnCompleteListener<Void>() {
-                           @Override
-                           public void onComplete(@NonNull Task<Void> task) {
-                               if (task.isSuccessful()) {
-                                   user.updatePassword(newPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                       @Override
-                                       public void onComplete(@NonNull Task<Void> task) {
-                                           if (task.isSuccessful()) {
-                                               progressBar.setVisibility(View.GONE);
-                                               Log.d("password", "Password updated");
-                                               errorView.setText("");
-                                               AlertDialog.Builder builder = new AlertDialog.Builder(ClientChangePassword.this);
-                                               builder.setMessage("Password Updated Successfully.")
-                                                       .setCancelable(false)
-                                                       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                                           public void onClick(DialogInterface dialog, int id) {
-                                                              finish();
-                                                           }
-                                                       });
-                                               AlertDialog alert = builder.create();
-                                               alert.show();
+                user.reauthenticate(credential)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    user.updatePassword(newPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                progressBar.setVisibility(View.GONE);
+                                                Log.d("password", "Password updated");
+                                                errorView.setText("");
+                                                AlertDialog.Builder builder = new AlertDialog.Builder(ClientChangePassword.this);
+                                                builder.setMessage("Password Updated Successfully.")
+                                                        .setCancelable(false)
+                                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                            public void onClick(DialogInterface dialog, int id) {
+                                                                finish();
+                                                            }
+                                                        });
+                                                AlertDialog alert = builder.create();
+                                                alert.show();
 
-                                           } else {
-                                               progressBar.setVisibility(View.GONE);
-                                               Log.d("password", "Error password not updated");
-                                               errorView.setText("Password is not updated. Try again...");
-                                           }
-                                       }
-                                   });
-                               } else {
-                                   progressBar.setVisibility(View.GONE);
-                                   errorView.setText("Current password is incorrect.");
-                                   Log.d("Auth", "Error auth failed");
+                                            } else {
+                                                progressBar.setVisibility(View.GONE);
+                                                Log.d("password", "Error password not updated");
+                                                errorView.setText("Password is not updated. Try again...");
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    progressBar.setVisibility(View.GONE);
+                                    errorView.setText("Current password is incorrect.");
+                                    Log.d("Auth", "Error auth failed");
 
-                               }
-                           }
-                       });
-
-
-           }
-       });
+                                }
+                            }
+                        });
 
 
-       back.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               finish();
-           }
-       });
+            }
+        });
+
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }

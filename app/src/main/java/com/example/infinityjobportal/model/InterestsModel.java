@@ -1,8 +1,8 @@
 package com.example.infinityjobportal.model;
 
 public class InterestsModel {
-    String id;
-       String faltu;
+     String id;
+    String faltu;
     String type_int;
 
     public String getId() {

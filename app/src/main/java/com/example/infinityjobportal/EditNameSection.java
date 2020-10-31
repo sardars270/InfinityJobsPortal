@@ -2,13 +2,12 @@ package com.example.infinityjobportal;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.ButtonBarLayout;
+import androidx.navigation.Navigation;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -62,7 +61,7 @@ FirebaseFirestore db;
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
 
                 progressBar.setVisibility(View.VISIBLE);
 
@@ -82,6 +81,8 @@ FirebaseFirestore db;
                             public void onComplete(@NonNull Task<Void> task) {
                                 Toast.makeText(getApplicationContext(),"Data Updated...",Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
+                                finish();
+
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {

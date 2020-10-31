@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 
 import com.example.infinityjobportal.ClientLogin;
 import com.example.infinityjobportal.R;
-import com.example.infinityjobportal.admin.AdminMainActivity;
 import com.example.infinityjobportal.admin.ChangePassword;
 import com.google.firebase.auth.FirebaseAuth;
 
