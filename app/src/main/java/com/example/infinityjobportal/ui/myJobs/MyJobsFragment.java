@@ -16,6 +16,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.infinityjobportal.R;
 
+import com.example.infinityjobportal.adapter.myJobsPagerAdapter;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -26,21 +27,21 @@ public class MyJobsFragment extends  Fragment {
     TabLayout tabLayout;
     TabItem activeTab, closedTab, draftTab;
     ViewPager2 viewPager2;
-   // myJobsPagerAdapter myJobsPagerAdapter;
+    com.example.infinityjobportal.adapter.myJobsPagerAdapter myJobsPagerAdapter;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: has started");
         View root = inflater.inflate(R.layout.fragment_my_jobs, container, false);
+        viewPager2 = root.findViewById(R.id.viewPager_myjobs);
 
         tabLayout = root.findViewById(R.id.myJobsTabBar);
 
-      //  myJobsPagerAdapter = new myJobsPagerAdapter(this);
-        viewPager2 = root.findViewById(R.id.viewPager_myjobs);
-       //  viewPager2.setAdapter(myJobsPagerAdapter);
+        myJobsPagerAdapter = new myJobsPagerAdapter(this);
+          viewPager2.setAdapter(myJobsPagerAdapter);
 
-        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
+        TabLayoutMediator rb = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 Log.d(TAG, "onConfigureTab: called");
@@ -52,12 +53,11 @@ public class MyJobsFragment extends  Fragment {
                     case 1:
                         tab.setText("Saved Jobs");
                         break;
-
-
                 }
             }
         });
-        tabLayoutMediator.attach();
+
+        rb.attach();
 
         Log.d(TAG, "onCreateView: has ended");
         return root;

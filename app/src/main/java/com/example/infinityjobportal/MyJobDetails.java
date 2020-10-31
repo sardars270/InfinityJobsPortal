@@ -1,12 +1,6 @@
 package com.example.infinityjobportal;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,9 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.infinityjobportal.model.PostJobPojo;
-import com.example.infinityjobportal.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,13 +21,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
-import java.util.Map;
 
-public class JobDetails extends AppCompatActivity {
+public class MyJobDetails extends AppCompatActivity {
     ImageView  back;
     TextView designation, company, location, salary, language, applicationDeadline, joiningDate, description, skiils, qualification, experience;
     FirebaseFirestore db;
@@ -43,7 +36,7 @@ public class JobDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_job_details);
+        setContentView(R.layout.activity_my_job_details);
         back = findViewById(R.id.back);
 
         designation = findViewById(R.id.Designation);
@@ -55,7 +48,7 @@ public class JobDetails extends AppCompatActivity {
         joiningDate = findViewById(R.id.joining_date);
         description = findViewById(R.id.description);
         skiils = findViewById(R.id.skill_needed);
-     qualification = findViewById(R.id.qualification);
+        qualification = findViewById(R.id.qualification);
         experience = findViewById(R.id.industry);
         apply  = findViewById(R.id.apply);
         save  = findViewById(R.id.savejob);
@@ -107,7 +100,7 @@ public class JobDetails extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener() {
                             @Override
                             public void onSuccess(Object o) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(JobDetails.this);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(MyJobDetails.this);
                                 builder.setMessage("Application Submitted.")
                                         .setCancelable(false)
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -146,7 +139,7 @@ public class JobDetails extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener() {
                             @Override
                             public void onSuccess(Object o) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(JobDetails.this);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(MyJobDetails.this);
                                 builder.setMessage("Job saved to my jobs section.")
                                         .setCancelable(false)
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
