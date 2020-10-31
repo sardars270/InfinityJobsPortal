@@ -65,8 +65,8 @@ public class JobDetails extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         id = getIntent().getStringExtra("id");
-        String s =getIntent().getStringExtra("status");
-
+//        String s =getIntent().getStringExtra("status");
+/*
         if (s.equals("save")){
             apply.setVisibility(View.VISIBLE);
             save.setVisibility(View.INVISIBLE);
@@ -82,6 +82,8 @@ public class JobDetails extends AppCompatActivity {
         }
 
 
+
+ */
 
 
 
