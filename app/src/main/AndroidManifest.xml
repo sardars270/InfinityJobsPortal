@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.infinityjobportal">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,13 +13,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".JobDetails"></activity>
         <activity android:name=".interests" />
+        <activity android:name=".JobDetails" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+
         <activity android:name=".CompanyProfileActivity" />
         <activity android:name=".AddCompanyActivity" />
         <activity android:name=".EditCompanyActivity" />
-        <activity android:name=".ClientChangePassword" />
         <activity
+            android:name=".ClientChangePassword"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+               <activity
             android:name=".UpdateContactSection"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
@@ -34,6 +41,7 @@
         <activity
             android:name=".admin.ViewQuery"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+
         <activity
             android:name=".AdminLogin"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -55,7 +63,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
     </application>
 
 </manifest>

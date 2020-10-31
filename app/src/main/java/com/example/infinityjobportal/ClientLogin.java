@@ -5,12 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class ClientLogin extends AppCompatActivity {
+    private static final String TAG = "ClientLogin";
     public EditText email, pass;
     public Button login, signup, forgotpassword, admin;
     ProgressBar progressBar;
@@ -28,6 +33,7 @@ public class ClientLogin extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: has started.");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_login);
 
@@ -45,39 +51,43 @@ public class ClientLogin extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-       //autoLogin(); // for testing only
+        autoLogin();
 
+        //SIGNUP onClick Listener.
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d(TAG, "onClick: signUp.");
                 startActivity(new Intent(getApplicationContext(), ClientSignUp.class));
             }
         });
+
+        //ADMIN onClick Listener.
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d(TAG, "onClick: admin.");
                 startActivity(new Intent(getApplicationContext(), AdminLogin.class));
             }
         });
 
-
+        //FORGOT PASSWORD onClick Listener
         forgotpassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d(TAG, "onClick: forgot password.");
                 Intent i = new Intent(getApplicationContext(), forget_password.class);
                 startActivity(i);
             }
         });
 
 
-
-
+        Log.d(TAG, "onCreate: has ended.");
 
     }
 
     private void autoLogin() {
-
-
+        Log.d(TAG, "autoLogin: has started");
 
         mAuth.signInWithEmailAndPassword("varunmahajan292@gmail.com", "varun123")
 
@@ -128,6 +138,7 @@ public class ClientLogin extends AppCompatActivity {
     }
 
     public void logInFunction(View view) {
+        Log.d(TAG, "logInFunction: has started.");
         if (email.getText().toString().contentEquals("")) {
 
 
@@ -143,6 +154,7 @@ public class ClientLogin extends AppCompatActivity {
             progressBar.setVisibility(View.VISIBLE);
 
             mAuth.signInWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
+                    // mAuth.signInWithEmailAndPassword("sardars270@gmail.com", "barry123")
            // mAuth.signInWithEmailAndPassword("sardars270@gmail.com", "barry123")
 
                     .addOnCompleteListener(ClientLogin.this, new OnCompleteListener<AuthResult>() {
