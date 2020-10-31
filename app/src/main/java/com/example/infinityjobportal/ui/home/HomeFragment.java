@@ -41,12 +41,14 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     private RecyclerView recjoblist;
-    TextView search;
+    TextView search, text;
 
     private ArrayList<PostJobPojo> list=new ArrayList<PostJobPojo>();
+
+    ArrayList<String> saveIdList = new ArrayList<>();
     Adapterjoblist adapter;
     FirebaseFirestore db;
-
+    CollectionReference collectionReference;
 
     private HomeViewModel homeViewModel;
 
@@ -56,12 +58,21 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         recjoblist=root.findViewById(R.id.recJobList);
-
-
+        text=root.findViewById(R.id.text);
 
         db = FirebaseFirestore.getInstance();
 
-        CollectionReference collectionReference = db.collection("Jobs");
+
+
+        text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadMyJobsList();
+            }
+        });
+       // loadMyJobsList();
+
+         collectionReference = db.collection("Jobs");
 
 
 
@@ -103,5 +114,78 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
-    
+    private void loadMyJobsList() {
+        db.collection("MyJobs").whereEqualTo("type","application").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        if (!queryDocumentSnapshots.isEmpty()) {
+
+                            List<DocumentSnapshot> list1 = queryDocumentSnapshots.getDocuments();
+
+                            for (DocumentSnapshot d : list1) {
+
+                                // PostJobPojo p = d.toObject(PostJobPojo.class);
+                                //  p.setJobTitle(d.getString("jobTitle"));
+                                // p.setCompanyName(d.getString("companyName"));
+                                //p.setCityAddress(d.getString("cityAddress"));
+                                //p.setId(d.getId());
+
+                                saveIdList.add(d.getString("jobId"));
+                               // Toast.makeText(getContext(),d.getString("jobId"),Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getContext(),saveIdList,Toast.LENGTH_SHORT).show();
+                            }
+                            //adapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+
+
+
+
+
+        list.clear();
+
+         collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                if (!queryDocumentSnapshots.isEmpty()) {
+
+                    List<DocumentSnapshot> list1 = queryDocumentSnapshots.getDocuments();
+
+                    for (DocumentSnapshot d : list1) {
+
+                        for(int i=0; i<saveIdList.size(); i++) {
+                            if(d.getId().equals(saveIdList.get(i))) {
+                                PostJobPojo p = d.toObject(PostJobPojo.class);
+                                p.setJobTitle(d.getString("jobTitle"));
+                                p.setCompanyName(d.getString("companyName"));
+                                p.setCityAddress(d.getString("cityAddress"));
+                                p.setId(d.getId());
+
+                                list.add(p);
+                            }
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+
+
+
+
+        for(int i=0; i<saveIdList.size(); i++) {
+             // text.setText(saveIdList.get(i));
+              Toast.makeText(getContext(), saveIdList.get(i), Toast.LENGTH_SHORT).show();
+          }
+
+
+
+    }
+
+
 }
