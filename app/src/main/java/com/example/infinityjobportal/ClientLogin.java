@@ -82,16 +82,14 @@ public class ClientLogin extends AppCompatActivity {
         });
 
 
-
-
+        Log.d(TAG, "onCreate: has ended.");
 
     }
 
     private void autoLogin() {
+        Log.d(TAG, "autoLogin: has started");
 
-
-
-        mAuth.signInWithEmailAndPassword("sardars270@gmail.com", "barry123")
+        mAuth.signInWithEmailAndPassword("varunmahajan292@gmail.com", "varun123")
 
                 .addOnCompleteListener(ClientLogin.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -140,6 +138,7 @@ public class ClientLogin extends AppCompatActivity {
     }
 
     public void logInFunction(View view) {
+        Log.d(TAG, "logInFunction: has started.");
         if (email.getText().toString().contentEquals("")) {
 
 
@@ -155,6 +154,7 @@ public class ClientLogin extends AppCompatActivity {
             progressBar.setVisibility(View.VISIBLE);
 
             mAuth.signInWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
+                    // mAuth.signInWithEmailAndPassword("sardars270@gmail.com", "barry123")
            // mAuth.signInWithEmailAndPassword("sardars270@gmail.com", "barry123")
 
                     .addOnCompleteListener(ClientLogin.this, new OnCompleteListener<AuthResult>() {
@@ -171,7 +171,7 @@ public class ClientLogin extends AppCompatActivity {
                                         progressBar.setVisibility(View.GONE);
                                         //errorView.setText("");
                                         // errorView.setVisibility(View.GONE);
-                                        Intent HomeActivity = new Intent(getApplicationContext(), MainActivity.class);
+                                        Intent HomeActivity = new Intent(getApplicationContext(), interests.class);
                                         //   setResult(RESULT_OK, null);
                                         startActivity(HomeActivity);
 

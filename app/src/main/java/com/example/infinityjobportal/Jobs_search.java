@@ -116,7 +116,7 @@ public class Jobs_search extends AppCompatActivity {
                             p.setJobTitle(d.getString("jobTitle"));
                             p.setCompanyName(d.getString("companyName"));
                             p.setCityAddress(d.getString("cityAddress"));
-//                            p.setId(d.getId());
+                            p.setId(d.getId());
 
                             exampleList.add(p);
                         }

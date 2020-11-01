@@ -13,9 +13,13 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class test extends AppCompatActivity {
@@ -23,7 +27,7 @@ Button button;
 
 FirebaseAuth mAuth;
 
-
+    ArrayList<String> saveIdList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,36 +36,58 @@ FirebaseAuth mAuth;
         mAuth = FirebaseAuth.getInstance();
 
 button = findViewById(R.id.button);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-                Map<String, Object> user = new HashMap<>();
-                user.put("first", "Ada");
-                user.put("last", "Lovelace");
-                user.put("born", 1815);
-
-// Add a new document with a generated ID
-                db.collection("users")
-                        .add(user)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                db.collection("MyJobs").get()
+                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                               // Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                                Toast.makeText(getApplicationContext(),"data added..", Toast.LENGTH_SHORT).show();
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                //Log.w(TAG, "Error adding document", e);
-                                Toast.makeText(getApplicationContext(),"error..", Toast.LENGTH_SHORT).show();
+                                if (!queryDocumentSnapshots.isEmpty()) {
 
+                                    List<DocumentSnapshot> list1 = queryDocumentSnapshots.getDocuments();
+
+                                    for (DocumentSnapshot d : list1) {
+
+                                        // PostJobPojo p = d.toObject(PostJobPojo.class);
+                                        //  p.setJobTitle(d.getString("jobTitle"));
+                                        // p.setCompanyName(d.getString("companyName"));
+                                        //p.setCityAddress(d.getString("cityAddress"));
+                                        //p.setId(d.getId());
+
+                                        saveIdList.add(d.getString("jobId"));
+                                        // Toast.makeText(getContext(),d.getString("jobId"),Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(getContext(),saveIdList,Toast.LENGTH_SHORT).show();
+                                    }
+                                    //adapter.notifyDataSetChanged();
+                                }
                             }
                         });
-            }
+
+
+
+                for(int i=0; i<saveIdList.size(); i++) {
+                  //  text.setText(saveIdList.get(i));
+                    Toast.makeText(getApplicationContext(), saveIdList.get(i), Toast.LENGTH_SHORT).show();
+                }
+
+
+
+
+
+
+
+
+
+
+
+           }
         });
     }
 }

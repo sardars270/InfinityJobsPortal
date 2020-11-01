@@ -54,9 +54,9 @@ public class PostJobFragment extends Fragment {
     double longitude;
 
     private EditText mJobTitleEditText, mStreetAddressEditText, mCityAddressEditText, mProvinceAddressEditText, mStartSalaryRangeEditText, mSalaryEndRangeEditText,
-            mJoiningEditTextDate, mApplicationDeadlineEditTextDate, mJobDescriptionEditText, mSkillsRequiredEditText,
+            mJoiningEditTextDate, mAvailabilityEditText, mApplicationDeadlineEditTextDate, mJobDescriptionEditText, mSkillsRequiredEditText,
             mQualificationRequiredEditText;
-    private Spinner mJobCategorySpinner, mTypeOfEmployerSpinner, mCompanyNameSpinner;
+    private Spinner mJobCategorySpinner, mCompanyNameSpinner;
     private CheckBox mEnglishCheckBox, mFrenchCheckBox;
     private Button mPostJobSubmitButton, mPostJobDraftButton;
 
@@ -76,7 +76,7 @@ public class PostJobFragment extends Fragment {
         mProvinceAddressEditText = root.findViewById(R.id.provinceEditText);
         mEnglishCheckBox = root.findViewById(R.id.radioEnglish);
         mFrenchCheckBox = root.findViewById(R.id.radioFrench);
-        mTypeOfEmployerSpinner = root.findViewById(R.id.availabilityEditText);
+        mAvailabilityEditText = root.findViewById(R.id.availabilityEditText);
         mStartSalaryRangeEditText = root.findViewById(R.id.salaryStartRangeEditText);
         mSalaryEndRangeEditText = root.findViewById(R.id.salaryEndRangeEditText);
         mApplicationDeadlineEditTextDate = root.findViewById(R.id.applicationDeadlineEditTextDate);
@@ -226,7 +226,7 @@ public class PostJobFragment extends Fragment {
                 Float minSalary = Float.parseFloat(mStartSalaryRangeEditText.getText().toString());
                 Float maxSalary = Float.parseFloat(mSalaryEndRangeEditText.getText().toString());
 
-                String availability = mTypeOfEmployerSpinner.getSelectedItem().toString();
+                String availability = mAvailabilityEditText.getText().toString();
                 String joiningDate = mJoiningEditTextDate.getText().toString();
                 String applicationDeadline = mApplicationDeadlineEditTextDate.getText().toString();
                 String jobDescription = mJobDescriptionEditText.getText().toString();
@@ -402,7 +402,7 @@ public class PostJobFragment extends Fragment {
                 Float minSalary = Float.parseFloat(mStartSalaryRangeEditText.getText().toString());
                 Float maxSalary = Float.parseFloat(mSalaryEndRangeEditText.getText().toString());
 
-                String availability = mTypeOfEmployerSpinner.getSelectedItem().toString();
+                String availability = mAvailabilityEditText.getText().toString();
                 String joiningDate = mJoiningEditTextDate.getText().toString();
                 String applicationDeadline = mApplicationDeadlineEditTextDate.getText().toString();
                 String jobDescription = mJobDescriptionEditText.getText().toString();

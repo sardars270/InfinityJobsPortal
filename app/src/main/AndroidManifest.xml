@@ -25,6 +25,7 @@
 
         </activity>
 
+        <activity android:name=".test"></activity>
         <activity
             android:name=".ClientChangePassword"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -40,7 +41,7 @@
         <activity
             android:name=".UpdateUserPic"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity android:name=".test" />
+
         <activity
             android:name=".admin.ChangePassword"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -56,6 +57,7 @@
         <activity android:name=".Jobs_search" />
         <activity android:name=".Applied_jobs" />
         <activity android:name=".SavedJobsActivity" />
+        <activity android:name=".MyJobDetails" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".AdminLogin"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
