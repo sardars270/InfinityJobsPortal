@@ -1,19 +1,11 @@
 package com.example.infinityjobportal;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.solver.widgets.Rectangle;
-import androidx.navigation.Navigation;
-
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,20 +17,19 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.infinityjobportal.R;
-import com.example.infinityjobportal.model.*;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.infinityjobportal.model.PostJobPojo;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polygon;
-import com.google.android.gms.maps.model.PolygonOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -49,14 +40,13 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class SearchViewMap extends AppCompatActivity implements OnMapReadyCallback {
     GoogleMap map;
-    ImageView  back;
+    ImageView back;
     SupportMapFragment mapFragment;
     SearchView searchView;
 
@@ -69,14 +59,14 @@ public class SearchViewMap extends AppCompatActivity implements OnMapReadyCallba
     SeekBar seekRadius;
     TextView textSeek;
     int radius;
-    String TAG="data is fetched";
+    String TAG = "data is fetched";
     FloatingActionButton FloatingActionButton;
-    private List streetList=new ArrayList<>();
-    ArrayList<String> D=new ArrayList<>();
+    private List streetList = new ArrayList<>();
+    ArrayList<String> D = new ArrayList<>();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-  //  LocationManager locationManager;
-   // private static final int REQUEST_LOCATION_PERMISSION = 1;
+    //  LocationManager locationManager;
+    // private static final int REQUEST_LOCATION_PERMISSION = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,16 +76,15 @@ public class SearchViewMap extends AppCompatActivity implements OnMapReadyCallba
         seekRadius = (SeekBar) findViewById(R.id.seekRadius);
         textSeek = findViewById(R.id.textSeek);
         back = findViewById(R.id.back);
-       FloatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        FloatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-
 
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               finish();
+                finish();
             }
         });
 
@@ -123,8 +112,6 @@ public class SearchViewMap extends AppCompatActivity implements OnMapReadyCallba
         });
 
 
-
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -145,7 +132,6 @@ public class SearchViewMap extends AppCompatActivity implements OnMapReadyCallba
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
 
 
-
                     db.collection("Jobs").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -157,7 +143,7 @@ public class SearchViewMap extends AppCompatActivity implements OnMapReadyCallba
 
                                     PostJobPojo p = d.toObject(PostJobPojo.class);
                                     street = p.getStreetAddress();
-                                   streetList.add(street);
+                                    streetList.add(street);
 
 
                                     city = p.getCityAddress();
@@ -172,21 +158,20 @@ public class SearchViewMap extends AppCompatActivity implements OnMapReadyCallba
                                     float[] results = new float[streetList.size()];
 
 
-                                    Location.distanceBetween(address.getLatitude(), address.getLongitude(),  lat, lng, results);
-                                    final LatLng newposition = new LatLng(lat,lng);
+                                    Location.distanceBetween(address.getLatitude(), address.getLongitude(), lat, lng, results);
+                                    final LatLng newposition = new LatLng(lat, lng);
                                     float distance = results[0];
-                                   // int kilometer = (int) (distance / 1000);
+                                    // int kilometer = (int) (distance / 1000);
                                     if (distance < radius) {
 
                                         MarkerOptions markerOptions1 = new MarkerOptions().position(newposition).title("Destination Location");
-                                    final Marker  marker= map.addMarker(markerOptions1);
-                                    marker.setTag(street + "," + city);
-                                        lattu=marker.getPosition().latitude;
-                                        longu=marker.getPosition().longitude;
+                                        final Marker marker = map.addMarker(markerOptions1);
+                                        marker.setTag(street + "," + city);
+                                        lattu = marker.getPosition().latitude;
+                                        longu = marker.getPosition().longitude;
 
 
-
-                                        if (lattu==lat& longu==lng) {
+                                        if (lattu == lat & longu == lng) {
                                             db.collection("Jobs").whereEqualTo("latitude", lattu).whereEqualTo("longitude", longu).get()
                                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                                         @Override
@@ -199,7 +184,6 @@ public class SearchViewMap extends AppCompatActivity implements OnMapReadyCallba
                                                                     D.add(document.getId());
 
 
-
                                                                 }
                                                             } else {
                                                                 Log.d(TAG, "Error getting documents: ", task.getException());
@@ -209,24 +193,16 @@ public class SearchViewMap extends AppCompatActivity implements OnMapReadyCallba
                                                     });
                                         }
 
-                                            FloatingActionButton.setOnClickListener(new View.OnClickListener() {
-                                                                                        public void onClick(View v) {
+                                        FloatingActionButton.setOnClickListener(new View.OnClickListener() {
+                                            public void onClick(View v) {
 
-                                                                                            GlobalStorage.S=D;
-                                                                                            Intent intent = new Intent(SearchViewMap.this, MapFilterData.class);
-                                                                                            startActivity(intent);
-
-
-
-                                                                                        }
-                                                                                    });
+                                                GlobalStorage.S = D;
+                                                Intent intent = new Intent(SearchViewMap.this, MapFilterData.class);
+                                                startActivity(intent);
 
 
-
-
-
-
-
+                                            }
+                                        });
 
 
                                         map.animateCamera(CameraUpdateFactory.newLatLngZoom(newposition, 10));
@@ -236,11 +212,10 @@ public class SearchViewMap extends AppCompatActivity implements OnMapReadyCallba
                                         @Override
                                         public boolean onMarkerClick(Marker marker) {
 
-                                            Toast.makeText(SearchViewMap.this, ""+marker.getTag(), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(SearchViewMap.this, "" + marker.getTag(), Toast.LENGTH_SHORT).show();
                                             String start = address.getAddressLine(0);
                                             String dest = (String) marker.getTag();
                                             displayTrack(start, dest);
-
 
 
                                             return false;
@@ -255,12 +230,6 @@ public class SearchViewMap extends AppCompatActivity implements OnMapReadyCallba
                         }
 
                     });
-
-
-
-
-
-
 
 
                     /////////////////////////////
@@ -288,29 +257,24 @@ public class SearchViewMap extends AppCompatActivity implements OnMapReadyCallba
     }
 
 
-
-
-
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
-        map=googleMap;
-
+        map = googleMap;
 
 
     }
+
     private void displayTrack(String startpoint, String endpoint) {
         try {
-            Uri uri= Uri.parse("https://www.google.co.in/maps/dir/"+startpoint+"/"+endpoint);
-            Intent intent=new Intent(Intent.ACTION_VIEW,uri);
+            Uri uri = Uri.parse("https://www.google.co.in/maps/dir/" + startpoint + "/" + endpoint);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             intent.setPackage("com.google.android.apps.maps");
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        }
-        catch(ActivityNotFoundException e) {
-            Uri uri=Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps.maps");
-            Intent intent=new Intent(Intent.ACTION_VIEW,uri);
+        } catch (ActivityNotFoundException e) {
+            Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps.maps");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }

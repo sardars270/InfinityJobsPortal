@@ -13,8 +13,8 @@ public class PostJobPojo {
     private String cityAddress;
     private String provinceAddress;
     private String language;
-    private Double minSalary;
-    private Double maxSalary;
+    private Float minSalary;
+    private Float maxSalary;
     private String availability;
     private String joiningDate;
     private String applicationDeadline;
@@ -34,7 +34,7 @@ public class PostJobPojo {
         this.jobTitle = jobTitle;
     }
 
-    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Double minSalary, Double maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired, String status, String date, double latitude, double longitude) {
+    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Float minSalary, Float maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired, String status, String date, double latitude, double longitude) {
         this.companyName = companyName;
         this.jobCategory = jobCategory;
         this.jobTitle = jobTitle;
@@ -58,7 +58,7 @@ public class PostJobPojo {
 
     }
 
-    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Double minSalary, Double maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired,double latitude,double longitude) {
+    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Float minSalary, Float maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired,double latitude,double longitude) {
         this.companyName = companyName;
         this.jobCategory = jobCategory;
         this.jobTitle = jobTitle;
@@ -138,11 +138,11 @@ public class PostJobPojo {
         return language;
     }
 
-    public Double getMinSalary() {
+    public Float getMinSalary() {
         return minSalary;
     }
 
-    public Double getMaxSalary() {
+    public Float getMaxSalary() {
         return maxSalary;
     }
 
@@ -198,11 +198,11 @@ public class PostJobPojo {
         this.language = language;
     }
 
-    public void setMinSalary(Double minSalary) {
+    public void setMinSalary(Float minSalary) {
         this.minSalary = minSalary;
     }
 
-    public void setMaxSalary(Double maxSalary) {
+    public void setMaxSalary(Float maxSalary) {
         this.maxSalary = maxSalary;
     }
 
