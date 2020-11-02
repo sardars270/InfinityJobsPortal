@@ -90,16 +90,15 @@ public class Jobs_search extends AppCompatActivity {
 
 
         if (!GlobalStorage.language.equals("") && !GlobalStorage.jobCatogory.equals("Any")) {// botth active
-            query=collectionReference.whereEqualTo("language", GlobalStorage.language).whereEqualTo("jobCategory",GlobalStorage.jobCatogory);//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
+            query=collectionReference.whereEqualTo("language", GlobalStorage.language).whereEqualTo("jobCategory",GlobalStorage.jobCatogory).whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
 
         } else if (!GlobalStorage.language.equals("") && GlobalStorage.jobCatogory.equals("Any")) {// only language active && category disabled {
-            query=collectionReference.whereEqualTo("language", GlobalStorage.language);//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
+            query=collectionReference.whereEqualTo("language", GlobalStorage.language).whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
         }
         else if (GlobalStorage.language.equals("") && !GlobalStorage.jobCatogory.equals("Any")) {// only language disabled && category active {
-            query=collectionReference.whereEqualTo("jobCategory",GlobalStorage.jobCatogory);//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
+            query=collectionReference.whereEqualTo("jobCategory",GlobalStorage.jobCatogory).whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
         }else {
          query=collectionReference;
-           //query=collectionReference.whereEqualTo("language", "English");//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
 
         }
                   query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -132,7 +131,7 @@ public class Jobs_search extends AppCompatActivity {
                     }
                 }
             });
-        } ;
+        }
 
     //fillExamplelist     end here
 

@@ -42,7 +42,7 @@ Context context;
         TextView textView1;
         CardView lout;
 
-        TextView title, at, location,id;
+        TextView title, at, location,id, category, language, salary;
         ImageView saveJob;
 
 
@@ -58,7 +58,11 @@ Context context;
             saveJob  = itemView.findViewById(R.id.saveJob);
 
             id  = itemView.findViewById(R.id.id);
-           // textView2 = itemView.findViewById(R.id.text_view2);
+            language  = itemView.findViewById(R.id.language);
+            salary  = itemView.findViewById(R.id.salary);
+            category  = itemView.findViewById(R.id.category);
+
+            // textView2 = itemView.findViewById(R.id.text_view2);
         }
     }
 
@@ -84,6 +88,9 @@ Context context;
         holder.textView1.setText(currentItem.getJobTitle());
         holder.at.setText(currentItem.getCompanyName());
         holder.location.setText(currentItem.getCityAddress());
+        holder.language.setText(currentItem.getLanguage());
+        holder.category.setText(currentItem.getJobCategory());
+        holder.salary.setText("$"+currentItem.getMinSalary()+" - $"+ currentItem.getMaxSalary());
         holder.id.setText(currentItem.getId());
         mAuth = FirebaseAuth.getInstance();
         db=FirebaseFirestore.getInstance();

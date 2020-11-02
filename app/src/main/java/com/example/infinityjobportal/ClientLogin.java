@@ -1,5 +1,8 @@
 package com.example.infinityjobportal;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,8 +16,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -50,7 +51,7 @@ public class ClientLogin extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-     //   autoLogin();
+        autoLogin();
 
         //SIGNUP onClick Listener.
         signup.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +89,7 @@ public class ClientLogin extends AppCompatActivity {
     private void autoLogin() {
         Log.d(TAG, "autoLogin: has started");
 
-        mAuth.signInWithEmailAndPassword("dhdhariaajit@gmail.com", "123456")
+        mAuth.signInWithEmailAndPassword("varunmahajan292@gmail.com", "varun123")
 
                 .addOnCompleteListener(ClientLogin.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -107,6 +108,7 @@ public class ClientLogin extends AppCompatActivity {
                                     Intent HomeActivity = new Intent(getApplicationContext(), MainActivity.class);
                                     //   setResult(RESULT_OK, null);
                                     startActivity(HomeActivity);
+
 
 
                                 } else {
@@ -136,22 +138,15 @@ public class ClientLogin extends AppCompatActivity {
     }
 
     public void logInFunction(View view) {
-
-
+        Log.d(TAG, "logInFunction: has started.");
         if (email.getText().toString().contentEquals("")) {
 
-            YoYo.with(Techniques.Shake)
-                    .duration(700)
-                    .repeat(2)
-                    .playOn(email);
+
             errorView.setText("Email cant be empty");
 
 
         } else if (pass.getText().toString().contentEquals("")) {
-            YoYo.with(Techniques.Shake)
-                    .duration(700)
-                    .repeat(2)
-                    .playOn(pass);
+
             errorView.setText("Password cant be empty");
 
         } else {
@@ -160,6 +155,7 @@ public class ClientLogin extends AppCompatActivity {
 
             mAuth.signInWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
                     // mAuth.signInWithEmailAndPassword("sardars270@gmail.com", "barry123")
+           // mAuth.signInWithEmailAndPassword("sardars270@gmail.com", "barry123")
 
                     .addOnCompleteListener(ClientLogin.this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -175,9 +171,10 @@ public class ClientLogin extends AppCompatActivity {
                                         progressBar.setVisibility(View.GONE);
                                         //errorView.setText("");
                                         // errorView.setVisibility(View.GONE);
-                                        Intent HomeActivity = new Intent(getApplicationContext(), MainActivity.class);
+                                        Intent HomeActivity = new Intent(getApplicationContext(), interests.class);
                                         //   setResult(RESULT_OK, null);
                                         startActivity(HomeActivity);
+
 
 
                                     } else {

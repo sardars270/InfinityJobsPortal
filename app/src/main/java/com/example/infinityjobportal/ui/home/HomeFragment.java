@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.infinityjobportal.ClientLogin;
+import com.example.infinityjobportal.GlobalStorage;
 import com.example.infinityjobportal.Jobs_search;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.adapter.Adapterjoblist;
@@ -27,6 +28,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -40,11 +42,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
-    private static final String TAG = "HomeFragment";
     private RecyclerView recjoblist;
     TextView search, text;
-
+    int count;
+    FirebaseAuth mAuth;
     private ArrayList<PostJobPojo> list=new ArrayList<PostJobPojo>();
+    private ArrayList<PostJobPojo> notAppliedList=new ArrayList<PostJobPojo>();
 
     ArrayList<String> saveIdList = new ArrayList<>();
     Adapterjoblist adapter;
@@ -62,45 +65,53 @@ public class HomeFragment extends Fragment {
         text=root.findViewById(R.id.text);
 
         db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        collectionReference = db.collection("Jobs");
 
 
-
-        text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadMyJobsList();
-            }
-        });
-       // loadMyJobsList();
-
-         collectionReference = db.collection("Jobs");
+      //  loadList();
+        loadMyJobsList();
 
 
 
 
-                           collectionReference.get()
-                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                        @Override
-                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
-                            if (!queryDocumentSnapshots.isEmpty()) {
 
-                                List<DocumentSnapshot> list1 = queryDocumentSnapshots.getDocuments();
 
-                                for (DocumentSnapshot d : list1) {
 
-                                    PostJobPojo p = d.toObject(PostJobPojo.class);
-                                    p.setJobTitle(d.getString("jobTitle"));
-                                    p.setCompanyName(d.getString("companyName"));
-                                    p.setCityAddress(d.getString("cityAddress"));
-                                    p.setId(d.getId());
+        return root;
+    }
 
-                                    list.add(p);
-                                }
-                                adapter.notifyDataSetChanged();
+    private void loadList() {
+
+        collectionReference//.whereLessThan("minSalary",20).whereGreaterThan("minSalary",10)
+                //.whereEqualTo("jobCategory", "Technology")//
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        if (!queryDocumentSnapshots.isEmpty()) {
+
+                            List<DocumentSnapshot> list1 = queryDocumentSnapshots.getDocuments();
+
+                            for (DocumentSnapshot d : list1) {
+
+                                PostJobPojo p = d.toObject(PostJobPojo.class);
+                                p.setJobTitle(d.getString("jobTitle"));
+                                p.setCompanyName(d.getString("companyName"));
+                                p.setCityAddress(d.getString("cityAddress"));
+                                //   p.setMinSalary(Double.valueOf(d.getString("minSalary")));
+                                p.setJobCategory(d.getString("jobCategory"));
+                                p.setLanguage(d.getString("language"));
+                                p.setId(d.getId());
+
+                                list.add(p);
                             }
+                            adapter.notifyDataSetChanged();
                         }
-                    });
+                    }
+                });
 
 
 
@@ -110,13 +121,13 @@ public class HomeFragment extends Fragment {
         recjoblist.setLayoutManager(new LinearLayoutManager(getContext()));
         recjoblist.setAdapter(adapter);
 
-
-
-        return root;
     }
 
+
+
     private void loadMyJobsList() {
-        db.collection("MyJobs").whereEqualTo("type","application").get()
+        db.collection("MyJobs").whereEqualTo("uid", mAuth.getCurrentUser().getEmail())//.whereEqualTo("type","application")
+                .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -132,22 +143,35 @@ public class HomeFragment extends Fragment {
                                 // p.setCompanyName(d.getString("companyName"));
                                 //p.setCityAddress(d.getString("cityAddress"));
                                 //p.setId(d.getId());
-                          saveIdList.add(d.getString("jobId"));
+
+                                saveIdList.add(d.getString("jobId"));
+                               // saveIdList.add(d.getId());
                                // Toast.makeText(getContext(),d.getString("jobId"),Toast.LENGTH_SHORT).show();
                                 //Toast.makeText(getContext(),saveIdList,Toast.LENGTH_SHORT).show();
                             }
+
+                           // showToast();
                             //adapter.notifyDataSetChanged();
                         }
+
                     }
+
+
+                    private void showToast() {
+
+                        for(int i=0; i<saveIdList.size(); i++) {
+                            // text.setText(saveIdList.get(i));
+                            Toast.makeText(getContext(), saveIdList.get(i), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+
                 });
 
 
 
-
-
-        list.clear();
-
-         collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
@@ -155,34 +179,35 @@ public class HomeFragment extends Fragment {
 
                     List<DocumentSnapshot> list1 = queryDocumentSnapshots.getDocuments();
 
+                    count = list1.size();
                     for (DocumentSnapshot d : list1) {
+                        int count=0;
+                        PostJobPojo p = d.toObject(PostJobPojo.class);
+                        p.setId(d.getId());
 
                         for(int i=0; i<saveIdList.size(); i++) {
-                            if(d.getId().equals(saveIdList.get(i))) {
-                                PostJobPojo p = d.toObject(PostJobPojo.class);
-                                p.setJobTitle(d.getString("jobTitle"));
-                                p.setCompanyName(d.getString("companyName"));
-                                p.setCityAddress(d.getString("cityAddress"));
-                                p.setId(d.getId());
-
-                                list.add(p);
+                            if(d.getId().equals(String.valueOf(saveIdList.get(i)))) {
+                                count=1;
                             }
                         }
+                        if(count==0)
+                        notAppliedList.add(p);
                     }
                     adapter.notifyDataSetChanged();
+                    text.setText("Total Result : "+String.valueOf(count));
                 }
             }
+
+
         });
 
 
+        adapter =new Adapterjoblist(getContext(), notAppliedList);
 
 
-
-        for(int i=0; i<saveIdList.size(); i++) {
-             // text.setText(saveIdList.get(i));
-              Toast.makeText(getContext(), saveIdList.get(i), Toast.LENGTH_SHORT).show();
-          }
-
+        recjoblist.setHasFixedSize(true);
+        recjoblist.setLayoutManager(new LinearLayoutManager(getContext()));
+        recjoblist.setAdapter(adapter);
 
 
     }
