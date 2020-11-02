@@ -1,11 +1,13 @@
 package com.example.infinityjobportal;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -20,8 +22,14 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.bumptech.glide.Glide;
+import com.example.infinityjobportal.model.User;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -31,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     AppBarConfiguration mAppBarConfiguration;
     DrawerLayout drawer;
     Toolbar toolbar;
+    ImageView img;
+    User user;
     NavigationView navigationView;
     NavController navController;
 
@@ -43,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         //set up toolbar as we are using noActionBarTheme
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        img= findViewById(R.id.imageView_navigation_header);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -55,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 
 

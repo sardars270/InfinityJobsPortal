@@ -54,7 +54,7 @@ public class PostJobFragment extends Fragment {
     private static final String QUALIFICATION_REQUIRED = "Qualification Required";
 
 
-    private PostJobViewModel postJobViewModel;
+   // private PostJobViewModel postJobViewModel;
     private EditText mCompanyNameEditText, mJobTitleEditText, mStreetAddressEditText, mCityAddressEditText, mProvinceAddressEditText, mStartSalaryRangeEditText, mSalaryEndRangeEditText,
             mJoiningEditTextDate, mApplicationDeadlineEditTextDate, mJobDescriptionEditText, mSkillsRequiredEditText,
             mQualificationRequiredEditText;
@@ -68,15 +68,10 @@ public class PostJobFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: has Started");
 
-        postJobViewModel = ViewModelProviders.of(this).get(PostJobViewModel.class);
+        //postJobViewModel = ViewModelProviders.of(this).get(PostJobViewModel.class);
         View root = inflater.inflate(R.layout.fragment_post_job, container, false);
         final TextView textView = root.findViewById(R.id.letsGetStartedTextView);
-        postJobViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
 
 
 

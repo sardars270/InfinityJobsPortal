@@ -1,6 +1,7 @@
 package com.example.infinityjobportal.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,17 +10,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infinityjobportal.JobDetails;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.PostJobPojo;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHolder>{
+    FirebaseFirestore db;
+    FirebaseAuth mAuth;
     Context context;
+
     ArrayList<PostJobPojo> ar1;
     public Adapterjoblist(Context context, ArrayList<PostJobPojo> ar1) {
 
@@ -49,7 +59,43 @@ public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHold
         holder.at.setText(pj.getCompanyName());
         holder.location.setText(pj.getCityAddress());
         holder.id.setText(pj.getId());
+        mAuth = FirebaseAuth.getInstance();
+        db=FirebaseFirestore.getInstance();
+        holder.saveJob.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View view) {
+                HashMap apllication = new HashMap();
+                apllication.put("uid",mAuth.getCurrentUser().getEmail());
+                apllication.put("jobId",holder.id.getText().toString());
+                apllication.put("type","save");
+
+                db.collection("MyJobs").add(apllication)
+                        .addOnSuccessListener(new OnSuccessListener() {
+                            @Override
+                            public void onSuccess(Object o) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                builder.setMessage("Job saved to my jobs section.")
+                                        .setCancelable(false)
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                              //  finish();
+                                            }
+                                        });
+                                AlertDialog alert = builder.create();
+                                alert.show();
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+                            }
+                        });
+
+            }
+        });
 
         holder.lout.setOnClickListener(new View.OnClickListener() {
             @Override

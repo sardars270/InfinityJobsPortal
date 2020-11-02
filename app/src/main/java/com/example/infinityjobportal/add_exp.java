@@ -84,7 +84,7 @@ public class add_exp extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         mAuth=FirebaseAuth.getInstance();
 
-        final global_vars globalVariable = (global_vars) faltu_context.context;
+      //  final global_vars globalVariable = (global_vars) faltu_context.context;
         start_date.addTextChangedListener(new TextWatcher() {
             private String current = "";
             private String ddmmyyyy = "DDMMYYYY";
