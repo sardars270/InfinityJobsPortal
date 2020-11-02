@@ -1,17 +1,14 @@
-package com.example.infinityjobportal.adapter;
+package com.example.infinityjobportal.ui.postedJobs;
 
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.infinityjobportal.ActiveJobsFragment;
-import com.example.infinityjobportal.ClosedJobsFragment;
-import com.example.infinityjobportal.DraftJobsFragment;
+import com.example.infinityjobportal.ui.postedJobs.activeJobs.ActiveJobsFragment;
+import com.example.infinityjobportal.ui.postedJobs.closedJobs.ClosedJobsFragment;
+import com.example.infinityjobportal.ui.postedJobs.draftJobs.DraftJobsFragment;
 
 public class PostedJobsPagerAdapter extends FragmentStateAdapter {
 

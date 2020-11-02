@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/active_jobs_constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/edit_text_background"
-    android:id="@+id/active_jobs_constraint_layout">
+    android:background="@drawable/edit_text_background">
 
 
     <TextView
-        android:id="@+id/jobTitleActiveJobsTextView"
+        android:id="@+id/jobTitleDraftJobsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -25,32 +23,32 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/companyNameActiveJobsTextView"
+        android:id="@+id/companyNameDraftJobsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/robotoregular"
         android:text="Company Name"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/jobTitleActiveJobsTextView"
-        app:layout_constraintTop_toBottomOf="@+id/jobTitleActiveJobsTextView" />
+        app:layout_constraintStart_toStartOf="@+id/jobTitleDraftJobsTextView"
+        app:layout_constraintTop_toBottomOf="@+id/jobTitleDraftJobsTextView" />
 
     <TextView
-        android:id="@+id/companyAddressActiveJobsTextView"
+        android:id="@+id/companyAddressDraftJobsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/robotoregular"
         android:text="Company Address"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/companyNameActiveJobsTextView"
-        app:layout_constraintTop_toBottomOf="@+id/companyNameActiveJobsTextView" />
+        app:layout_constraintStart_toStartOf="@+id/companyNameDraftJobsTextView"
+        app:layout_constraintTop_toBottomOf="@+id/companyNameDraftJobsTextView" />
 
     <Button
-        android:id="@+id/jobDetailsActiveJobsButton"
+        android:id="@+id/jobDetailsDraftJobsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/button_pressed"
         android:fontFamily="@font/robotoregular"
@@ -58,13 +56,13 @@
         android:text="Job Details"
         android:textAllCaps="false"
         android:textColor="#ffffff"
-        android:textSize="20dp"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/companyAddressActiveJobsTextView"
-        app:layout_constraintTop_toBottomOf="@+id/companyAddressActiveJobsTextView" />
+        app:layout_constraintStart_toStartOf="@+id/companyAddressDraftJobsTextView"
+        app:layout_constraintTop_toBottomOf="@+id/companyAddressDraftJobsTextView" />
 
     <Button
-        android:id="@+id/viewApplicationActiveJobsButton"
+        android:id="@+id/viewApplicationsActiveJobButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -75,7 +73,18 @@
         android:text="View Application"
         android:textAllCaps="false"
         android:textColor="#ffffff"
-        android:textSize="20dp"
+        android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/jobDetailsActiveJobsButton" />
+        app:layout_constraintTop_toTopOf="@+id/jobDetailsDraftJobsButton" />
+
+    <TextView
+        android:id="@+id/numberOfApplicationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/robotoregular"
+        android:text="Number of application"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/viewApplicationsActiveJobButton"
+        app:layout_constraintEnd_toEndOf="@+id/viewApplicationsActiveJobButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

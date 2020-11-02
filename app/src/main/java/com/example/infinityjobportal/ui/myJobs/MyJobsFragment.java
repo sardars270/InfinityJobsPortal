@@ -1,6 +1,7 @@
 package com.example.infinityjobportal.ui.myJobs;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,25 +12,54 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.infinityjobportal.R;
 
-public class MyJobsFragment extends Fragment {
+import com.example.infinityjobportal.adapter.myJobsPagerAdapter;
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
-    private MyJobsModel myJobsModel;
+public class MyJobsFragment extends  Fragment {
+    private static final String TAG = "PostedJobsFragment";
+
+    TabLayout tabLayout;
+    TabItem activeTab, closedTab, draftTab;
+    ViewPager2 viewPager2;
+    com.example.infinityjobportal.adapter.myJobsPagerAdapter myJobsPagerAdapter;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        myJobsModel =
-                ViewModelProviders.of(this).get(MyJobsModel.class);
+        Log.d(TAG, "onCreateView: has started");
         View root = inflater.inflate(R.layout.fragment_my_jobs, container, false);
-        final TextView textView = root.findViewById(R.id.text_my_jobs);
-        myJobsModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        viewPager2 = root.findViewById(R.id.viewPager_myjobs);
+
+        tabLayout = root.findViewById(R.id.myJobsTabBar);
+
+        myJobsPagerAdapter = new myJobsPagerAdapter(this);
+          viewPager2.setAdapter(myJobsPagerAdapter);
+
+        TabLayoutMediator rb = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                Log.d(TAG, "onConfigureTab: called");
+
+                switch (position) {
+                    case 0:
+                        tab.setText("Applied Jobs");
+                        break;
+                    case 1:
+                        tab.setText("Saved Jobs");
+                        break;
+                }
             }
         });
+
+        rb.attach();
+
+        Log.d(TAG, "onCreateView: has ended");
         return root;
     }
 }

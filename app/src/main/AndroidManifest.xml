@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.infinityjobportal">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,13 +16,20 @@
         <activity android:name=".JobDetails" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
         <activity android:name=".Filter" />
         <activity android:name=".Search" />
+        <activity android:name=".interests"></activity>
         <activity android:name=".CompanyProfileActivity" />
         <activity android:name=".AddCompanyActivity" />
         <activity android:name=".EditCompanyActivity" />
+        <activity android:name=".MapFilterData"></activity>
+        <activity android:name=".SearchViewMap" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+
+        </activity>
+
+        <activity android:name=".test"></activity>
         <activity
             android:name=".ClientChangePassword"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity
+               <activity
             android:name=".UpdateContactSection"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
@@ -30,7 +41,7 @@
         <activity
             android:name=".UpdateUserPic"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity android:name=".test" />
+
         <activity
             android:name=".admin.ChangePassword"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -41,11 +52,12 @@
         <activity android:name=".EditEducation" />
         <activity android:name=".MainEducation" />
         <activity android:name=".Update_Exp" />
-        <activity android:name=".interests" />
+
         <activity android:name=".Search_jobs" />
         <activity android:name=".Jobs_search" />
         <activity android:name=".Applied_jobs" />
         <activity android:name=".SavedJobsActivity" />
+        <activity android:name=".MyJobDetails" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".AdminLogin"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -67,6 +79,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".ListOfExperienceActiviy"
@@ -77,6 +90,21 @@
         <activity
             android:name=".add_exp"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+
+
+
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+
+
+
+
+
+
+
     </application>
 
 </manifest>

@@ -1,8 +1,11 @@
 package com.example.infinityjobportal.model;
 
+import com.google.firebase.firestore.ServerTimestamp;
+
 import java.util.Date;
 
 public class PostJobPojo {
+
     private String companyName;
     private String jobCategory;
     private String jobTitle;
@@ -10,14 +13,18 @@ public class PostJobPojo {
     private String cityAddress;
     private String provinceAddress;
     private String language;
-    private Double minSalary;
-    private Double maxSalary;
+    private Float minSalary;
+    private Float maxSalary;
     private String availability;
     private String joiningDate;
     private String applicationDeadline;
     private String jobDescription;
     private String skillsRequired;
     private String qualificationRequired;
+    private String status;
+    private String date;
+    private double latitude;
+    private double longitude;
     String id;
 
     public PostJobPojo() {
@@ -27,7 +34,7 @@ public class PostJobPojo {
         this.jobTitle = jobTitle;
     }
 
-    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Double minSalary, Double maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired) {
+    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Float minSalary, Float maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired, String status, String date, double latitude, double longitude) {
         this.companyName = companyName;
         this.jobCategory = jobCategory;
         this.jobTitle = jobTitle;
@@ -43,8 +50,65 @@ public class PostJobPojo {
         this.jobDescription = jobDescription;
         this.skillsRequired = skillsRequired;
         this.qualificationRequired = qualificationRequired;
+        this.status = status;
+        this.date = date;
+        this.latitude = latitude;
+        this.longitude = longitude;
+
+
     }
 
+    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Float minSalary, Float maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired,double latitude,double longitude) {
+        this.companyName = companyName;
+        this.jobCategory = jobCategory;
+        this.jobTitle = jobTitle;
+        this.streetAddress = streetAddress;
+        this.cityAddress = cityAddress;
+        this.provinceAddress = provinceAddress;
+        this.language = language;
+        this.minSalary = minSalary;
+        this.maxSalary = maxSalary;
+        this.availability = availability;
+        this.joiningDate = joiningDate;
+        this.applicationDeadline = applicationDeadline;
+        this.jobDescription = jobDescription;
+        this.skillsRequired = skillsRequired;
+        this.qualificationRequired = qualificationRequired;
+        this.latitude=latitude;
+        this.longitude=longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getCompanyName() {
         return companyName;
@@ -74,11 +138,11 @@ public class PostJobPojo {
         return language;
     }
 
-    public Double getMinSalary() {
+    public Float getMinSalary() {
         return minSalary;
     }
 
-    public Double getMaxSalary() {
+    public Float getMaxSalary() {
         return maxSalary;
     }
 
@@ -134,11 +198,11 @@ public class PostJobPojo {
         this.language = language;
     }
 
-    public void setMinSalary(Double minSalary) {
+    public void setMinSalary(Float minSalary) {
         this.minSalary = minSalary;
     }
 
-    public void setMaxSalary(Double maxSalary) {
+    public void setMaxSalary(Float maxSalary) {
         this.maxSalary = maxSalary;
     }
 

@@ -53,15 +53,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/logoImageView" />
 
-            <EditText
-                android:id="@+id/companyNameEditText"
+            <Spinner
+                android:id="@+id/companyNameSpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:background="@drawable/edit_text_background"
                 android:ems="10"
                 android:fontFamily="@font/robotoregular"
-                android:hint="Company Name"
                 android:inputType="textPersonName"
+                android:padding="10dp"
                 android:paddingLeft="10dp"
                 android:paddingBottom="15dp"
                 android:textColorHint="#57454545"
@@ -73,13 +74,16 @@
                 android:id="@+id/jobCategorySpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp" android:entries="@array/category"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/edit_text_background"
+                android:ems="10"
+                android:entries="@array/category"
                 android:fontFamily="@font/robotoregular"
                 android:padding="10dp"
                 android:spinnerMode="dropdown"
-                app:layout_constraintEnd_toEndOf="@+id/companyNameEditText"
-                app:layout_constraintStart_toStartOf="@+id/companyNameEditText"
-                app:layout_constraintTop_toBottomOf="@+id/companyNameEditText" />
+                app:layout_constraintEnd_toEndOf="@+id/companyNameSpinner"
+                app:layout_constraintStart_toStartOf="@+id/companyNameSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/companyNameSpinner" />
 
             <EditText
                 android:id="@+id/jobTitleEditText"
@@ -124,7 +128,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/EnterWorkLocationTextView" />
 
             <EditText
-                android:id="@+id/cityAddressSpinner"
+                android:id="@+id/cityAddressEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -133,14 +137,14 @@
                 android:hint="City"
                 android:padding="10dp"
                 android:spinnerMode="dropdown"
-                app:layout_constraintEnd_toStartOf="@+id/provinceSpinner"
+                app:layout_constraintEnd_toStartOf="@+id/provinceEditText"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="@+id/streetAddressEditText"
                 app:layout_constraintTop_toBottomOf="@+id/streetAddressEditText" />
 
             <EditText
-                android:id="@+id/provinceSpinner"
+                android:id="@+id/provinceEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -150,10 +154,10 @@
                 android:hint="Province"
                 android:padding="10dp"
                 android:spinnerMode="dropdown"
-                app:layout_constraintBaseline_toBaselineOf="@+id/cityAddressSpinner"
+                app:layout_constraintBaseline_toBaselineOf="@+id/cityAddressEditText"
                 app:layout_constraintEnd_toEndOf="@+id/streetAddressEditText"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/cityAddressSpinner" />
+                app:layout_constraintStart_toEndOf="@+id/cityAddressEditText" />
 
             <TextView
                 android:id="@+id/languageRequiredTextView"
@@ -165,9 +169,9 @@
                 android:text="Language Required"
                 android:textColor="#000000"
                 android:textSize="18dp"
-                app:layout_constraintEnd_toEndOf="@+id/provinceSpinner"
-                app:layout_constraintStart_toStartOf="@+id/cityAddressSpinner"
-                app:layout_constraintTop_toBottomOf="@+id/provinceSpinner" />
+                app:layout_constraintEnd_toEndOf="@+id/provinceEditText"
+                app:layout_constraintStart_toStartOf="@+id/cityAddressEditText"
+                app:layout_constraintTop_toBottomOf="@+id/provinceEditText" />
 
             <CheckBox
                 android:id="@+id/radioEnglish"
@@ -175,6 +179,8 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="English"
+                android:focusableInTouchMode="true"
+                android:focusable="true"
                 app:layout_constraintEnd_toStartOf="@+id/radioFrench"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="spread"
@@ -192,17 +198,32 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/radioEnglish" />
 
-            <Spinner
-                android:id="@+id/typeOfEmploymentSpinner"
+            <EditText
+                android:id="@+id/availabilityEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:focusableInTouchMode="true"
+                android:focusable="true"
                 android:background="@drawable/edit_text_background"
                 android:entries="@array/jobDaysRequirement"
                 android:padding="10dp"
+                android:hint="Enter Availability"
                 app:layout_constraintEnd_toEndOf="@+id/radioFrench"
                 app:layout_constraintStart_toStartOf="@+id/radioEnglish"
                 app:layout_constraintTop_toBottomOf="@+id/radioEnglish" />
+
+            <TextView
+                android:id="@+id/availabilityHintTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Ex: monday, tuesday, wednesday"
+                android:fontFamily="@font/robotoitalic"
+                app:layout_constraintEnd_toEndOf="@+id/availabilityEditText"
+                app:layout_constraintStart_toStartOf="@+id/availabilityEditText"
+                app:layout_constraintTop_toBottomOf="@+id/availabilityEditText">
+            </TextView>
+
 
             <TextView
                 android:id="@+id/salaryRangeTextView"
@@ -214,9 +235,9 @@
                 android:text="Salary Range"
                 android:textColor="#000000"
                 android:textSize="18dp"
-                app:layout_constraintEnd_toEndOf="@+id/typeOfEmploymentSpinner"
-                app:layout_constraintStart_toStartOf="@+id/typeOfEmploymentSpinner"
-                app:layout_constraintTop_toBottomOf="@+id/typeOfEmploymentSpinner" />
+                app:layout_constraintEnd_toEndOf="@+id/availabilityHintTextView"
+                app:layout_constraintStart_toStartOf="@+id/availabilityHintTextView"
+                app:layout_constraintTop_toBottomOf="@+id/availabilityHintTextView" />
 
             <EditText
                 android:id="@+id/salaryStartRangeEditText"
@@ -287,11 +308,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:clickable="true"
                 android:ems="10"
                 android:focusableInTouchMode="false"
                 android:hint="Application Deadline"
                 android:inputType="date"
-                android:clickable="true"
                 android:paddingLeft="10dp"
                 android:paddingBottom="15dp"
                 app:layout_constraintEnd_toEndOf="@+id/textView7"
@@ -305,8 +326,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:ems="10"
-                android:hint="Joining Date"
                 android:focusableInTouchMode="false"
+                android:hint="Joining Date"
                 android:inputType="date"
                 android:paddingLeft="10dp"
                 android:paddingBottom="15dp"
@@ -342,6 +363,7 @@
                 android:padding="10dp"
                 android:scrollbarStyle="insideInset"
                 android:scrollbars="vertical"
+                android:gravity="top"
                 app:layout_constraintEnd_toEndOf="@+id/jobDescriptionTextView"
                 app:layout_constraintStart_toStartOf="@+id/jobDescriptionTextView"
                 app:layout_constraintTop_toBottomOf="@+id/jobDescriptionTextView" />
@@ -372,6 +394,8 @@
                 android:inputType="textMultiLine"
                 android:maxLines="10"
                 android:padding="10dp"
+                android:scrollbars="vertical"
+                android:gravity="top"
                 app:layout_constraintEnd_toEndOf="@+id/skillsRequiredTextView"
                 app:layout_constraintStart_toStartOf="@+id/skillsRequiredTextView"
                 app:layout_constraintTop_toBottomOf="@+id/skillsRequiredTextView" />
@@ -401,16 +425,34 @@
                 android:inputType="textMultiLine"
                 android:maxLines="10"
                 android:padding="10dp"
+                android:scrollbars="vertical"
+                android:gravity="top"
                 app:layout_constraintEnd_toEndOf="@+id/qualificationRequiredTextView"
                 app:layout_constraintStart_toStartOf="@+id/qualificationRequiredTextView"
                 app:layout_constraintTop_toBottomOf="@+id/qualificationRequiredTextView" />
 
             <Button
+                android:id="@+id/postJobDraftButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/button_pressed"
+                android:elevation="5dp"
+                android:fontFamily="@font/robotoregular"
+                android:text="Draft"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/postJobSubmitButton"
+                app:layout_constraintStart_toStartOf="@+id/qualificationRequiredEditText"
+                app:layout_constraintTop_toBottomOf="@+id/qualificationRequiredEditText" />
+
+            <Button
                 android:id="@+id/postJobSubmitButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/button_pressed"
                 android:elevation="5dp"
                 android:fontFamily="@font/robotoregular"
@@ -419,8 +461,10 @@
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/qualificationRequiredEditText"
-                app:layout_constraintStart_toStartOf="@+id/qualificationRequiredEditText"
-                app:layout_constraintTop_toBottomOf="@+id/qualificationRequiredEditText" />
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/postJobDraftButton"
+                app:layout_constraintTop_toTopOf="@+id/postJobDraftButton"
+                app:layout_constraintVertical_bias="0.0" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

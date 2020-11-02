@@ -1,4 +1,4 @@
-package com.example.infinityjobportal;
+package com.example.infinityjobportal.ui.postedJobs.activeJobs;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,31 +10,31 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.infinityjobportal.adapter.ActiveJobsAdapter;
+import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.PostJobPojo;
+import com.example.infinityjobportal.model.User;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class ActiveJobsFragment extends Fragment {
-
-    private static final String TAG = "ActiveJobsFragment";
-
-    RecyclerView recyclerView;
-    View view;
+public class NumberOfApplication extends Fragment {
+    private static final String TAG = "NumberOfApplication";
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference jobsReference = db.collection("Jobs");
 
-    private ActiveJobsAdapter activeJobsAdapter;
+    NumberOfApplicationsAdapter numberOfApplicationsAdapter;
+
+    RecyclerView recyclerView;
+    View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: called");
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_active_jobs, container, false);
+        view = inflater.inflate(R.layout.fragment_number_of_application, container, false);
         setUpRecyclerView();
         return view;
     }
@@ -43,31 +43,32 @@ public class ActiveJobsFragment extends Fragment {
         Log.d(TAG, "setUpRecyclerView: called");
 
         //Query
-        Query query = jobsReference.whereEqualTo("status","active");
+        Query query = jobsReference.whereEqualTo("status", "active");
 
         //Recycler Options
-        FirestoreRecyclerOptions<PostJobPojo> options = new FirestoreRecyclerOptions.Builder<PostJobPojo>()
-                .setQuery(query, PostJobPojo.class)
+        FirestoreRecyclerOptions<User> options = new FirestoreRecyclerOptions.Builder<User>()
+                .setQuery(query, User.class)
                 .build();
-        activeJobsAdapter = new ActiveJobsAdapter(options);
+        numberOfApplicationsAdapter = new NumberOfApplicationsAdapter(options);
 
-        recyclerView = view.findViewById(R.id.active_posted_jobs_recyclerview);
+        recyclerView = view.findViewById(R.id.numberOfApplicationsRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(activeJobsAdapter);
+        recyclerView.setAdapter(numberOfApplicationsAdapter);
+
 
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        activeJobsAdapter.startListening();
+        numberOfApplicationsAdapter.startListening();
 
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        activeJobsAdapter.stopListening();
+        numberOfApplicationsAdapter.stopListening();
     }
 }

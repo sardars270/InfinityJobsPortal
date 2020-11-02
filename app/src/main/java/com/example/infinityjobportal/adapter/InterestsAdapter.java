@@ -30,6 +30,7 @@ public class InterestsAdapter extends RecyclerView.Adapter<InterestsAdapter.View
     // FirebaseFirestore db;
     public FirebaseFirestore db = FirebaseFirestore.getInstance();
     public InterestsAdapter(ArrayList<InterestsModel> o, Context context,String af) {
+
         this.l = o;
 
         this.context = context;
@@ -73,6 +74,8 @@ public class InterestsAdapter extends RecyclerView.Adapter<InterestsAdapter.View
 
 
 
+          del= itemView.findViewById(R.id.del);
+          ////////////
 
 
 
@@ -104,6 +107,38 @@ public class InterestsAdapter extends RecyclerView.Adapter<InterestsAdapter.View
                     // context.startActivity(new Intent(context, interests.class));
                     v.getContext().startActivity(new Intent(v.getContext(), interests.class));
 
+          /////////
+minus.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(final View v) {
+     //   Map<String, Object> city = new HashMap<>();
+       // city.put("faltu", "deleted");
+
+
+        DocumentReference washingtonRef = db.collection("allInterests").document(del.getText().toString());
+
+// Set the "isCapital" field of the city 'DC'
+        washingtonRef
+                .update("faltu", "khatam")
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                     //   Log.d(TAG, "DocumentSnapshot successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                       // Log.w(TAG, "Error updating document", e);
+                    }
+                });
+       // context.startActivity(new Intent(context, interests.class));
+        v.getContext().startActivity(new Intent(v.getContext(), interests.class));
+
+
+
+    }
+           });
 
 
                 }
