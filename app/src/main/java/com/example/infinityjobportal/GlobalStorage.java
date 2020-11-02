@@ -12,6 +12,8 @@ public class GlobalStorage {
 
     public static boolean showmsg=false;
 
+    public  static int resultCount;
+
 
     static ArrayList<String> S=new ArrayList<>();
 
