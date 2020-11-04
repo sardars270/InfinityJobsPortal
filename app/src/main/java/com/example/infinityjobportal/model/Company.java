@@ -4,12 +4,12 @@ package com.example.infinityjobportal.model;
 public class Company {
 
 
-    String id, name, location, line1, line2, city, state, country, about, desc, web, email, contact, userId, industry, logoURL;
+    String id, name, location, line1, line2, city, state, country, about, desc, web, email, contact, userId, industry,company_image;
 
     public Company() {
     }
 
-    public Company(String id, String name, String location, String line1, String line2, String city, String state, String country, String about, String desc, String web, String email, String contact, String userId, String industry, String logoURL) {
+    public Company(String id, String name, String location, String line1, String line2, String city, String state, String country, String about, String desc, String web, String email, String contact, String userId, String industry) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -25,7 +25,33 @@ public class Company {
         this.contact = contact;
         this.userId = userId;
         this.industry = industry;
-        this.logoURL = logoURL;
+    }
+
+    public Company(String id, String name, String location, String line1, String line2, String city, String state, String country, String about, String desc, String web, String email, String contact, String userId, String industry, String company_image) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.line1 = line1;
+        this.line2 = line2;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.about = about;
+        this.desc = desc;
+        this.web = web;
+        this.email = email;
+        this.contact = contact;
+        this.userId = userId;
+        this.industry = industry;
+        this.company_image = company_image;
+    }
+
+    public String getCompany_image() {
+        return company_image;
+    }
+
+    public void setCompany_image(String company_image) {
+        this.company_image = company_image;
     }
 
     public String getId() {
@@ -146,13 +172,5 @@ public class Company {
 
     public void setIndustry(String industry) {
         this.industry = industry;
-    }
-
-    public String getLogoURL() {
-        return logoURL;
-    }
-
-    public void setLogoURL(String logoURL) {
-        this.logoURL = logoURL;
     }
 }

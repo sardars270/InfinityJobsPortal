@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,6 +24,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.app.ActivityCompat;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,8 +40,6 @@ import java.util.Map;
 import java.util.UUID;
 
 
-
-
 public class EditCompanyActivity extends AppCompatActivity {
 
     AppCompatEditText tvCompanyName, tvLocation, tvLine1, tvLine2, tvCity, tvState, tvCountry, tvAbout, tvDesc, tvWeb, tvEmail, tvContact;
@@ -49,13 +47,11 @@ public class EditCompanyActivity extends AppCompatActivity {
     AppCompatButton btnSubmit;
     ImageView ivLogo;
     AppCompatImageView ivCamera;
-    TextView save;
-    ImageView back;
 
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth mAuth;
 
-    String userId = "1234";
+    String userId;
 
     FirebaseStorage storage;
     StorageReference storageReference;
@@ -70,14 +66,15 @@ public class EditCompanyActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_edit);
-       /* getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Edit Company");*/
+        getSupportActionBar().setTitle("Edit Company");
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
+        userId = mAuth.getCurrentUser().getUid();
         ivLogo = findViewById(R.id.ivLogo);
 
 
@@ -94,8 +91,6 @@ public class EditCompanyActivity extends AppCompatActivity {
         tvEmail = findViewById(R.id.tvEmail);
         tvContact = findViewById(R.id.tvContact);
         spnIndustry = findViewById(R.id.tvIndustry);
-        back=findViewById(R.id.back);
-        save=findViewById(R.id.save);
 
         companyId = getIntent().getStringExtra("id");
         final String name = getIntent().getStringExtra("name");
@@ -108,6 +103,7 @@ public class EditCompanyActivity extends AppCompatActivity {
         final String web = getIntent().getStringExtra("web");
         final String city = getIntent().getStringExtra("city");
         final String state = getIntent().getStringExtra("state");
+        final String company_image= getIntent().getStringExtra("company_image");
 
         tvCompanyName.setText(name);
         spnIndustry.setPrompt(industry);
@@ -125,18 +121,38 @@ public class EditCompanyActivity extends AppCompatActivity {
         ivLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (ActivityCompat.checkSelfPermission(EditCompanyActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(EditCompanyActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PICK_IMAGE_PERMISSION);
                 } else {
-                    Intent intent = new Intent();
-                    intent.setType("image/*");
-                    intent.setAction(Intent.ACTION_GET_CONTENT);
-                    startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+                    Intent i = new Intent(EditCompanyActivity.this, UpdateCompanyPicActivity.class);
+                    i.putExtra("companyid", companyId);
+                    startActivity(i);
+                    finish();
                 }
             }
         });
 
-        save.setOnClickListener(new View.OnClickListener() {
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        StorageReference storageReference = firebaseStorage.getReference();
+
+        StorageReference imageRef = storageReference.child("company/" + company_image);
+        imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(EditCompanyActivity.this).load(uri).into(ivLogo);
+
+                //Toast.makeText(getApplicationContext(),"Success.",Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                //Toast.makeText(getApplicationContext(),"fail.",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String companyName = tvCompanyName.getText().toString();
@@ -244,13 +260,6 @@ public class EditCompanyActivity extends AppCompatActivity {
 
             }
         });
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
 
     }
 

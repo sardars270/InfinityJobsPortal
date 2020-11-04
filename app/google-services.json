@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "313501571213-nog808ht8iu6ht4pgvu3c2uufe6r9oka.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.infinityjobportal",
-            "certificate_hash": "eb49d314b702bcc6ffafad3a39445164cf3b028c"
-          }
-        },
-        {
           "client_id": "313501571213-kiber80d3lj5pihhnbcrcd0rv90vdmip.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

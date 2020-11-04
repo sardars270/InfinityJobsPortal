@@ -3,14 +3,14 @@ package com.example.infinityjobportal.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +18,10 @@ import com.bumptech.glide.Glide;
 import com.example.infinityjobportal.CompanyProfileActivity;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.Company;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 
 import java.util.List;
@@ -33,15 +37,16 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.ViewHold
 
         public TextView tvCompanyName, tvIndustry, tvLocation;
         ConstraintLayout constraintLayout;
-        AppCompatImageView ivCompanyLogo;
+        ImageView ivCompanyLogo;
 
 
         ViewHolder(View view) {
             super(view);
-            ivCompanyLogo = view.findViewById(R.id.ivCompanyLogo);
+
             tvCompanyName = view.findViewById(R.id.tvCompanyName);
             tvIndustry = view.findViewById(R.id.tvIndustry);
             tvLocation = view.findViewById(R.id.tvLocation);
+            ivCompanyLogo = view.findViewById(R.id.ivCompanyLogo);
             constraintLayout = view.findViewById(R.id.constraintLayout);
             constraintLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -59,6 +64,7 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.ViewHold
                     i.putExtra("web", company.getWeb());
                     i.putExtra("city", company.getCity());
                     i.putExtra("state", company.getState());
+                    i.putExtra("company_image", company.getCompany_image());
                     context.startActivity(i);
                 }
             });
@@ -92,12 +98,25 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.ViewHold
         holder.tvCompanyName.setText(company.getName());
         holder.tvIndustry.setText(company.getIndustry());
         holder.tvLocation.setText(company.getLocation());
-     //   Log.e("url", company.getLogoURL());
-        Glide.with(context)
-                .load(company.getLogoURL())
-                .circleCrop()
-                .error(R.drawable.company_thumb)
-                .into(holder.ivCompanyLogo);
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        StorageReference storageReference = firebaseStorage.getReference();
+
+        StorageReference imageRef = storageReference.child("company/" + company.getCompany_image());
+        imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(context).load(uri).into(holder.ivCompanyLogo);
+
+                //Toast.makeText(getApplicationContext(),"Success.",Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                //Toast.makeText(getApplicationContext(),"fail.",Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override

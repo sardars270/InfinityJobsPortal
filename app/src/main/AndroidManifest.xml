@@ -80,7 +80,8 @@
             android:name=".add_exp"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".AddSkillsActivity" />
-
+        <activity android:name=".UpdateCompanyPicActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
     </application>
 
 </manifest>
