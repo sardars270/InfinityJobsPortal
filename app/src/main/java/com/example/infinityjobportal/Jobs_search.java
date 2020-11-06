@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.infinityjobportal.adapter.JobSearchAdapter;
 import com.example.infinityjobportal.model.PostJobPojo;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -34,18 +35,19 @@ import java.util.List;
 public class Jobs_search extends AppCompatActivity {
     private RecyclerView recjoblist;
     ImageView back;
+    ArrayList<String> saveIdList = new ArrayList<>();
     SearchView searchView;
     private ArrayList<PostJobPojo> list=new ArrayList<PostJobPojo>();
     JobSearchAdapter adapter;
     FirebaseFirestore db;
     private List<PostJobPojo> exampleList;
     LinearLayout filtersContainer;
-    TextView filter,msg;
+    TextView filter,msg, count;
     private Spinner jobCategorySpinner;
     Query q;
     String category;
-    int count=0;
-
+    FirebaseAuth mAuth;
+int cout=0;
     CollectionReference collectionReference ;
     Query query;
     @Override
@@ -54,12 +56,14 @@ public class Jobs_search extends AppCompatActivity {
         setContentView(R.layout.activity_jobs_search);
         back = findViewById(R.id.back);
         recjoblist=findViewById(R.id.recJobList);
+        count = findViewById(R.id.count);
 
         filter = findViewById(R.id.filter);
         msg = findViewById(R.id.msg);
         jobCategorySpinner = findViewById(R.id.jobCategorySpinner);
         db= FirebaseFirestore.getInstance();
         collectionReference=db.collection("Jobs");
+        mAuth = FirebaseAuth.getInstance();
 
         //msg.setVisibility(View.GONE);
         fillExampleList();
@@ -88,6 +92,60 @@ public class Jobs_search extends AppCompatActivity {
         exampleList = new ArrayList<>();
 
 
+        db.collection("MyJobs").whereEqualTo("uid", mAuth.getCurrentUser().getEmail())//.whereEqualTo("type","application")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        if (!queryDocumentSnapshots.isEmpty()) {
+
+                            List<DocumentSnapshot> list1 = queryDocumentSnapshots.getDocuments();
+
+                            for (DocumentSnapshot d : list1) {
+
+                                // PostJobPojo p = d.toObject(PostJobPojo.class);
+                                //  p.setJobTitle(d.getString("jobTitle"));
+                                // p.setCompanyName(d.getString("companyName"));
+                                //p.setCityAddress(d.getString("cityAddress"));
+                                //p.setId(d.getId());
+
+                                saveIdList.add(d.getString("jobId"));
+                                // saveIdList.add(d.getId());
+                                // Toast.makeText(getContext(),d.getString("jobId"),Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getContext(),saveIdList,Toast.LENGTH_SHORT).show();
+                            }
+
+                            // showToast();
+                            //adapter.notifyDataSetChanged();
+                        }
+
+                    }
+
+
+                    private void showToast() {
+
+                        for(int i=0; i<saveIdList.size(); i++) {
+                            // text.setText(saveIdList.get(i));
+                            Toast.makeText(getApplicationContext(), saveIdList.get(i), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+
+                });
+
+
+
+
+
+
+
+
+
+
+
+
 
         if (!GlobalStorage.language.equals("") && !GlobalStorage.jobCatogory.equals("Any")) {// botth active
             query=collectionReference.whereEqualTo("language", GlobalStorage.language).whereEqualTo("jobCategory",GlobalStorage.jobCatogory);//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
@@ -99,9 +157,9 @@ public class Jobs_search extends AppCompatActivity {
             query=collectionReference.whereEqualTo("jobCategory",GlobalStorage.jobCatogory);//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
         }else {
          query=collectionReference;
-           //query=collectionReference.whereEqualTo("language", "English");//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
 
         }
+        cout = 0;
                   query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                 @Override
                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -111,14 +169,24 @@ public class Jobs_search extends AppCompatActivity {
                         List<DocumentSnapshot> list1 = queryDocumentSnapshots.getDocuments();
 
                         for (DocumentSnapshot d : list1) {
-
+                          int cout=0;
                             PostJobPojo p = d.toObject(PostJobPojo.class);
                             p.setJobTitle(d.getString("jobTitle"));
                             p.setCompanyName(d.getString("companyName"));
                             p.setCityAddress(d.getString("cityAddress"));
                             p.setId(d.getId());
 
-                            exampleList.add(p);
+
+                            for(int i=0; i<saveIdList.size(); i++) {
+                                if(d.getId().equals(String.valueOf(saveIdList.get(i)))) {
+                                    cout=1;
+                                }
+                            }
+                            if(cout==0)
+                                exampleList.add(p);
+
+
+
                         }
 
                         RecyclerView recyclerView = findViewById(R.id.recJobList);
@@ -129,10 +197,15 @@ public class Jobs_search extends AppCompatActivity {
                         recyclerView.setLayoutManager(layoutManager);
                         recyclerView.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
+                      msg.setVisibility(View.GONE);
+
                     }
+                    count.setText("Total Result : "+exampleList.size());
                 }
             });
-        } ;
+    }
+
+
 
     //fillExamplelist     end here
 
