@@ -13,7 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UploadResume" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+        <activity android:name=".Successful"></activity>
+        <activity
+            android:name=".UploadResume"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".JobDetails"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -26,7 +29,7 @@
         <activity android:name=".MapFilterData" />
         <activity
             android:name=".SearchViewMap"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".test" />
         <activity
             android:name=".ClientChangePassword"

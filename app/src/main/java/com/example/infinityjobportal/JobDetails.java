@@ -39,12 +39,13 @@ public class JobDetails extends AppCompatActivity {
     Button save, apply;
 
     String id;
-
+    static JobDetails jobDetails;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_details);
         back = findViewById(R.id.back);
+        jobDetails = this;
 
         designation = findViewById(R.id.Designation);
         company  = findViewById(R.id.company_name);
@@ -215,5 +216,8 @@ public class JobDetails extends AppCompatActivity {
             }
         });
 
+    }
+    public static JobDetails getInstance(){
+        return   jobDetails;
     }
 }

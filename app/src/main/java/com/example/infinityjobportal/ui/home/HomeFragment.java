@@ -194,23 +194,17 @@ public class HomeFragment extends Fragment {
                         notAppliedList.add(p);
                     }
                     adapter.notifyDataSetChanged();
-                    text.setText("Total Result : "+String.valueOf(count));
+                    text.setText("Total Result : "+String.valueOf(notAppliedList.size()));
                 }
             }
 
 
         });
 
-
         adapter =new Adapterjoblist(getContext(), notAppliedList);
-
 
         recjoblist.setHasFixedSize(true);
         recjoblist.setLayoutManager(new LinearLayoutManager(getContext()));
         recjoblist.setAdapter(adapter);
-
-
     }
-
-
 }
