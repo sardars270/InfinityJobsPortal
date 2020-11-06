@@ -18,7 +18,11 @@
     <fragment
         android:id="@+id/postedJobsFragment"
         android:name="com.example.infinityjobportal.ui.postedJobs.PostedJobsFragment"
-        android:label="Posted Jobs" />
+        android:label="Posted Jobs" >
+        <action
+            android:id="@+id/action_postedJobsFragment_to_activeJobsFragment"
+            app:destination="@id/activeJobsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myProfileFragment"
         android:name="com.example.infinityjobportal.ui.myProfile.MyProfile"
@@ -27,7 +31,8 @@
         android:id="@+id/postJobFragment"
         android:name="com.example.infinityjobportal.ui.postJob.PostJobFragment"
         android:label="Post a Job"
-        tools:layout="@layout/fragment_post_job" />
+        tools:layout="@layout/fragment_post_job" >
+    </fragment>
     <fragment
         android:id="@+id/aboutUsFragment"
         android:name="com.example.infinityjobportal.ui.AboutUsFragment"
@@ -76,4 +81,26 @@
         android:name="com.example.infinityjobportal.ClientLogin"
         android:label="activity_client_login"
         tools:layout="@layout/activity_client_login" />
+    <fragment
+        android:id="@+id/activeJobsFragment"
+        android:name="com.example.infinityjobportal.ui.postedJobs.activeJobs.ActiveJobsFragment"
+        android:label="fragment_active_jobs"
+        tools:layout="@layout/fragment_active_jobs" >
+
+        <action
+            android:id="@+id/action_activeJobsFragment_to_myJobDetails"
+            app:destination="@id/myJobDetails" />
+        <action
+            android:id="@+id/action_activeJobsFragment_to_applicationFragment"
+            app:destination="@id/applicationFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/myJobDetails"
+        android:name="com.example.infinityjobportal.MyJobDetails"
+        android:label="MyJobDetails" />
+    <fragment
+        android:id="@+id/applicationFragment"
+        android:name="com.example.infinityjobportal.ui.postedJobs.activeJobs.ApplicationFragment"
+        android:label="fragment_application"
+        tools:layout="@layout/fragment_application" />>
 </navigation>
