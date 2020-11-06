@@ -1,41 +1,28 @@
 package com.example.infinityjobportal;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.infinityjobportal.adapter.adapterAppliedJobs;
-import com.example.infinityjobportal.adapter.adapteruserlist;
-import com.example.infinityjobportal.model.InterestsModel;
 import com.example.infinityjobportal.model.PostJobPojo;
-import com.example.infinityjobportal.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
@@ -43,9 +30,10 @@ import java.util.List;
 
 
 public class AppliedJobs extends Fragment {
+    private static final String TAG = "AppliedJobs";
     //EditText ed_interests;
     public String a = "";
-    public String b="";
+    public String b = "";
     Button bt_add;
     // FirebaseFirestore db;
     StorageReference mstorageRef;
@@ -58,7 +46,7 @@ public class AppliedJobs extends Fragment {
     ArrayList<PostJobPojo> list = new ArrayList<>();
     ArrayList<PostJobPojo> list2 = new ArrayList<>();
     ArrayList<PostJobPojo> list3 = new ArrayList<>();
-    ArrayList<String > l = new ArrayList<String>();
+    ArrayList<String> l = new ArrayList<>();
 
     public AppliedJobs() {
         // Required empty public constructor
@@ -77,8 +65,8 @@ public class AppliedJobs extends Fragment {
         ///////////get applied jobs by username
         String k = String.valueOf(fbauth.getCurrentUser().getEmail());
 
-
-        db.collection("MyJobs").whereEqualTo("uid", k).whereEqualTo("type","application").get()
+        Log.d(TAG, "onCreateView: getting Data");
+        db.collection("MyJobs").whereEqualTo("uid", k).whereEqualTo("type", "application").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -92,7 +80,6 @@ public class AppliedJobs extends Fragment {
 
 
                                 l.add(d.getString("jobId"));
-                                //Toast.makeText(getApplicationContext(),d.getString("uid"),Toast.LENGTH_SHORT).show();
                             }
 
                             showdata();
@@ -102,13 +89,14 @@ public class AppliedJobs extends Fragment {
                     }
                 });
 
-return root;
+        return root;
     }
 
     private void showdata() {
+        Log.d(TAG, "showdata: called");
         for (int i = 0; i < l.size(); i++) {
 
-            b=String.valueOf(l.get(i));
+            b = String.valueOf(l.get(i));
             DocumentReference docRef = db.collection("Jobs").document(l.get(i));
 
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -121,13 +109,13 @@ return root;
                             PostJobPojo user = document.toObject(PostJobPojo.class);
                             user.setJobTitle(document.getString("jobTitle"));
                             user.setJobCategory(document.getString("jobCategory"));
-                            user.setCityAddress(String.valueOf(document.getString("cityAddress")+", "+document.getString("provinceAddress")));
+                            user.setCityAddress(String.valueOf(document.getString("cityAddress") + ", " + document.getString("provinceAddress")));
                             user.setId(String.valueOf(b));
                             user.setProvinceAddress("application");
                             list2.add(user);
-                          //  Toast.makeText(getContext(),user.getJobTitle(),Toast.LENGTH_SHORT).show();
+                            //  Toast.makeText(getContext(),user.getJobTitle(),Toast.LENGTH_SHORT).show();
                             //InteAdapter.notifyDataSetChanged();
-                            InteAdapter = new adapterAppliedJobs( getContext(),list2);
+                            InteAdapter = new adapterAppliedJobs(getContext(), list2);
 
                             recy.setHasFixedSize(true);
                             recy.setLayoutManager(new LinearLayoutManager(c, RecyclerView.VERTICAL, false));
@@ -143,8 +131,9 @@ return root;
             });
 
 
-
             // Toast.makeText(getApplicationContext(),l.get(i),Toast.LENGTH_SHORT).show();
 
 
-        }}}
+        }
+    }
+}

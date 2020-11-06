@@ -1,5 +1,6 @@
 package com.example.infinityjobportal.ui.postedJobs.activeJobs;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,10 +11,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infinityjobportal.JobDetails;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.PostJobPojo;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -36,6 +39,7 @@ public class ActiveJobsFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_active_jobs, container, false);
         setUpRecyclerView();
+
         return view;
     }
 
@@ -43,7 +47,7 @@ public class ActiveJobsFragment extends Fragment {
         Log.d(TAG, "setUpRecyclerView: called");
 
         //Query
-        Query query = jobsReference.whereEqualTo("status","active");
+        Query query = jobsReference.whereEqualTo("status", "active");
 
         //Recycler Options
         FirestoreRecyclerOptions<PostJobPojo> options = new FirestoreRecyclerOptions.Builder<PostJobPojo>()
@@ -55,7 +59,6 @@ public class ActiveJobsFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(activeJobsAdapter);
-
     }
 
     @Override
