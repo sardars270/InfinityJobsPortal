@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,9 +46,9 @@ public class EditCompanyActivity extends AppCompatActivity {
     AppCompatEditText tvCompanyName, tvLocation, tvLine1, tvLine2, tvCity, tvState, tvCountry, tvAbout, tvDesc, tvWeb, tvEmail, tvContact;
     Spinner spnIndustry;
     AppCompatButton btnSubmit;
-    ImageView ivLogo;
+    ImageView ivLogo, back;
     AppCompatImageView ivCamera;
-
+    TextView save;
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth mAuth;
 
@@ -66,9 +67,7 @@ public class EditCompanyActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_edit);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Edit Company");
+
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
@@ -103,7 +102,7 @@ public class EditCompanyActivity extends AppCompatActivity {
         final String web = getIntent().getStringExtra("web");
         final String city = getIntent().getStringExtra("city");
         final String state = getIntent().getStringExtra("state");
-        final String company_image= getIntent().getStringExtra("company_image");
+        final String company_image = getIntent().getStringExtra("company_image");
 
         tvCompanyName.setText(name);
         spnIndustry.setPrompt(industry);
@@ -116,7 +115,7 @@ public class EditCompanyActivity extends AppCompatActivity {
         tvEmail.setText(email);
         tvContact.setText(contact);
 
-        btnSubmit = findViewById(R.id.btnSubmit);
+        save = findViewById(R.id.save);
 
         ivLogo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +129,14 @@ public class EditCompanyActivity extends AppCompatActivity {
                     startActivity(i);
                     finish();
                 }
+            }
+        });
+
+        back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 
@@ -152,7 +159,7 @@ public class EditCompanyActivity extends AppCompatActivity {
             }
         });
 
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String companyName = tvCompanyName.getText().toString();

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,17 +24,19 @@ import com.google.firebase.storage.StorageReference;
 public class CompanyProfileActivity extends AppCompatActivity {
 
     AppCompatImageView ivEdit;
-    ImageView ivCompanyLogo;
+    ImageView ivCompanyLogo, back;
     AppCompatTextView tvCompanyName, tvIndustry, tvLocation, tvWeb, tvAbout, tvDescription, tvEmail, tvPhone;
     String companyId;
+    TextView edit;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_profile);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+      /*  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Company Information");
+        getSupportActionBar().setTitle("Company Information");*/
         tvCompanyName = findViewById(R.id.tvCompanyName);
         tvIndustry = findViewById(R.id.tvIndustry);
         tvLocation = findViewById(R.id.tvLocation);
@@ -42,7 +45,7 @@ public class CompanyProfileActivity extends AppCompatActivity {
         tvDescription = findViewById(R.id.tvDescription);
         tvEmail = findViewById(R.id.tvEmail);
         tvPhone = findViewById(R.id.tvPhone);
-        ivCompanyLogo=findViewById(R.id.ivCompanyLogo);
+        ivCompanyLogo = findViewById(R.id.ivCompanyLogo);
 
         companyId = getIntent().getStringExtra("id");
         final String name = getIntent().getStringExtra("name");
@@ -55,7 +58,7 @@ public class CompanyProfileActivity extends AppCompatActivity {
         final String web = getIntent().getStringExtra("web");
         final String city = getIntent().getStringExtra("city");
         final String state = getIntent().getStringExtra("state");
-        final String company_image= getIntent().getStringExtra("company_image");
+        final String company_image = getIntent().getStringExtra("company_image");
 
         tvCompanyName.setText(name);
         tvIndustry.setText(industry);
@@ -66,8 +69,8 @@ public class CompanyProfileActivity extends AppCompatActivity {
         tvEmail.setText(email);
         tvPhone.setText(contact);
 
-        ivEdit = findViewById(R.id.ivEdit);
-        ivEdit.setOnClickListener(new View.OnClickListener() {
+        edit=findViewById(R.id.edit);
+        edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(CompanyProfileActivity.this, EditCompanyActivity.class);
@@ -82,11 +85,19 @@ public class CompanyProfileActivity extends AppCompatActivity {
                 i.putExtra("web", web);
                 i.putExtra("city", city);
                 i.putExtra("state", state);
-                i.putExtra("company_image",company_image);
+                i.putExtra("company_image", company_image);
                 startActivity(i);
                 finish();
             }
         });
+        back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
 
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
         StorageReference storageReference = firebaseStorage.getReference();
