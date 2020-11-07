@@ -34,13 +34,12 @@ public class MyJobsFragment extends  Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: has started");
         View root = inflater.inflate(R.layout.fragment_my_jobs, container, false);
+        viewPager2 = root.findViewById(R.id.viewPager_myjobs);
 
         tabLayout = root.findViewById(R.id.myJobsTabBar);
 
         myJobsPagerAdapter = new myJobsPagerAdapter(this);
-
-        viewPager2 = root.findViewById(R.id.viewPager_myjobs);
-        viewPager2.setAdapter(myJobsPagerAdapter);
+          viewPager2.setAdapter(myJobsPagerAdapter);
 
         TabLayoutMediator rb = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
@@ -54,11 +53,10 @@ public class MyJobsFragment extends  Fragment {
                     case 1:
                         tab.setText("Saved Jobs");
                         break;
-
-
                 }
             }
         });
+
         rb.attach();
 
         Log.d(TAG, "onCreateView: has ended");
