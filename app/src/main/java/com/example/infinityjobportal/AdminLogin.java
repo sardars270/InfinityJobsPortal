@@ -12,6 +12,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.infinityjobportal.admin.AdminMainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -73,12 +75,6 @@ public class AdminLogin extends AppCompatActivity {
 
     }
     private void autoLogin() {
-
-
-
-
-
-
             mAuth.signInWithEmailAndPassword("varunmahajan292@gmail.com", "varun123")
                     .addOnCompleteListener(AdminLogin.this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -146,12 +142,18 @@ public class AdminLogin extends AppCompatActivity {
     public void logInFunction(View view) {
         if (email.getText().toString().contentEquals("")) {
 
-
+            YoYo.with(Techniques.Shake)
+                    .duration(700)
+                    .repeat(2)
+                    .playOn(email);
             errorView.setText("Email cant be empty");
 
 
         } else if (pass.getText().toString().contentEquals("")) {
-
+            YoYo.with(Techniques.Shake)
+                    .duration(700)
+                    .repeat(2)
+                    .playOn(pass);
             errorView.setText("Password cant be empty");
 
         } else {

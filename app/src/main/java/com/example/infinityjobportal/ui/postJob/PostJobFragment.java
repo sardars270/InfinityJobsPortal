@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -27,15 +28,22 @@ import com.example.infinityjobportal.EditAvailability;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.PostJobPojo;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.ServerTimestamp;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -54,18 +62,19 @@ public class PostJobFragment extends Fragment {
     private EditText mCompanyNameEditText, mJobTitleEditText, mStreetAddressEditText, mCityAddressEditText, mStartSalaryRangeEditText, mSalaryEndRangeEditText,
             mJoiningEditTextDate, mApplicationDeadlineEditTextDate, mJobDescriptionEditText, mSkillsRequiredEditText,
             mQualificationRequiredEditText;
-    private Spinner mJobCategorySpinner,mProvinceAddressEditText;
+    private Spinner mJobCategorySpinner,mProvinceAddressEditText,mCompanyNameSpinner;
     private CheckBox mEnglishCheckBox, mFrenchCheckBox;
     private Button mPostJobSubmitButton, mPostJobDraftButton;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance(); //Initialize an instance of Cloud Firestore.
+FirebaseAuth mAuth;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: has Started");
         View root = inflater.inflate(R.layout.fragment_post_job, container, false);
 
-        mCompanyNameEditText = root.findViewById(R.id.companyNameEditText);
+        mCompanyNameSpinner = root.findViewById(R.id.companyNameSpinner);
         mJobCategorySpinner = root.findViewById(R.id.jobCategorySpinner);
         mJobTitleEditText = root.findViewById(R.id.jobTitleEditText);
         mStreetAddressEditText = root.findViewById(R.id.streetAddressEditText);
@@ -117,6 +126,8 @@ public class PostJobFragment extends Fragment {
         mPostJobSubmitButton = root.findViewById(R.id.postJobSubmitButton);
         mPostJobDraftButton = root.findViewById(R.id.postJobDraftButton);
 
+        mAuth = FirebaseAuth.getInstance();
+
         //Application Deadline calendar
         mApplicationDeadlineEditTextDate.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -163,7 +174,24 @@ public class PostJobFragment extends Fragment {
 
 
 
-
+//Spinner for company names
+        CollectionReference myCompaniesCollectionRef = db.collection("mycompanies");
+        final List<String> companyNames = new ArrayList<>();
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, companyNames);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mCompanyNameSpinner.setAdapter(adapter);
+        myCompaniesCollectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String companyName = document.getString("name");
+                        companyNames.add(companyName);
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
 
 
 
@@ -713,7 +741,7 @@ public class PostJobFragment extends Fragment {
                         skillsRequired, qualificationRequired)) {
 
                     PostJobPojo postJobPOJO = new PostJobPojo(companyName, jobCategory, jobTitle, streetAddress, city, province, language,
-                            minSalary, maxSalary, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired,"active", date, latitude, longitude,Mondayvalue, Tuesdayvalue, Wednessdayvalue, Thursdayvalue, Fridayvalue, Saturdayvalue, Sundayvalue);
+                            minSalary, maxSalary, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired,"active", date, latitude, longitude,Mondayvalue, Tuesdayvalue, Wednessdayvalue, Thursdayvalue, Fridayvalue, Saturdayvalue, Sundayvalue,mAuth.getCurrentUser().getEmail());
 
                     db.collection("Jobs")
                             .add(postJobPOJO)
@@ -1149,7 +1177,7 @@ public class PostJobFragment extends Fragment {
                         skillsRequired, qualificationRequired)) {
 
                     PostJobPojo postJobPOJO = new PostJobPojo(companyName, jobCategory, jobTitle, streetAddress, city, province, language,
-                            minSalary, maxSalary, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired, "draft", date, latitude, longitude, Mondayvalue, Tuesdayvalue, Wednessdayvalue, Thursdayvalue, Fridayvalue, Saturdayvalue, Sundayvalue);
+                            minSalary, maxSalary, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired, "draft", date, latitude, longitude, Mondayvalue, Tuesdayvalue, Wednessdayvalue, Thursdayvalue, Fridayvalue, Saturdayvalue, Sundayvalue,mAuth.getCurrentUser().getEmail());
 
 
                     db.collection("Jobs")

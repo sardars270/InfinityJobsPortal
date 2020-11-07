@@ -14,6 +14,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,6 +30,7 @@ public class ClientSignUp extends AppCompatActivity {
     EditText firstName,lastName,email,password,mobile;
     Button login,signup;
     ProgressBar progressBar;
+    String  patterntomatch ="[0-9]{10}";
 
     public FirebaseAuth mAuth;
     FirebaseFirestore db;
@@ -69,19 +72,56 @@ public class ClientSignUp extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (email.getText().toString().contentEquals("")) {
+                YoYo.with(Techniques.Bounce)
+                        .duration(700)
+                        .repeat(2)
+                        .playOn(signup);
 
+                if (email.getText().toString().contentEquals("")) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(3)
+                            .playOn(email);
 
                     errorView.setText("Email cannot be empty");
 
 
                 } else if (password.getText().toString().contentEquals("")) {
 
-
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(3)
+                            .playOn(password);
                     errorView.setText("Password cannot be empty");
 
 
-                } else {
+                }
+                else if (firstName.getText().toString().contentEquals("")) {
+
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(3)
+                            .playOn(firstName);
+                    errorView.setText("Firstname cannot be empty");
+                }
+                else if (lastName.getText().toString().contentEquals("")) {
+
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(3)
+                            .playOn(lastName);
+                    errorView.setText("Lastname cannot be empty");
+                }
+                else if (!mobile.getText().toString().matches(patterntomatch)) {
+
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(3)
+                            .playOn(mobile);
+                    errorView.setText("Please enter valid number");
+                }
+
+                else {
 
 
                     progressBar.setVisibility(View.VISIBLE);

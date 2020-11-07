@@ -26,7 +26,15 @@ public class PostJobPojo {
     private double longitude;
     String id;
     private String Monday, Tuesday, Wednessday, Thursday, Friday, Saturday, Sunday,UserId;
+    String uid;
 
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     public PostJobPojo() {
     }
@@ -35,7 +43,7 @@ public class PostJobPojo {
         this.jobTitle = jobTitle;
     }
 
-    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Double minSalary, Double maxSalary, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired, String status, String date, double latitude, double longitude, String monday, String tuesday, String wednessday, String thursday, String friday, String saturday, String sunday) {
+    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Double minSalary, Double maxSalary, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired, String status, String date, double latitude, double longitude, String monday, String tuesday, String wednessday, String thursday, String friday, String saturday, String sunday, String uid) {
         this.companyName = companyName;
         this.jobCategory = jobCategory;
         this.jobTitle = jobTitle;
@@ -61,8 +69,7 @@ public class PostJobPojo {
         Friday = friday;
         Saturday = saturday;
         Sunday = sunday;
-
-
+        this.uid=uid;
     }
 
     public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Double minSalary, Double maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired,double latitude,double longitude) {
