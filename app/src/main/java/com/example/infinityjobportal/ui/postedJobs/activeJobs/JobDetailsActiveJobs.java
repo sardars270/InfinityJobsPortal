@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,10 +23,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JobDetailsActiveJobs extends AppCompatActivity {
-    private static final String TAG = "JobDetailsPostedJobs";
+    private static final String TAG = "JobDetailsActiveJobs";
 
     TextView jobTitle, companyName, location, salary, language, applicationDeadline, joiningDate, jobDescription, skillsRequired, qualification, industry;
     Button markClosed;
+    ImageView back, editActiveJobs;
 
     FirebaseFirestore db;
     String id;
@@ -49,6 +51,8 @@ public class JobDetailsActiveJobs extends AppCompatActivity {
         qualification = findViewById(R.id.qualificationTextViewActiveJob);
         industry = findViewById(R.id.industryTextViewActiveJob);
         markClosed = findViewById(R.id.markClosedButton);
+        back = findViewById(R.id.backActiveJobsDetails);
+        editActiveJobs = findViewById(R.id.editJobImageViewActiveJob);
 
         db = FirebaseFirestore.getInstance();
 
@@ -111,6 +115,19 @@ public class JobDetailsActiveJobs extends AppCompatActivity {
             }
         });
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        editActiveJobs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+            }
+        });
 
         Log.d(TAG, "onCreate: ended");
     }

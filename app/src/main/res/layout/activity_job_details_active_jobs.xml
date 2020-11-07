@@ -18,7 +18,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/back"
+            android:id="@+id/backActiveJobsDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -62,7 +62,7 @@
             android:paddingBottom="50dp">
 
             <ImageView
-                android:id="@+id/reportJobImageViewActiveJob"
+                android:id="@+id/editJobImageViewActiveJob"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
