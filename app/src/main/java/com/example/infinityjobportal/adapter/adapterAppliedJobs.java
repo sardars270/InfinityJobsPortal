@@ -1,6 +1,7 @@
 package com.example.infinityjobportal.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infinityjobportal.EditEducation;
 import com.example.infinityjobportal.JobDetails;
 import com.example.infinityjobportal.MyJobDetails;
 import com.example.infinityjobportal.R;
@@ -64,7 +67,6 @@ public class adapterAppliedJobs extends RecyclerView.Adapter<adapterAppliedJobs.
                  context.startActivity(i);
             }
         });
-
 
 
     }
