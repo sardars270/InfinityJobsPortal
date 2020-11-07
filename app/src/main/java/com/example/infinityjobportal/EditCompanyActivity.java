@@ -24,6 +24,8 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.app.ActivityCompat;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -149,52 +151,100 @@ public class EditCompanyActivity extends AppCompatActivity {
 
 
                 if (TextUtils.isEmpty(companyName)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(tvCompanyName);
                     tvCompanyName.setError("Invalid");
                     return;
                 }
 
                 if (TextUtils.isEmpty(location)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(tvLocation);
                     tvLocation.setError("Invalid");
                     return;
                 }
                 if (TextUtils.isEmpty(line1)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(tvLine1);
                     tvLine1.setError("Invalid");
                     return;
                 }
                 if (TextUtils.isEmpty(line2)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(tvLine2);
                     tvLine2.setError("Invalid");
                     return;
                 }
                 if (TextUtils.isEmpty(city)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(tvCity);
                     tvCity.setError("Invalid");
                     return;
                 }
                 if (TextUtils.isEmpty(state)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(tvState);
                     tvState.setError("Invalid");
                     return;
                 }
                 if (TextUtils.isEmpty(country)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(tvCountry);
                     tvCountry.setError("Invalid");
                     return;
                 }
                 if (TextUtils.isEmpty(about)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(tvAbout);
                     tvAbout.setError("Invalid");
                     return;
                 }
                 if (TextUtils.isEmpty(desc)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(tvDesc);
                     tvDesc.setError("Invalid");
                     return;
                 }
                 if (TextUtils.isEmpty(web)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(tvWeb);
                     tvWeb.setError("Invalid");
                     return;
                 }
                 if (TextUtils.isEmpty(email)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(tvEmail);
                     tvEmail.setError("Invalid");
                     return;
                 }
 
                 if (TextUtils.isEmpty(contact)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(tvContact);
                     tvContact.setError("Invalid");
                     return;
                 }

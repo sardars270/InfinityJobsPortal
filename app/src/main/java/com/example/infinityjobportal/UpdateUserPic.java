@@ -178,7 +178,6 @@ public class UpdateUserPic extends AppCompatActivity {
 
 
 
-
     private void FileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");

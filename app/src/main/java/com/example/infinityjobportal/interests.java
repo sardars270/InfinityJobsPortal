@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.infinityjobportal.adapter.InterestsAdapter;
 import com.example.infinityjobportal.model.InterestsModel;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -68,6 +70,10 @@ public class interests extends AppCompatActivity {
                 washingtonRef.set(data);
                 String interest =ed_interests.getText().toString();
                 if (TextUtils.isEmpty(interest)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(ed_interests);
                     ed_interests.setError("Invalid");
 
                 }else {

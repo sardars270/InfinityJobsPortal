@@ -8,12 +8,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -68,33 +72,52 @@ public class ClientSignUp extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                YoYo.with(Techniques.Bounce)
+                        .duration(700)
+                        .repeat(2)
+                        .playOn(signup);
 
                 if (email.getText().toString().contentEquals("")) {
-
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(3)
+                            .playOn(email);
 
                     errorView.setText("Email cannot be empty");
 
 
                 } else if (password.getText().toString().contentEquals("")) {
 
-
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(3)
+                            .playOn(password);
                     errorView.setText("Password cannot be empty");
 
 
                 }
                else if (firstName.getText().toString().contentEquals("")) {
 
-
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(3)
+                            .playOn(firstName);
                     errorView.setText("Firstname cannot be empty");
                 }
                 else if (lastName.getText().toString().contentEquals("")) {
 
-
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(3)
+                            .playOn(lastName);
                     errorView.setText("Lastname cannot be empty");
                 }
                 else if (!mobile.getText().toString().matches(patterntomatch)) {
 
-
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(3)
+                            .playOn(mobile);
                     errorView.setText("Please enter valid number");
                 }else {
 
@@ -125,6 +148,7 @@ public class ClientSignUp extends AppCompatActivity {
                                                                         .setCancelable(false)
                                                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                                             public void onClick(DialogInterface dialog, int id) {
+
                                                                                 Intent i = new Intent(getApplicationContext(),ClientLogin.class);
                                                                                 startActivity(i);
                                                                             }

@@ -14,6 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -146,45 +148,77 @@ public class AddNewEducation extends AppCompatActivity {
 
             private boolean hasValidationErrors(String school, String degree, String fieldOfStudy, String startDate, String endDate, String grade, String extraActs, String discription) {
                 if (school.isEmpty()) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(school1);
                     school1.setError("School Name is required");
                     school1.requestFocus();
                     return true;
                 }
 
                 if (degree.isEmpty()) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(degree1);
                     degree1.setError("Degree is required");
                     degree1.requestFocus();
                     return true;
                 }
 
                 if (fieldOfStudy.isEmpty()) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(fieldOfStudy1);
                     fieldOfStudy1.setError("Field of study is required");
                     fieldOfStudy1.requestFocus();
                     return true;
                 }
 
                 if (startDate.isEmpty()) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(startdate);
                     startdate.setError("Start date is required");
                     startdate.requestFocus();
                     return true;
                 }
 
                 if (endDate.isEmpty()) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(enddate);
                     enddate.setError("End date is required");
                     enddate.requestFocus();
                     return true;
                 }
                 if (grade.isEmpty()) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(grades);
                     grades.setError("Grades are required");
                     grades.requestFocus();
                     return true;
                 }
                 if (extraActs.isEmpty()) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(extraAct);
                     extraAct.setError("Activities and societies information is required");
                     extraAct.requestFocus();
                     return true;
                 }
                 if (discription.isEmpty()) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(description1);
                     description1.setError("Description of Study is required");
                     description1.requestFocus();
                     return true;

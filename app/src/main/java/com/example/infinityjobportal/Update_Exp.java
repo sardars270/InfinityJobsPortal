@@ -8,6 +8,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.infinityjobportal.adapter.LOEAdapter;
 import com.example.infinityjobportal.model.LOEModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -292,7 +295,42 @@ public class Update_Exp extends AppCompatActivity {
         updates.put("institute", institute.getText().toString());
         updates.put("startdate", startdate.getText().toString());
         updates.put("enddate", enddate.getText().toString());
-
+            String desig = designation.getText().toString();
+            String insti = institute.getText().toString();
+            String sdate = startdate.getText().toString();
+            String edate = enddate.getText().toString();
+            if (TextUtils.isEmpty(desig)) {
+                YoYo.with(Techniques.Shake)
+                        .duration(700)
+                        .repeat(2)
+                        .playOn(designation);
+                designation.setError("Invalid");
+                return;
+            }
+            if (TextUtils.isEmpty(insti)) {
+                YoYo.with(Techniques.Shake)
+                        .duration(700)
+                        .repeat(2)
+                        .playOn(institute);
+                institute.setError("Invalid");
+                return;
+            }
+            if (TextUtils.isEmpty(sdate)) {
+                YoYo.with(Techniques.Shake)
+                        .duration(700)
+                        .repeat(2)
+                        .playOn(startdate);
+                startdate.setError("Invalid");
+                return;
+            }
+            if (TextUtils.isEmpty(edate)) {
+                YoYo.with(Techniques.Shake)
+                        .duration(700)
+                        .repeat(2)
+                        .playOn(enddate);
+                enddate.setError("Invalid");
+                return;
+            }
         docRef.update(updates)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
