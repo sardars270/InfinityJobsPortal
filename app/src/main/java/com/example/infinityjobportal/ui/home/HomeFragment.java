@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
+    private static final String TAG = "HomeFragment";
     private RecyclerView recjoblist;
     TextView search, text;
 
