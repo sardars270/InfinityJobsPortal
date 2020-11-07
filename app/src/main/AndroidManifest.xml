@@ -13,8 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.postedJobs.closedJobs.JobDetailsClosedJobs"></activity>
-        <activity android:name=".ui.postedJobs.activeJobs.JobDetailsActiveJobs" />
+        <activity android:name=".ui.postJob.EditActiveJobs"></activity>
+        <activity android:name=".ui.postedJobs.closedJobs.JobDetailsClosedJobs" />
+        <activity
+            android:name=".ui.postedJobs.activeJobs.JobDetailsActiveJobs"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".ui.postedJobs.activeJobs.ViewApplicationActiveJobs" />
         <activity android:name=".Successful" />
         <activity

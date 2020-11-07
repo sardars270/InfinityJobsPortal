@@ -318,7 +318,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/markClosedButton"
+                    android:id="@+id/markActiveButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"

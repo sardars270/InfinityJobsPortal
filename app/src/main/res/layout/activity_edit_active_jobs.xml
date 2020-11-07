@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.postJob.PostJobFragment">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/jobPostedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/logoImageView"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="150dp"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="150dp"
+                android:layout_marginRight="150dp"
+                android:fitsSystemWindows="false"
+                android:scaleType="fitCenter"
+                android:src="@drawable/infinitylogo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/letsGetStartedTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:fontFamily="@font/robotobold"
+                android:text="Let's get started"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/logoImageView" />
+
+            <Spinner
+                android:id="@+id/companyNameActiveEditSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/edit_text_background"
+                android:ems="10"
+                android:fontFamily="@font/robotoregular"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:paddingLeft="10dp"
+                android:paddingBottom="15dp"
+                android:textColorHint="#57454545"
+                app:layout_constraintEnd_toEndOf="@+id/letsGetStartedTextView"
+                app:layout_constraintStart_toStartOf="@+id/letsGetStartedTextView"
+                app:layout_constraintTop_toBottomOf="@+id/letsGetStartedTextView" />
+
+            <Spinner
+                android:id="@+id/jobCategoryActiveEditSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/edit_text_background"
+                android:ems="10"
+                android:entries="@array/category"
+                android:fontFamily="@font/robotoregular"
+                android:padding="10dp"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="@+id/companyNameActiveEditSpinner"
+                app:layout_constraintStart_toStartOf="@+id/companyNameActiveEditSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/companyNameActiveEditSpinner" />
+
+            <EditText
+                android:id="@+id/jobTitleActiveEditEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:fontFamily="@font/robotoregular"
+                android:hint="Job Title"
+                android:inputType="textPersonName"
+                android:paddingLeft="10dp"
+                android:paddingBottom="15dp"
+                app:layout_constraintEnd_toEndOf="@+id/jobCategoryActiveEditSpinner"
+                app:layout_constraintStart_toStartOf="@+id/jobCategoryActiveEditSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/jobCategoryActiveEditSpinner" />
+
+            <TextView
+                android:id="@+id/EnterWorkLocationActiveEditTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/robotobold"
+                android:padding="10dp"
+                android:text="Enter Work Location"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toEndOf="@+id/jobTitleActiveEditEditText"
+                app:layout_constraintStart_toStartOf="@+id/jobTitleActiveEditEditText"
+                app:layout_constraintTop_toBottomOf="@+id/jobTitleActiveEditEditText" />
+
+            <EditText
+                android:id="@+id/streetAddressActiveEditEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Street Address"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:paddingBottom="15dp"
+                app:layout_constraintEnd_toEndOf="@+id/EnterWorkLocationActiveEditTextView"
+                app:layout_constraintStart_toStartOf="@+id/EnterWorkLocationActiveEditTextView"
+                app:layout_constraintTop_toBottomOf="@+id/EnterWorkLocationActiveEditTextView" />
+
+            <EditText
+                android:id="@+id/cityAddressActiveEditEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:entries="@array/cities"
+                android:fontFamily="@font/robotoregular"
+                android:hint="City"
+                android:padding="10dp"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toStartOf="@+id/streetAddressActiveEditEditText"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/streetAddressActiveEditEditText"
+                app:layout_constraintTop_toBottomOf="@+id/streetAddressActiveEditEditText" />
+
+            <EditText
+                android:id="@+id/provinceActiveEditEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:entries="@array/province"
+                android:fontFamily="@font/robotoregular"
+                android:hint="Province"
+                android:padding="10dp"
+                android:spinnerMode="dropdown"
+                app:layout_constraintBaseline_toBaselineOf="@+id/cityAddressActiveEditEditText"
+                app:layout_constraintEnd_toEndOf="@+id/cityAddressActiveEditEditText"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/cityAddressActiveEditEditText" />
+
+            <TextView
+                android:id="@+id/languageRequiredActiveEditTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/robotobold"
+                android:padding="10dp"
+                android:text="Language Required"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toEndOf="@+id/provinceActiveEditEditText"
+                app:layout_constraintStart_toStartOf="@+id/provinceActiveEditEditText"
+                app:layout_constraintTop_toBottomOf="@+id/provinceActiveEditEditText" />
+
+            <CheckBox
+                android:id="@+id/radioEnglishActiveEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="English"
+                android:focusableInTouchMode="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toStartOf="@+id/radioFrenchActiveEdit"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="@+id/languageRequiredActiveEditTextView"
+                app:layout_constraintTop_toBottomOf="@+id/languageRequiredActiveEditTextView" />
+
+            <CheckBox
+                android:id="@+id/radioFrenchActiveEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="French"
+                app:layout_constraintBaseline_toBaselineOf="@+id/radioEnglishActiveEdit"
+                app:layout_constraintEnd_toEndOf="@+id/languageRequiredActiveEditTextView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/radioEnglishActiveEdit" />
+
+            <EditText
+                android:id="@+id/availabilityActiveEditEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:focusableInTouchMode="true"
+                android:focusable="true"
+                android:background="@drawable/edit_text_background"
+                android:entries="@array/jobDaysRequirement"
+                android:padding="10dp"
+                android:hint="Enter Availability"
+                app:layout_constraintEnd_toEndOf="@+id/radioFrenchActiveEdit"
+                app:layout_constraintStart_toStartOf="@+id/radioEnglishActiveEdit"
+                app:layout_constraintTop_toBottomOf="@+id/radioEnglishActiveEdit" />
+
+            <TextView
+                android:id="@+id/availabilityHintActiveEditTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Ex: monday, tuesday, wednesday"
+                android:fontFamily="@font/robotoitalic"
+                app:layout_constraintEnd_toEndOf="@+id/availabilityActiveEditEditText"
+                app:layout_constraintStart_toStartOf="@+id/availabilityActiveEditEditText"
+                app:layout_constraintTop_toBottomOf="@+id/availabilityActiveEditEditText">
+            </TextView>
+
+
+            <TextView
+                android:id="@+id/salaryRangeActiveEditTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/robotobold"
+                android:padding="10dp"
+                android:text="Salary Range"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toEndOf="@+id/availabilityHintTextView"
+                app:layout_constraintStart_toStartOf="@+id/availabilityHintTextView"
+                app:layout_constraintTop_toBottomOf="@+id/availabilityHintTextView" />
+
+            <EditText
+                android:id="@+id/salaryStartRangeActiveEditEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_baseline_attach_money_24"
+                android:ems="10"
+                android:hint="Min"
+                android:inputType="number|numberDecimal"
+                android:paddingBottom="15dp"
+                app:layout_constraintEnd_toStartOf="@+id/toTextView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="@+id/salaryRangeTextView"
+                app:layout_constraintTop_toBottomOf="@+id/salaryRangeTextView" />
+
+            <TextView
+                android:id="@+id/toActiveEditTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:fontFamily="@font/robotobold"
+                android:padding="10dp"
+                android:text="to"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/salaryStartRangeEditText"
+                app:layout_constraintEnd_toStartOf="@+id/salaryEndRangeEditText"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/salaryStartRangeEditText" />
+
+            <EditText
+                android:id="@+id/salaryEndRangeActiveEditEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_baseline_attach_money_24"
+                android:ems="10"
+                android:hint="Max"
+                android:inputType="number|numberDecimal"
+                android:paddingBottom="15dp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/toTextView"
+                app:layout_constraintEnd_toStartOf="@+id/textView7"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/toTextView" />
+
+            <TextView
+                android:id="@+id/ActiveEdittextView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:fontFamily="@font/robotoregular"
+                android:padding="10dp"
+                android:text="per hour"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/salaryEndRangeEditText"
+                app:layout_constraintEnd_toEndOf="@+id/salaryRangeTextView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/salaryEndRangeEditText" />
+
+
+            <EditText
+                android:id="@+id/applicationDeadlineEditTextDateActiveEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:clickable="true"
+                android:ems="10"
+                android:focusableInTouchMode="false"
+                android:hint="Application Deadline"
+                android:inputType="date"
+                android:paddingLeft="10dp"
+                android:paddingBottom="15dp"
+                app:layout_constraintEnd_toEndOf="@+id/textView7"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/salaryStartRangeEditText"
+                app:layout_constraintTop_toBottomOf="@+id/salaryStartRangeEditText" />
+
+            <EditText
+                android:id="@+id/joiningEditTextDateActiveEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:focusableInTouchMode="false"
+                android:hint="Joining Date"
+                android:inputType="date"
+                android:paddingLeft="10dp"
+                android:paddingBottom="15dp"
+                app:layout_constraintEnd_toEndOf="@+id/applicationDeadlineEditTextDate"
+                app:layout_constraintStart_toStartOf="@+id/applicationDeadlineEditTextDate"
+                app:layout_constraintTop_toBottomOf="@+id/applicationDeadlineEditTextDate" />
+
+            <TextView
+                android:id="@+id/jobDescriptionTextViewActiveEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/robotobold"
+                android:padding="10dp"
+                android:text="Job Description"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/joiningEditTextDate"
+                app:layout_constraintStart_toStartOf="@+id/joiningEditTextDate"
+                app:layout_constraintTop_toBottomOf="@+id/joiningEditTextDate" />
+
+
+            <EditText
+                android:id="@+id/jobDescriptionEditTextActiveEdit"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:background="@drawable/edit_text_background"
+                android:ems="10"
+                android:hint="Write Job Description here."
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:overScrollMode="always"
+                android:padding="10dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
+                android:gravity="top"
+                app:layout_constraintEnd_toEndOf="@+id/jobDescriptionTextView"
+                app:layout_constraintStart_toStartOf="@+id/jobDescriptionTextView"
+                app:layout_constraintTop_toBottomOf="@+id/jobDescriptionTextView" />
+
+
+            <TextView
+                android:id="@+id/skillsRequiredTextViewActiveEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/robotobold"
+                android:padding="10dp"
+                android:text="Skills Required"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/jobDescriptionEditText"
+                app:layout_constraintStart_toStartOf="@+id/jobDescriptionEditText"
+                app:layout_constraintTop_toBottomOf="@+id/jobDescriptionEditText" />
+
+
+            <EditText
+                android:id="@+id/skillsRequiredEditTextActiveEdit"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:background="@drawable/edit_text_background"
+                android:ems="10"
+                android:hint="Enter Skills required"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:padding="10dp"
+                android:scrollbars="vertical"
+                android:gravity="top"
+                app:layout_constraintEnd_toEndOf="@+id/skillsRequiredTextView"
+                app:layout_constraintStart_toStartOf="@+id/skillsRequiredTextView"
+                app:layout_constraintTop_toBottomOf="@+id/skillsRequiredTextView" />
+
+            <TextView
+                android:id="@+id/qualificationRequiredTextViewActiveEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/robotobold"
+                android:padding="10dp"
+                android:text="Qualification Required"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/skillsRequiredEditText"
+                app:layout_constraintStart_toStartOf="@+id/skillsRequiredEditText"
+                app:layout_constraintTop_toBottomOf="@+id/skillsRequiredEditText" />
+
+
+            <EditText
+                android:id="@+id/qualificationRequiredEditTextActiveEdit"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:background="@drawable/edit_text_background"
+                android:ems="10"
+                android:hint="Enter qualification required"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:padding="10dp"
+                android:scrollbars="vertical"
+                android:gravity="top"
+                app:layout_constraintEnd_toEndOf="@+id/qualificationRequiredTextView"
+                app:layout_constraintStart_toStartOf="@+id/qualificationRequiredTextView"
+                app:layout_constraintTop_toBottomOf="@+id/qualificationRequiredTextView" />
+
+            <Button
+                android:id="@+id/postJobDraftButtonActiveEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/button_pressed"
+                android:elevation="5dp"
+                android:fontFamily="@font/robotoregular"
+                android:text="Draft"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/postJobSubmitButton"
+                app:layout_constraintStart_toStartOf="@+id/qualificationRequiredEditText"
+                app:layout_constraintTop_toBottomOf="@+id/qualificationRequiredEditText" />
+
+            <Button
+                android:id="@+id/postJobSubmitButtonActiveEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button_pressed"
+                android:elevation="5dp"
+                android:fontFamily="@font/robotoregular"
+                android:text="Submit"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/qualificationRequiredEditText"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/postJobDraftButton"
+                app:layout_constraintTop_toTopOf="@+id/postJobDraftButton"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
