@@ -77,29 +77,22 @@
         android:text="Start Date"
         android:padding="2dp"
         android:cursorVisible="true" />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/et_start_date"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_below = "@+id/errorView"
-            android:layout_centerHorizontal = "true"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:hint="Start Date"
-            android:padding="8dp"
-            android:cursorVisible="true" />
-        <Button
-            android:id="@+id/spickdate"
-            android:text="PickDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_start_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below = "@+id/errorView"
+        android:layout_centerHorizontal = "true"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:inputType="date"
+        android:layout_marginRight="20dp"
+        android:hint="Start Date"
+        android:padding="8dp"
+        android:cursorVisible="true" />
+
     <TextView
         android:id="@+id/end_date"
         android:layout_width="match_parent"
@@ -111,29 +104,22 @@
         android:text="End Date"
         android:padding="2dp"
         android:cursorVisible="true" />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/et_end_date"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_below = "@+id/errorView"
-            android:layout_centerHorizontal = "true"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:hint="End Date"
-            android:padding="8dp"
-            android:cursorVisible="true" />
-        <Button
-            android:id="@+id/pickdate"
-            android:text="PickDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_end_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below = "@+id/errorView"
+        android:layout_centerHorizontal = "true"
+        android:layout_marginTop="5dp"
+        android:inputType="date"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="End Date"
+        android:padding="8dp"
+        android:cursorVisible="true" />
+
     <Button
         android:id="@+id/update"
         android:layout_width="match_parent"
@@ -156,3 +142,4 @@
 
 
 </LinearLayout>
+

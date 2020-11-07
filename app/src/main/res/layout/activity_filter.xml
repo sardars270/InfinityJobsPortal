@@ -1,157 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Filter">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
 
     <LinearLayout
+        android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/mainAppçColor"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="50dp"
-            android:fontFamily="@font/robotomedium"
-            android:text="Location"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/location_editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/robotoregular"
-            android:padding="5dp"
-            android:layout_marginLeft="20dp"
-            android:layout_margin="20dp"
-
-            android:textSize="20dp" />
-
-
-
-        <TextView
-            android:id="@+id/category"
+        <ImageView
+            android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/robotomedium"
-            android:text="Category"
-            android:textSize="18dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/back"
+            android:text=""
+            android:textSize="20sp"
             android:textStyle="bold" />
-
-        <Spinner
-            android:id="@+id/jobCategorySpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:entries="@array/categoryforfilter"
-            android:fontFamily="@font/robotoregular"
-            android:padding="10dp"
-            android:spinnerMode="dropdown" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/grayFontsColor" />
-
         <TextView
-            android:id="@+id/Language"
-            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/Education"
+            android:layout_width="0dp"
+            android:gravity="center"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:text="Language"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp">
-
-            <CheckBox
-                android:id="@+id/radioEnglish"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dp"
-                android:text="English" />
-
-            <CheckBox
-                android:id="@+id/radioFrench"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dp"
-                android:text="French" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/grayFontsColor" />
-
-
-        <TextView
-            android:id="@+id/Salary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:text="Salary"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp">
-
-            <NumberPicker
-                android:id="@+id/dollar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:layout_weight="1" />
-
-            <NumberPicker
-                android:id="@+id/cents"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:layout_weight="1" />
-        </LinearLayout>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"
-            android:background="@color/mainSecondaryColor"
-            android:onClick="applyFilter"
-            android:paddingLeft="50dp"
-            android:paddingTop="5dp"
-            android:paddingRight="50dp"
-            android:paddingBottom="5dp"
-            android:text="Apply"
+            android:layout_margin="10dp"
+            android:text="Filters"
+            android:textSize="18sp"
+            android:textStyle="bold"
             android:textColor="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            />
+
+        <TextView
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:visibility="invisible"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white"
+            />
     </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/province"
+        android:text="Province"
+        android:layout_marginLeft="20dp"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <Spinner
+        android:id="@+id/provinceSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:entries="@array/provinceForFilter"
+        android:fontFamily="@font/robotoregular"
+        android:padding="10dp"
+        android:spinnerMode="dropdown"
+        />
+
+    <View
+        android:background="@color/grayFontsColor"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+
+
+
+    <TextView
+        android:id="@+id/category"
+        android:text="Category"
+        android:layout_marginLeft="20dp"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <Spinner
+        android:id="@+id/jobCategorySpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:entries="@array/categoryforfilter"
+        android:fontFamily="@font/robotoregular"
+        android:padding="10dp"
+        android:spinnerMode="dropdown"
+        />
+
+    <View
+        android:background="@color/grayFontsColor"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/Language"
+        android:text="Language"
+        android:layout_marginLeft="20dp"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        >
+    <CheckBox
+        android:id="@+id/radioEnglish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="10dp"
+        android:text="English"
+        />
+
+    <CheckBox
+        android:id="@+id/radioFrench"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_weight="1"
+        android:text="French"
+        />
+    </LinearLayout>
+
+    <View
+        android:background="@color/grayFontsColor"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+
+
+
+
+    <TextView
+        android:onClick="applyFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Apply"
+        android:textSize="20dp"
+        android:background="@color/mainSecondaryColor"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:paddingLeft="50dp"
+        android:paddingTop="5dp"
+        android:layout_margin="20dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="50dp"
+        android:layout_gravity="center"
+        />
+</LinearLayout>
 </ScrollView>
