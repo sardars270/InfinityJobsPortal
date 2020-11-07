@@ -39,6 +39,7 @@ public class JobDetails extends AppCompatActivity {
     Button save, apply;
 
     String id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +55,7 @@ public class JobDetails extends AppCompatActivity {
         joiningDate = findViewById(R.id.joining_date);
         description = findViewById(R.id.description);
         skiils = findViewById(R.id.skill_needed);
-
-        qualification = findViewById(R.id.qualification);
+     qualification = findViewById(R.id.qualification);
         experience = findViewById(R.id.industry);
         apply  = findViewById(R.id.apply);
         save  = findViewById(R.id.savejob);
@@ -65,7 +65,8 @@ public class JobDetails extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         id = getIntent().getStringExtra("id");
-        String s =getIntent().getStringExtra("status");
+//        String s =getIntent().getStringExtra("status");
+/*
         if (s.equals("save")){
             apply.setVisibility(View.VISIBLE);
             save.setVisibility(View.INVISIBLE);
@@ -79,6 +80,15 @@ public class JobDetails extends AppCompatActivity {
             apply.setVisibility(View.VISIBLE);
             save.setVisibility(View.VISIBLE);
         }
+
+
+
+ */
+
+
+
+
+
         Toast.makeText(getApplicationContext(),id,Toast.LENGTH_SHORT).show();
 
         loadInfo();
@@ -183,16 +193,16 @@ public class JobDetails extends AppCompatActivity {
                         PostJobPojo job = document.toObject(PostJobPojo.class);
 
                         designation.setText(job.getJobTitle());
-                        company.setText(job.getCompanyName());
-                        location.setText(job.getStreetAddress()+", "+job.getCityAddress()+", "+job.getProvinceAddress());
-                        salary.setText("$"+job.getMinSalary()+ " - $" +job.getMaxSalary());
-                        language.setText(job.getLanguage());
+                       company.setText(job.getCompanyName());
+                       location.setText(job.getStreetAddress()+", "+job.getCityAddress()+", "+job.getProvinceAddress());
+                       salary.setText("$"+job.getMinSalary()+ " - $" +job.getMaxSalary());
+                       language.setText(job.getLanguage());
                         applicationDeadline.setText(job.getApplicationDeadline());
-                        joiningDate.setText(job.getJoiningDate());
-                        description.setText(job.getJobDescription());
-                        skiils.setText(job.getSkillsRequired());
-                        qualification.setText(job.getQualificationRequired());
-                        //experience.setText("");
+                       joiningDate.setText(job.getJoiningDate());
+                       description.setText(job.getJobDescription());
+                       skiils.setText(job.getSkillsRequired());
+                       qualification.setText(job.getQualificationRequired());
+                       //experience.setText("");
 
 
 
@@ -205,4 +215,5 @@ public class JobDetails extends AppCompatActivity {
             }
         });
 
-    }}
+    }
+}
