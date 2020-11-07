@@ -23,7 +23,7 @@ public class ClientLogin extends AppCompatActivity {
 
     private static final String TAG = "ClientLogin";
 
-    public EditText email, password;
+    public EditText emailEditText, password;
     public Button login, signUp, forgotPassword;
     ProgressBar progressBar;
 
@@ -41,7 +41,7 @@ public class ClientLogin extends AppCompatActivity {
         login = findViewById(R.id.login);
         signUp = findViewById(R.id.signup);
         forgotPassword = findViewById(R.id.bt_forgotpassword);
-        email = findViewById(R.id.email);
+        emailEditText = findViewById(R.id.email);
         password = findViewById(R.id.password);
         errorView = findViewById(R.id.errorView);
         progressBar = findViewById(R.id.progressBar);
@@ -63,7 +63,7 @@ public class ClientLogin extends AppCompatActivity {
 
     public void logInFunction(View view) {
         Log.d(TAG, "logInFunction: has started");
-        if (email.getText().toString().contentEquals("")) {
+        if (emailEditText.getText().toString().contentEquals("")) {
 
 
             errorView.setText("Email cant be empty");
@@ -77,7 +77,7 @@ public class ClientLogin extends AppCompatActivity {
 
             progressBar.setVisibility(View.VISIBLE);
 
-            mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+            mAuth.signInWithEmailAndPassword(emailEditText.getText().toString(), password.getText().toString())
                     .addOnCompleteListener(ClientLogin.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
