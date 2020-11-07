@@ -23,6 +23,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.infinityjobportal.model.LOEModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -45,13 +47,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class add_exp extends AppCompatActivity {
- EditText et_designation,et_institute,start_date,end_date;
- ImageView img;
+    EditText et_designation,et_institute,start_date,end_date;
+    ImageView img;
 
- Button pickdate,spickdate;
+    Button pickdate,spickdate;
     int mYear, mMonth, mDay;
- TextView faltu;
- Button submit;
+    TextView faltu;
+    Button submit;
     private Uri filePath;
     private static final int PICK_IMAGE_REQUEST = 71;
     FirebaseFirestore db;
@@ -84,7 +86,7 @@ public class add_exp extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         mAuth=FirebaseAuth.getInstance();
 
-      //  final global_vars globalVariable = (global_vars) faltu_context.context;
+        //  final global_vars globalVariable = (global_vars) faltu_context.context;
         start_date.addTextChangedListener(new TextWatcher() {
             private String current = "";
             private String ddmmyyyy = "DDMMYYYY";
@@ -287,15 +289,31 @@ public class add_exp extends AppCompatActivity {
                 String startdate =start_date.getText().toString();
                 String enddate =end_date.getText().toString();
                 if (TextUtils.isEmpty(designation)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(et_designation);
                     et_designation.setError("Invalid");
 
                 }else if (TextUtils.isEmpty(insitute)){
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(et_institute);
                     et_institute.setError("Invalid");
                 }
                 else if (TextUtils.isEmpty(startdate)){
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(start_date);
                     start_date.setError("Invalid");
                 }
                 else if (TextUtils.isEmpty(enddate)){
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(end_date);
                     end_date.setError("Invalid");
                 }
                 else {
@@ -311,7 +329,7 @@ public class add_exp extends AppCompatActivity {
 
 
 
-        }
+    }
 
 
 
