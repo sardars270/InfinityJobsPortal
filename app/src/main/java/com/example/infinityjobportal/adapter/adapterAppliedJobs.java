@@ -53,6 +53,9 @@ public class adapterAppliedJobs extends RecyclerView.Adapter<adapterAppliedJobs.
         holder.title.setText(pj.getJobTitle());
         holder.at.setText(pj.getCompanyName());
         holder.location.setText(pj.getCityAddress());
+        holder.language.setText(pj.getLanguage());
+        holder.category.setText(pj.getJobCategory());
+        holder.salary.setText("$"+pj.getMinSalary()+" - $"+ pj.getMaxSalary());
         holder.id.setText(pj.getId());
         holder.faltu_st.setText(pj.getProvinceAddress());
 
@@ -80,7 +83,7 @@ public class adapterAppliedJobs extends RecyclerView.Adapter<adapterAppliedJobs.
     {
         CardView lout;
 
-        TextView title, at, location,id, faltu_st;
+        TextView title, at, location,id, faltu_st, category, language, salary;
         ImageView saveJob;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -93,6 +96,9 @@ public class adapterAppliedJobs extends RecyclerView.Adapter<adapterAppliedJobs.
             saveJob  = itemView.findViewById(R.id.saveJob);
             id  = itemView.findViewById(R.id.id);
             faltu_st  = itemView.findViewById(R.id.faltu_st);
+            language  = itemView.findViewById(R.id.language);
+            salary  = itemView.findViewById(R.id.salary);
+            category  = itemView.findViewById(R.id.category);
 
 
         }

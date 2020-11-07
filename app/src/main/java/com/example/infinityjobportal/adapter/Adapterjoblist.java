@@ -48,21 +48,27 @@ public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHold
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
-        PostJobPojo pj=ar1.get(position);
-
-        holder.title.setText(pj.getJobTitle());
-        holder.at.setText(pj.getCompanyName());
-        holder.location.setText(pj.getCityAddress());
-        holder.id.setText(pj.getId());
 
 
-        holder.lout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(context, JobDetails.class);
-               i.putExtra("id", holder.id.getText().toString());
-               context.startActivity(i);          }
-        });
+
+            PostJobPojo pj = ar1.get(position);
+
+            holder.title.setText(pj.getJobTitle());
+            holder.at.setText(pj.getCompanyName());
+            holder.location.setText(pj.getCityAddress() + ", " + pj.getProvinceAddress());
+            holder.id.setText(pj.getId());
+            holder.language.setText(pj.getLanguage());
+            holder.category.setText(pj.getJobCategory());
+            holder.salary.setText("$" + pj.getMinSalary() + " - $" + pj.getMaxSalary());
+
+            holder.lout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, JobDetails.class);
+                    i.putExtra("id", holder.id.getText().toString());
+                    context.startActivity(i);
+                }
+            });
 
 
 
@@ -77,7 +83,7 @@ public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHold
     {
         CardView lout;
 
-        TextView title, at, location,id;
+        TextView title, at, location,id, category, language, salary;
         ImageView saveJob;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -88,6 +94,9 @@ public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHold
             lout=itemView.findViewById(R.id.lout);
             saveJob  = itemView.findViewById(R.id.saveJob);
             id  = itemView.findViewById(R.id.id);
+            language  = itemView.findViewById(R.id.language);
+            salary  = itemView.findViewById(R.id.salary);
+            category  = itemView.findViewById(R.id.category);
 
         }
     }
