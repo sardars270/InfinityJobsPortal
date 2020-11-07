@@ -101,6 +101,12 @@ public class JobDetails extends AppCompatActivity {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),UploadResume.class);
+                i.putExtra("jobId",id);
+                startActivity(i);
+
+
+                /*
                 HashMap apllication = new HashMap();
                 apllication.put("uid",mAuth.getCurrentUser().getEmail());
                 apllication.put("jobId",id);
@@ -110,6 +116,8 @@ public class JobDetails extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener() {
                             @Override
                             public void onSuccess(Object o) {
+
+
                                 AlertDialog.Builder builder = new AlertDialog.Builder(JobDetails.this);
                                 builder.setMessage("Application Submitted.")
                                         .setCancelable(false)
@@ -129,6 +137,8 @@ public class JobDetails extends AppCompatActivity {
 
                             }
                         });
+
+                 */
 
             }
         });
