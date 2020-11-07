@@ -13,7 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Successful"></activity>
+        <activity android:name=".ui.postedJobs.closedJobs.JobDetailsClosedJobs"></activity>
+        <activity android:name=".ui.postedJobs.activeJobs.JobDetailsActiveJobs" />
+        <activity android:name=".ui.postedJobs.activeJobs.ViewApplicationActiveJobs" />
+        <activity android:name=".Successful" />
         <activity
             android:name=".UploadResume"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />

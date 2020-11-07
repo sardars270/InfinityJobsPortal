@@ -1,12 +1,7 @@
 package com.example.infinityjobportal;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,9 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.infinityjobportal.model.PostJobPojo;
-import com.example.infinityjobportal.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,14 +22,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class JobDetails extends AppCompatActivity {
-    ImageView  back;
+    ImageView back;
     TextView designation, company, location, salary, language, applicationDeadline, joiningDate, description, skiils, qualification, experience;
     FirebaseFirestore db;
     FirebaseAuth mAuth;
@@ -40,6 +34,7 @@ public class JobDetails extends AppCompatActivity {
 
     String id;
     static JobDetails jobDetails;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,21 +43,21 @@ public class JobDetails extends AppCompatActivity {
         jobDetails = this;
 
         designation = findViewById(R.id.Designation);
-        company  = findViewById(R.id.company_name);
+        company = findViewById(R.id.company_name);
         salary = findViewById(R.id.salary);
-        location  = findViewById(R.id.location);
+        location = findViewById(R.id.location);
         language = findViewById(R.id.language);
         applicationDeadline = findViewById(R.id.application_deadline);
         joiningDate = findViewById(R.id.joining_date);
         description = findViewById(R.id.description);
         skiils = findViewById(R.id.skill_needed);
-     qualification = findViewById(R.id.qualification);
+        qualification = findViewById(R.id.qualification);
         experience = findViewById(R.id.industry);
-        apply  = findViewById(R.id.apply);
-        save  = findViewById(R.id.savejob);
+        apply = findViewById(R.id.apply);
+        save = findViewById(R.id.savejob);
 
 
-        db=FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
         id = getIntent().getStringExtra("id");
@@ -87,22 +82,16 @@ public class JobDetails extends AppCompatActivity {
  */
 
 
-
-
-
-        Toast.makeText(getApplicationContext(),id,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), id, Toast.LENGTH_SHORT).show();
 
         loadInfo();
-
-
-
 
 
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),UploadResume.class);
-                i.putExtra("jobId",id);
+                Intent i = new Intent(getApplicationContext(), UploadResume.class);
+                i.putExtra("jobId", id);
                 startActivity(i);
 
 
@@ -144,16 +133,13 @@ public class JobDetails extends AppCompatActivity {
         });
 
 
-
-
-
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 HashMap apllication = new HashMap();
-                apllication.put("uid",mAuth.getCurrentUser().getEmail());
-                apllication.put("jobId",id);
-                apllication.put("type","save");
+                apllication.put("uid", mAuth.getCurrentUser().getEmail());
+                apllication.put("jobId", id);
+                apllication.put("type", "save");
 
                 db.collection("MyJobs").add(apllication)
                         .addOnSuccessListener(new OnSuccessListener() {
@@ -191,7 +177,6 @@ public class JobDetails extends AppCompatActivity {
     }
 
 
-
     private void loadInfo() {
         DocumentReference docRef = db.collection("Jobs").document(id);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -204,17 +189,16 @@ public class JobDetails extends AppCompatActivity {
                         PostJobPojo job = document.toObject(PostJobPojo.class);
 
                         designation.setText(job.getJobTitle());
-                       company.setText(job.getCompanyName());
-                       location.setText(job.getStreetAddress()+", "+job.getCityAddress()+", "+job.getProvinceAddress());
-                       salary.setText("$"+job.getMinSalary()+ " - $" +job.getMaxSalary());
-                       language.setText(job.getLanguage());
+                        company.setText(job.getCompanyName());
+                        location.setText(job.getStreetAddress() + ", " + job.getCityAddress() + ", " + job.getProvinceAddress());
+                        salary.setText("$" + job.getMinSalary() + " - $" + job.getMaxSalary());
+                        language.setText(job.getLanguage());
                         applicationDeadline.setText(job.getApplicationDeadline());
-                       joiningDate.setText(job.getJoiningDate());
-                       description.setText(job.getJobDescription());
-                       skiils.setText(job.getSkillsRequired());
-                       qualification.setText(job.getQualificationRequired());
-                       //experience.setText("");
-
+                        joiningDate.setText(job.getJoiningDate());
+                        description.setText(job.getJobDescription());
+                        skiils.setText(job.getSkillsRequired());
+                        qualification.setText(job.getQualificationRequired());
+                        //experience.setText("");
 
 
                     } else {
@@ -227,7 +211,8 @@ public class JobDetails extends AppCompatActivity {
         });
 
     }
-    public static JobDetails getInstance(){
-        return   jobDetails;
+
+    public static JobDetails getInstance() {
+        return jobDetails;
     }
 }
