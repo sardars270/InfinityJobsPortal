@@ -152,7 +152,50 @@ public class HomeFragment extends Fragment {
 
                            // showToast();
                             //adapter.notifyDataSetChanged();
+
+                            loadNotAplyedList();
                         }
+
+                    }
+
+                    private void loadNotAplyedList() {
+
+                        notAppliedList.clear();
+                        collectionReference.whereEqualTo("status","active").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                                if (!queryDocumentSnapshots.isEmpty()) {
+
+                                    List<DocumentSnapshot> list1 = queryDocumentSnapshots.getDocuments();
+
+                                    count = list1.size();
+                                    for (DocumentSnapshot d : list1) {
+                                        int count=0;
+                                        PostJobPojo p = d.toObject(PostJobPojo.class);
+                                        p.setId(d.getId());
+
+                                        for(int i=0; i<saveIdList.size(); i++) {
+                                            if(d.getId().equals(String.valueOf(saveIdList.get(i)))) {
+                                                count=1;
+                                            }
+                                        }
+                                        if(count==0)
+                                            notAppliedList.add(p);
+                                    }
+                                    adapter.notifyDataSetChanged();
+                                    text.setText("Total Result : "+String.valueOf(notAppliedList.size()));
+                                }
+                            }
+
+
+                        });
+
+                        adapter =new Adapterjoblist(getContext(), notAppliedList);
+
+                        recjoblist.setHasFixedSize(true);
+                        recjoblist.setLayoutManager(new LinearLayoutManager(getContext()));
+                        recjoblist.setAdapter(adapter);
 
                     }
 
@@ -169,42 +212,5 @@ public class HomeFragment extends Fragment {
 
                 });
 
-
-
-        collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
-                if (!queryDocumentSnapshots.isEmpty()) {
-
-                    List<DocumentSnapshot> list1 = queryDocumentSnapshots.getDocuments();
-
-                    count = list1.size();
-                    for (DocumentSnapshot d : list1) {
-                        int count=0;
-                        PostJobPojo p = d.toObject(PostJobPojo.class);
-                        p.setId(d.getId());
-
-                        for(int i=0; i<saveIdList.size(); i++) {
-                            if(d.getId().equals(String.valueOf(saveIdList.get(i)))) {
-                                count=1;
-                            }
-                        }
-                        if(count==0)
-                        notAppliedList.add(p);
-                    }
-                    adapter.notifyDataSetChanged();
-                    text.setText("Total Result : "+String.valueOf(notAppliedList.size()));
-                }
-            }
-
-
-        });
-
-        adapter =new Adapterjoblist(getContext(), notAppliedList);
-
-        recjoblist.setHasFixedSize(true);
-        recjoblist.setLayoutManager(new LinearLayoutManager(getContext()));
-        recjoblist.setAdapter(adapter);
     }
 }

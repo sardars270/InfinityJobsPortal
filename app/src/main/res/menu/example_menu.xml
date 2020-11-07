@@ -9,4 +9,12 @@
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView" />
 
+    <item
+        android:id="@+id/back"
+        android:icon="@drawable/close"
+        android:title="Search"
+        android:onClick="back"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView" />
+
 </menu>

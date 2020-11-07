@@ -51,10 +51,10 @@ public class PostJobFragment extends Fragment {
     double latitude;
     double longitude;
 
-    private EditText mCompanyNameEditText, mJobTitleEditText, mStreetAddressEditText, mCityAddressEditText, mProvinceAddressEditText, mStartSalaryRangeEditText, mSalaryEndRangeEditText,
+    private EditText mCompanyNameEditText, mJobTitleEditText, mStreetAddressEditText, mCityAddressEditText, mStartSalaryRangeEditText, mSalaryEndRangeEditText,
             mJoiningEditTextDate, mApplicationDeadlineEditTextDate, mJobDescriptionEditText, mSkillsRequiredEditText,
             mQualificationRequiredEditText;
-    private Spinner mJobCategorySpinner;
+    private Spinner mJobCategorySpinner,mProvinceAddressEditText;
     private CheckBox mEnglishCheckBox, mFrenchCheckBox;
     private Button mPostJobSubmitButton, mPostJobDraftButton;
 
@@ -292,7 +292,7 @@ public class PostJobFragment extends Fragment {
                 String jobTitle = mJobTitleEditText.getText().toString();
                 String streetAddress = mStreetAddressEditText.getText().toString();
                 String city = mCityAddressEditText.getText().toString();
-                String province = mProvinceAddressEditText.getText().toString();
+                String province = mProvinceAddressEditText.getSelectedItem().toString();
 
                 String language = "";
                 if (mEnglishCheckBox.isChecked()) {
@@ -752,7 +752,7 @@ public class PostJobFragment extends Fragment {
                 String jobTitle = mJobTitleEditText.getText().toString();
                 String streetAddress = mStreetAddressEditText.getText().toString();
                 String city = mCityAddressEditText.getText().toString();
-                String province = mProvinceAddressEditText.getText().toString();
+                String province = mProvinceAddressEditText.getSelectedItem().toString();
 
                 String language = "";
                 if (mEnglishCheckBox.isChecked()) {
@@ -1214,11 +1214,7 @@ public class PostJobFragment extends Fragment {
             mCityAddressEditText.requestFocus();
             return true;
         }
-        if (province.isEmpty()) {
-            mProvinceAddressEditText.setError("Province are required");
-            mProvinceAddressEditText.requestFocus();
-            return true;
-        }
+
         if (language.isEmpty()) {
             return true;
         }

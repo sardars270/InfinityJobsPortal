@@ -102,15 +102,16 @@ public class AppliedJobs extends Fragment {
                     }
                 });
 
-return root;
+        return root;
     }
 
     private void showdata() {
         for (int i = 0; i < l.size(); i++) {
+//Toast.makeText(getContext(),l.get(i),Toast.LENGTH_SHORT).show();
 
             b=String.valueOf(l.get(i));
-            DocumentReference docRef = db.collection("Jobs").document(l.get(i));
 
+            DocumentReference docRef = db.collection("Jobs").document(l.get(i));
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -125,7 +126,7 @@ return root;
                             user.setId(String.valueOf(b));
                             user.setProvinceAddress("application");
                             list2.add(user);
-                          //  Toast.makeText(getContext(),user.getJobTitle(),Toast.LENGTH_SHORT).show();
+                            //  Toast.makeText(getContext(),user.getJobTitle(),Toast.LENGTH_SHORT).show();
                             //InteAdapter.notifyDataSetChanged();
                             InteAdapter = new adapterAppliedJobs( getContext(),list2);
 
@@ -141,6 +142,8 @@ return root;
                     }
                 }
             });
+
+
 
 
 
