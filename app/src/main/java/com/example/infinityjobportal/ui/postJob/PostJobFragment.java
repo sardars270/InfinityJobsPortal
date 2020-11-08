@@ -7,6 +7,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.PostJobPojo;
 import com.google.android.gms.maps.model.LatLng;
@@ -306,12 +309,39 @@ public class PostJobFragment extends Fragment {
                 Log.d(TAG, "onClick: for job submit started");
 
                 //Firestore values
+
                 String companyName = mCompanyNameSpinner.getSelectedItem().toString();
+
                 String jobCategory = mJobCategorySpinner.getSelectedItem().toString();
                 String jobTitle = mJobTitleEditText.getText().toString();
                 String streetAddress = mStreetAddressEditText.getText().toString();
                 String city = mCityAddressEditText.getText().toString();
                 String province = mProvinceAddressEditText.getSelectedItem().toString();
+                
+                if (TextUtils.isEmpty(jobTitle)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(mJobTitleEditText);
+                    mJobTitleEditText.setError("Invalid");
+                    return;
+                }
+                if (TextUtils.isEmpty(streetAddress)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(mStreetAddressEditText);
+                    mStreetAddressEditText.setError("Invalid");
+                    return;
+                }
+                if (TextUtils.isEmpty(city)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(mCityAddressEditText);
+                    mCityAddressEditText.setError("Invalid");
+                    return;
+                }
 
                 String language = "";
                 if (mEnglishCheckBox.isChecked()) {
@@ -331,6 +361,40 @@ public class PostJobFragment extends Fragment {
                 String jobDescription = mJobDescriptionEditText.getText().toString();
                 String skillsRequired = mSkillsRequiredEditText.getText().toString();
                 String qualificationRequired = mQualificationRequiredEditText.getText().toString();
+
+                if (TextUtils.isEmpty(applicationDeadline)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(mApplicationDeadlineEditTextDate);
+                    mApplicationDeadlineEditTextDate.setError("Invalid");
+                    return;
+                }
+                if (TextUtils.isEmpty(jobDescription)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(mJobDescriptionEditText);
+                    mJobDescriptionEditText.setError("Invalid");
+                    return;
+                }
+                if (TextUtils.isEmpty(skillsRequired)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(mSkillsRequiredEditText);
+                    mSkillsRequiredEditText.setError("Invalid");
+                    return;
+                }
+                if (TextUtils.isEmpty(qualificationRequired)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(mQualificationRequiredEditText);
+                    mQualificationRequiredEditText.setError("Invalid");
+                    return;
+                }
+
                 SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
                 Date todayDate = new Date();
                 String date = currentDate.format(todayDate);
