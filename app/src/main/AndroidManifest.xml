@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.postedJobs.closedJobs.JobDetailsClosedJobs"></activity>
+        <activity android:name=".profileViaadmin"></activity>
+        <activity android:name=".ui.postedJobs.closedJobs.JobDetailsClosedJobs" />
         <activity android:name=".ui.postedJobs.activeJobs.JobDetailsActiveJobs" />
         <activity android:name=".ui.postedJobs.activeJobs.ViewApplicationActiveJobs" />
         <activity android:name=".Successful" />
@@ -23,7 +24,9 @@
         <activity
             android:name=".JobDetails"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity android:name=".Filter" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".Filter"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".Search" />
         <activity android:name=".interests" />
         <activity android:name=".CompanyProfileActivity" />

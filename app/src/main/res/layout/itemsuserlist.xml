@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
@@ -38,7 +39,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4.5"
+            android:layout_weight="8"
             android:orientation="vertical">
 
             <TextView
@@ -67,6 +68,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3.5"
+            android:visibility="gone"
             android:orientation="vertical">
 
             <TextView
@@ -85,5 +87,5 @@
     </LinearLayout>
 
 
-</androidx.cardview.widget.CardView>
+</ScrollView>
 

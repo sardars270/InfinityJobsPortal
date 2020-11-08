@@ -51,7 +51,7 @@ public class ClientLogin extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-        autoLogin();
+        //autoLogin();
 
         //SIGNUP onClick Listener.
         signup.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +89,7 @@ public class ClientLogin extends AppCompatActivity {
     private void autoLogin() {
         Log.d(TAG, "autoLogin: has started");
 
-        mAuth.signInWithEmailAndPassword("sardars270@gmail.com", "barry123")
+        mAuth.signInWithEmailAndPassword("varunmahajan292@gmail.com", "varun123")
 
                 .addOnCompleteListener(ClientLogin.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -171,7 +171,7 @@ public class ClientLogin extends AppCompatActivity {
                                         progressBar.setVisibility(View.GONE);
                                         //errorView.setText("");
                                         // errorView.setVisibility(View.GONE);
-                                        Intent HomeActivity = new Intent(getApplicationContext(), interests.class);
+                                        Intent HomeActivity = new Intent(getApplicationContext(), MainActivity.class);
                                         //   setResult(RESULT_OK, null);
                                         startActivity(HomeActivity);
 

@@ -13,9 +13,8 @@ public class PostJobPojo {
     private String cityAddress;
     private String provinceAddress;
     private String language;
-    private Float minSalary;
-    private Float maxSalary;
-    private String availability;
+    private Double minSalary;
+    private Double maxSalary;
     private String joiningDate;
     private String applicationDeadline;
     private String jobDescription;
@@ -26,6 +25,9 @@ public class PostJobPojo {
     private double latitude;
     private double longitude;
     String id;
+    String uid;
+    private String Monday, Tuesday, Wednessday, Thursday, Friday, Saturday, Sunday,UserId;
+
 
     public PostJobPojo() {
     }
@@ -34,7 +36,7 @@ public class PostJobPojo {
         this.jobTitle = jobTitle;
     }
 
-    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Float minSalary, Float maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired, String status, String date, double latitude, double longitude) {
+    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Double minSalary, Double maxSalary, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired, String status, String date, double latitude, double longitude, String monday, String tuesday, String wednessday, String thursday, String friday, String saturday, String sunday, String uid) {
         this.companyName = companyName;
         this.jobCategory = jobCategory;
         this.jobTitle = jobTitle;
@@ -44,7 +46,6 @@ public class PostJobPojo {
         this.language = language;
         this.minSalary = minSalary;
         this.maxSalary = maxSalary;
-        this.availability = availability;
         this.joiningDate = joiningDate;
         this.applicationDeadline = applicationDeadline;
         this.jobDescription = jobDescription;
@@ -54,11 +55,19 @@ public class PostJobPojo {
         this.date = date;
         this.latitude = latitude;
         this.longitude = longitude;
+        Monday = monday;
+        Tuesday = tuesday;
+        Wednessday = wednessday;
+        Thursday = thursday;
+        Friday = friday;
+        Saturday = saturday;
+        Sunday = sunday;
+        this.uid = uid;
 
 
     }
 
-    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Float minSalary, Float maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired,double latitude,double longitude) {
+    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Double minSalary, Double maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired,double latitude,double longitude) {
         this.companyName = companyName;
         this.jobCategory = jobCategory;
         this.jobTitle = jobTitle;
@@ -68,7 +77,6 @@ public class PostJobPojo {
         this.language = language;
         this.minSalary = minSalary;
         this.maxSalary = maxSalary;
-        this.availability = availability;
         this.joiningDate = joiningDate;
         this.applicationDeadline = applicationDeadline;
         this.jobDescription = jobDescription;
@@ -138,18 +146,13 @@ public class PostJobPojo {
         return language;
     }
 
-    public Float getMinSalary() {
+    public Double getMinSalary() {
         return minSalary;
     }
 
-    public Float getMaxSalary() {
+    public Double getMaxSalary() {
         return maxSalary;
     }
-
-    public String getAvailability() {
-        return availability;
-    }
-
     public String getJoiningDate() {
         return joiningDate;
     }
@@ -198,16 +201,12 @@ public class PostJobPojo {
         this.language = language;
     }
 
-    public void setMinSalary(Float minSalary) {
+    public void setMinSalary(Double minSalary) {
         this.minSalary = minSalary;
     }
 
-    public void setMaxSalary(Float maxSalary) {
+    public void setMaxSalary(Double maxSalary) {
         this.maxSalary = maxSalary;
-    }
-
-    public void setAvailability(String availability) {
-        this.availability = availability;
     }
 
     public void setJoiningDate(String joiningDate) {
@@ -237,4 +236,72 @@ public class PostJobPojo {
     public void setId(String id) {
         this.id = id;
     }
+
+
+
+    public String getMonday() {
+        return Monday;
+    }
+
+    public void setMonday(String monday) {
+        Monday = monday;
+    }
+
+    public String getTuesday() {
+        return Tuesday;
+    }
+
+    public String getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(String userId) {
+        UserId = userId;
+    }
+
+    public void setTuesday(String tuesday) {
+        Tuesday = tuesday;
+    }
+
+    public String getWednessday() {
+        return Wednessday;
+    }
+
+    public void setWednessday(String wednessday) {
+        Wednessday = wednessday;
+    }
+
+    public String getThursday() {
+        return Thursday;
+    }
+
+    public void setThursday(String thursday) {
+        Thursday = thursday;
+    }
+
+    public String getFriday() {
+        return Friday;
+    }
+
+    public void setFriday(String friday) {
+        Friday = friday;
+    }
+
+    public String getSaturday() {
+        return Saturday;
+    }
+
+    public void setSaturday(String saturday) {
+        Saturday = saturday;
+    }
+
+    public String getSunday() {
+        return Sunday;
+    }
+
+    public void setSunday(String sunday) {
+        Sunday = sunday;
+    }
+
+
 }

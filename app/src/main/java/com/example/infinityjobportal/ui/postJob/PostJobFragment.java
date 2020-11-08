@@ -30,6 +30,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ServerTimestamp;
@@ -50,7 +51,7 @@ public class PostJobFragment extends Fragment {
     DatePickerDialog datePickerDialog;
     double latitude;
     double longitude;
-
+FirebaseAuth mAuth;
     private EditText mCompanyNameEditText, mJobTitleEditText, mStreetAddressEditText, mCityAddressEditText, mStartSalaryRangeEditText, mSalaryEndRangeEditText,
             mJoiningEditTextDate, mApplicationDeadlineEditTextDate, mJobDescriptionEditText, mSkillsRequiredEditText,
             mQualificationRequiredEditText;
@@ -109,7 +110,7 @@ public class PostJobFragment extends Fragment {
         ckbxSunMor = root.findViewById(R.id.chbxSunMor);
         ckbxSunEve = root.findViewById(R.id.chbxSunEve);
         ckbxSunN9t = root.findViewById(R.id.chbxSunN9t);
-
+mAuth = FirebaseAuth.getInstance();
 
 
 
@@ -713,7 +714,7 @@ public class PostJobFragment extends Fragment {
                         skillsRequired, qualificationRequired)) {
 
                     PostJobPojo postJobPOJO = new PostJobPojo(companyName, jobCategory, jobTitle, streetAddress, city, province, language,
-                            minSalary, maxSalary, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired,"active", date, latitude, longitude,Mondayvalue, Tuesdayvalue, Wednessdayvalue, Thursdayvalue, Fridayvalue, Saturdayvalue, Sundayvalue);
+                            minSalary, maxSalary, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired,"active", date, latitude, longitude,Mondayvalue, Tuesdayvalue, Wednessdayvalue, Thursdayvalue, Fridayvalue, Saturdayvalue, Sundayvalue,mAuth.getCurrentUser().getEmail());
 
                     db.collection("Jobs")
                             .add(postJobPOJO)
@@ -1149,7 +1150,7 @@ public class PostJobFragment extends Fragment {
                         skillsRequired, qualificationRequired)) {
 
                     PostJobPojo postJobPOJO = new PostJobPojo(companyName, jobCategory, jobTitle, streetAddress, city, province, language,
-                            minSalary, maxSalary, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired, "draft", date, latitude, longitude, Mondayvalue, Tuesdayvalue, Wednessdayvalue, Thursdayvalue, Fridayvalue, Saturdayvalue, Sundayvalue);
+                            minSalary, maxSalary, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired, "draft", date, latitude, longitude, Mondayvalue, Tuesdayvalue, Wednessdayvalue, Thursdayvalue, Fridayvalue, Saturdayvalue, Sundayvalue,mAuth.getCurrentUser().getEmail());
 
 
                     db.collection("Jobs")

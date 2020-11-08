@@ -200,4 +200,8 @@ public class JobDetails extends AppCompatActivity {
         });
 
     }
+
+    public static JobDetails getInstance(){
+        return jobDetails;
+    }
 }
