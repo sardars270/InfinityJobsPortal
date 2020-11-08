@@ -224,6 +224,10 @@ public class EditCompanyActivity extends AppCompatActivity {
                     return;
                 }
                 if (TextUtils.isEmpty(web)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(tvWeb);
                     tvWeb.setError("Invalid");
                     return;
                 }

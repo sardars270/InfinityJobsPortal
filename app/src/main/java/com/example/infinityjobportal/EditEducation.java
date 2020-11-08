@@ -144,7 +144,6 @@ back.setOnClickListener(new OnClickListener() {
                     .duration(700)
                     .repeat(2)
                     .playOn(school1);
-
             school1.setError("School Name is required");
             school1.requestFocus();
             return true;
@@ -155,7 +154,6 @@ back.setOnClickListener(new OnClickListener() {
                     .duration(700)
                     .repeat(2)
                     .playOn(degree1);
-
             degree1.setError("Degree is required");
             degree1.requestFocus();
             return true;
@@ -166,7 +164,6 @@ back.setOnClickListener(new OnClickListener() {
                     .duration(700)
                     .repeat(2)
                     .playOn(fieldOfStudy1);
-
             fieldOfStudy1.setError("Field of study is required");
             fieldOfStudy1.requestFocus();
             return true;
@@ -177,7 +174,6 @@ back.setOnClickListener(new OnClickListener() {
                     .duration(700)
                     .repeat(2)
                     .playOn(startdate);
-
             startdate.setError("Start date is required");
             startdate.requestFocus();
             return true;
@@ -188,7 +184,6 @@ back.setOnClickListener(new OnClickListener() {
                     .duration(700)
                     .repeat(2)
                     .playOn(enddate);
-
             enddate.setError("End date is required");
             enddate.requestFocus();
             return true;
@@ -198,7 +193,6 @@ back.setOnClickListener(new OnClickListener() {
                     .duration(700)
                     .repeat(2)
                     .playOn(grades);
-
             grades.setError("Grades are required");
             grades.requestFocus();
             return true;
@@ -208,7 +202,6 @@ back.setOnClickListener(new OnClickListener() {
                     .duration(700)
                     .repeat(2)
                     .playOn(extraAct);
-
             extraAct.setError("Activities and societies information is required");
             extraAct.requestFocus();
             return true;
@@ -218,7 +211,6 @@ back.setOnClickListener(new OnClickListener() {
                     .duration(700)
                     .repeat(2)
                     .playOn(discription1);
-
             discription1.setError("Description of Study is required");
             discription1.requestFocus();
             return true;

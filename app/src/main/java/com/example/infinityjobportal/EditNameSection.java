@@ -7,6 +7,7 @@ import androidx.navigation.Navigation;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.infinityjobportal.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -73,9 +76,29 @@ FirebaseFirestore db;
                 updates.put("firstName", firstName.getText().toString());
                 updates.put("lastName", lastName.getText().toString());
                 updates.put("tagLine", tagLine.getText().toString());
+                String firstname = firstName.getText().toString();
+                String lastname = lastName.getText().toString();
+
+                if (TextUtils.isEmpty(firstname)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(firstName);
+                    firstName.setError("Invalid");
+                    return;
+                }
+                if (TextUtils.isEmpty(lastname)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(lastName);
+                    lastName.setError("Invalid");
+                    return;
+                }
+
+                 docRef.update((Map<String, Object>) updates)
 
 
-                docRef.update((Map<String, Object>) updates)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {

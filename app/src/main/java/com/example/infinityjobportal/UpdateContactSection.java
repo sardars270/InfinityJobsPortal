@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -11,6 +12,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.infinityjobportal.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -79,8 +82,69 @@ public class UpdateContactSection extends AppCompatActivity {
                 updates.put("province", province.getText().toString());
                 updates.put("country", country.getText().toString());
                 updates.put("zipCode", zip.getText().toString());
-
-
+                String apart = apartment.getText().toString();
+                String build = building.getText().toString();
+                String Street = street.getText().toString();
+                String City = city.getText().toString();
+                String Province = province.getText().toString();
+                String Country = country.getText().toString();
+                String Zipcode = zip.getText().toString();
+                if (TextUtils.isEmpty(apart)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(apartment);
+                    apartment.setError("Invalid");
+                    return;
+                }
+                if (TextUtils.isEmpty(build)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(building);
+                    building.setError("Invalid");
+                    return;
+                }
+                if (TextUtils.isEmpty(Street)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(street);
+                    street.setError("Invalid");
+                    return;
+                }
+                if (TextUtils.isEmpty(City)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(city);
+                    city.setError("Invalid");
+                    return;
+                }
+                if (TextUtils.isEmpty(Province)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(province);
+                    province.setError("Invalid");
+                    return;
+                }
+                if (TextUtils.isEmpty(Country)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(country);
+                    country.setError("Invalid");
+                    return;
+                }
+                if (TextUtils.isEmpty(Zipcode)) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(2)
+                            .playOn(zip);
+                    zip.setError("Invalid");
+                    return;
+                }
 
                 docRef.update((Map<String, Object>) updates)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {

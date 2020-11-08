@@ -95,8 +95,6 @@ public class AddCompanyActivity extends AppCompatActivity {
 
         btnSubmit = findViewById(R.id.btnSubmit);
 
-
-
         ivLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,7 +116,6 @@ public class AddCompanyActivity extends AppCompatActivity {
                         .duration(700)
                         .repeat(2)
                         .playOn(btnSubmit);
-
                 String companyName = tvCompanyName.getText().toString();
                 String location = tvLocation.getText().toString();
                 String line1 = tvLine1.getText().toString();
@@ -134,10 +131,9 @@ public class AddCompanyActivity extends AppCompatActivity {
 
 
                 if (TextUtils.isEmpty(companyName)) {
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .repeat(2)
-                            .playOn(tvCompanyName);
+
+
+
                     tvCompanyName.setError("Invalid");
                     return;
                 }
@@ -162,7 +158,7 @@ public class AddCompanyActivity extends AppCompatActivity {
                     YoYo.with(Techniques.Shake)
                             .duration(700)
                             .repeat(2)
-                            .playOn(tvLine1);
+                            .playOn(tvLine2);
                     tvLine2.setError("Invalid");
                     return;
                 }

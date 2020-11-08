@@ -47,13 +47,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class add_exp extends AppCompatActivity {
-    EditText et_designation,et_institute,start_date,end_date;
-    ImageView img;
+ EditText et_designation,et_institute,start_date,end_date;
+ ImageView img;
 
-    Button pickdate,spickdate;
+ Button pickdate,spickdate;
     int mYear, mMonth, mDay;
-    TextView faltu;
-    Button submit;
+ TextView faltu;
+ Button submit;
     private Uri filePath;
     private static final int PICK_IMAGE_REQUEST = 71;
     FirebaseFirestore db;
@@ -86,7 +86,7 @@ public class add_exp extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         mAuth=FirebaseAuth.getInstance();
 
-        //  final global_vars globalVariable = (global_vars) faltu_context.context;
+      //  final global_vars globalVariable = (global_vars) faltu_context.context;
         start_date.addTextChangedListener(new TextWatcher() {
             private String current = "";
             private String ddmmyyyy = "DDMMYYYY";
@@ -213,58 +213,58 @@ public class add_exp extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {}
         });
-     /* spickdate.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
+      /* spickdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
 
-               final Calendar c = Calendar.getInstance();
-               mYear = c.get(Calendar.YEAR);
-               mMonth = c.get(Calendar.MONTH);
-               mDay = c.get(Calendar.DAY_OF_MONTH);
+                final Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
-               DatePickerDialog datePickerDialog = new DatePickerDialog(add_exp.this,
-                       new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(add_exp.this,
+                        new DatePickerDialog.OnDateSetListener() {
 
-                           @Override
-                           public void onDateSet(DatePicker view, int year,
-                                                 int monthOfYear, int dayOfMonth) {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
 
-                               et_start_date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                et_start_date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
-                           }
-                       }, mYear, mMonth, mDay);
-               datePickerDialog.show();
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
 
-           }
-       });
-       pickdate.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-
-
-               final Calendar c = Calendar.getInstance();
-               mYear = c.get(Calendar.YEAR);
-               mMonth = c.get(Calendar.MONTH);
-               mDay = c.get(Calendar.DAY_OF_MONTH);
+            }
+        });
+        pickdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
 
-               DatePickerDialog datePickerDialog = new DatePickerDialog(add_exp.this,
-                       new DatePickerDialog.OnDateSetListener() {
+                final Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
 
-                           @Override
-                           public void onDateSet(DatePicker view, int year,
-                                                 int monthOfYear, int dayOfMonth) {
 
-                               end_date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(add_exp.this,
+                        new DatePickerDialog.OnDateSetListener() {
 
-                           }
-                       }, mYear, mMonth, mDay);
-               datePickerDialog.show();
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
 
-           }
-       });*/
+                                end_date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+
+            }
+        });*/
 
         submit.setOnClickListener(new View.OnClickListener() {
 
@@ -329,7 +329,7 @@ public class add_exp extends AppCompatActivity {
 
 
 
-    }
+        }
 
 
 
@@ -337,5 +337,3 @@ public class add_exp extends AppCompatActivity {
 
 
 }
-
-

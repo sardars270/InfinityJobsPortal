@@ -75,6 +75,12 @@ public class AdminLogin extends AppCompatActivity {
 
     }
     private void autoLogin() {
+
+
+
+
+
+
             mAuth.signInWithEmailAndPassword("varunmahajan292@gmail.com", "varun123")
                     .addOnCompleteListener(AdminLogin.this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -140,7 +146,8 @@ public class AdminLogin extends AppCompatActivity {
 
 
     public void logInFunction(View view) {
-        if (email.getText().toString().contentEquals("")) {
+
+                   if (email.getText().toString().contentEquals("")) {
 
             YoYo.with(Techniques.Shake)
                     .duration(700)
