@@ -31,6 +31,7 @@ public class ActiveJobsFragment extends Fragment {
 
     private FirebaseFirestore db;
     private CollectionReference jobsReference;
+    private CollectionReference collectionReference;
 
     private ActiveJobsAdapter activeJobsAdapter;
     private ArrayList<PostJobPojo> documentList = new ArrayList<PostJobPojo>();

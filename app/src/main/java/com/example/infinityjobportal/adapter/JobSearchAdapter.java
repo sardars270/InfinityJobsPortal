@@ -87,7 +87,7 @@ Context context;
       //  holder.imageView.setImageResource(currentItem.gett());
         holder.textView1.setText(currentItem.getJobTitle());
         holder.at.setText(currentItem.getCompanyName());
-        holder.location.setText(currentItem.getCityAddress());
+        holder.location.setText(currentItem.getCityAddress()+", "+currentItem.getProvinceAddress());
         holder.language.setText(currentItem.getLanguage());
         holder.category.setText(currentItem.getJobCategory());
         holder.salary.setText("$"+currentItem.getMinSalary()+" - $"+ currentItem.getMaxSalary());

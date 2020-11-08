@@ -17,21 +17,25 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.security.AccessController.getContext;
+
 public class ViewApplicationActiveJobs extends AppCompatActivity {
     String id;
+
+
     private FirebaseFirestore db;
     ArrayList<String> candidateList = new ArrayList<>();
 
     ViewApplicationAdapter viewApplicationAdapter;
     RecyclerView viewApplicationsRecyclerView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_application_active_jobs);
         viewApplicationsRecyclerView = findViewById(R.id.applicationsRecyclerView);
-        id = getIntent().getStringExtra("id");
-//      Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+        id = getIntent().getStringExtra("activeJobID");
 
         db = FirebaseFirestore.getInstance();
 
@@ -50,12 +54,12 @@ public class ViewApplicationActiveJobs extends AppCompatActivity {
                         candidateList.add(d.getString("uid"));
                     }
 
-                    viewApplicationData();
+                   // viewApplicationData();
                 }
             }
         });
 
-        viewApplicationAdapter = new ViewApplicationAdapter();
+        viewApplicationAdapter = new ViewApplicationAdapter(getApplicationContext(), candidateList);
 
         viewApplicationsRecyclerView.setHasFixedSize(true);
         viewApplicationsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

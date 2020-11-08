@@ -65,6 +65,7 @@ int cout=0;
         collectionReference=db.collection("Jobs");
         mAuth = FirebaseAuth.getInstance();
 
+        setTitle("Search Jobs");
         //msg.setVisibility(View.GONE);
         fillExampleList();
        // setUpRecyclerView();
@@ -145,22 +146,36 @@ int cout=0;
 
 
 
+      //  query=collectionReference.whereEqualTo("language", GlobalStorage.language).whereEqualTo("jobCategory",GlobalStorage.jobCatogory).whereEqualTo("provinceAddress","QC");//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
+        Toast.makeText(this, GlobalStorage.province, Toast.LENGTH_SHORT).show();
 
-
-        if (!GlobalStorage.language.equals("") && !GlobalStorage.jobCatogory.equals("Any")) {// botth active
+        if (!GlobalStorage.language.equals("") && !GlobalStorage.jobCatogory.equals("Any") && GlobalStorage.province.equals("Any")) {// botth active province disabled
             query=collectionReference.whereEqualTo("language", GlobalStorage.language).whereEqualTo("jobCategory",GlobalStorage.jobCatogory);//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
 
-        } else if (!GlobalStorage.language.equals("") && GlobalStorage.jobCatogory.equals("Any")) {// only language active && category disabled {
+        } else if (!GlobalStorage.language.equals("") && GlobalStorage.jobCatogory.equals("Any") && GlobalStorage.province.equals("Any")) {// only language active && category disabled && province disabled{
             query=collectionReference.whereEqualTo("language", GlobalStorage.language);//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
         }
-        else if (GlobalStorage.language.equals("") && !GlobalStorage.jobCatogory.equals("Any")) {// only language disabled && category active {
+        else if (GlobalStorage.language.equals("") && !GlobalStorage.jobCatogory.equals("Any") && GlobalStorage.province.equals("Any")) {//  language & province disabled && category active {
             query=collectionReference.whereEqualTo("jobCategory",GlobalStorage.jobCatogory);//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
-        }else {
-         query=collectionReference;
+        }
+        else if (!GlobalStorage.language.equals("") && GlobalStorage.jobCatogory.equals("Any") && !GlobalStorage.province.equals("Any")) {//  language & province active && category disabled  {
+            query=collectionReference.whereEqualTo("language", GlobalStorage.language).whereEqualTo("provinceAddress",GlobalStorage.province);
+        }
+        else if (GlobalStorage.language.equals("") && !GlobalStorage.jobCatogory.equals("Any") && !GlobalStorage.province.equals("Any") ) {//  language   disabled && category & province active {
+            query=collectionReference.whereEqualTo("jobCategory",GlobalStorage.jobCatogory).whereEqualTo("provinceAddress",GlobalStorage.province);//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
+        }
+        else if (GlobalStorage.language.equals("") && GlobalStorage.jobCatogory.equals("Any") && !GlobalStorage.province.equals("Any") ) {//  language & category disabled && province active {
+            query=collectionReference.whereEqualTo("provinceAddress",GlobalStorage.province);//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
+        }
+        else  if (!GlobalStorage.language.equals("") && !GlobalStorage.jobCatogory.equals("Any") && !GlobalStorage.province.equals("Any")) {// botth active plus province
+        query=collectionReference.whereEqualTo("language", GlobalStorage.language).whereEqualTo("jobCategory",GlobalStorage.jobCatogory).whereEqualTo("provinceAddress",GlobalStorage.province);//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
+        }
+         else {
+            query=collectionReference;//.whereEqualTo("language", GlobalStorage.language).whereEqualTo("jobCategory",GlobalStorage.jobCatogory).whereEqualTo("provinceAddress",GlobalStorage.province);//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
 
         }
         cout = 0;
-                  query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                  query.whereEqualTo("status","active").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                 @Override
                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
@@ -216,6 +231,7 @@ int cout=0;
         inflater.inflate(R.menu.example_menu, menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
+
         SearchView searchView = (SearchView) searchItem.getActionView();
 
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -232,6 +248,12 @@ int cout=0;
                 return false;
             }
         });
+
+
         return true;
+    }
+
+    public void back(MenuItem item) {
+        finish();
     }
 }

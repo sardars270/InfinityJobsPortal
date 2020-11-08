@@ -70,6 +70,32 @@
         <item>Others</item>
     </string-array>
 
+    <string-array name="provinceForFilter">
+        <item>Any</item>
+        <item>Alberta</item>
+        <item>British Columbia</item>
+        <item>Manitoba</item>
+        <item>New Brunswick</item>
+        <item>Nova Scotia</item>
+        <item>Newfoundland and Labrador</item>
+        <item>Ontario</item>
+        <item>Prince Edward Island</item>
+        <item>Quebec</item>
+        <item>Saskatchewan</item>
+    </string-array>
+    <string-array name="provinceForPost">
+        <item>Alberta</item>
+        <item>British Columbia</item>
+        <item>Manitoba</item>
+        <item>New Brunswick</item>
+        <item>Nova Scotia</item>
+        <item>Newfoundland and Labrador</item>
+        <item>Ontario</item>
+        <item>Prince Edward Island</item>
+        <item>Quebec</item>
+        <item>Saskatchewan</item>
+    </string-array>
+
     <string-array name="jobDaysRequirement">
         <item>Select the availability requirement</item>
         <item>Monday</item>

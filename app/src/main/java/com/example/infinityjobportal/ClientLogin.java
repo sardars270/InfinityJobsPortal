@@ -16,6 +16,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -141,11 +143,18 @@ public class ClientLogin extends AppCompatActivity {
         Log.d(TAG, "logInFunction: has started.");
         if (email.getText().toString().contentEquals("")) {
 
+            YoYo.with(Techniques.Shake)
+                    .duration(700)
+                    .repeat(2)
+                    .playOn(email);
 
             errorView.setText("Email cant be empty");
 
-
         } else if (pass.getText().toString().contentEquals("")) {
+            YoYo.with(Techniques.Shake)
+                    .duration(700)
+                    .repeat(2)
+                    .playOn(pass);
 
             errorView.setText("Password cant be empty");
 
