@@ -2,13 +2,14 @@ package com.example.infinityjobportal.ui.postedJobs.activeJobs;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.ViewProfile;
 import com.example.infinityjobportal.model.PostJobPojo;
+
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.infinityjobportal.Filter;
+import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.User;
 
 import java.util.ArrayList;
@@ -37,7 +45,7 @@ public class ViewApplicationAdapter extends RecyclerView.Adapter<ViewApplication
     public ViewApplicationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d(TAG, "onCreateViewHolder: called");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.application_row_layout, parent, false);
-        ViewApplicationAdapter.ViewApplicationViewHolder viewHolder = new ViewApplicationAdapter.ViewApplicationViewHolder(view);
+        ViewApplicationViewHolder viewHolder = new ViewApplicationViewHolder(view);
         return viewHolder;
     }
 

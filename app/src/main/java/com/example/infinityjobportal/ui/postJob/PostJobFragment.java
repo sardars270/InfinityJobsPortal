@@ -1,4 +1,3 @@
-
 package com.example.infinityjobportal.ui.postJob;
 
 import android.app.DatePickerDialog;
@@ -7,7 +6,6 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +24,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
+import com.example.infinityjobportal.EditAvailability;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.PostJobPojo;
 import com.google.android.gms.maps.model.LatLng;
@@ -35,12 +32,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.ServerTimestamp;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -48,6 +47,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class PostJobFragment extends Fragment {
     private static final String TAG = "PostJobFragment";
@@ -59,15 +59,15 @@ public class PostJobFragment extends Fragment {
     double latitude;
     double longitude;
 
-    private EditText mJobTitleEditText, mStreetAddressEditText, mCityAddressEditText, mStartSalaryRangeEditText, mSalaryEndRangeEditText,
+    private EditText mCompanyNameEditText, mJobTitleEditText, mStreetAddressEditText, mCityAddressEditText, mStartSalaryRangeEditText, mSalaryEndRangeEditText,
             mJoiningEditTextDate, mApplicationDeadlineEditTextDate, mJobDescriptionEditText, mSkillsRequiredEditText,
             mQualificationRequiredEditText;
-    private Spinner mJobCategorySpinner, mProvinceAddressEditText, mCompanyNameSpinner;
+    private Spinner mJobCategorySpinner,mProvinceAddressEditText,mCompanyNameSpinner;
     private CheckBox mEnglishCheckBox, mFrenchCheckBox;
     private Button mPostJobSubmitButton, mPostJobDraftButton;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance(); //Initialize an instance of Cloud Firestore.
-    FirebaseAuth mAuth;
+FirebaseAuth mAuth;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -78,7 +78,7 @@ public class PostJobFragment extends Fragment {
         mJobCategorySpinner = root.findViewById(R.id.jobCategorySpinner);
         mJobTitleEditText = root.findViewById(R.id.jobTitleEditText);
         mStreetAddressEditText = root.findViewById(R.id.streetAddressEditText);
-        mCityAddressEditText = root.findViewById(R.id.cityAddressEditText);
+        mCityAddressEditText = root.findViewById(R.id.cityAddressSpinner);
         mProvinceAddressEditText = root.findViewById(R.id.provinceSpinner);
         mEnglishCheckBox = root.findViewById(R.id.radioEnglish);
         mFrenchCheckBox = root.findViewById(R.id.radioFrench);
@@ -118,6 +118,8 @@ public class PostJobFragment extends Fragment {
         ckbxSunMor = root.findViewById(R.id.chbxSunMor);
         ckbxSunEve = root.findViewById(R.id.chbxSunEve);
         ckbxSunN9t = root.findViewById(R.id.chbxSunN9t);
+
+
 
 
         //Submit Button.
@@ -171,6 +173,7 @@ public class PostJobFragment extends Fragment {
         });
 
 
+
 //Spinner for company names
         CollectionReference myCompaniesCollectionRef = db.collection("mycompanies");
         final List<String> companyNames = new ArrayList<>();
@@ -189,6 +192,9 @@ public class PostJobFragment extends Fragment {
                 }
             }
         });
+
+
+
 
 
         checkBoxMon.setOnClickListener(new View.OnClickListener() {
@@ -309,39 +315,12 @@ public class PostJobFragment extends Fragment {
                 Log.d(TAG, "onClick: for job submit started");
 
                 //Firestore values
-
-                String companyName = mCompanyNameSpinner.getSelectedItem().toString();
-
+                String companyName = mCompanyNameEditText.getText().toString();
                 String jobCategory = mJobCategorySpinner.getSelectedItem().toString();
                 String jobTitle = mJobTitleEditText.getText().toString();
                 String streetAddress = mStreetAddressEditText.getText().toString();
                 String city = mCityAddressEditText.getText().toString();
                 String province = mProvinceAddressEditText.getSelectedItem().toString();
-
-                if (TextUtils.isEmpty(jobTitle)) {
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .repeat(2)
-                            .playOn(mJobTitleEditText);
-                    mJobTitleEditText.setError("Invalid");
-                    return;
-                }
-                if (TextUtils.isEmpty(streetAddress)) {
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .repeat(2)
-                            .playOn(mStreetAddressEditText);
-                    mStreetAddressEditText.setError("Invalid");
-                    return;
-                }
-                if (TextUtils.isEmpty(city)) {
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .repeat(2)
-                            .playOn(mCityAddressEditText);
-                    mCityAddressEditText.setError("Invalid");
-                    return;
-                }
 
                 String language = "";
                 if (mEnglishCheckBox.isChecked()) {
@@ -361,46 +340,12 @@ public class PostJobFragment extends Fragment {
                 String jobDescription = mJobDescriptionEditText.getText().toString();
                 String skillsRequired = mSkillsRequiredEditText.getText().toString();
                 String qualificationRequired = mQualificationRequiredEditText.getText().toString();
-
-                if (TextUtils.isEmpty(applicationDeadline)) {
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .repeat(2)
-                            .playOn(mApplicationDeadlineEditTextDate);
-                    mApplicationDeadlineEditTextDate.setError("Invalid");
-                    return;
-                }
-                if (TextUtils.isEmpty(jobDescription)) {
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .repeat(2)
-                            .playOn(mJobDescriptionEditText);
-                    mJobDescriptionEditText.setError("Invalid");
-                    return;
-                }
-                if (TextUtils.isEmpty(skillsRequired)) {
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .repeat(2)
-                            .playOn(mSkillsRequiredEditText);
-                    mSkillsRequiredEditText.setError("Invalid");
-                    return;
-                }
-                if (TextUtils.isEmpty(qualificationRequired)) {
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .repeat(2)
-                            .playOn(mQualificationRequiredEditText);
-                    mQualificationRequiredEditText.setError("Invalid");
-                    return;
-                }
-
                 SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
                 Date todayDate = new Date();
                 String date = currentDate.format(todayDate);
 
-                String Add = mStreetAddressEditText.getText().toString() + "," + mCityAddressEditText.getText().toString();
-                Toast.makeText(getContext(), "location" + Add, Toast.LENGTH_LONG).show();
+                String Add= mStreetAddressEditText.getText().toString()+","+ mCityAddressEditText.getText().toString();
+                Toast.makeText(getContext(),"location"+Add,Toast.LENGTH_LONG).show();
                 List<Address> addressList = null;
                 if (Add != null || !Add.equals("")) {
                     Geocoder geocoder = new Geocoder(getContext());
@@ -408,8 +353,8 @@ public class PostJobFragment extends Fragment {
                         addressList = geocoder.getFromLocationName(Add, 1);
                         final Address address = addressList.get(0);
                         final LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                        latitude = latLng.latitude;
-                        longitude = latLng.longitude;
+                        latitude=latLng.latitude;
+                        longitude=latLng.longitude;
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -417,8 +362,10 @@ public class PostJobFragment extends Fragment {
                 }
                 final Address address = addressList.get(0);
                 final LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                latitude = address.getLatitude();
-                longitude = address.getLongitude();
+                latitude=address.getLatitude();
+                longitude=address.getLongitude();
+
+
 
 
                 //availabilty
@@ -446,7 +393,9 @@ public class PostJobFragment extends Fragment {
 
                         Mondayvalue = "Morning/Evening/Night";
 
-                    } else {
+                    }
+
+                    else {
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setMessage("Please select check box for Monday.")
@@ -463,7 +412,10 @@ public class PostJobFragment extends Fragment {
 
 
                     }
-                } else {
+                }
+
+
+                else {
                     // if(!checkBoxMon.isChecked())
                     {
                         ckbxMonMor.setChecked(false);
@@ -500,7 +452,10 @@ public class PostJobFragment extends Fragment {
                         // Toast.makeText(getContext(), "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
                         Tuesdayvalue = "Morning/Evening/Night";
 
-                    } else {
+                    }
+
+
+                    else {
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setMessage("Please select check box for Tuesday.")
@@ -515,7 +470,8 @@ public class PostJobFragment extends Fragment {
                         return;
 
                     }
-                } else {
+                }
+                else {
                     ckbxTueMor.setChecked(false);
                     ckbxTueEve.setChecked(false);
                     ckbxTueN9t.setChecked(false);
@@ -549,7 +505,10 @@ public class PostJobFragment extends Fragment {
                     } else if (ckbxWedMor.isChecked() && ckbxWedEve.isChecked() && ckbxWedN9t.isChecked()) {
                         //   Toast.makeText(getContext(), "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
                         Wednessdayvalue = "Morning/Evening/Night";
-                    } else {
+                    }
+
+
+                    else {
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setMessage("Please select check box for Wednessday.")
@@ -564,7 +523,8 @@ public class PostJobFragment extends Fragment {
                         return;
 
                     }
-                } else {
+                }
+                else  {
                     ckbxWedMor.setChecked(false);
                     ckbxWedEve.setChecked(false);
                     ckbxWedN9t.setChecked(false);
@@ -597,7 +557,9 @@ public class PostJobFragment extends Fragment {
                     } else if (ckbxThursMor.isChecked() && ckbxThursEve.isChecked() && ckbxThursN9t.isChecked()) {
                         //  Toast.makeText(getContext(), "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
                         Thursdayvalue = "Morning/Evening/Night";
-                    } else {
+                    }
+
+                    else {
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setMessage("Please select check box for Thursday.")
@@ -612,7 +574,8 @@ public class PostJobFragment extends Fragment {
                         return;
 
                     }
-                } else {
+                }
+                else  {
                     ckbxThursMor.setChecked(false);
                     ckbxThursEve.setChecked(false);
                     ckbxThursN9t.setChecked(false);
@@ -645,7 +608,9 @@ public class PostJobFragment extends Fragment {
                         // Toast.makeText(getContext(), "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
                         Fridayvalue = "Morning/Evening/Night";
 
-                    } else {
+                    }
+
+                    else {
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setMessage("Please select check box for Friday.")
@@ -660,7 +625,8 @@ public class PostJobFragment extends Fragment {
                         return;
 
                     }
-                } else {
+                }
+                else  {
                     ckbxFriMor.setChecked(false);
                     ckbxFriEve.setChecked(false);
                     ckbxFriN9t.setChecked(false);
@@ -693,7 +659,8 @@ public class PostJobFragment extends Fragment {
                         //  Toast.makeText(getContext(), "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
                         Saturdayvalue = "Morning/Evening/Night";
 
-                    } else {
+                    }
+                    else {
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setMessage("Please select check box for Saturday.")
@@ -708,7 +675,8 @@ public class PostJobFragment extends Fragment {
                         return;
 
                     }
-                } else {
+                }
+                else   {
                     ckbxSatMor.setChecked(false);
                     ckbxSatEve.setChecked(false);
                     ckbxSatN9t.setChecked(false);
@@ -739,7 +707,9 @@ public class PostJobFragment extends Fragment {
                     } else if (ckbxSunMor.isChecked() && ckbxSunEve.isChecked() && ckbxSunN9t.isChecked()) {
                         // Toast.makeText(getContext(), "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
                         Sundayvalue = "Morning/Evening/Night";
-                    } else {
+                    }
+
+                    else {
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setMessage("Please select check box for Sunday.")
@@ -754,7 +724,8 @@ public class PostJobFragment extends Fragment {
                         return;
 
                     }
-                } else {
+                }
+                else {
                     ckbxSunMor.setChecked(false);
                     ckbxSunEve.setChecked(false);
                     ckbxSunN9t.setChecked(false);
@@ -763,33 +734,37 @@ public class PostJobFragment extends Fragment {
 
                 //availabilty end
 
-                DocumentReference documentReference = db.collection("Jobs").document();
-                String docId = documentReference.getId();
-
-                final PostJobPojo postJobPOJO = new PostJobPojo(companyName, jobCategory, jobTitle, streetAddress, city, province, language,
-                        minSalary, maxSalary, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired, "active", date, latitude, longitude, Mondayvalue, Tuesdayvalue, Wednessdayvalue, Thursdayvalue, Fridayvalue, Saturdayvalue, Sundayvalue, mAuth.getCurrentUser().getEmail());
-
-                db.collection("Jobs")
-                        .add(postJobPOJO)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
 
 
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error adding document", e);
-                            }
-                        });
+                if (!hasValidationErrors(companyName, jobCategory, jobTitle, streetAddress, city, province, language, minSalary,
+                        maxSalary, joiningDate, applicationDeadline, jobDescription,
+                        skillsRequired, qualificationRequired)) {
+
+                    PostJobPojo postJobPOJO = new PostJobPojo(companyName, jobCategory, jobTitle, streetAddress, city, province, language,
+                            minSalary, maxSalary, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired,"active", date, latitude, longitude,Mondayvalue, Tuesdayvalue, Wednessdayvalue, Thursdayvalue, Fridayvalue, Saturdayvalue, Sundayvalue,mAuth.getCurrentUser().getEmail());
+
+                    db.collection("Jobs")
+                            .add(postJobPOJO)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w(TAG, "Error adding document", e);
+                                }
+                            });
 
 
-                Navigation.findNavController(view).navigate(R.id.postedJobsFragment);
+                    Navigation.findNavController(view).navigate(R.id.postedJobsFragment);
 
-                Log.d(TAG, "onClick: for job post has ended");
+                    Log.d(TAG, "onClick: for job post has ended");
+
+                }
+
 
             }
 
@@ -800,7 +775,7 @@ public class PostJobFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                String companyName = mCompanyNameSpinner.getSelectedItem().toString();
+                String companyName = mCompanyNameEditText.getText().toString();
                 String jobCategory = mJobCategorySpinner.getSelectedItem().toString();
                 String jobTitle = mJobTitleEditText.getText().toString();
                 String streetAddress = mStreetAddressEditText.getText().toString();
@@ -854,7 +829,9 @@ public class PostJobFragment extends Fragment {
 
                         Mondayvalue = "Morning/Evening/Night";
 
-                    } else {
+                    }
+
+                    else {
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setMessage("Please select check box for Monday.")
@@ -871,7 +848,10 @@ public class PostJobFragment extends Fragment {
 
 
                     }
-                } else {
+                }
+
+
+                else {
                     // if(!checkBoxMon.isChecked())
                     {
                         ckbxMonMor.setChecked(false);
@@ -908,7 +888,10 @@ public class PostJobFragment extends Fragment {
                         // Toast.makeText(getContext(), "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
                         Tuesdayvalue = "Morning/Evening/Night";
 
-                    } else {
+                    }
+
+
+                    else {
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setMessage("Please select check box for Tuesday.")
@@ -923,7 +906,8 @@ public class PostJobFragment extends Fragment {
                         return;
 
                     }
-                } else {
+                }
+                else {
                     ckbxTueMor.setChecked(false);
                     ckbxTueEve.setChecked(false);
                     ckbxTueN9t.setChecked(false);
@@ -957,7 +941,10 @@ public class PostJobFragment extends Fragment {
                     } else if (ckbxWedMor.isChecked() && ckbxWedEve.isChecked() && ckbxWedN9t.isChecked()) {
                         //   Toast.makeText(getContext(), "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
                         Wednessdayvalue = "Morning/Evening/Night";
-                    } else {
+                    }
+
+
+                    else {
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setMessage("Please select check box for Wednessday.")
@@ -972,7 +959,8 @@ public class PostJobFragment extends Fragment {
                         return;
 
                     }
-                } else {
+                }
+                else  {
                     ckbxWedMor.setChecked(false);
                     ckbxWedEve.setChecked(false);
                     ckbxWedN9t.setChecked(false);
@@ -1005,7 +993,9 @@ public class PostJobFragment extends Fragment {
                     } else if (ckbxThursMor.isChecked() && ckbxThursEve.isChecked() && ckbxThursN9t.isChecked()) {
                         //  Toast.makeText(getContext(), "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
                         Thursdayvalue = "Morning/Evening/Night";
-                    } else {
+                    }
+
+                    else {
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setMessage("Please select check box for Thursday.")
@@ -1020,7 +1010,8 @@ public class PostJobFragment extends Fragment {
                         return;
 
                     }
-                } else {
+                }
+                else  {
                     ckbxThursMor.setChecked(false);
                     ckbxThursEve.setChecked(false);
                     ckbxThursN9t.setChecked(false);
@@ -1053,7 +1044,9 @@ public class PostJobFragment extends Fragment {
                         // Toast.makeText(getContext(), "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
                         Fridayvalue = "Morning/Evening/Night";
 
-                    } else {
+                    }
+
+                    else {
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setMessage("Please select check box for Friday.")
@@ -1068,7 +1061,8 @@ public class PostJobFragment extends Fragment {
                         return;
 
                     }
-                } else {
+                }
+                else  {
                     ckbxFriMor.setChecked(false);
                     ckbxFriEve.setChecked(false);
                     ckbxFriN9t.setChecked(false);
@@ -1101,7 +1095,8 @@ public class PostJobFragment extends Fragment {
                         //  Toast.makeText(getContext(), "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
                         Saturdayvalue = "Morning/Evening/Night";
 
-                    } else {
+                    }
+                    else {
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setMessage("Please select check box for Saturday.")
@@ -1116,7 +1111,8 @@ public class PostJobFragment extends Fragment {
                         return;
 
                     }
-                } else {
+                }
+                else   {
                     ckbxSatMor.setChecked(false);
                     ckbxSatEve.setChecked(false);
                     ckbxSatN9t.setChecked(false);
@@ -1147,7 +1143,9 @@ public class PostJobFragment extends Fragment {
                     } else if (ckbxSunMor.isChecked() && ckbxSunEve.isChecked() && ckbxSunN9t.isChecked()) {
                         // Toast.makeText(getContext(), "monday Morning,evening and night is selected", Toast.LENGTH_SHORT).show();
                         Sundayvalue = "Morning/Evening/Night";
-                    } else {
+                    }
+
+                    else {
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setMessage("Please select check box for Sunday.")
@@ -1162,7 +1160,8 @@ public class PostJobFragment extends Fragment {
                         return;
 
                     }
-                } else {
+                }
+                else {
                     ckbxSunMor.setChecked(false);
                     ckbxSunEve.setChecked(false);
                     ckbxSunN9t.setChecked(false);
@@ -1172,30 +1171,120 @@ public class PostJobFragment extends Fragment {
                 //availabilty end
 
 
-                PostJobPojo postJobPOJO = new PostJobPojo(companyName, jobCategory, jobTitle, streetAddress, city, province, language,
-                        minSalary, maxSalary, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired, "draft", date, latitude, longitude, Mondayvalue, Tuesdayvalue, Wednessdayvalue, Thursdayvalue, Fridayvalue, Saturdayvalue, Sundayvalue, mAuth.getCurrentUser().getEmail());
+
+                if (!hasValidationErrors(companyName, jobCategory, jobTitle, streetAddress, city, province, language, minSalary,
+                        maxSalary,joiningDate, applicationDeadline, jobDescription,
+                        skillsRequired, qualificationRequired)) {
+
+                    PostJobPojo postJobPOJO = new PostJobPojo(companyName, jobCategory, jobTitle, streetAddress, city, province, language,
+                            minSalary, maxSalary, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired, "draft", date, latitude, longitude, Mondayvalue, Tuesdayvalue, Wednessdayvalue, Thursdayvalue, Fridayvalue, Saturdayvalue, Sundayvalue,mAuth.getCurrentUser().getEmail());
 
 
-                db.collection("Jobs")
-                        .add(postJobPOJO)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
-                                Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error adding document", e);
-                            }
-                        });
+                    db.collection("Jobs")
+                            .add(postJobPOJO)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                                    Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w(TAG, "Error adding document", e);
+                                }
+                            });
+
+                }
+
 
                 Navigation.findNavController(view).navigate(R.id.postedJobsFragment);
 
             }
         });
+
+
+
+
+
+
         return root;
+
+
     }
+
+    private boolean hasValidationErrors(String companyName, String jobCategory, String jobTitle, String streetAddress, String city, String province, String language, Double minSalary, Double maxSalary, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired) {
+
+
+        if (companyName.isEmpty()) {
+            mCompanyNameEditText.setError("Company Name is required");
+            mCompanyNameEditText.requestFocus();
+            return true;
+        }
+        if (jobCategory.equals("Select the job category")) {
+            mCompanyNameEditText.setError("Job category is required");
+            mCompanyNameEditText.requestFocus();
+        }
+        if (jobTitle.isEmpty()) {
+            mJobTitleEditText.setError("Title is required");
+            mJobTitleEditText.requestFocus();
+            return true;
+        }
+        if (streetAddress.isEmpty()) {
+            mStreetAddressEditText.setError("Street address is required");
+            mStreetAddressEditText.requestFocus();
+            return true;
+        }
+
+        if (city.isEmpty()) {
+            mCityAddressEditText.setError("City is required");
+            mCityAddressEditText.requestFocus();
+            return true;
+        }
+
+        if (language.isEmpty()) {
+            return true;
+        }
+
+        if (minSalary.equals(null)) {
+            mStartSalaryRangeEditText.setError("Minimum salary is required");
+            mStartSalaryRangeEditText.requestFocus();
+            return true;
+        }
+        if (maxSalary.equals(null)) {
+            mSalaryEndRangeEditText.setError("Maximum salary is required");
+            mSalaryEndRangeEditText.requestFocus();
+            return true;
+        }
+
+        if (joiningDate.isEmpty()) {
+            mJoiningEditTextDate.setError("joining date is required");
+            mJoiningEditTextDate.requestFocus();
+            return true;
+        }
+        if (applicationDeadline.isEmpty()) {
+            mApplicationDeadlineEditTextDate.setError("Application deadline is required");
+            mApplicationDeadlineEditTextDate.requestFocus();
+            return true;
+        }
+        if (jobDescription.isEmpty()) {
+            mSkillsRequiredEditText.setError("Description is required");
+            mSkillsRequiredEditText.requestFocus();
+            return true;
+        }
+        if (skillsRequired.isEmpty()) {
+            mSkillsRequiredEditText.setError("Skills are required");
+            mSkillsRequiredEditText.requestFocus();
+            return true;
+        }
+        if (qualificationRequired.isEmpty()) {
+            mQualificationRequiredEditText.setError("Qualification is required");
+            mQualificationRequiredEditText.requestFocus();
+            return true;
+        }
+        return false;
+    }
+
+
 }

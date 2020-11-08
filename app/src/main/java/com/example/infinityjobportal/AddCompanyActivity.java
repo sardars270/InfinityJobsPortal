@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,8 +26,6 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.app.ActivityCompat;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,18 +46,21 @@ public class AddCompanyActivity extends AppCompatActivity {
     AppCompatEditText tvCompanyName, tvLocation, tvLine1, tvLine2, tvCity, tvState, tvCountry, tvAbout, tvDesc, tvWeb, tvEmail, tvContact;
     Spinner spnIndustry;
     AppCompatButton btnSubmit;
-    ImageView ivLogo;
+    AppCompatImageView ivLogo;
     AppCompatImageView ivCamera;
+    ImageView back;
+    TextView save;
 
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth mAuth;
 
-    String userId = "1234";
+    String userId;
 
     FirebaseStorage storage;
     StorageReference storageReference;
 
     private Uri filePath;
+    String logoURL;
 
     private final int PICK_IMAGE_REQUEST = 10;
     private final int PICK_IMAGE_PERMISSION = 100;
@@ -68,16 +70,18 @@ public class AddCompanyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_company);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Add Company");
+      /* getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       getSupportActionBar().setDisplayShowHomeEnabled(true);
+       getSupportActionBar().setTitle("Add Company");*/
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
+        userId = mAuth.getCurrentUser().getUid();
+
         ivLogo = findViewById(R.id.ivLogo);
-     //   ivCamera = findViewById(R.id.ivCamera);
+        //   ivCamera = findViewById(R.id.ivCamera);
 
         tvCompanyName = findViewById(R.id.tvCompanyName);
         tvLocation = findViewById(R.id.tvLocation);
@@ -92,12 +96,19 @@ public class AddCompanyActivity extends AppCompatActivity {
         tvEmail = findViewById(R.id.tvEmail);
         tvContact = findViewById(R.id.tvContact);
         spnIndustry = findViewById(R.id.tvIndustry);
+        back = findViewById(R.id.back);
+        save = findViewById(R.id.save);
 
         btnSubmit = findViewById(R.id.btnSubmit);
 
         ivLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent,PICK_IMAGE_REQUEST);
+                /*
                 if (ActivityCompat.checkSelfPermission(AddCompanyActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(AddCompanyActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PICK_IMAGE_PERMISSION);
                 } else {
@@ -106,16 +117,14 @@ public class AddCompanyActivity extends AppCompatActivity {
                     intent.setAction(Intent.ACTION_GET_CONTENT);
                     startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
                 }
+
+                 */
             }
         });
 
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                YoYo.with(Techniques.Bounce)
-                        .duration(700)
-                        .repeat(2)
-                        .playOn(btnSubmit);
                 String companyName = tvCompanyName.getText().toString();
                 String location = tvLocation.getText().toString();
                 String line1 = tvLine1.getText().toString();
@@ -131,100 +140,57 @@ public class AddCompanyActivity extends AppCompatActivity {
 
 
                 if (TextUtils.isEmpty(companyName)) {
-
-
-
                     tvCompanyName.setError("Invalid");
                     return;
                 }
 
                 if (TextUtils.isEmpty(location)) {
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .repeat(2)
-                            .playOn(tvLocation);
                     tvLocation.setError("Invalid");
                     return;
                 }
                 if (TextUtils.isEmpty(line1)) {
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .repeat(2)
-                            .playOn(tvLine1);
                     tvLine1.setError("Invalid");
                     return;
                 }
                 if (TextUtils.isEmpty(line2)) {
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .repeat(2)
-                            .playOn(tvLine2);
                     tvLine2.setError("Invalid");
                     return;
                 }
                 if (TextUtils.isEmpty(city)) {
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .repeat(2)
-                            .playOn(tvCity);
                     tvCity.setError("Invalid");
                     return;
                 }
                 if (TextUtils.isEmpty(state)) {
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .repeat(2)
-                            .playOn(tvState);
                     tvState.setError("Invalid");
                     return;
                 }
                 if (TextUtils.isEmpty(country)) {
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .repeat(2)
-                            .playOn(tvCountry);
                     tvCountry.setError("Invalid");
                     return;
                 }
                 if (TextUtils.isEmpty(about)) {
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .repeat(2)
-                            .playOn(tvAbout);
                     tvAbout.setError("Invalid");
                     return;
                 }
                 if (TextUtils.isEmpty(desc)) {
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .repeat(2)
-                            .playOn(tvDesc);
                     tvDesc.setError("Invalid");
                     return;
                 }
                 if (TextUtils.isEmpty(web)) {
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .repeat(2)
-                            .playOn(tvWeb);
                     tvWeb.setError("Invalid");
                     return;
                 }
                 if (TextUtils.isEmpty(email)) {
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .repeat(2)
-                            .playOn(tvEmail);
                     tvEmail.setError("Invalid");
                     return;
                 }
 
                 if (TextUtils.isEmpty(contact)) {
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .repeat(2)
-                            .playOn(tvContact);
                     tvContact.setError("Invalid");
+                    return;
+                }
+                if (TextUtils.isEmpty(logoURL)) {
+                    Toast.makeText(AddCompanyActivity.this, "Uploam compnay logo", Toast.LENGTH_LONG).show();
                     return;
                 }
                 Log.e("here", "here");
@@ -244,8 +210,9 @@ public class AddCompanyActivity extends AppCompatActivity {
                 order.put("web", web);
                 order.put("email", email);
                 order.put("contact", contact);
-                order.put("userId", mAuth.getCurrentUser().getEmail());
+                order.put("userId", userId);
                 order.put("industry", spnIndustry.getSelectedItem().toString());
+                order.put("logo", logoURL);
 
 
                 firebaseFirestore.collection("mycompanies").document(id)
@@ -268,6 +235,13 @@ public class AddCompanyActivity extends AppCompatActivity {
 
             }
         });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
 
     }
 
@@ -304,14 +278,22 @@ public class AddCompanyActivity extends AppCompatActivity {
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            StorageReference ref = storageReference.child("images/" + UUID.randomUUID().toString());
+            final StorageReference ref = storageReference.child("company/" + UUID.randomUUID().toString());
             ref.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
                             Toast.makeText(AddCompanyActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
-                            Log.e("path", taskSnapshot.getUploadSessionUri().getPath());
+                            ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri downloadPhotoUrl) {
+                                    //Now play with downloadPhotoUrl
+                                    //Store data into Firebase Realtime Database
+                                    logoURL = downloadPhotoUrl.toString();
+                                    Log.e("url", logoURL);
+                                }
+                            });
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -349,3 +331,4 @@ public class AddCompanyActivity extends AppCompatActivity {
 
 
 }
+

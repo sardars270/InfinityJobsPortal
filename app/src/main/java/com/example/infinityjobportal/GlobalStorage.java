@@ -15,7 +15,10 @@ public class GlobalStorage {
     public  static int resultCount;
 
 
-    static ArrayList<String> S=new ArrayList<>();
+
+    public static ArrayList<String> S=new ArrayList<>();
+    public static ArrayList<String> T=new ArrayList<>();
+
 
 
 

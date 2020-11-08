@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.example.infinityjobportal.admin.AdminMainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -25,8 +27,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.auth.User;
-
 public class AdminLogin extends AppCompatActivity {
+    private static final String TAG = "AdminLogin";
     public EditText email, pass;
     public Button login, user, forgotpassword;
     ProgressBar progressBar;
@@ -51,7 +53,7 @@ public class AdminLogin extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-        autoLogin();
+        // autoLogin();
 
         user.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,25 +83,26 @@ public class AdminLogin extends AppCompatActivity {
 
 
 
-            mAuth.signInWithEmailAndPassword("varunmahajan292@gmail.com", "varun123")
-                    .addOnCompleteListener(AdminLogin.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
+        mAuth.signInWithEmailAndPassword("varunmahajan292@gmail.com", "varun123")
+                .addOnCompleteListener(AdminLogin.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
 
-                                FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser user = mAuth.getCurrentUser();
 
-                                if (user != null) {
-                                    if (user.isEmailVerified()) {
+                            if (user != null) {
+                                if (user.isEmailVerified()) {
 
-                                        DocumentReference docRef = db.collection("users").document("varunmahajan292@gmail.com");
-                                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                            @Override
-                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                User user = documentSnapshot.toObject(User.class);
+                                    DocumentReference docRef = db.collection("users").document("varunmahajan292@gmail.com");
+                                    docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                            User user = documentSnapshot.toObject(User.class);
 
-                                              //  if(user.isAdmin())
+                                                /*
+                                               if(user.isAdmin())
                                                 {
                                                     progressBar.setVisibility(View.GONE);
                                                     //errorView.setText("");
@@ -112,55 +115,53 @@ public class AdminLogin extends AppCompatActivity {
                                                     progressBar.setVisibility(View.GONE);
                                                     errorView.setText("This Email Is Not SetUp For Admin Account.");
                                                // }
-                                            }
-                                        });
 
-                                    } else {
+                                                 */
+                                            Intent HomeActivity = new Intent(getApplicationContext(), AdminMainActivity.class);
+                                            //   setResult(RESULT_OK, null);
+                                            startActivity(HomeActivity);
+                                        }
+                                    });
 
-                                        progressBar.setVisibility(View.GONE);
-                                        errorView.setText("Please Verify your EmailID and SignIn");
+                                } else {
 
-                                    }
-                                }
-
-                            } else {
-                                // If sign in fails, display a message to the user.
-
-                                progressBar.setVisibility(View.GONE);
-                                Toast.makeText(getApplicationContext(), "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-                                if (task.getException() != null) {
-                                    errorView.setText(task.getException().getMessage());
+                                    progressBar.setVisibility(View.GONE);
+                                    errorView.setText("Please Verify your EmailID and SignIn");
 
                                 }
+                            }
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(getApplicationContext(), "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            if (task.getException() != null) {
+                                errorView.setText(task.getException().getMessage());
 
                             }
 
                         }
-                    });
+
+                    }
+                });
 
 
-        }
-
+    }
 
 
 
     public void logInFunction(View view) {
+        Log.d(TAG, "logInFunction: has started.");
+        if (email.getText().toString().contentEquals("")) {
 
-                   if (email.getText().toString().contentEquals("")) {
 
-            YoYo.with(Techniques.Shake)
-                    .duration(700)
-                    .repeat(2)
-                    .playOn(email);
             errorView.setText("Email cant be empty");
 
 
         } else if (pass.getText().toString().contentEquals("")) {
-            YoYo.with(Techniques.Shake)
-                    .duration(700)
-                    .repeat(2)
-                    .playOn(pass);
+
             errorView.setText("Password cant be empty");
 
         } else {
@@ -168,6 +169,9 @@ public class AdminLogin extends AppCompatActivity {
             progressBar.setVisibility(View.VISIBLE);
 
             mAuth.signInWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
+                    // mAuth.signInWithEmailAndPassword("sardars270@gmail.com", "barry123")
+                    // mAuth.signInWithEmailAndPassword("sardars270@gmail.com", "barry123")
+
                     .addOnCompleteListener(AdminLogin.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -179,29 +183,30 @@ public class AdminLogin extends AppCompatActivity {
                                 if (user != null) {
                                     if (user.isEmailVerified()) {
 
-                                        DocumentReference docRef = db.collection("users").document(email.getText().toString().trim());
-                                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                        progressBar.setVisibility(View.GONE);
+
+                                        db.collection("users").document(email.getText().toString().trim())
+                                                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                             @Override
                                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                 User user = documentSnapshot.toObject(User.class);
 
-                                              /* if(user.isAdmin())
-                                                {
-                                                    progressBar.setVisibility(View.GONE);
-                                                    //errorView.setText("");
-                                                    // errorView.setVisibility(View.GONE);
-                                                    Intent HomeActivity = new Intent(getApplicationContext(), AdminMainActivity.class);
-                                                    //   setResult(RESULT_OK, null);
-                                                    startActivity(HomeActivity);
-                                                }
-                                                else {
-                                                    progressBar.setVisibility(View.GONE);
-                                                    errorView.setText("This Email Is Not SetUp For Admin Account.");
-                                                }
 
-                                               */
+
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+
                                             }
                                         });
+                                        //errorView.setText("");
+                                        // errorView.setVisibility(View.GONE);
+                                        Intent HomeActivity = new Intent(getApplicationContext(), AdminMainActivity.class);
+                                        //   setResult(RESULT_OK, null);
+                                        startActivity(HomeActivity);
+
+
 
                                     } else {
 
@@ -231,5 +236,4 @@ public class AdminLogin extends AppCompatActivity {
         }
 
     }
-
 }

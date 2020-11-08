@@ -26,6 +26,7 @@ import com.example.infinityjobportal.ListOfExperienceActiviy;
 import com.example.infinityjobportal.MainEducation;
 import com.example.infinityjobportal.PojoAddNewEducation;
 import com.example.infinityjobportal.R;
+import com.example.infinityjobportal.SkillActivity;
 import com.example.infinityjobportal.UpdateAbout;
 import com.example.infinityjobportal.UpdateContactSection;
 import com.example.infinityjobportal.UpdateUserPic;
@@ -412,6 +413,14 @@ public class MyProfile extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), ListOfExperienceActiviy.class));
+            }
+        });
+
+        editSkillsSection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), SkillActivity.class));
+
             }
         });
 

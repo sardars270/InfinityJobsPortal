@@ -21,15 +21,15 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".ui.postedJobs.activeJobs.ViewApplicationActiveJobs" />
         <activity android:name=".Successful" />
+        <activity android:name=".UpdateCompanyPicActivity"/>
+        <activity android:name=".Successful" />
         <activity
             android:name=".UploadResume"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".JobDetails"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity
-            android:name=".Filter"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity android:name=".Filter" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".Search" />
         <activity android:name=".interests" />
         <activity android:name=".CompanyProfileActivity" />
