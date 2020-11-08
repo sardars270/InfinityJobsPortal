@@ -16,9 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.bumptech.glide.Glide;
+import com.example.infinityjobportal.MyJobDetails;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.InterestsModel;
 import com.example.infinityjobportal.model.User;
+import com.example.infinityjobportal.profileViaadmin;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -58,7 +60,7 @@ public class adapteruserlist extends RecyclerView.Adapter<adapteruserlist.ViewHo
         firebaseStorage=FirebaseStorage.getInstance();
         storageReference= firebaseStorage.getReference();
 
-        Toast.makeText(context,o.getUserProfilePic(),Toast.LENGTH_SHORT).show();
+       // Toast.makeText(context,o.getUserProfilePic(),Toast.LENGTH_SHORT).show();
         StorageReference imageRef=storageReference.child("user/"+o.getUserProfilePic());
         imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -85,6 +87,16 @@ public class adapteruserlist extends RecyclerView.Adapter<adapteruserlist.ViewHo
         holder.nm.setText(o.getFirstName().toString() +" "+o.getLastName().toString());
         holder.eml.setText(o.getEmail().toString());
         holder.loc.setText(o.getCity().toString());
+        holder.lout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, profileViaadmin.class);
+                i.putExtra("email", holder.eml.getText().toString());
+               // i.putExtra("status",s );
+                context.startActivity(i);
+            }
+        });
+
         //holder.imageView.
 
 

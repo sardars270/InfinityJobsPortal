@@ -19,9 +19,9 @@
         <activity
             android:name=".ui.postedJobs.activeJobs.JobDetailsActiveJobs"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity android:name=".profileViaadmin"></activity>
         <activity android:name=".ui.postedJobs.activeJobs.ViewApplicationActiveJobs" />
         <activity android:name=".Successful" />
-        <activity android:name=".UpdateCompanyPicActivity" />
         <activity
             android:name=".UploadResume"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -33,13 +33,9 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".Search" />
         <activity android:name=".interests" />
-        <activity
-            android:name=".CompanyProfileActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity android:name=".CompanyProfileActivity" />
         <activity android:name=".AddCompanyActivity" />
-        <activity
-            android:name=".EditCompanyActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity android:name=".EditCompanyActivity" />
         <activity android:name=".MapFilterData" />
         <activity
             android:name=".SearchViewMap"

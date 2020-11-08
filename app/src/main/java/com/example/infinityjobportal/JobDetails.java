@@ -1,9 +1,5 @@
 package com.example.infinityjobportal;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,11 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
 import com.example.infinityjobportal.model.PostJobPojo;
-import com.example.infinityjobportal.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,14 +23,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class JobDetails extends AppCompatActivity {
-    ImageView  back;
+    ImageView back;
     TextView designation, company, location, salary, language, applicationDeadline, joiningDate, description, skiils, qualification, experience;
     FirebaseFirestore db;
     FirebaseAuth mAuth;
@@ -40,6 +35,7 @@ public class JobDetails extends AppCompatActivity {
 
     String id;
     static JobDetails jobDetails;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,9 +44,9 @@ public class JobDetails extends AppCompatActivity {
         jobDetails = this;
 
         designation = findViewById(R.id.Designation);
-        company  = findViewById(R.id.company_name);
+        company = findViewById(R.id.company_name);
         salary = findViewById(R.id.salary);
-        location  = findViewById(R.id.location);
+        location = findViewById(R.id.location);
         language = findViewById(R.id.language);
         applicationDeadline = findViewById(R.id.application_deadline);
         joiningDate = findViewById(R.id.joining_date);
@@ -58,102 +54,93 @@ public class JobDetails extends AppCompatActivity {
         skiils = findViewById(R.id.skill_needed);
         qualification = findViewById(R.id.qualification);
         experience = findViewById(R.id.industry);
-        apply  = findViewById(R.id.apply);
-        save  = findViewById(R.id.savejob);
+        apply = findViewById(R.id.apply);
+        save = findViewById(R.id.savejob);
 
 
-        db=FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
         id = getIntent().getStringExtra("id");
 //        String s =getIntent().getStringExtra("status");
 /*
-       if (s.equals("save")){
-           apply.setVisibility(View.VISIBLE);
-           save.setVisibility(View.INVISIBLE);
-       }
-       else if(s.equals("application")){
-           apply.setVisibility(View.INVISIBLE);
-           save.setVisibility(View.INVISIBLE);
+        if (s.equals("save")){
+            apply.setVisibility(View.VISIBLE);
+            save.setVisibility(View.INVISIBLE);
+        }
+        else if(s.equals("application")){
+            apply.setVisibility(View.INVISIBLE);
+            save.setVisibility(View.INVISIBLE);
 
-       }
-       else {
-           apply.setVisibility(View.VISIBLE);
-           save.setVisibility(View.VISIBLE);
-       }
-
-
-
-*/
+        }
+        else {
+            apply.setVisibility(View.VISIBLE);
+            save.setVisibility(View.VISIBLE);
+        }
 
 
 
+ */
 
 
-//        Toast.makeText(getApplicationContext(),id,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), id, Toast.LENGTH_SHORT).show();
 
         loadInfo();
-
-
-
 
 
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),UploadResume.class);
-                i.putExtra("jobId",id);
+                Intent i = new Intent(getApplicationContext(), UploadResume.class);
+                i.putExtra("jobId", id);
                 startActivity(i);
 
 
-               /*
-               HashMap apllication = new HashMap();
-               apllication.put("uid",mAuth.getCurrentUser().getEmail());
-               apllication.put("jobId",id);
-               apllication.put("type","application");
+                /*
+                HashMap apllication = new HashMap();
+                apllication.put("uid",mAuth.getCurrentUser().getEmail());
+                apllication.put("jobId",id);
+                apllication.put("type","application");
 
-               db.collection("MyJobs").add(apllication)
-                       .addOnSuccessListener(new OnSuccessListener() {
-                           @Override
-                           public void onSuccess(Object o) {
+                db.collection("MyJobs").add(apllication)
+                        .addOnSuccessListener(new OnSuccessListener() {
+                            @Override
+                            public void onSuccess(Object o) {
 
 
-                               AlertDialog.Builder builder = new AlertDialog.Builder(JobDetails.this);
-                               builder.setMessage("Application Submitted.")
-                                       .setCancelable(false)
-                                       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                           public void onClick(DialogInterface dialog, int id) {
-                                               finish();
-                                           }
-                                       });
-                               AlertDialog alert = builder.create();
-                               alert.show();
+                                AlertDialog.Builder builder = new AlertDialog.Builder(JobDetails.this);
+                                builder.setMessage("Application Submitted.")
+                                        .setCancelable(false)
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                finish();
+                                            }
+                                        });
+                                AlertDialog alert = builder.create();
+                                alert.show();
 
-                           }
-                       })
-                       .addOnFailureListener(new OnFailureListener() {
-                           @Override
-                           public void onFailure(@NonNull Exception e) {
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
 
-                           }
-                       });
+                            }
+                        });
 
-                */
+                 */
 
             }
         });
-
-
-
 
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 HashMap apllication = new HashMap();
-                apllication.put("uid",mAuth.getCurrentUser().getEmail());
-                apllication.put("jobId",id);
-                apllication.put("type","save");
+                apllication.put("uid", mAuth.getCurrentUser().getEmail());
+                apllication.put("jobId", id);
+                apllication.put("type", "save");
 
                 db.collection("MyJobs").add(apllication)
                         .addOnSuccessListener(new OnSuccessListener() {
@@ -191,7 +178,6 @@ public class JobDetails extends AppCompatActivity {
     }
 
 
-
     private void loadInfo() {
         DocumentReference docRef = db.collection("Jobs").document(id);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -205,8 +191,8 @@ public class JobDetails extends AppCompatActivity {
 
                         designation.setText(job.getJobTitle());
                         company.setText(job.getCompanyName());
-                        location.setText(job.getStreetAddress()+", "+job.getCityAddress()+", "+job.getProvinceAddress());
-                        salary.setText("$"+job.getMinSalary()+ " - $" +job.getMaxSalary());
+                        location.setText(job.getStreetAddress() + ", " + job.getCityAddress() + ", " + job.getProvinceAddress());
+                        salary.setText("$" + job.getMinSalary() + " - $" + job.getMaxSalary());
                         language.setText(job.getLanguage());
                         applicationDeadline.setText(job.getApplicationDeadline());
                         joiningDate.setText(job.getJoiningDate());
@@ -214,7 +200,6 @@ public class JobDetails extends AppCompatActivity {
                         skiils.setText(job.getSkillsRequired());
                         qualification.setText(job.getQualificationRequired());
                         //experience.setText("");
-
 
 
                     } else {
@@ -227,8 +212,8 @@ public class JobDetails extends AppCompatActivity {
         });
 
     }
-    public static JobDetails getInstance(){
-        return   jobDetails;
+
+    public static JobDetails getInstance() {
+        return jobDetails;
     }
 }
-

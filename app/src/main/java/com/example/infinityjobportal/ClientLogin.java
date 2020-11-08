@@ -29,9 +29,9 @@ public class ClientLogin extends AppCompatActivity {
     private static final String TAG = "ClientLogin";
     public EditText email, pass;
     public Button login, signup, forgotpassword, admin;
-    private ProgressBar progressBar;
+    ProgressBar progressBar;
 
-    private TextView errorView;
+    TextView errorView;
     public FirebaseAuth mAuth;
 
     @Override
@@ -92,7 +92,7 @@ public class ClientLogin extends AppCompatActivity {
     private void autoLogin() {
         Log.d(TAG, "autoLogin: has started");
 
-        mAuth.signInWithEmailAndPassword("dhdhariaajit@gmail.com", "123456")
+        mAuth.signInWithEmailAndPassword("sardars270@gmail.com", "barry123")
 
                 .addOnCompleteListener(ClientLogin.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -144,18 +144,11 @@ public class ClientLogin extends AppCompatActivity {
         Log.d(TAG, "logInFunction: has started.");
         if (email.getText().toString().contentEquals("")) {
 
-            YoYo.with(Techniques.Shake)
-                    .duration(700)
-                    .repeat(2)
-                    .playOn(email);
 
             errorView.setText("Email cant be empty");
 
+
         } else if (pass.getText().toString().contentEquals("")) {
-            YoYo.with(Techniques.Shake)
-                    .duration(700)
-                    .repeat(2)
-                    .playOn(pass);
 
             errorView.setText("Password cant be empty");
 
@@ -181,7 +174,7 @@ public class ClientLogin extends AppCompatActivity {
                                         progressBar.setVisibility(View.GONE);
                                         //errorView.setText("");
                                         // errorView.setVisibility(View.GONE);
-                                        Intent HomeActivity = new Intent(getApplicationContext(), MainActivity.class);
+                                        Intent HomeActivity = new Intent(getApplicationContext(), interests.class);
                                         //   setResult(RESULT_OK, null);
                                         startActivity(HomeActivity);
 
