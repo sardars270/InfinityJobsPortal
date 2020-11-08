@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.bumptech.glide.Glide;
 import com.example.infinityjobportal.model.PostJobPojo;
@@ -90,7 +90,7 @@ public class JobDetails extends AppCompatActivity {
 
 
 
-        Toast.makeText(getApplicationContext(),id,Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(),id,Toast.LENGTH_SHORT).show();
 
         loadInfo();
 

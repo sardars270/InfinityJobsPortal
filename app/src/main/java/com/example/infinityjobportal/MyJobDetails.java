@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -80,7 +80,7 @@ public class MyJobDetails extends AppCompatActivity {
 
 
 
-        Toast.makeText(getApplicationContext(),id,Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(),id,Toast.LENGTH_SHORT).show();
 
         loadInfo();
 

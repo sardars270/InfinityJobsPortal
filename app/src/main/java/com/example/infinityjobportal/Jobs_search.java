@@ -147,7 +147,7 @@ int cout=0;
 
 
       //  query=collectionReference.whereEqualTo("language", GlobalStorage.language).whereEqualTo("jobCategory",GlobalStorage.jobCatogory).whereEqualTo("provinceAddress","QC");//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
-        Toast.makeText(this, GlobalStorage.province, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, GlobalStorage.province, Toast.LENGTH_SHORT).show();
 
         if (!GlobalStorage.language.equals("") && !GlobalStorage.jobCatogory.equals("Any") && GlobalStorage.province.equals("Any")) {// botth active province disabled
             query=collectionReference.whereEqualTo("language", GlobalStorage.language).whereEqualTo("jobCategory",GlobalStorage.jobCatogory);//.whereLessThan("minSalary",GlobalStorage.maxSalary).whereGreaterThan("minSalary",GlobalStorage.minSalary);
