@@ -1,5 +1,6 @@
 package com.example.infinityjobportal.ui.postedJobs.activeJobs;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +13,19 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infinityjobportal.R;
+import com.example.infinityjobportal.model.PostJobPojo;
+import com.example.infinityjobportal.model.User;
+
+import java.util.ArrayList;
 
 public class ViewApplicationAdapter extends RecyclerView.Adapter<ViewApplicationAdapter.ViewApplicationViewHolder>{
     private static final String TAG = "ViewApplicationAdapter";
+    Context context;
+    private ArrayList<String> userArrayList;
 
-    public ViewApplicationAdapter() {
-
+    public ViewApplicationAdapter(Context context, ArrayList<String> userArrayList) {
+        this.context = context;
+        this.userArrayList = userArrayList;
     }
 
     @NonNull
@@ -31,13 +39,15 @@ public class ViewApplicationAdapter extends RecyclerView.Adapter<ViewApplication
 
     @Override
     public void onBindViewHolder(@NonNull ViewApplicationViewHolder holder, int position) {
-        holder.applicantName.setText("postJobPOJO.getJobTitle()");
-        holder.applicantAddress.setText("postJobPOJO.getCompanyName()");
+        //final userArr postJobPOJO = userArrayList.get(position);
+
+        holder.applicantName.setText(userArrayList.get(position).toString());
+        //holder.applicantAddress.setText("postJobPOJO.getCompanyName()");
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return userArrayList.size();
     }
 
     public class ViewApplicationViewHolder extends RecyclerView.ViewHolder {

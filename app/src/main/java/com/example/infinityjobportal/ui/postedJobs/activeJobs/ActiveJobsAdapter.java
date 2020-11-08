@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.PostJobPojo;
+import com.example.infinityjobportal.model.User;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -47,6 +48,7 @@ public class ActiveJobsAdapter extends RecyclerView.Adapter<ActiveJobsAdapter.Ac
         Log.d(TAG, "onBindViewHolder: called");
 
         final PostJobPojo postJobPOJO = postJobPojoArrayList.get(position);
+
 
         holder.jobTitle.setText(postJobPOJO.getJobTitle());
         holder.companyName.setText(postJobPOJO.getCompanyName());

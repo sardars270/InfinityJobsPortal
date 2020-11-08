@@ -1,9 +1,5 @@
 package com.example.infinityjobportal;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,10 +8,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.example.infinityjobportal.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -24,33 +25,33 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import   com.example.infinityjobportal.model.*;
 
 public class ClientSignUp extends AppCompatActivity {
-    EditText firstName,lastName,email,password,mobile;
-    Button login,signup;
+    EditText firstName, lastName, email, password, mobile;
+    Button login, signup;
     ProgressBar progressBar;
-    String  patterntomatch ="[0-9]{10}";
+    String patterntomatch = "[0-9]{10}";
 
     public FirebaseAuth mAuth;
     FirebaseFirestore db;
 
     TextView errorView;
     String emailString;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_sign_up);
 
 
-        firstName=findViewById(R.id.firstName);
-        lastName=(EditText)findViewById(R.id.lastName);
-        email=(EditText)findViewById(R.id.email);
-        password=(EditText)findViewById(R.id.password);
-        mobile=(EditText)findViewById(R.id.mobile);
-        login=(Button) findViewById(R.id.login);
-        signup=(Button)findViewById(R.id.signup);
-        emailString= email.getText().toString();
+        firstName = findViewById(R.id.firstName);
+        lastName = (EditText) findViewById(R.id.lastName);
+        email = (EditText) findViewById(R.id.email);
+        password = (EditText) findViewById(R.id.password);
+        mobile = (EditText) findViewById(R.id.mobile);
+        login = (Button) findViewById(R.id.login);
+        signup = (Button) findViewById(R.id.signup);
+        emailString = email.getText().toString();
         progressBar = findViewById(R.id.progressBar);
 
         errorView = findViewById(R.id.errorView);
@@ -60,12 +61,10 @@ public class ClientSignUp extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),ClientLogin.class);
+                Intent i = new Intent(getApplicationContext(), ClientLogin.class);
                 startActivity(i);
             }
         });
-
-
 
 
         signup.setOnClickListener(new View.OnClickListener() {
@@ -95,33 +94,28 @@ public class ClientSignUp extends AppCompatActivity {
                     errorView.setText("Password cannot be empty");
 
 
-                }
-                else if (firstName.getText().toString().contentEquals("")) {
+                } else if (firstName.getText().toString().contentEquals("")) {
 
                     YoYo.with(Techniques.Shake)
                             .duration(700)
                             .repeat(3)
                             .playOn(firstName);
                     errorView.setText("Firstname cannot be empty");
-                }
-                else if (lastName.getText().toString().contentEquals("")) {
+                } else if (lastName.getText().toString().contentEquals("")) {
 
                     YoYo.with(Techniques.Shake)
                             .duration(700)
                             .repeat(3)
                             .playOn(lastName);
                     errorView.setText("Lastname cannot be empty");
-                }
-                else if (!mobile.getText().toString().matches(patterntomatch)) {
+                } else if (!mobile.getText().toString().matches(patterntomatch)) {
 
                     YoYo.with(Techniques.Shake)
                             .duration(700)
                             .repeat(3)
                             .playOn(mobile);
                     errorView.setText("Please enter valid number");
-                }
-
-                else {
+                } else {
 
 
                     progressBar.setVisibility(View.VISIBLE);
@@ -141,7 +135,7 @@ public class ClientSignUp extends AppCompatActivity {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
                                                             if (task.isSuccessful()) {
-                                                                   // loadOtherDetails();
+                                                                // loadOtherDetails();
                                                                 progressBar.setVisibility(View.GONE);
                                                                 //Toast.makeText(getApplicationContext(),"Verfy Email",Toast.LENGTH_LONG).show();
                                                                 //  loadOtherDetails();
@@ -150,7 +144,7 @@ public class ClientSignUp extends AppCompatActivity {
                                                                         .setCancelable(false)
                                                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                                             public void onClick(DialogInterface dialog, int id) {
-                                                                                Intent i = new Intent(getApplicationContext(),ClientLogin.class);
+                                                                                Intent i = new Intent(getApplicationContext(), ClientLogin.class);
                                                                                 startActivity(i);
                                                                             }
                                                                         });
@@ -185,9 +179,6 @@ public class ClientSignUp extends AppCompatActivity {
         });
 
 
-
-
-
     }
 
     private void loadOtherDetails() {
@@ -209,7 +200,7 @@ public class ClientSignUp extends AppCompatActivity {
         user.setZipCode("");
 
 
-      //  db.collection("users").document(user.getEmail()).set(user)
+        //  db.collection("users").document(user.getEmail()).set(user)
         db.collection("users").document(mAuth.getCurrentUser().getEmail()).set(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
