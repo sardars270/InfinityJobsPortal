@@ -55,14 +55,16 @@
         <activity
             android:name=".admin.ViewQuery"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity android:name=".AddNewEducation" />
+        <activity android:name=".AddNewEducation"  android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity android:name=".EditEducation" />
-        <activity android:name=".MainEducation" />
+        <activity android:name=".MainEducation"  android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity android:name=".Update_Exp" />
         <activity android:name=".Search_jobs" />
         <activity android:name=".Jobs_search" />
         <activity android:name=".Applied_jobs" />
         <activity android:name=".SavedJobsActivity" />
+        <activity android:name=".SkillActivity"/>
+        <activity android:name=".AddSkillsActivity"/>
         <activity
             android:name=".MyJobDetails"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />

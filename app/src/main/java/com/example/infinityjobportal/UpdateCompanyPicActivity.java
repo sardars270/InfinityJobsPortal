@@ -198,7 +198,7 @@ public class UpdateCompanyPicActivity extends AppCompatActivity {
 
                         Company company = document.toObject(Company.class);
 
-                        if (company.getCompany_image().equals("")) {
+                  /*   if (company.getCompany_image().equals("")) {
                             // userPic.setHint("Write here about your self.");
                             //Toast.makeText(getApplicationContext(),user.getUserProfilePic(),Toast.LENGTH_SHORT).show();
                         } else {
@@ -231,6 +231,7 @@ public class UpdateCompanyPicActivity extends AppCompatActivity {
 
 
                         }
+                     */
                     } else {
 
                     }

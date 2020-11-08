@@ -81,6 +81,12 @@ public class AddNewEducation extends AppCompatActivity {
             }
         });
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         textEnd.setOnClickListener(new View.OnClickListener() {
             @Override

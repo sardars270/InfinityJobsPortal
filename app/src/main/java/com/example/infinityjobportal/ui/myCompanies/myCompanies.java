@@ -16,6 +16,7 @@ import com.example.infinityjobportal.AddCompanyActivity;
 import com.example.infinityjobportal.*;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.adapter.*;
+import com.example.infinityjobportal.adapter.CompanyAdapter;
 import com.example.infinityjobportal.model.Company;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

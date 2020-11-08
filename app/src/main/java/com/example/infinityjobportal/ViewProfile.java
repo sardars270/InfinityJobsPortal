@@ -1,11 +1,9 @@
-package com.example.infinityjobportal.ui.myProfile;
+package com.example.infinityjobportal;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,28 +11,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.infinityjobportal.ClientChangePassword;
-import com.example.infinityjobportal.EditAvailability;
-import com.example.infinityjobportal.EditNameSection;
-import com.example.infinityjobportal.ListOfExperienceActiviy;
-import com.example.infinityjobportal.MainEducation;
-import com.example.infinityjobportal.PojoAddNewEducation;
-import com.example.infinityjobportal.R;
-import com.example.infinityjobportal.SkillActivity;
-import com.example.infinityjobportal.UpdateAbout;
-import com.example.infinityjobportal.UpdateContactSection;
-import com.example.infinityjobportal.UpdateUserPic;
 import com.example.infinityjobportal.adapter.InterestsAdapterProfile;
 import com.example.infinityjobportal.adapter.LOEAdapterProfile;
 import com.example.infinityjobportal.adapter.NewEducationAdapterProfile;
-import com.example.infinityjobportal.faltu_context;
-import com.example.infinityjobportal.interests;
 import com.example.infinityjobportal.model.InterestsModel;
 import com.example.infinityjobportal.model.LOEModel;
 import com.example.infinityjobportal.model.User;
@@ -48,7 +33,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -56,7 +40,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyProfile extends Fragment {
+public class ViewProfile extends AppCompatActivity {
 
     ImageView userPic, editNameSection, editAboutSection, editContcatSection;
     TextView editExperienceSection, editEducationSection, editInterestSection, editSkillsSection;
@@ -79,58 +63,55 @@ public class MyProfile extends Fragment {
     private NewEducationAdapterProfile adapter;
     private List<PojoAddNewEducation> educationList;
 
-
     RecyclerView recexp;
     LOEAdapterProfile loeAdapter;
     faltu_context context;
+    String id;
 
     ArrayList<LOEModel> listexp = new ArrayList<>();
 
-
-    public MyProfile() {
-        // Required empty public constructor
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_my_profile, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_view_profile);
 
-        editAvailabilitySection = root.findViewById(R.id.editAvailabilitySection);
-        mon = root.findViewById(R.id.mon);
-        tue = root.findViewById(R.id.tue);
-        wed = root.findViewById(R.id.wed);
-        thurs = root.findViewById(R.id.thurs);
-        fri = root.findViewById(R.id.fri);
-        sat = root.findViewById(R.id.sat);
-        sun = root.findViewById(R.id.sun);
-        userPic = root.findViewById(R.id.userPic);
-        name = root.findViewById(R.id.name);
-        tagLine = root.findViewById(R.id.tagLine);
-        location = root.findViewById(R.id.location);
-        about = root.findViewById(R.id.about);
-        email = root.findViewById(R.id.email);
-        number = root.findViewById(R.id.number);
-        website = root.findViewById(R.id.website);
-        address = root.findViewById(R.id.address);
-        editNameSection = root.findViewById(R.id.editNameSection);
-        editAboutSection = root.findViewById(R.id.editAboutSection);
-        editEducationSection = root.findViewById(R.id.openEducation);
-        editExperienceSection = root.findViewById(R.id.openExperience);
-        editSkillsSection = root.findViewById(R.id.openSkills);
-        editInterestSection = root.findViewById(R.id.openInterest);
-        editContcatSection = root.findViewById(R.id.editContactInfo);
-        changePassword = root.findViewById(R.id.changePassword);
-        rec = root.findViewById(R.id.rec);
-        recyclerViewEducation = root.findViewById(R.id.recyclerEducation);
-        recexp = root.findViewById(R.id.recexp);
+        Toast.makeText(this, "ajit", Toast.LENGTH_SHORT).show();
+/*
+        editAvailabilitySection = findViewById(R.id.editAvailabilitySection);
+        mon = findViewById(R.id.mon);
+        tue = findViewById(R.id.tue);
+        wed = findViewById(R.id.wed);
+        thurs = findViewById(R.id.thurs);
+        fri = findViewById(R.id.fri);
+        sat = findViewById(R.id.sat);
+        sun = findViewById(R.id.sun);
+        userPic = findViewById(R.id.userPic);
+        name = findViewById(R.id.name);
+        tagLine = findViewById(R.id.tagLine);
+        location = findViewById(R.id.location);
+        about = findViewById(R.id.about);
+        email = findViewById(R.id.email);
+        number = findViewById(R.id.number);
+        website = findViewById(R.id.website);
+        address = findViewById(R.id.address);
+        editNameSection = findViewById(R.id.editNameSection);
+        editAboutSection = findViewById(R.id.editAboutSection);
+        editEducationSection = findViewById(R.id.openEducation);
+        editExperienceSection = findViewById(R.id.openExperience);
+        editSkillsSection = findViewById(R.id.openSkills);
+        editInterestSection = findViewById(R.id.openInterest);
+        editContcatSection = findViewById(R.id.editContactInfo);
+        changePassword = findViewById(R.id.changePassword);
+        rec = findViewById(R.id.rec);
+        recyclerViewEducation = findViewById(R.id.recyclerEducation);
+        recexp = findViewById(R.id.recexp);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        id = getIntent().getStringExtra("uid").toString();
 
-        DocumentReference dref = db.collection("Availability").document(mAuth.getCurrentUser().getEmail());
+        DocumentReference dref = db.collection("Availability").document(id);
         dref.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
@@ -159,7 +140,7 @@ public class MyProfile extends Fragment {
         });
 
 
-        DocumentReference docRef = db.collection("users").document(mAuth.getCurrentUser().getEmail());
+        DocumentReference docRef = db.collection("users").document(id);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -189,11 +170,11 @@ public class MyProfile extends Fragment {
                         if (user.getWebsite().equals("")) {
                             website.setText("Add your website.");
                             websiteUrl = "";
-                            website.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+                            website.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
                         } else {
                             website.setText(user.getWebsite());
                             websiteUrl = user.getWebsite();
-                            website.setTextColor(ContextCompat.getColor(getContext(), R.color.mainAppçColor));
+                            website.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.mainAppçColor));
                         }
 
                         if (user.getCity().equals("") || user.getProvince().equals("") || user.getCountry().equals("")) {
@@ -218,20 +199,20 @@ public class MyProfile extends Fragment {
                             @Override
                             public void onSuccess(Uri uri) {
 
-                                Glide.with(getContext())
+                                Glide.with(getApplicationContext())
                                         .load(uri)
                                         .circleCrop()
                                         .into(userPic);
 
                                 //Picasso.get().load(uri).into(limg);
 
-                                // Toast.makeText(getContext(),"Success.",Toast.LENGTH_SHORT).show();
+                                // Toast.makeText(getApplicationContext(),"Success.",Toast.LENGTH_SHORT).show();
 
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getContext(), "Profile Pic is not available", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Profile Pic is not available", Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -273,10 +254,10 @@ public class MyProfile extends Fragment {
                 });
 
 
-        loeAdapter = new LOEAdapterProfile(listexp, getContext(), "af");
+        loeAdapter = new LOEAdapterProfile(listexp, getApplicationContext(), "af");
 
         recexp.setHasFixedSize(true);
-        recexp.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
+        recexp.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
         recexp.setAdapter(loeAdapter);
 
 
@@ -304,41 +285,41 @@ public class MyProfile extends Fragment {
                         }
                     }
                 });
-        InteAdapter = new InterestsAdapterProfile(list, getContext(), "af");
+        InteAdapter = new InterestsAdapterProfile(list, getApplicationContext(), "af");
 
         rec.setHasFixedSize(true);
-        rec.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
+        rec.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
         rec.setAdapter(InteAdapter);
 
 
         recyclerViewEducation.setHasFixedSize(true);
-        recyclerViewEducation.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewEducation.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         educationList = new ArrayList<>();
-        adapter = new NewEducationAdapterProfile(getContext(), educationList);
+        adapter = new NewEducationAdapterProfile(getApplicationContext(), educationList);
         recyclerViewEducation.setAdapter(adapter);
         db.collection("Education").limit(2).get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if (!queryDocumentSnapshots.isEmpty()) {
-                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                    for (DocumentSnapshot d : list) {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                            for (DocumentSnapshot d : list) {
 
-                        PojoAddNewEducation ed = d.toObject(PojoAddNewEducation.class);
-                        ed.setId(d.getId());
-                        educationList.add(ed);
+                                PojoAddNewEducation ed = d.toObject(PojoAddNewEducation.class);
+                                ed.setId(d.getId());
+                                educationList.add(ed);
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
                     }
-                    adapter.notifyDataSetChanged();
-                }
-            }
-        });
+                });
 
 
         userPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(), UpdateUserPic.class);
+                Intent i = new Intent(getApplicationContext(), UpdateUserPic.class);
                 startActivity(i);
             }
         });
@@ -347,21 +328,21 @@ public class MyProfile extends Fragment {
         editNameSection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), EditNameSection.class));
+                startActivity(new Intent(getApplicationContext(), EditNameSection.class));
             }
         });
 
         editAboutSection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), UpdateAbout.class));
+                startActivity(new Intent(getApplicationContext(), UpdateAbout.class));
             }
         });
 
         editContcatSection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), UpdateContactSection.class));
+                startActivity(new Intent(getApplicationContext(), UpdateContactSection.class));
             }
         });
 
@@ -381,7 +362,7 @@ public class MyProfile extends Fragment {
         editAvailabilitySection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(), EditAvailability.class);
+                Intent i = new Intent(getApplicationContext(), EditAvailability.class);
                 startActivity(i);
             }
         });
@@ -390,7 +371,7 @@ public class MyProfile extends Fragment {
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), ClientChangePassword.class));
+                startActivity(new Intent(getApplicationContext(), ClientChangePassword.class));
             }
         });
 
@@ -398,37 +379,25 @@ public class MyProfile extends Fragment {
         editEducationSection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), MainEducation.class));
+                startActivity(new Intent(getApplicationContext(), MainEducation.class));
             }
         });
 
         editInterestSection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), interests.class));
+                startActivity(new Intent(getApplicationContext(), interests.class));
             }
         });
 
         editExperienceSection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), ListOfExperienceActiviy.class));
+                startActivity(new Intent(getApplicationContext(), ListOfExperienceActiviy.class));
             }
         });
 
-        editSkillsSection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getContext(), SkillActivity.class));
+*/
 
-            }
-        });
-
-
-        return root;
     }
-
-
 }
-
-
