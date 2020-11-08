@@ -54,10 +54,11 @@ public class ActiveJobsFragment extends Fragment {
         Log.d(TAG, "setUpRecyclerView: called");
 
         db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         jobsReference = db.collection("Jobs");
 
         //Query
-        Query query = jobsReference.whereEqualTo("status", "active");
+        Query query = jobsReference.whereEqualTo("status", "active").whereEqualTo("uid", mAuth.getCurrentUser().getEmail());
 
         // QuerySnapshot - A QuerySnapshot contains the results of a query. It can contain zero or more DocumentSnapshot objects.
         // DocumentSnapshot - A DocumentSnapshot contains data read from a document in your Cloud Firestore database. The data can be extracted with the getData() or get(String) methods.
