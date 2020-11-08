@@ -150,4 +150,6 @@ public class AppliedJobs extends Fragment {
             // Toast.makeText(getApplicationContext(),l.get(i),Toast.LENGTH_SHORT).show();
 
 
-        }}}
+        }
+    }
+}
