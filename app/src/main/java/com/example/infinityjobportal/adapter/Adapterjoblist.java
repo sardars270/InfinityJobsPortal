@@ -20,15 +20,21 @@ import com.example.infinityjobportal.model.PostJobPojo;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHolder>{
     FirebaseFirestore db;
     FirebaseAuth mAuth;
     Context context;
+    private ArrayList<PostJobPojo> list=new ArrayList<PostJobPojo>();
+
+    ArrayList<String> saveIdList = new ArrayList<>();
 
     ArrayList<PostJobPojo> ar1;
     public Adapterjoblist(Context context, ArrayList<PostJobPojo> ar1) {
@@ -66,9 +72,9 @@ public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHold
             @Override
             public void onClick(View view) {
                 HashMap apllication = new HashMap();
-                apllication.put("uid",mAuth.getCurrentUser().getEmail());
-                apllication.put("jobId",holder.id.getText().toString());
-                apllication.put("type","save");
+                apllication.put("uid", mAuth.getCurrentUser().getEmail());
+                apllication.put("jobId", holder.id.getText().toString());
+                apllication.put("type", "save");
 
                 db.collection("MyJobs").add(apllication)
                         .addOnSuccessListener(new OnSuccessListener() {
@@ -79,11 +85,12 @@ public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHold
                                         .setCancelable(false)
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
-                                              //  finish();
+                                                //  finish();
                                             }
                                         });
                                 AlertDialog alert = builder.create();
                                 alert.show();
+
 
                             }
                         })
@@ -94,8 +101,11 @@ public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHold
                             }
                         });
 
+
             }
         });
+
+
 
         holder.lout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,7 +115,6 @@ public class Adapterjoblist extends RecyclerView.Adapter<Adapterjoblist.ViewHold
                 context.startActivity(i);
             }
         });
-
 
 
     }

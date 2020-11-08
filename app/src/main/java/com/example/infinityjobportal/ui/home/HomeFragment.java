@@ -132,8 +132,7 @@ public class HomeFragment extends Fragment {
                                 // p.setCompanyName(d.getString("companyName"));
                                 //p.setCityAddress(d.getString("cityAddress"));
                                 //p.setId(d.getId());
-
-                                saveIdList.add(d.getString("jobId"));
+                          saveIdList.add(d.getString("jobId"));
                                // Toast.makeText(getContext(),d.getString("jobId"),Toast.LENGTH_SHORT).show();
                                 //Toast.makeText(getContext(),saveIdList,Toast.LENGTH_SHORT).show();
                             }
