@@ -39,13 +39,12 @@ public class JobDetails extends AppCompatActivity {
     Button save, apply;
 
     String id;
-    static JobDetails jobDetails;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_details);
         back = findViewById(R.id.back);
-        jobDetails = this;
 
         designation = findViewById(R.id.Designation);
         company  = findViewById(R.id.company_name);
@@ -101,12 +100,6 @@ public class JobDetails extends AppCompatActivity {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),UploadResume.class);
-                i.putExtra("jobId",id);
-                startActivity(i);
-
-
-                /*
                 HashMap apllication = new HashMap();
                 apllication.put("uid",mAuth.getCurrentUser().getEmail());
                 apllication.put("jobId",id);
@@ -116,8 +109,6 @@ public class JobDetails extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener() {
                             @Override
                             public void onSuccess(Object o) {
-
-
                                 AlertDialog.Builder builder = new AlertDialog.Builder(JobDetails.this);
                                 builder.setMessage("Application Submitted.")
                                         .setCancelable(false)
@@ -137,8 +128,6 @@ public class JobDetails extends AppCompatActivity {
 
                             }
                         });
-
-                 */
 
             }
         });
@@ -226,8 +215,5 @@ public class JobDetails extends AppCompatActivity {
             }
         });
 
-    }
-    public static JobDetails getInstance(){
-        return   jobDetails;
     }
 }
