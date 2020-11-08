@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infinityjobportal.R;
+import com.example.infinityjobportal.adapter.Adapterjoblist;
 import com.example.infinityjobportal.model.User;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -25,6 +26,7 @@ public class ViewApplicationActiveJobs extends AppCompatActivity {
 
     private FirebaseFirestore db;
     ArrayList<String> candidateList = new ArrayList<>();
+    ArrayList<User> candidateListData = new ArrayList<>();
 
     ViewApplicationAdapter viewApplicationAdapter;
     RecyclerView viewApplicationsRecyclerView;
@@ -37,7 +39,13 @@ public class ViewApplicationActiveJobs extends AppCompatActivity {
         viewApplicationsRecyclerView = findViewById(R.id.applicationsRecyclerView);
         id = getIntent().getStringExtra("activeJobID");
 
+        setTitle("Applications");
+
         db = FirebaseFirestore.getInstance();
+        //Toast.makeText(ViewApplicationActiveJobs.this, id, Toast.LENGTH_SHORT).show();
+
+
+
 
         db.collection("MyJobs").whereEqualTo("jobId", id).whereEqualTo("type", "application")
                 .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -49,21 +57,19 @@ public class ViewApplicationActiveJobs extends AppCompatActivity {
                     List<DocumentSnapshot> list1 = queryDocumentSnapshots.getDocuments();
 
                     for (DocumentSnapshot d : list1) {
-
-
                         candidateList.add(d.getString("uid"));
                     }
 
-                   // viewApplicationData();
+                    viewApplicationData();
                 }
             }
         });
 
-        viewApplicationAdapter = new ViewApplicationAdapter(getApplicationContext(), candidateList);
+       // viewApplicationAdapter = new ViewApplicationAdapter(getApplicationContext(), candidateList);
 
-        viewApplicationsRecyclerView.setHasFixedSize(true);
-        viewApplicationsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        viewApplicationsRecyclerView.setAdapter(viewApplicationAdapter);
+        //viewApplicationsRecyclerView.setHasFixedSize(true);
+        //viewApplicationsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        //viewApplicationsRecyclerView.setAdapter(viewApplicationAdapter);
 
 
     }
@@ -76,10 +82,25 @@ public class ViewApplicationActiveJobs extends AppCompatActivity {
                     if (documentSnapshot.exists()) {
 
                         User user = documentSnapshot.toObject(User.class);
+                        candidateListData.add(user);
                         Toast.makeText(ViewApplicationActiveJobs.this, user.getFirstName(), Toast.LENGTH_SHORT).show();
+                        viewApplicationAdapter.notifyDataSetChanged();
+
                     }
                 }
             });
+            viewApplicationAdapter.notifyDataSetChanged();
+
         }
+
+        User u = new User();
+
+        candidateListData.add(new User());
+        viewApplicationAdapter = new ViewApplicationAdapter(getApplicationContext(), candidateListData);
+
+        viewApplicationsRecyclerView.setHasFixedSize(true);
+        viewApplicationsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        viewApplicationsRecyclerView.setAdapter(viewApplicationAdapter);
+
     }
-}
+    }

@@ -21,9 +21,9 @@ import java.util.ArrayList;
 public class ViewApplicationAdapter extends RecyclerView.Adapter<ViewApplicationAdapter.ViewApplicationViewHolder>{
     private static final String TAG = "ViewApplicationAdapter";
     Context context;
-    private ArrayList<String> userArrayList;
+    private ArrayList<User> userArrayList;
 
-    public ViewApplicationAdapter(Context context, ArrayList<String> userArrayList) {
+    public ViewApplicationAdapter(Context context, ArrayList<User> userArrayList) {
         this.context = context;
         this.userArrayList = userArrayList;
     }
@@ -39,9 +39,9 @@ public class ViewApplicationAdapter extends RecyclerView.Adapter<ViewApplication
 
     @Override
     public void onBindViewHolder(@NonNull ViewApplicationViewHolder holder, int position) {
-        //final userArr postJobPOJO = userArrayList.get(position);
+        User postJobPOJO = userArrayList.get(position);
 
-        holder.applicantName.setText(userArrayList.get(position).toString());
+        holder.applicantName.setText(postJobPOJO.getFirstName()+" " +postJobPOJO.getLastName());
         //holder.applicantAddress.setText("postJobPOJO.getCompanyName()");
     }
 
