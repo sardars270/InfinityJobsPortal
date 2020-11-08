@@ -12,16 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.example.infinityjobportal.CompanyProfileActivity;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.Company;
-
 
 import java.util.List;
 
 public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.ViewHolder> {
 
-    private Company company;
+    Company company;
     private Context context;
     private List<Company> companyList;
 
@@ -88,6 +88,7 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.ViewHold
         holder.tvCompanyName.setText(company.getName());
         holder.tvIndustry.setText(company.getIndustry());
         holder.tvLocation.setText(company.getLocation());
+
     }
 
     @Override
@@ -97,3 +98,4 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.ViewHold
 
 
 }
+

@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import com.example.infinityjobportal.model.*;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,7 +31,9 @@ public class MapFilterData extends AppCompatActivity {
         MapJobsList = new ArrayList<>();
 
 
-        for (int i = 0; i < GlobalStorage.S.size(); i=i+2) {
+        for (int i = 0; i < GlobalStorage.S.size(); i++) {
+
+
             DocumentReference docRef = db.collection("Jobs").document(GlobalStorage.S.get(i));
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -38,9 +42,41 @@ public class MapFilterData extends AppCompatActivity {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
 
-                      PostJobPojo postJobPOJO= document.toObject(PostJobPojo.class);
+
+                            PostJobPojo postJobPOJO = document.toObject(PostJobPojo.class);
+                            postJobPOJO.setId(document.getId());
+
+                            MapJobsList.add(postJobPOJO);
+                            adapter.notifyDataSetChanged();
 
 
+                        } else {
+
+                        }
+
+
+                    } else {
+
+                    }
+
+                }
+            });
+
+        }
+        for (int i = 0; i < GlobalStorage.T.size(); i++) {
+
+
+            DocumentReference docRef = db.collection("Jobs").document(GlobalStorage.T.get(i));
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+
+
+                            PostJobPojo postJobPOJO = document.toObject(PostJobPojo.class);
+                            postJobPOJO.setId(document.getId());
                             MapJobsList.add(postJobPOJO);
                             adapter.notifyDataSetChanged();
 
@@ -68,5 +104,4 @@ public class MapFilterData extends AppCompatActivity {
 
     }
 }
-
 

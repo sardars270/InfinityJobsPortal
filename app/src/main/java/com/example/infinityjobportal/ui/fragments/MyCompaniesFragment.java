@@ -1,8 +1,9 @@
-package com.example.infinityjobportal.ui.myCompanies;
+package com.example.infinityjobportal.ui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,9 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.infinityjobportal.AddCompanyActivity;
-import com.example.infinityjobportal.*;
 import com.example.infinityjobportal.R;
-import com.example.infinityjobportal.adapter.*;
+import com.example.infinityjobportal.adapter.CompanyAdapter;
 import com.example.infinityjobportal.model.Company;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,7 +25,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class myCompanies extends Fragment {
+public class MyCompaniesFragment extends Fragment {
+
     FirebaseFirestore firebaseFirestore;
 
     private List<Company> companyList;
@@ -33,12 +34,10 @@ public class myCompanies extends Fragment {
     RecyclerView recyclerView;
     String TAG = "MyCompaniesFragment";
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_my_companies, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
 
+        View root = inflater.inflate(R.layout.fragment_my_companies, container, false);
         FloatingActionButton fab = root.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
