@@ -317,7 +317,7 @@ public class PostJobFragment extends Fragment {
                 String streetAddress = mStreetAddressEditText.getText().toString();
                 String city = mCityAddressEditText.getText().toString();
                 String province = mProvinceAddressEditText.getSelectedItem().toString();
-                
+
                 if (TextUtils.isEmpty(jobTitle)) {
                     YoYo.with(Techniques.Shake)
                             .duration(700)
@@ -763,8 +763,10 @@ public class PostJobFragment extends Fragment {
 
                 //availabilty end
 
+                DocumentReference documentReference = db.collection("Jobs").document();
+                String docId = documentReference.getId();
 
-                PostJobPojo postJobPOJO = new PostJobPojo(companyName, jobCategory, jobTitle, streetAddress, city, province, language,
+                final PostJobPojo postJobPOJO = new PostJobPojo(companyName, jobCategory, jobTitle, streetAddress, city, province, language,
                         minSalary, maxSalary, joiningDate, applicationDeadline, jobDescription, skillsRequired, qualificationRequired, "active", date, latitude, longitude, Mondayvalue, Tuesdayvalue, Wednessdayvalue, Thursdayvalue, Fridayvalue, Saturdayvalue, Sundayvalue, mAuth.getCurrentUser().getEmail());
 
                 db.collection("Jobs")
@@ -773,6 +775,8 @@ public class PostJobFragment extends Fragment {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+
+
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {

@@ -1,9 +1,5 @@
 package com.example.infinityjobportal.model;
 
-import com.google.firebase.firestore.ServerTimestamp;
-
-import java.util.Date;
-
 public class PostJobPojo {
 
     private String companyName;
@@ -25,7 +21,7 @@ public class PostJobPojo {
     private double latitude;
     private double longitude;
     String id;
-    private String Monday, Tuesday, Wednessday, Thursday, Friday, Saturday, Sunday,UserId;
+    private String Monday, Tuesday, Wednessday, Thursday, Friday, Saturday, Sunday, UserId;
     String uid;
 
     public String getUid() {
@@ -69,10 +65,10 @@ public class PostJobPojo {
         Friday = friday;
         Saturday = saturday;
         Sunday = sunday;
-        this.uid=uid;
+        this.uid = uid;
     }
 
-    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Double minSalary, Double maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired,double latitude,double longitude) {
+    public PostJobPojo(String companyName, String jobCategory, String jobTitle, String streetAddress, String cityAddress, String provinceAddress, String language, Double minSalary, Double maxSalary, String availability, String joiningDate, String applicationDeadline, String jobDescription, String skillsRequired, String qualificationRequired, double latitude, double longitude) {
         this.companyName = companyName;
         this.jobCategory = jobCategory;
         this.jobTitle = jobTitle;
@@ -87,8 +83,8 @@ public class PostJobPojo {
         this.jobDescription = jobDescription;
         this.skillsRequired = skillsRequired;
         this.qualificationRequired = qualificationRequired;
-        this.latitude=latitude;
-        this.longitude=longitude;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public double getLatitude() {
@@ -158,6 +154,7 @@ public class PostJobPojo {
     public Double getMaxSalary() {
         return maxSalary;
     }
+
     public String getJoiningDate() {
         return joiningDate;
     }
@@ -241,7 +238,6 @@ public class PostJobPojo {
     public void setId(String id) {
         this.id = id;
     }
-
 
 
     public String getMonday() {

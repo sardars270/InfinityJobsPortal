@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.PostJobPojo;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,6 +33,7 @@ public class ActiveJobsFragment extends Fragment {
     private FirebaseFirestore db;
     private CollectionReference jobsReference;
     private CollectionReference collectionReference;
+    FirebaseAuth mAuth;
 
     private ActiveJobsAdapter activeJobsAdapter;
     private ArrayList<PostJobPojo> documentList = new ArrayList<PostJobPojo>();
