@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infinityjobportal.EditEducation;
 import com.example.infinityjobportal.R;
-import com.example.infinityjobportal.PojoAddNewEducation;
+import com.example.infinityjobportal.pojoAddNewEducation;
 
 import java.util.List;
 
@@ -21,14 +21,14 @@ public class NewEducationAdapter extends RecyclerView.Adapter<NewEducationAdapte
 
 
     private Context context;
-    private List<PojoAddNewEducation> educationList;
+    private List<pojoAddNewEducation> educationList;
 
     // public NewEducationAdapter(Context context, List<pojoAddNewEducation> educationList) {
     //  this.context = context;
     // this.educationList = educationList;
     // }
 
-    public NewEducationAdapter(Context context, List<PojoAddNewEducation> educationList) {
+    public NewEducationAdapter(Context context, List<pojoAddNewEducation> educationList) {
         this.context = context;
         this.educationList = educationList;
     }
@@ -44,7 +44,7 @@ public class NewEducationAdapter extends RecyclerView.Adapter<NewEducationAdapte
 
     @Override
     public void onBindViewHolder(@NonNull NewEducationAdapter.EducationViewHolder holder, final int position) {
-        final PojoAddNewEducation pojoAddNewEducation = educationList.get(position);
+        final pojoAddNewEducation pojoAddNewEducation = educationList.get(position);
         holder.school.setText(pojoAddNewEducation.getSchool());
         holder.details.setText("Degree"+" - "+pojoAddNewEducation.getDegree() +","+"  " +"("+pojoAddNewEducation.getFieldOfStudy()+")");
         holder.grade.setText("Grade"+"  "+pojoAddNewEducation.getGrade());

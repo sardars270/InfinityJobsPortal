@@ -78,7 +78,7 @@ FirebaseAuth mAuth;
         mJobCategorySpinner = root.findViewById(R.id.jobCategorySpinner);
         mJobTitleEditText = root.findViewById(R.id.jobTitleEditText);
         mStreetAddressEditText = root.findViewById(R.id.streetAddressEditText);
-        mCityAddressEditText = root.findViewById(R.id.cityAddressSpinner);
+        mCityAddressEditText = root.findViewById(R.id.cityAddressEditText);
         mProvinceAddressEditText = root.findViewById(R.id.provinceSpinner);
         mEnglishCheckBox = root.findViewById(R.id.radioEnglish);
         mFrenchCheckBox = root.findViewById(R.id.radioFrench);

@@ -24,7 +24,7 @@ import com.example.infinityjobportal.EditAvailability;
 import com.example.infinityjobportal.EditNameSection;
 import com.example.infinityjobportal.ListOfExperienceActiviy;
 import com.example.infinityjobportal.MainEducation;
-import com.example.infinityjobportal.PojoAddNewEducation;
+import com.example.infinityjobportal.pojoAddNewEducation;
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.SkillActivity;
 import com.example.infinityjobportal.UpdateAbout;
@@ -48,7 +48,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -77,7 +76,7 @@ public class MyProfile extends Fragment {
 
     private RecyclerView recyclerViewEducation;
     private NewEducationAdapterProfile adapter;
-    private List<PojoAddNewEducation> educationList;
+    private List<pojoAddNewEducation> educationList;
 
 
     RecyclerView recexp;
@@ -319,20 +318,20 @@ public class MyProfile extends Fragment {
         recyclerViewEducation.setAdapter(adapter);
         db.collection("Education").limit(2).get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if (!queryDocumentSnapshots.isEmpty()) {
-                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                    for (DocumentSnapshot d : list) {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                            for (DocumentSnapshot d : list) {
 
-                        PojoAddNewEducation ed = d.toObject(PojoAddNewEducation.class);
-                        ed.setId(d.getId());
-                        educationList.add(ed);
+                                pojoAddNewEducation ed = d.toObject(pojoAddNewEducation.class);
+                                ed.setId(d.getId());
+                                educationList.add(ed);
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
                     }
-                    adapter.notifyDataSetChanged();
-                }
-            }
-        });
+                });
 
 
         userPic.setOnClickListener(new View.OnClickListener() {

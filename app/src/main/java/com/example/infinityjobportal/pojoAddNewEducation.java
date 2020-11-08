@@ -6,7 +6,7 @@ import com.google.firebase.firestore.Exclude;
 
 import java.io.Serializable;
 
-public class PojoAddNewEducation implements Serializable {
+public class pojoAddNewEducation implements Serializable {
 
     @Exclude
     private String id;
@@ -21,7 +21,7 @@ public class PojoAddNewEducation implements Serializable {
     private String description;
     private String userid;
 
-    public PojoAddNewEducation(String school, String degree, String fieldOfStudy, String startDate, String endDate, String grade, String extraActs, String description, String userid) {
+    public pojoAddNewEducation(String school, String degree, String fieldOfStudy, String startDate, String endDate, String grade, String extraActs, String description, String userid) {
         this.school = school;
         this.degree = degree;
         this.fieldOfStudy = fieldOfStudy;
@@ -34,7 +34,7 @@ public class PojoAddNewEducation implements Serializable {
     }
 
 
-    public PojoAddNewEducation(String school, String degree, String fieldOfStudy, String startDate, String endDate, String grade, String extraActs, String description) {
+    public pojoAddNewEducation(String school, String degree, String fieldOfStudy, String startDate, String endDate, String grade, String extraActs, String description) {
         this.school = school;
         this.degree = degree;
         this.fieldOfStudy = fieldOfStudy;
@@ -45,7 +45,7 @@ public class PojoAddNewEducation implements Serializable {
         this.description = description;
     }
 
-    public PojoAddNewEducation() {
+    public pojoAddNewEducation() {
 
     }
 

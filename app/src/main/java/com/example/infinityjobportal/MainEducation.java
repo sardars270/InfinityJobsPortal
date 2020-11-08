@@ -22,7 +22,7 @@ public class MainEducation extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private RecyclerView recyclerViewEducation;
     private NewEducationAdapter adapter;
-    private List<PojoAddNewEducation> educationList;
+    private List<pojoAddNewEducation> educationList;
     // private FirestoreRecyclerAdapter adapter;
     ImageView addEducation;
 
@@ -50,7 +50,7 @@ public class MainEducation extends AppCompatActivity {
                     List<DocumentSnapshot> list=queryDocumentSnapshots.getDocuments();
                     for(DocumentSnapshot d: list){
 
-                        PojoAddNewEducation ed= d.toObject(PojoAddNewEducation.class);
+                        pojoAddNewEducation ed= d.toObject(pojoAddNewEducation.class);
                         ed.setId(d.getId());
                         educationList.add(ed);
                     }

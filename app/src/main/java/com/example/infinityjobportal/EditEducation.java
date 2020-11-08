@@ -36,12 +36,12 @@ public class EditEducation extends AppCompatActivity implements OnClickListener 
 
     private EditText school1, degree1, fieldOfStudy1, startdate, enddate, grades, extraAct, discription1;
     CollectionReference reference = db.collection("Education");
-    private PojoAddNewEducation pojoAddNewEducation;
+    private com.example.infinityjobportal.pojoAddNewEducation pojoAddNewEducation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_education);
-        pojoAddNewEducation = (PojoAddNewEducation) getIntent().getSerializableExtra("Education");
+        pojoAddNewEducation = (com.example.infinityjobportal.pojoAddNewEducation) getIntent().getSerializableExtra("Education");
         back = findViewById(R.id.button_back);
         school1=findViewById(R.id.school);
         degree1 = findViewById(R.id.Degree);
@@ -233,7 +233,7 @@ back.setOnClickListener(new OnClickListener() {
 
            // CollectionReference reference = db.collection("Education");
 
-            PojoAddNewEducation pojoaddNewEducation = new PojoAddNewEducation(school, degree, fieldOfStudy, startDate, endDate, grade, extraActs, discription);
+            com.example.infinityjobportal.pojoAddNewEducation pojoaddNewEducation = new pojoAddNewEducation(school, degree, fieldOfStudy, startDate, endDate, grade, extraActs, discription);
             db.collection("Education").document(pojoAddNewEducation.getId()).update("school",pojoaddNewEducation.getSchool(), "degree",pojoaddNewEducation.getDegree(),
                     "fieldOfStudy", pojoaddNewEducation.getFieldOfStudy(), "startDate", pojoaddNewEducation.getStartDate(), "endDate",pojoaddNewEducation.getEndDate(), "grade",
                     pojoaddNewEducation.getGrade(), "extraActs", pojoaddNewEducation.getExtraActs(), "description", pojoaddNewEducation.getdescription())
