@@ -5,8 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/closed_jobs_constraint_layout"
     android:background="@drawable/edit_text_background"
-    android:id="@+id/closed_jobs_constraint_layout">
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:paddingBottom="10dp"
+    android:elevation="5dp">
 
 
     <TextView

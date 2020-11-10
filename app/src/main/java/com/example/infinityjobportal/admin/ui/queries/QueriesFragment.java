@@ -68,6 +68,7 @@ public class QueriesFragment extends Fragment {
                             List<DocumentSnapshot> list1 = queryDocumentSnapshots.getDocuments();
 
                             for (DocumentSnapshot d : list1) {
+
                                 Query p = d.toObject(Query.class);
                                 assert p != null;
                                 //Toast.makeText(getContext(),d.getString(s),Toast.LENGTH_SHORT).show();
@@ -75,17 +76,11 @@ public class QueriesFragment extends Fragment {
                                 //  Log.d("log_userid",p.getUserid());
                                 p.setEditSubject(d.getString("editSubject"));
                                 p.setUserid(d.getString("userid"));
-                                p.setFeedbackQuery(d.getString("feedbackQuery"));
                                lq.add(p);
                                 //Toast.makeText(getApplicationContext(),d.getString("uid"),Toast.LENGTH_SHORT).show();
                             }
-                            InteAdapter = new adapterquerylist( getContext(),lq);
 
-                            recy.setHasFixedSize(true);
-                            recy.setLayoutManager(new LinearLayoutManager(c, RecyclerView.VERTICAL, false));
-                            recy.setAdapter(InteAdapter);
-
-                           // gdata();
+                            gdata();
 
 
                         }

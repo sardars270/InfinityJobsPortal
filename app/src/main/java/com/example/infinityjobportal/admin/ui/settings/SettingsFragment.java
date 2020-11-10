@@ -42,7 +42,6 @@ LinearLayout changePassword, logout;
 
  */
             changePassword = root.findViewById(R.id.changePassword);
-        logout = root.findViewById(R.id.logout);
 
             changePassword.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -51,13 +50,7 @@ LinearLayout changePassword, logout;
                 }
             });
 
-logout.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        getActivity().finish();
-        startActivity(new Intent(getContext(), ClientLogin.class));
-    }
-});
+
 
 
         return root;

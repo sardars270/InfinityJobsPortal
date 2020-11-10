@@ -1,54 +1,28 @@
 package com.example.infinityjobportal.adapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.infinityjobportal.EditEducation;
 import com.example.infinityjobportal.JobDetails;
-import com.example.infinityjobportal.MainEducation;
 import com.example.infinityjobportal.MyJobDetails;
 import com.example.infinityjobportal.R;
-import com.example.infinityjobportal.interests;
 import com.example.infinityjobportal.model.PostJobPojo;
 import com.example.infinityjobportal.model.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FieldValue;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import static android.content.ContentValues.TAG;
 
 public class adapterAppliedJobs extends RecyclerView.Adapter<adapterAppliedJobs.ViewHolder>{
-    public FirebaseFirestore db = FirebaseFirestore.getInstance();
-    String rr="";
     Context context;
-    public FirebaseAuth mAuth;
     ArrayList<PostJobPojo> ar1;
-
     public adapterAppliedJobs(Context context, ArrayList<PostJobPojo> ar1) {
 
         this.context=context;
@@ -93,83 +67,7 @@ public class adapterAppliedJobs extends RecyclerView.Adapter<adapterAppliedJobs.
                  context.startActivity(i);
             }
         });
-holder.lout.setOnLongClickListener(new View.OnLongClickListener() {
-    @Override
-    public boolean onLongClick(View v) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        String xc =  holder.faltu_st.getText().toString();
-        mAuth = FirebaseAuth.getInstance();
 
-        if (xc.equals("save")){
-            builder.setTitle("You want ro unsave this job?");
-            builder.setMessage("Job Unsaved");
-
-            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    db.collection("MyJobs")
-                            .whereEqualTo("jobId", holder.id.getText().toString())
-                            .whereEqualTo("uid",  mAuth.getCurrentUser().getEmail())
-                            .get()
-                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        for (QueryDocumentSnapshot document : task.getResult()) {
-                                           rr= String.valueOf(document.getId());
-                                           // Log.d(TAG, document.getId() + " => " + document.getData());
-                                            delsave();
-                                        }
-                                    } else {
-                                        Log.d(TAG, "Error getting documents: ", task.getException());
-                                    }
-                                }
-                            });
-
-                }
-
-                ///////
-
-
-
-            });
-
-            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                }
-            });
-
-        }
-        else if(xc.equals("application")){
-
-
-        }
-        else {
-
-        }
-        AlertDialog jks = builder.create();
-        jks.show();
-
-        return true;
-    }
-});
-
-
-    }
-    private void delsave() {
-        db.collection("MyJobs").document(rr).delete()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(context, rr +"deleted", Toast.LENGTH_LONG).show();
-                          //  finish();
-                           // startActivity(new Intent(EditEducation.this, MainEducation.class));
-                        }
-                    }
-                });
 
 
     }

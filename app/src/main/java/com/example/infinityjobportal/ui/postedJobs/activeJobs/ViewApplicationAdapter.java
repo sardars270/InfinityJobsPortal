@@ -2,7 +2,6 @@ package com.example.infinityjobportal.ui.postedJobs.activeJobs;
 
 import android.content.Context;
 import android.content.Intent;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,27 +9,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.ViewProfile;
-import com.example.infinityjobportal.model.PostJobPojo;
-
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.infinityjobportal.Filter;
-import com.example.infinityjobportal.R;
 import com.example.infinityjobportal.model.User;
 
 import java.util.ArrayList;
 
-public class ViewApplicationAdapter extends RecyclerView.Adapter<ViewApplicationAdapter.ViewApplicationViewHolder>{
+public class ViewApplicationAdapter extends RecyclerView.Adapter<ViewApplicationAdapter.ViewApplicationViewHolder> {
     private static final String TAG = "ViewApplicationAdapter";
     Context context;
     private ArrayList<User> userArrayList;
@@ -53,36 +41,36 @@ public class ViewApplicationAdapter extends RecyclerView.Adapter<ViewApplication
     public void onBindViewHolder(@NonNull ViewApplicationViewHolder holder, int position) {
         final User postJobPOJO = userArrayList.get(position);
 
-        holder.applicantName.setText(postJobPOJO.getFirstName()+" "+postJobPOJO.getLastName());
-        holder.applicantAddress.setText(postJobPOJO.getCity()+", "+postJobPOJO.getProvince());
+        holder.applicantName.setText(postJobPOJO.getFirstName() + " " + postJobPOJO.getLastName());
+        holder.applicantAddress.setText(postJobPOJO.getCity() + ", " + postJobPOJO.getProvince());
 
         holder.viewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Toast.makeText(context, postJobPOJO.getEmail(), Toast.LENGTH_SHORT).show();
+                // Toast.makeText(context, postJobPOJO.getEmail(), Toast.LENGTH_SHORT).show();
 
                 Intent i = new Intent(context, ViewProfile.class);
-               // i.putExtra("uid",postJobPOJO.getEmail());
-               // context.startActivity(new Intent(context, ViewProfile.class));
+                // i.putExtra("uid",postJobPOJO.getEmail());
+                // context.startActivity(new Intent(context, ViewProfile.class));
             }
         });
 
         holder.contactApplicant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  Toast.makeText(context, "ail", Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(Intent.ACTION_SEND);
-                String[] recipients={"a@b.c"};
+                //  Toast.makeText(context, "ail", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                String[] recipients = {"a@b.c"};
                 intent.putExtra(Intent.EXTRA_EMAIL, recipients);
-                intent.putExtra(Intent.EXTRA_SUBJECT,"Reply to your query ");
-                intent.putExtra(Intent.EXTRA_TEXT,"Hello ");
-                intent.putExtra(Intent.EXTRA_CC,"");
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Reply to your query ");
+                intent.putExtra(Intent.EXTRA_TEXT, "Hello ");
+                intent.putExtra(Intent.EXTRA_CC, "");
                 intent.setType("text/html");
                 intent.setPackage("com.google.android.gm");
                 context.startActivity(Intent.createChooser(intent, "Send mail"));
 
 
-                }
+            }
         });
 
 

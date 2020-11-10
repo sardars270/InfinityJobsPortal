@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,8 +29,8 @@ import static java.util.Calendar.getInstance;
 
 public class AddNewEducation extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private Button save, back;
-    TextView textStart, textEnd;
+    ImageView back;
+    TextView save, textStart, textEnd;
     FirebaseAuth mAuth;
     private EditText school1, degree1, fieldOfStudy1, startdate, enddate, grades, extraAct, description1;
     CollectionReference reference = db.collection("Education");

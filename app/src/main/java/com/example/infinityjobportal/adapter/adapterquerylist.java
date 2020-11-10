@@ -12,13 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.infinityjobportal.MyJobDetails;
 import com.example.infinityjobportal.R;
-import com.example.infinityjobportal.admin.ViewQuery;
 import com.example.infinityjobportal.model.Query;
 import com.example.infinityjobportal.model.User;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -57,10 +54,10 @@ public class adapterquerylist extends RecyclerView.Adapter<adapterquerylist.View
         final Query o =list.get(position);
 
 
-        //FirebaseStorage firebaseStorage;
-        //StorageReference storageReference;
-        //firebaseStorage=FirebaseStorage.getInstance();
-      //  storageReference= firebaseStorage.getReference();
+        FirebaseStorage firebaseStorage;
+        StorageReference storageReference;
+        firebaseStorage=FirebaseStorage.getInstance();
+        storageReference= firebaseStorage.getReference();
 
         //Toast.makeText(context,o.getUserProfilePic(),Toast.LENGTH_SHORT).show();
       /** StorageReference imageRef=storageReference.child("user/"+o.getUserProfilePic());imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -75,25 +72,19 @@ public class adapterquerylist extends RecyclerView.Adapter<adapterquerylist.View
             }
         });*/
 
+
+
+
+
+
+
+
+
+
         ////////////////////////''''''''''''''''''''''///////////////////
 
         holder.message.setText(o.getEditSubject().toString());
-        holder.username.setText(o.getUserid().toString());
-        holder.visit.setText(o.getFeedbackQuery().toString());
-       /** holder.lout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(context, ViewQuery.class);
-                String sub =  holder.message.getText().toString();
-                String usname =  holder.username.getText().toString();
-                String maincontent =  holder.visit.getText().toString();
-              //  i.putExtra("id", holder.id.getText().toString());
-                i.putExtra("sub",sub );
-                i.putExtra("usname", usname);
-                i.putExtra("maincontent",maincontent );
-                context.startActivity(i);
-            }
-        });*/
+        holder.username.setText(o.getFirstName().toString());
         //holder.loc.setText(o.getCity().toString());
         //holder.imageView.
 
@@ -113,14 +104,14 @@ public class adapterquerylist extends RecyclerView.Adapter<adapterquerylist.View
         TextView username;
         TextView message;
         ImageView imageView1;
-        //LinearLayout lout;
+        LinearLayout lout;
         TextView visit;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             id=itemView.findViewById(R.id.qid);
             username= itemView.findViewById(R.id.uName);
             message=itemView.findViewById(R.id.queryMessage);
-           // lout=itemView.findViewById(R.id.lout);
+            lout=itemView.findViewById(R.id.querylist);
             imageView1 = itemView.findViewById(R.id.imageView);
             visit= itemView.findViewById(R.id.visit);
         }

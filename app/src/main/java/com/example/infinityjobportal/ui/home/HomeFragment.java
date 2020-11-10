@@ -106,7 +106,6 @@ public class HomeFragment extends Fragment {
 
 
     private void loadMyJobsList() {
-        Log.d(TAG, "loadMyJobsList: called");
         db.collection("MyJobs").whereEqualTo("uid", mAuth.getCurrentUser().getEmail())//.whereEqualTo("type","application")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -136,12 +135,13 @@ public class HomeFragment extends Fragment {
 
                             loadNotAplyedList();
                         }
+
                     }
 
                     private void loadNotAplyedList() {
 
                         notAppliedList.clear();
-                        collectionReference.whereEqualTo("status","active").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        collectionReference.whereEqualTo("status", "active").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                             @Override
                             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
@@ -151,33 +151,45 @@ public class HomeFragment extends Fragment {
 
                                     count = list1.size();
                                     for (DocumentSnapshot d : list1) {
-                                        int count=0;
+                                        int count = 0;
                                         PostJobPojo p = d.toObject(PostJobPojo.class);
                                         p.setId(d.getId());
 
-                                        for(int i=0; i<saveIdList.size(); i++) {
-                                            if(d.getId().equals(String.valueOf(saveIdList.get(i)))) {
-                                                count=1;
+                                        for (int i = 0; i < saveIdList.size(); i++) {
+                                            if (d.getId().equals(String.valueOf(saveIdList.get(i)))) {
+                                                count = 1;
                                             }
                                         }
-                                        if(count==0)
+                                        if (count == 0)
                                             notAppliedList.add(p);
                                     }
                                     adapter.notifyDataSetChanged();
-                                    text.setText("Total Result : "+String.valueOf(notAppliedList.size()));
+                                    text.setText("Total Result : " + String.valueOf(notAppliedList.size()));
                                 }
                             }
 
 
                         });
 
-                        adapter =new Adapterjoblist(getContext(), notAppliedList);
+                        adapter = new Adapterjoblist(getContext(), notAppliedList);
 
                         recjoblist.setHasFixedSize(true);
                         recjoblist.setLayoutManager(new LinearLayoutManager(getContext()));
                         recjoblist.setAdapter(adapter);
 
                     }
+
+
+                    private void showToast() {
+
+                        for (int i = 0; i < saveIdList.size(); i++) {
+                            // text.setText(saveIdList.get(i));
+                            Toast.makeText(getContext(), saveIdList.get(i), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+
                 });
 
     }

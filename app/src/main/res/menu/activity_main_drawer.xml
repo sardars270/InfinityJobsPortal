@@ -10,7 +10,7 @@
             android:title="Home" />
         <item
             android:id="@+id/myMapFragment"
-            android:icon="@drawable/home_black"
+            android:icon="@drawable/location"
             android:title="Map" />
 
         <item
@@ -21,7 +21,7 @@
 
         <item
             android:id="@+id/myProfileFragment"
-            android:icon="@drawable/work_black"
+            android:icon="@drawable/user"
             android:title="My Profile"></item>
 
 

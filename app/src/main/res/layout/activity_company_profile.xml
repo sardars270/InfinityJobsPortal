@@ -8,7 +8,7 @@
     <LinearLayout
         android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@color/mainAppçColor"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent">
@@ -17,18 +17,19 @@
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_margin="10dp"
             android:background="@drawable/back"
-            android:text=""
-            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/Education"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_margin="10dp"
             android:layout_weight="1"
+            android:fontFamily="@font/robotoregular"
             android:gravity="center"
             android:text="Company Profile"
             android:textColor="@color/white"
@@ -41,6 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginRight="10dp"
+            android:fontFamily="@font/robotoregular"
+            android:gravity="center"
             android:text="Edit"
             android:textColor="@color/white" />
     </LinearLayout>
@@ -50,17 +53,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:visibility="gone"
         android:src="@drawable/edit_symbol"
         android:tint="@color/black"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/ivCompanyLogo"
-        android:layout_width="120dp"
+        android:layout_width="0dp"
         android:layout_height="120dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:src="@drawable/company_thumb"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,163 +75,145 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvCompanyName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/robotobold"
+        android:fontFamily="@font/robotomedium"
+        android:gravity="center"
         android:text="XYZ Company"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/ivCompanyLogo"
+        app:layout_constraintStart_toStartOf="@+id/ivCompanyLogo"
         app:layout_constraintTop_toBottomOf="@+id/ivCompanyLogo" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvIndustry"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/robotomedium"
+        android:fontFamily="@font/robotoregular"
+        android:gravity="center"
         android:text="Information Technology"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvCompanyName"
+        app:layout_constraintStart_toStartOf="@+id/tvCompanyName"
         app:layout_constraintTop_toBottomOf="@+id/tvCompanyName" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvLocation"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/robotomedium"
+        android:fontFamily="@font/robotoregular"
+        android:gravity="center"
         android:text="Toronto, Canada"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvIndustry"
+        app:layout_constraintStart_toStartOf="@+id/tvIndustry"
         app:layout_constraintTop_toBottomOf="@+id/tvIndustry" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvWeb"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/robotomedium"
+        android:fontFamily="@font/robotoitalic"
+        android:gravity="center"
         android:text="https://xyz.com"
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvLocation"
+        app:layout_constraintStart_toStartOf="@+id/tvLocation"
         app:layout_constraintTop_toBottomOf="@+id/tvLocation" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorPrimaryDark"
-        app:layout_constraintTop_toBottomOf="@+id/tvWeb" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvAboutText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/robotobold"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/robotomedium"
         android:text="Tag Line"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        app:layout_constraintEnd_toEndOf="@+id/tvWeb"
+        app:layout_constraintStart_toStartOf="@+id/tvWeb"
+        app:layout_constraintTop_toBottomOf="@+id/tvWeb" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvAbout"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:fontFamily="@font/robotomedium"
-        android:text="XYZ is a fast-growing, research-led information technology company. An emerging leader in the IT products domain"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAboutText" />
-
-    <View
-        android:id="@+id/view1"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="@color/colorPrimaryDark"
-        app:layout_constraintTop_toBottomOf="@+id/tvAbout" />
+        android:background="@drawable/edit_text_background"
+        android:fontFamily="@font/robotoitalic"
+        android:padding="10dp"
+        android:text="XYZ is a fast-growing, research-led information technology company. An emerging leader in the IT products domain"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvAboutText"
+        app:layout_constraintStart_toStartOf="@+id/tvAboutText"
+        app:layout_constraintTop_toBottomOf="@+id/tvAboutText" />
 
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvDescText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/robotobold"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/robotomedium"
         android:text="Description"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view1" />
+        app:layout_constraintEnd_toEndOf="@+id/tvAbout"
+        app:layout_constraintStart_toStartOf="@+id/tvAbout"
+        app:layout_constraintTop_toBottomOf="@+id/tvAbout" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvDescription"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_background"
         android:fontFamily="@font/robotomedium"
+        android:padding="10dp"
         android:text="XYZ is a fast-growing, research-led information technology company. An emerging leader in the IT products domain"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvDescText"
+        app:layout_constraintStart_toStartOf="@+id/tvDescText"
         app:layout_constraintTop_toBottomOf="@+id/tvDescText" />
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorPrimaryDark"
-        app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvContactText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/robotobold"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/robotomedium"
         android:text="Contact"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
+        app:layout_constraintEnd_toEndOf="@+id/tvDescription"
+        app:layout_constraintStart_toStartOf="@+id/tvDescription"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
 
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvEmail"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
         android:fontFamily="@font/robotomedium"
+        android:padding="10dp"
         android:text="Email : contact@xyz.com"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvContactText"
-        android:layout_marginLeft="10dp" />
+        app:fontFamily="@font/robotolight"
+        app:layout_constraintEnd_toEndOf="@+id/tvContactText"
+        app:layout_constraintStart_toStartOf="@+id/tvContactText"
+        app:layout_constraintTop_toBottomOf="@+id/tvContactText" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvPhone"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/robotomedium"
         android:text="Phone : +1-154-786-843"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEmail"
-        android:layout_marginLeft="10dp" />
+
+        android:padding="10dp"
+        app:fontFamily="@font/robotolight"
+        app:layout_constraintEnd_toEndOf="@+id/tvEmail"
+        app:layout_constraintStart_toStartOf="@+id/tvEmail"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

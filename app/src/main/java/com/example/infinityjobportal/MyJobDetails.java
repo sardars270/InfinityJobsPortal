@@ -70,8 +70,8 @@ public class MyJobDetails extends AppCompatActivity {
 
         }
         else {
-            apply.setVisibility(View.INVISIBLE);
-            save.setVisibility(View.INVISIBLE);
+            apply.setVisibility(View.VISIBLE);
+            save.setVisibility(View.VISIBLE);
         }
 
 

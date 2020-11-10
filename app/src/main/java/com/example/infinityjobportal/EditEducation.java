@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,19 +32,21 @@ import static java.util.Calendar.getInstance;
 
 public class EditEducation extends AppCompatActivity implements OnClickListener {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private TextView textstart,textend;
-    private Button back, update, delete;
+    private TextView textstart, textend, update;
+    private Button delete;
+    ImageView back;
 
     private EditText school1, degree1, fieldOfStudy1, startdate, enddate, grades, extraAct, discription1;
     CollectionReference reference = db.collection("Education");
     private com.example.infinityjobportal.pojoAddNewEducation pojoAddNewEducation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_education);
         pojoAddNewEducation = (com.example.infinityjobportal.pojoAddNewEducation) getIntent().getSerializableExtra("Education");
         back = findViewById(R.id.button_back);
-        school1=findViewById(R.id.school);
+        school1 = findViewById(R.id.school);
         degree1 = findViewById(R.id.Degree);
         fieldOfStudy1 = findViewById(R.id.studyField);
         startdate = findViewById(R.id.start_date);
@@ -51,8 +54,8 @@ public class EditEducation extends AppCompatActivity implements OnClickListener 
         grades = findViewById(R.id.grade);
         extraAct = findViewById(R.id.activities_societies);
         discription1 = findViewById(R.id.description);
-        textstart=findViewById(R.id.textstart);
-        textend=findViewById(R.id.textend);
+        textstart = findViewById(R.id.textstart);
+        textend = findViewById(R.id.textend);
 
         school1.setText(pojoAddNewEducation.getSchool());
         degree1.setText(pojoAddNewEducation.getDegree());
@@ -93,7 +96,6 @@ public class EditEducation extends AppCompatActivity implements OnClickListener 
         });
 
 
-
         textend.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,19 +124,13 @@ public class EditEducation extends AppCompatActivity implements OnClickListener 
         });
 
 
+        back.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(EditEducation.this, MainEducation.class));
 
-
-
-
-
-
-back.setOnClickListener(new OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        startActivity(new Intent(EditEducation.this, MainEducation.class));
-
-    }
-});
+            }
+        });
 
     }
 
@@ -231,11 +227,11 @@ back.setOnClickListener(new OnClickListener() {
 
         if (!hasValidationErrors(school, degree, fieldOfStudy, startDate, endDate, grade, extraActs, discription)) {
 
-           // CollectionReference reference = db.collection("Education");
+            // CollectionReference reference = db.collection("Education");
 
             com.example.infinityjobportal.pojoAddNewEducation pojoaddNewEducation = new pojoAddNewEducation(school, degree, fieldOfStudy, startDate, endDate, grade, extraActs, discription);
-            db.collection("Education").document(pojoAddNewEducation.getId()).update("school",pojoaddNewEducation.getSchool(), "degree",pojoaddNewEducation.getDegree(),
-                    "fieldOfStudy", pojoaddNewEducation.getFieldOfStudy(), "startDate", pojoaddNewEducation.getStartDate(), "endDate",pojoaddNewEducation.getEndDate(), "grade",
+            db.collection("Education").document(pojoAddNewEducation.getId()).update("school", pojoaddNewEducation.getSchool(), "degree", pojoaddNewEducation.getDegree(),
+                    "fieldOfStudy", pojoaddNewEducation.getFieldOfStudy(), "startDate", pojoaddNewEducation.getStartDate(), "endDate", pojoaddNewEducation.getEndDate(), "grade",
                     pojoaddNewEducation.getGrade(), "extraActs", pojoaddNewEducation.getExtraActs(), "description", pojoaddNewEducation.getdescription())
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
 

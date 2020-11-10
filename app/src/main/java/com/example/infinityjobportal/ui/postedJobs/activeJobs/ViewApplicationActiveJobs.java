@@ -1,7 +1,6 @@
 package com.example.infinityjobportal.ui.postedJobs.activeJobs;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,8 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infinityjobportal.R;
-import com.example.infinityjobportal.adapter.Adapterjoblist;
-import com.example.infinityjobportal.adapter.adapterAppliedJobs;
 import com.example.infinityjobportal.model.PostJobPojo;
 import com.example.infinityjobportal.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,14 +21,12 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.security.AccessController.getContext;
-
 public class ViewApplicationActiveJobs extends AppCompatActivity {
-    String id,b;
+    String id, b;
     ArrayList<PostJobPojo> list = new ArrayList<>();
     ArrayList<User> list2 = new ArrayList<>();
     ArrayList<PostJobPojo> list3 = new ArrayList<>();
-    ArrayList<String > l = new ArrayList<String>();
+    ArrayList<String> l = new ArrayList<String>();
 
 
     private FirebaseFirestore db;
@@ -55,11 +50,7 @@ public class ViewApplicationActiveJobs extends AppCompatActivity {
         //Toast.makeText(ViewApplicationActiveJobs.this, id, Toast.LENGTH_SHORT).show();
 
 
-
-
-
-
-        db.collection("MyJobs").whereEqualTo("jobId", id).whereEqualTo("type","application").get()
+        db.collection("MyJobs").whereEqualTo("jobId", id).whereEqualTo("type", "application").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -83,12 +74,11 @@ public class ViewApplicationActiveJobs extends AppCompatActivity {
                     }
 
 
-
                     public void showdata() {
                         for (int i = 0; i < l.size(); i++) {
 //Toast.makeText(getContext(),l.get(i),Toast.LENGTH_SHORT).show();
 
-                            b=String.valueOf(l.get(i));
+                            b = String.valueOf(l.get(i));
 
                             DocumentReference docRef = db.collection("users").document(b);
                             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -101,18 +91,18 @@ public class ViewApplicationActiveJobs extends AppCompatActivity {
                                             User user = document.toObject(User.class);
                                             user.setFirstName(document.getString("firstName"));
                                             list2.add(user);
-                                           // user.setJobTitle(document.getString("jobTitle"));
+                                            // user.setJobTitle(document.getString("jobTitle"));
                                             //user.setJobCategory(document.getString("jobCategory"));
                                             //user.setCityAddress(String.valueOf(document.getString("cityAddress")+", "+document.getString("provinceAddress")));
                                             //user.setId(String.valueOf(b));
                                             //user.setProvinceAddress("application");
 
-                                           // Toast.makeText(ViewApplicationActiveJobs.this, "toast", Toast.LENGTH_SHORT).show();
+                                            // Toast.makeText(ViewApplicationActiveJobs.this, "toast", Toast.LENGTH_SHORT).show();
 
 
                                             //  Toast.makeText(getContext(),user.getJobTitle(),Toast.LENGTH_SHORT).show();
                                             //InteAdapter.notifyDataSetChanged();
-                                            viewApplicationAdapter = new ViewApplicationAdapter( getApplicationContext(),list2);
+                                            viewApplicationAdapter = new ViewApplicationAdapter(getApplicationContext(), list2);
 
                                             viewApplicationsRecyclerView.setHasFixedSize(true);
                                             viewApplicationsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
@@ -128,16 +118,12 @@ public class ViewApplicationActiveJobs extends AppCompatActivity {
                             });
 
 
-
-
-
                             // Toast.makeText(getApplicationContext(),l.get(i),Toast.LENGTH_SHORT).show();
 
 
                         }
                     }
                 });
-
 
 
     }

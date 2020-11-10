@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="5dp"
     android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical"
@@ -13,18 +11,17 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="60dp"
         android:background="@color/mainSecondaryColor"
         android:orientation="horizontal">
 
-        <Button
+        <ImageView
             android:id="@+id/button_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/mainSecondaryColor"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/back"
             android:text="X"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -33,39 +30,45 @@
             android:id="@+id/Add_education"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-
-            android:layout_marginTop="5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="Add Education"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <Button
+        <TextView
             android:id="@+id/button_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/mainSecondaryColor"
-            android:text="Save" />
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/robotoregular"
+            android:text="Save"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
 
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp">
+        android:layout_margin="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/t1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/robotoregular"
                 android:padding="5dp"
                 android:text="School"
                 android:textColor="#000000"
@@ -73,22 +76,19 @@
 
             <EditText
                 android:id="@+id/school"
-                style="@android:style/Widget.DeviceDefault.AutoCompleteTextView"
                 android:layout_width="match_parent"
-
                 android:layout_height="wrap_content"
-                android:backgroundTint="@drawable/backgroundtintcolor"
-                android:textCursorDrawable="@drawable/customized_cursor"
-                android:ems="10"
+                android:background="@drawable/edit_text_background"
+                android:fontFamily="@font/robotoregular"
                 android:hint="enter school name"
-
-                android:textColor="@color/grayFontsColor" />
+                android:padding="10dp" />
 
             <TextView
                 android:id="@+id/t2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/robotoregular"
                 android:padding="5dp"
                 android:text="Degree"
                 android:textColor="#000000"
@@ -98,18 +98,19 @@
                 android:id="@+id/Degree"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textCursorDrawable="@drawable/customized_cursor"
-                android:backgroundTint="@drawable/backgroundtintcolor"
+                android:background="@drawable/edit_text_background"
                 android:ems="10"
+                android:hint="enter degree"
                 android:inputType="textPersonName"
-               android:hint="enter degree"
+                android:padding="10dp"
                 android:textColor="@color/grayFontsColor" />
 
             <TextView
                 android:id="@+id/t3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/robotoregular"
                 android:padding="5dp"
                 android:text="Field of study"
                 android:textColor="#000000"
@@ -119,105 +120,87 @@
                 android:id="@+id/studyField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_background"
                 android:hint="enter field of study"
-                android:textCursorDrawable="@drawable/customized_cursor"
-                android:backgroundTint="@drawable/backgroundtintcolor"
-                android:ems="10"
                 android:inputType="textPersonName"
-                android:textColor="@color/grayFontsColor" />
+                android:padding="10dp"
+                android:textColor="@color/grayFontsColor"
+                android:textCursorDrawable="@drawable/customized_cursor" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp">
 
-                    <androidx.cardview.widget.CardView
+                    <TextView
+                        android:id="@+id/textstart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/white">
+                        android:background="#FFFFFF"
+                        android:fontFamily="@font/robotoregular"
+                        android:padding="5dp"
+                        android:text="Start date"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
-                        <TextView
-                            android:id="@+id/textstart"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="#FFFFFF"
-                            android:padding="5dp"
-                            android:text="Start date"
-                            android:textColor="#000000"
-                            android:textSize="20sp" />
-                    </androidx.cardview.widget.CardView>
 
                     <EditText
                         android:id="@+id/start_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:textCursorDrawable="@drawable/customized_cursor"
-                        android:backgroundTint="@drawable/backgroundtintcolor"
                         android:ems="10"
                         android:hint="09/12/2020"
-                        android:inputType="date"
-                        android:textColor="@color/grayFontsColor" />
+                        android:inputType="date" />
                 </LinearLayout>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp">
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/textend"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@color/white">
-
-                            <TextView
-                                android:id="@+id/textend"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="#FFFFFF"
-                                android:padding="5dp"
-                                android:text="End date"
-                                android:textColor="#000000"
-                                android:textSize="20sp" />
-                        </androidx.cardview.widget.CardView>
-
-                        <EditText
-                            android:id="@+id/end_date"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="5dp"
-                            android:layout_marginRight="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:hint="09/12/2020"
-                            android:textCursorDrawable="@drawable/customized_cursor"
-                            android:backgroundTint="@drawable/backgroundtintcolor"
-                            android:ems="10"
-                            android:inputType="date"
-                            android:textColor="@color/grayFontsColor" />
+                        android:background="#FFFFFF"
+                        android:fontFamily="@font/robotoregular"
+                        android:padding="5dp"
+                        android:text="End date"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
 
-                        <TextView
-                            android:id="@+id/expected"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/end_date"
-                            android:text="Or expected graduation"
-                            android:textColor="#000000" />
-                    </LinearLayout>
+                    <EditText
+                        android:id="@+id/end_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:ems="10"
+                        android:hint="09/12/2020"
+                        android:inputType="date" />
 
-                </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/expected"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/end_date"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/robotoitalic"
+                        android:text="Or expected graduation"
+                        android:textColor="#000000" />
+                </LinearLayout>
 
 
             </LinearLayout>
@@ -226,7 +209,8 @@
                 android:id="@+id/t6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/robotoregular"
                 android:padding="5dp"
                 android:text="Grade"
                 android:textColor="#000000"
@@ -234,83 +218,71 @@
 
             <EditText
                 android:id="@+id/grade"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:hint="enter grade here"
-                android:textCursorDrawable="@drawable/customized_cursor"
-                android:backgroundTint="@drawable/backgroundtintcolor"
+                android:background="@drawable/edit_text_background"
                 android:ems="10"
+                android:hint="enter grade here"
                 android:inputType="textPersonName"
-                android:padding="5dp"
-                android:textColor="@color/grayFontsColor" />
+                android:padding="10dp" />
 
             <TextView
                 android:id="@+id/t7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/robotoregular"
                 android:padding="5dp"
-                android:textCursorDrawable="@drawable/customized_cursor"
                 android:text="Activities and societies"
                 android:textColor="#000000"
                 android:textSize="20sp" />
 
-            <androidx.cardview.widget.CardView
+
+            <EditText
+                android:id="@+id/activities_societies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp">
-
-                <EditText
-                    android:id="@+id/activities_societies"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:hint="enter your achievements here"
-                    android:ems="10"
-                    android:textCursorDrawable="@drawable/customized_cursor"
-                    android:gravity="start|top"
-                    android:inputType="textMultiLine"
-                    android:minLines="4"
-                    android:padding="5dp"
-                    android:textColor="@color/grayFontsColor"
-                    />
-            </androidx.cardview.widget.CardView>
+                android:background="@drawable/edit_text_background"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="enter your achievements here"
+                android:inputType="textMultiLine"
+                android:minLines="4"
+                android:padding="10dp" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Example: Alpha phi omega, NCC, Debate Team" />
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/robotoitalic"
+                android:text="Example: Alpha, phi, omega, NCC, Debate Team" />
 
             <TextView
                 android:id="@+id/t8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/robotoregular"
                 android:text="Description"
                 android:textColor="#000000"
                 android:textSize="20sp" />
 
-            <androidx.cardview.widget.CardView
+
+            <EditText
+                android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp">
+                android:background="@drawable/edit_text_background"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Enter description here"
+                android:inputType="textMultiLine"
+                android:minLines="5"
+                android:padding="10dp"
+                android:textColor="@color/grayFontsColor"
+                android:textCursorDrawable="@drawable/customized_cursor" />
 
-                <EditText
-                    android:id="@+id/description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:ems="10"
-                    android:textCursorDrawable="@drawable/customized_cursor"
-                    android:gravity="start|top"
-                    android:hint="Enter description here"
-                    android:inputType="textMultiLine"
-                    android:minLines="5"
-                    android:padding="5dp"
-                    android:textColor="@color/grayFontsColor" />
-            </androidx.cardview.widget.CardView>
         </LinearLayout>
 
     </ScrollView>
