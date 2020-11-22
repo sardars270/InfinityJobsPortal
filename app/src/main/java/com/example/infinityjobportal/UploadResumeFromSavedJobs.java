@@ -1,10 +1,5 @@
 package com.example.infinityjobportal;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,6 +12,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class UploadResume extends AppCompatActivity {
+public class UploadResumeFromSavedJobs extends AppCompatActivity {
     ImageView back;
     TextView message;
     Button apply, uploadPdf;
@@ -50,7 +50,7 @@ ArrayList<String> deleteList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_upload_resume);
+        setContentView(R.layout.activity_upload_resume_from_saved_job);
         back = findViewById(R.id.back);
         apply = findViewById(R.id.apply);
         uploadPdf = findViewById(R.id.uploadPdf);
@@ -74,7 +74,7 @@ ArrayList<String> deleteList = new ArrayList<>();
         });
 
 
-//checkSave();
+checkSave();
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,13 +123,13 @@ ArrayList<String> deleteList = new ArrayList<>();
 
                                        // checkSave();
 
-//                                        if(!deleteList.isEmpty()) {
-//                                            deleteJobMyjobs();
-//                                        }
+                                        if(!deleteList.isEmpty()) {
+                                            deleteJobMyjobs();
+                                        }
 
                                         Intent i = new Intent(getApplicationContext(),Successful.class);
                                         startActivity(i);
-                                        JobDetails.getInstance().finish();
+                                        //JobDetails.getInstance().finish();
                                         finish();
 
 
@@ -138,7 +138,7 @@ ArrayList<String> deleteList = new ArrayList<>();
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        AlertDialog.Builder builder = new AlertDialog.Builder(UploadResume.this);
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(UploadResumeFromSavedJobs.this);
                                         builder.setMessage("Something went wrong. Please try again...")
                                                 .setCancelable(false)
                                                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -161,7 +161,7 @@ ArrayList<String> deleteList = new ArrayList<>();
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(UploadResume.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(UploadResumeFromSavedJobs.this);
                         builder.setMessage("Something went wrong. Please try again...")
                                 .setCancelable(false)
                                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
